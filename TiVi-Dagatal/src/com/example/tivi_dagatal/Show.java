@@ -1,5 +1,6 @@
+package com.example.tivi_dagatal;
 
-public class show {
+public class Show {
 	String title;
 	String year;
 	String url;
@@ -16,6 +17,12 @@ public class show {
 	String poster;
 	String fanart;
 	String banner;
+	
+	public Show(){}
+	
+	public Show(String title){
+		this.title = title;
+	}
 	
 	//Getters
 	public String getTitle(){
