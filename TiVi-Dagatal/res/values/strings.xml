@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">TiVi-Dagatal</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hér koma allir uppáhalds þættirnir þínir</string>
     <string name="action_settings">Settings</string>
 
 </resources>
