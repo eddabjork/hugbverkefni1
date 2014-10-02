@@ -72,7 +72,7 @@ public class Client {
 		  if (name.equals("title")) {
 		    show.setTitle(reader.nextString());
 		  } else if (name.equals("year")) {
-			  show.year = reader.nextString();
+			  show.setYear(reader.nextString());
 		  } else {
 		    reader.skipValue();
 		  }
