@@ -2,6 +2,7 @@ package com.example.tivi_dagatal;
 
 public class Show {
 	private String title;
+	private String dataTitle;
 	private String year;
 	private String url;
 	private String firstAired;
@@ -17,6 +18,7 @@ public class Show {
 	private String poster;
 	private String fanart;
 	private String banner;
+	private String imdbRating;
 	
 	public Show(){}
 	
@@ -89,6 +91,14 @@ public class Show {
 		return year;
 	}
 	
+	public String getDataTitle(){
+		return dataTitle;
+	}
+	
+	public String getImdbRating(){
+		return imdbRating;
+	}
+	
 	//Setters
 	public void setAirDay(String airDay) {
 		this.airDay = airDay;
@@ -152,5 +162,13 @@ public class Show {
 	
 	public void setYear(String year) {
 		this.year = year;
+	}
+	
+	public void setDataTitle(String dataTitle){
+		this.dataTitle = dataTitle;
+	}
+	
+	public void setImdbRating(String rating){
+		this.imdbRating = rating;
 	}
 }

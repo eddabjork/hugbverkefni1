@@ -1,9 +1,14 @@
 package com.example.tivi_dagatal;
 
+import java.util.List;
+
+import Clients.IMDbClient;
+import Clients.TraktClient;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,8 +46,11 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-        	Client client = new Client();
-        	client.searchShow("big bang theory");
+        	TraktClient search = new TraktClient();
+        	List<Show> searchShows = search.searchShow("big bang theory");
+        	Log.v("title", searchShows.get(0).getTitle());
+        	IMDbClient.getIMDbRating(searchShows.get(0));
+        	Log.v("rating", searchShows.get(0).getImdbRating());
             return true;
         }
         return super.onOptionsItemSelected(item);
