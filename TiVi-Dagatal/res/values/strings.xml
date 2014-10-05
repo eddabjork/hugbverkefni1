@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello_world">Hér koma allir uppáhalds þættirnir þínir</string>
+    <string name="hello_world">Hey Jóóóó!</string>
     <string name="app_name">TiVi-Dagataleð</string>
 
 
     <string name="action_settings">Settings</string>
+    <string name="search_title">Leit</string>
+    <string name="search_hint">Leitartest</string>
 
 </resources>
