@@ -73,6 +73,12 @@ public class Client {
 		    show.setTitle(reader.nextString());
 		  } else if (name.equals("year")) {
 			  show.setYear(reader.nextString());
+		  } else if (name.equals("url")) {
+			  show.setUrl(reader.nextString());
+		  } else if (name.equals("firstAired")) {
+			  show.setFirstAired(reader.nextString());
+		  } else if (name.equals("overview")) {
+			  show.setOverview(reader.nextString());
 		  } else {
 		    reader.skipValue();
 		  }
