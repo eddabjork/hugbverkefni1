@@ -4,7 +4,11 @@ import java.util.List;
 
 import Clients.IMDbClient;
 import Clients.TraktClient;
+
+import Data.ShowsContract.ShowsEntry;
+import Data.ShowsDb;
 import android.support.v7.app.ActionBarActivity;
+
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -15,11 +19,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
+import android.util.Log;
 
 
 
 public class MainActivity extends ActionBarActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +49,45 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        /*********** TESTA GAGNAGRUNN ************/
+        //skrifa í gagnagrunn
+        ShowsDb mDbHelper = new ShowsDb(getBaseContext());
+        
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ShowsEntry.COLUMN_NAME_TITLE, "The Big Bang Theory");
+        values.put(ShowsEntry.COLUMN_NAME_DATATITLE, "the-big-bang-theory");
+        long newRowId = db.insert(ShowsEntry.TABLE_NAME, ShowsEntry.COLUMN_NAME_NULLABLE, values);
+        
+        //sækja úr grunni
+        SQLiteDatabase dbRead = mDbHelper.getReadableDatabase();
+        
+        String[] columns = {
+        		ShowsEntry._ID,
+        		ShowsEntry.COLUMN_NAME_TITLE,
+        		ShowsEntry.COLUMN_NAME_DATATITLE
+        };
+        
+        String[] attributes = {
+        		"The Big Bang Theory"
+        };
+        
+        Cursor cursor = db.query(
+        		ShowsEntry.TABLE_NAME,
+        		columns,
+        		ShowsEntry.COLUMN_NAME_TITLE +"=?", //where
+        		attributes, //value for where
+        		null,
+        		null,
+        		null);
+        
+        cursor.moveToFirst();
+        //set gögnin í data breytuna -> titill fer í data
+        String data = cursor.getString(
+            cursor.getColumnIndex(ShowsEntry.COLUMN_NAME_TITLE)
+        );
+        Log.e("stuff from db", data); //logga og athuga hvort data skili sér
         return true;
     }
 
