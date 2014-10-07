@@ -25,6 +25,7 @@ import java.io.ObjectOutputStream;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
@@ -96,7 +97,8 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        View x = new View(this);
+    	int id = item.getItemId();
         if (id == R.id.action_settings) {
         	TraktClient search = new TraktClient();
         	List<Show> searchShows = search.searchShow("big bang theory");
@@ -105,8 +107,19 @@ public class MainActivity extends ActionBarActivity {
         	Log.v("rating", searchShows.get(0).getImdbRating());
             return true;
         }
+        //TODO: Breyta id i staekkunaglegs-takkann a lyklabordinu seinna
+		if (id == R.id.search){
+			onSearch(x);
+			return true;
+		}
         return super.onOptionsItemSelected(item);
     }
+    
+	public void onSearch(View view){
+    	Intent intent = new Intent(this, SearchResultsActivity.class);
+        startActivity(intent);
+    }
+
 
     /**
      * A placeholder fragment containing a simple view.
