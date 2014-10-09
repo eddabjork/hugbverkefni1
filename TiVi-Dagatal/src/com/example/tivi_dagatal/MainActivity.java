@@ -1,5 +1,6 @@
 package com.example.tivi_dagatal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Clients.IMDbClient;
@@ -7,6 +8,8 @@ import Clients.TraktClient;
 
 import Data.ShowsContract.ShowsEntry;
 import Data.ShowsDb;
+import Dtos.Episode;
+import Dtos.Show;
 import android.support.v7.app.ActionBarActivity;
 
 import android.support.v7.app.ActionBar;
@@ -100,11 +103,22 @@ public class MainActivity extends ActionBarActivity {
         View x = new View(this);
     	int id = item.getItemId();
         if (id == R.id.action_settings) {
-        	TraktClient search = new TraktClient();
-        	List<Show> searchShows = search.searchShow("big bang theory");
+        	// test search
+        	TraktClient trakt = new TraktClient();
+        	List<Show> searchShows = trakt.searchShow("big bang theory");
         	Log.v("title", searchShows.get(0).getTitle());
+        	
+        	// test IMDb rating
         	IMDbClient.getIMDbRating(searchShows.get(0));
         	Log.v("rating", searchShows.get(0).getImdbRating());
+        	
+        	// test episodes for calendar
+        	List<String> calendarShows = new ArrayList<String>();
+        	calendarShows.add("friends");
+        	List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(calendarShows);
+        	for(Episode ep : calendarEpisodes){
+        		Log.v("ep", ep.getTitle());
+        	}
             return true;
         }
         //TODO: Breyta id i staekkunaglegs-takkann a lyklabordinu seinna
