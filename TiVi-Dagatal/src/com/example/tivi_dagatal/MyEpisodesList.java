@@ -1,10 +1,8 @@
 package com.example.tivi_dagatal;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
+import Dtos.Episode;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -20,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class MyEpisodesList extends ActionBarActivity {
@@ -30,17 +27,12 @@ public class MyEpisodesList extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_episodes_list);
 		
-		addShow(5);
-		
-		
+		Episode episode = new Episode();
+		addShow(episode);
+		episode.setTitle("Dance moms");
 	}
 	
-	public void addShow(int id) {
-		String img_src = "bla";
-		String name_show = "New Girl";
-		
-		//tengjast við þætti
-		
+	public void addShow(final Dtos.Episode episode) {		
 		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.episode_layout);
 		
 		LinearLayout ll_1 = new LinearLayout(this);
@@ -48,12 +40,13 @@ public class MyEpisodesList extends ActionBarActivity {
 		
 		ImageView image = new ImageView(this);
 		new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
+		//image.setImageResource(R.drawable.ic_launcher);
 		
 		LinearLayout ll_2 = new LinearLayout(this);
 		ll_2.setOrientation(LinearLayout.VERTICAL);
 		
 		TextView title = new TextView(this);
-		title.setText(name_show);
+		title.setText(episode.getTitle());
 		
 		LinearLayout ll_3 = new LinearLayout(this);
 		ll_3.setOrientation(LinearLayout.HORIZONTAL);
@@ -61,20 +54,20 @@ public class MyEpisodesList extends ActionBarActivity {
 		Button btn_cal = new Button(this);
 		btn_cal.setText("Setja á dagatal");
 		btn_cal.setTextSize(10);
-		btn_cal.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 30));
-
+		btn_cal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	addToCal(episode);
+            }
+        });
+		
 		Button btn_info = new Button(this);
 		btn_info.setText("Upplýsingar");
 		btn_info.setTextSize(10);
-		btn_info.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 30));
 
-		
 		Button btn_delete = new Button(this);
 		btn_delete.setText("Eyða");
 		btn_delete.setTextSize(10);
-		btn_delete.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 30));
 
-		
 		ll_3.addView(btn_cal);
 		ll_3.addView(btn_info);
 		ll_3.addView(btn_delete);
@@ -82,7 +75,6 @@ public class MyEpisodesList extends ActionBarActivity {
 		ll_2.addView(ll_3);
 		ll_1.addView(image);
 		ll_1.addView(ll_2);
-		
 		mainLayout.addView(ll_1);
 	}
 
@@ -123,27 +115,30 @@ public class MyEpisodesList extends ActionBarActivity {
 	}
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-	  ImageView bmImage;
-
-	  public DownloadImageTask(ImageView bmImage) {
-	      this.bmImage = bmImage;
-	  }
-
-	  protected Bitmap doInBackground(String... urls) {
-	      String urldisplay = urls[0];
-	      Bitmap mIcon11 = null;
-	      try {
-	        InputStream in = new java.net.URL(urldisplay).openStream();
-	        mIcon11 = BitmapFactory.decodeStream(in);
-	      } catch (Exception e) {
-	          Log.e("Error", e.getMessage());
-	          e.printStackTrace();
-	      }
-	      return mIcon11;
-	  }
-
-	  protected void onPostExecute(Bitmap result) {
-	      bmImage.setImageBitmap(result);
-	  }
+		ImageView bmImage;
+		public DownloadImageTask(ImageView bmImage) {
+			this.bmImage = bmImage;
+		}
+		
+		protected Bitmap doInBackground(String... urls) {
+			String urldisplay = urls[0];
+			Bitmap mIcon11 = null;
+			try {
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				mIcon11 = BitmapFactory.decodeStream(in);
+			} catch (Exception e) {
+				Log.e("Error", e.getMessage());
+				e.printStackTrace();
+			}
+			return mIcon11;
+		}
+		
+		protected void onPostExecute(Bitmap result) {
+			bmImage.setImageBitmap(result);
+		}
+	}
+	
+	public void addToCal(Episode episode){
+		//senda episode til Eddu
 	}
 }
