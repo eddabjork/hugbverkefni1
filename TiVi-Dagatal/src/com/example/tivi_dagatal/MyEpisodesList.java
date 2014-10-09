@@ -1,8 +1,17 @@
 package com.example.tivi_dagatal;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +31,8 @@ public class MyEpisodesList extends ActionBarActivity {
 		setContentView(R.layout.activity_my_episodes_list);
 		
 		addShow(5);
+		
+		
 	}
 	
 	public void addShow(int id) {
@@ -36,7 +47,7 @@ public class MyEpisodesList extends ActionBarActivity {
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
 		
 		ImageView image = new ImageView(this);
-		image.setImageResource(R.drawable.ic_launcher);
+		new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
 		
 		LinearLayout ll_2 = new LinearLayout(this);
 		ll_2.setOrientation(LinearLayout.VERTICAL);
@@ -109,5 +120,30 @@ public class MyEpisodesList extends ActionBarActivity {
 					container, false);
 			return rootView;
 		}
+	}
+	
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	  ImageView bmImage;
+
+	  public DownloadImageTask(ImageView bmImage) {
+	      this.bmImage = bmImage;
+	  }
+
+	  protected Bitmap doInBackground(String... urls) {
+	      String urldisplay = urls[0];
+	      Bitmap mIcon11 = null;
+	      try {
+	        InputStream in = new java.net.URL(urldisplay).openStream();
+	        mIcon11 = BitmapFactory.decodeStream(in);
+	      } catch (Exception e) {
+	          Log.e("Error", e.getMessage());
+	          e.printStackTrace();
+	      }
+	      return mIcon11;
+	  }
+
+	  protected void onPostExecute(Bitmap result) {
+	      bmImage.setImageBitmap(result);
+	  }
 	}
 }
