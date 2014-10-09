@@ -13,6 +13,8 @@ public final class ShowsContract {
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_DATATITLE = "datatitle";
         public static final String COLUMN_NAME_NULLABLE = "NOT NULL";
+        public static final String COLUMN_NAME_ONCAL = "on_calendar";
+        public static final String COLUMN_NAME_POSTER = "poster";
         //...
     }
 }
