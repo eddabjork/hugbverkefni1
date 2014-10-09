@@ -3,6 +3,7 @@ package com.example.tivi_dagatal;
 import java.util.List;
 
 import Clients.TraktClient;
+import Data.DbUtils;
 import Dtos.Show;
 import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
@@ -11,13 +12,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class SearchResultsActivity extends ActionBarActivity {
-
+	DbUtils dbHelper = new DbUtils(this);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,28 +30,38 @@ public class SearchResultsActivity extends ActionBarActivity {
 
 	public void SearchStuff(View view){
 
-		EditText wordText = (EditText) findViewById(R.id.leitarbox);
-		String word = wordText.getText().toString();
-		
-		TraktClient search = new TraktClient();
-    	List<Show> searchShows = search.searchShow(word);
-    	LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT);
-    	ScrollView sv = new ScrollView(this);
-    	LinearLayout ll = new LinearLayout(this);
-    	ll.setOrientation(LinearLayout.VERTICAL);
-    	for (Show show : searchShows){
-        	TextView textView = new TextView(this);
-    	    textView.setText(show.getTitle());
-    	    textView.setTextSize(16);
-    	    textView.setLayoutParams(lparams);
-    	    ll.addView(textView);
-    	}
-    	//Add the linearLayout view to the scroll view
-    	sv.addView(ll);
-	    //Show the new view
-	    setContentView(sv);
+				EditText wordText = (EditText) findViewById(R.id.leitarbox);
+				String word = wordText.getText().toString();
+				
+				TraktClient search = new TraktClient();
+		    	List<Show> searchShows = search.searchShow(word);
+		    	LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+		                LayoutParams.MATCH_PARENT);
+            	ScrollView sv = new ScrollView(this);
+		    	LinearLayout llv = new LinearLayout(this);
+		    	llv.setOrientation(LinearLayout.VERTICAL);
+		    	for (final Show show : searchShows){
+		        	TextView textView = new TextView(this);
+		    	    textView.setText(show.getTitle());
+		    	    textView.setTextSize(30);
+		    	    textView.setLayoutParams(lparams);
+		    	    Button button = new Button(this);
+		    	    button.setText("Bæta á Þættirnir mínir");
+		    	    button.setLayoutParams(lparams);
+		            button.setOnClickListener(new View.OnClickListener() {
+		                public void onClick(View view) {
+		                	dbHelper.saveShow(show);
+		                }
+		            });
+		    	    llv.addView(textView);
+		    	    llv.addView(button);
+		    	}
+		    	//Add the linearLayout view to the scroll view
+		    	sv.addView(llv);
+			    //Show the new view
+			    setContentView(sv);		
 	}
+	
 	
     /*private void handleIntent(Intent intent) {
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
