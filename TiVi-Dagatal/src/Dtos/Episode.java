@@ -1,7 +1,8 @@
-package com.example.tivi_dagatal;
+package Dtos;
 
 public class Episode {
 	private String title;
+	private String dataTitle;
 	private String season;
 	private String number;
 	private String tvdbId;
@@ -59,6 +60,10 @@ public class Episode {
 		return url;
 	}
 	
+	public String getDataTitle(){
+		return dataTitle;
+	}
+	
 	
 	//Setters
 	public void setFirstAired(String firstAired) {
@@ -99,5 +104,9 @@ public class Episode {
 	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public void setDataTitle(String dataTitle){
+		this.dataTitle = dataTitle;
 	}
 }

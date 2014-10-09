@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import Dtos.Show;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.example.tivi_dagatal.Show;
 
 public class IMDbClient {
 	

@@ -3,6 +3,7 @@ package com.example.tivi_dagatal;
 import java.util.List;
 
 import Clients.TraktClient;
+import Dtos.Show;
 import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
 import android.os.Bundle;

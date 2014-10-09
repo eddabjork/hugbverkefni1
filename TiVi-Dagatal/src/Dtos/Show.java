@@ -1,4 +1,4 @@
-package com.example.tivi_dagatal;
+package Dtos;
 
 public class Show {
 	private String title;
