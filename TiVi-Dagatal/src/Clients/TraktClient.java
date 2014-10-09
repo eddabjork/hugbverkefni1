@@ -24,8 +24,8 @@ public class TraktClient {
 	private String APIkey = "1b7308cb59d642b6548e8c8da531695b";
 	private Date lastMonday = getLastMonday();
 	private Date nextMonday = getNextMonday();
-	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-	
+	private static SimpleDateFormat format = new SimpleDateFormat("yyMMdd");
+
 	private List<Show> searchShows = new ArrayList<Show>();
 	private List<Episode> calendarEpisodes = new ArrayList<Episode>();
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();

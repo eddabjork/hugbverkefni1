@@ -1,4 +1,4 @@
-<LinearLayout android:id="@+id/episode_layout"
+<LinearLayout android:id="@+id/my_shows_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"

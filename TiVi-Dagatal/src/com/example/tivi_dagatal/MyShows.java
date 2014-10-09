@@ -1,8 +1,10 @@
 package com.example.tivi_dagatal;
 
 import java.io.InputStream;
+import java.util.List;
 
-import Dtos.Episode;
+import Data.DbUtils;
+import Dtos.Show;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -18,22 +20,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
-public class MyEpisodesList extends ActionBarActivity {
+public class MyShows extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_episodes_list);
+		setContentView(R.layout.activity_my_shows);
 		
-		Episode episode = new Episode();
-		episode.setTitle("Dance Moms");
-		addShow(episode);
+		//setLayout();
+		
+		DbUtils dbHelper = new DbUtils(this);
+		List<Show> showList = dbHelper.getAllShows();
+		for(Show show : showList){
+			addShow(show);
+		}
 	}
 	
-	public void addShow(final Episode episode) {		
-		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.episode_layout);
+	public void addShow(final Show show) {		
+		ScrollView mainLayout = (ScrollView)findViewById(R.id.my_shows_layout);
 		
 		LinearLayout ll_1 = new LinearLayout(this);
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
@@ -46,7 +54,7 @@ public class MyEpisodesList extends ActionBarActivity {
 		ll_2.setOrientation(LinearLayout.VERTICAL);
 		
 		TextView title = new TextView(this);
-		title.setText(episode.getTitle());
+		title.setText(show.getTitle());
 		
 		LinearLayout ll_3 = new LinearLayout(this);
 		ll_3.setOrientation(LinearLayout.HORIZONTAL);
@@ -56,7 +64,7 @@ public class MyEpisodesList extends ActionBarActivity {
 		btn_cal.setTextSize(10);
 		btn_cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	addToCal(episode);
+            	addToCal(show);
             }
         });
 		
@@ -108,7 +116,7 @@ public class MyEpisodesList extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_my_episodes_list,
+			View rootView = inflater.inflate(R.layout.fragment_my_shows,
 					container, false);
 			return rootView;
 		}
@@ -138,7 +146,20 @@ public class MyEpisodesList extends ActionBarActivity {
 		}
 	}
 	
-	public void addToCal(Episode episode){
-		//senda episode til Eddu
+	public void addToCal(Show show){
+		DbUtils dbHelper = new DbUtils(this);
+		dbHelper.putShowOnCal(show);
 	}
+	
+	public void setLayout() {
+		ScrollView sv = new ScrollView(this);
+    	
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	ll.setId(R.id.calendar_layout);
+    	
+    	sv.addView(ll);
+    	
+    	setContentView(sv);
+    }
 }

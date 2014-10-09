@@ -11,5 +11,6 @@
     <string name="leita">Leita</string>
     <string name="leitarbox">Leitin hér</string>
     <string name="title_activity_my_episodes_list">MyEpisodesList</string>
+    <string name="title_activity_my_shows">MyShows</string>
 
 </resources>

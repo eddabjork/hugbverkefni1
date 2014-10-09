@@ -36,8 +36,18 @@ public class MainActivity extends ActionBarActivity {
         setLayout();
         fillInDates();
         
-        dummyTestEpisodes();
+        //dummyTestEpisodes();
         dummyTestDB();
+        
+        DbUtils dbHelper = new DbUtils(this);
+        List<String> dataTitles = dbHelper.getOnCalShows();
+        
+        TraktClient trakt = new TraktClient();
+        List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles);
+        
+        for (Episode episode : calendarEpisodes){
+        	fillInEpisode(episode);
+        }
     }
     
     public void dummyTestDB(){
@@ -74,6 +84,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     
+    //eyða..
     public void dummyTestEpisodes(){
     	Episode ep1 = new Episode();
   		ep1.setTitle("The Walking Dead");
@@ -125,10 +136,6 @@ public class MainActivity extends ActionBarActivity {
             	see_my_episodes(view);
             }
         });
-        
-    	TextView tv = new TextView(this);
-    	tv.setText("halloo");
-    	tv.setLayoutParams(lparams_match);
     	
     	ll.addView(btn);
     	sv.addView(ll);
@@ -205,7 +212,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	public void see_my_episodes(View view) {
-		Intent intent = new Intent(this, MyEpisodesList.class);
+		Intent intent = new Intent(this, MyShows.class);
 	    startActivity(intent);
 	}
 

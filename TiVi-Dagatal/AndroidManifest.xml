@@ -48,6 +48,10 @@
             android:name=".MyEpisodesList"
             android:label="@string/title_activity_my_episodes_list" >
         </activity>
+        <activity
+            android:name=".MyShows"
+            android:label="@string/title_activity_my_shows" >
+        </activity>
     </application>
 
 </manifest>
