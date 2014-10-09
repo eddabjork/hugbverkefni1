@@ -1,6 +1,7 @@
 package com.example.tivi_dagatal;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,41 +36,12 @@ public class MainActivity extends ActionBarActivity {
         setLayout();
         fillInDates();
         
-      //Test þættir
-      		Episode ep1 = new Episode();
-      		ep1.setTitle("Mindys Project");
-      		ep1.setFirstAired("141005");
-      		
-      		Episode ep2 = new Episode();
-      		ep2.setTitle("New Girl");
-      		ep2.setFirstAired("141005");
-      		
-      		Episode ep3 = new Episode();
-      		ep3.setTitle("New Girl");
-      		ep3.setFirstAired("141005");
-      		
-      		Episode ep4 = new Episode();
-      		ep4.setTitle("New Girl");
-      		ep4.setFirstAired("141005");
-      		
-      		Episode ep5 = new Episode();
-      		ep5.setTitle("New Girl");
-      		ep5.setFirstAired("141005");
-      		
-      		Episode ep6 = new Episode();
-      		ep6.setTitle("Person of Interest");
-      		ep6.setFirstAired("141007");
-      		
-      		fillInEpisode(ep1);
-      		fillInEpisode(ep2);
-      		fillInEpisode(ep3);
-      		fillInEpisode(ep4);
-      		fillInEpisode(ep5);
-      		fillInEpisode(ep6);
-        
-        /*********** TESTA GAGNAGRUNN ************/
-        
-        DbUtils dbHelper = new DbUtils(this);
+        dummyTestEpisodes();
+        dummyTestDB();
+    }
+    
+    public void dummyTestDB(){
+    	DbUtils dbHelper = new DbUtils(this);
         
         Show show = new Show();
         show.setTitle("New Girl");
@@ -100,6 +72,39 @@ public class MainActivity extends ActionBarActivity {
         for(Show _show: dbHelper.getAllShows()) {
         	Log.e("stuff from db", _show.getTitle());
         }
+    }
+    
+    public void dummyTestEpisodes(){
+    	Episode ep1 = new Episode();
+  		ep1.setTitle("The Walking Dead");
+  		ep1.setFirstAired("141006");
+  		
+  		Episode ep2 = new Episode();
+  		ep2.setTitle("Once Upon a Time");
+  		ep2.setFirstAired("141006");
+  		
+  		Episode ep3 = new Episode();
+  		ep3.setTitle("The Big Bang Theory");
+  		ep3.setFirstAired("141007");
+  		
+  		Episode ep4 = new Episode();
+  		ep4.setTitle("New Girl");
+  		ep4.setFirstAired("141008");
+  		
+  		Episode ep5 = new Episode();
+  		ep5.setTitle("The Mindy Project");
+  		ep5.setFirstAired("141008");
+  		
+  		Episode ep6 = new Episode();
+  		ep6.setTitle("Modern Family");
+  		ep6.setFirstAired("141009");
+  		
+  		fillInEpisode(ep1);
+  		fillInEpisode(ep2);
+  		fillInEpisode(ep3);
+  		fillInEpisode(ep4);
+  		fillInEpisode(ep5);
+  		fillInEpisode(ep6);
     }
     
     public void setLayout() {
