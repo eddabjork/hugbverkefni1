@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data.ShowsContract.ShowsEntry;
+import Dtos.Show;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-
-import com.example.tivi_dagatal.MainActivity;
-import Dtos.Show;
 
 public class DbUtils {
 	private Context context;
