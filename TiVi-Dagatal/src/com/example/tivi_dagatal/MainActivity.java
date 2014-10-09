@@ -1,5 +1,6 @@
 package com.example.tivi_dagatal;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         fillInDates();
         
         //dummyTestEpisodes();
-        dummyTestDB();
+        //dummyTestDB();
         
         DbUtils dbHelper = new DbUtils(this);
         List<String> dataTitles = dbHelper.getOnCalShows();
@@ -45,8 +46,15 @@ public class MainActivity extends ActionBarActivity {
         TraktClient trakt = new TraktClient();
         List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles);
         
+        if(dataTitles.isEmpty()) Log.e("dataTitles is ", "empty");
+        else Log.e("dataTitles is  ", "not empty");
+        
+        if(calendarEpisodes.isEmpty()) Log.e("calendarEpisodes is ", "empty");
+        else Log.e("calendarEpisodes is ", "not empty");
+        
         for (Episode episode : calendarEpisodes){
         	fillInEpisode(episode);
+        	//Log.v("ep on calendar", episode.getDataTitle());
         }
     }
     
@@ -119,7 +127,6 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void setLayout() {
-    	LayoutParams lparams_match = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
         LayoutParams lparams_wrap = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 
     	ScrollView sv = new ScrollView(this);
@@ -145,25 +152,28 @@ public class MainActivity extends ActionBarActivity {
     
     public void fillInDates() {
 		Calendar cal = Calendar.getInstance();
+		LinearLayout ll = (LinearLayout)findViewById(R.id.calendar_layout);
+		
+		//View line = new View(this);
+		//line.setBackgroundColor(Color.rgb(204, 204, 204));
+		
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		setDateLayout("SUN", cal);
+		setDateLayout("SUN", cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		setDateLayout("MÁN", cal);
+		setDateLayout("MÁN", cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-		setDateLayout("ÞRI", cal);
+		setDateLayout("ÞRI", cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-		setDateLayout("MIÐ", cal);
+		setDateLayout("MIÐ", cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-		setDateLayout("FIM", cal);
+		setDateLayout("FIM", cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		setDateLayout("FÖS", cal);
+		setDateLayout("FÖS", cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		setDateLayout("LAU", cal);
+		setDateLayout("LAU", cal, ll);
 	}
 	
-	public void setDateLayout(String day_name, Calendar cal) {
-		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.calendar_layout);
-		
+	public void setDateLayout(String day_name, Calendar cal, LinearLayout mainLayout) {		
 		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		ll.setPadding(16,8,16,8);
@@ -202,8 +212,8 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void fillInEpisode(Episode episode) {		
 		String title = episode.getTitle();
-		int ep_id = Integer.parseInt(episode.getFirstAired());
-		
+		int ep_id = firstAiredRightForm(episode.getFirstAired());
+	
 		LinearLayout ll = (LinearLayout)findViewById(ep_id);
 		TextView textView = new TextView(this);
 	    textView.setText(title);
@@ -211,10 +221,28 @@ public class MainActivity extends ActionBarActivity {
 	    ll.addView(textView);	
 	}
 	
+	public void onSearch(View view){
+    	Intent intent = new Intent(this, SearchResultsActivity.class);
+        startActivity(intent);
+    }
+	
 	public void see_my_episodes(View view) {
 		Intent intent = new Intent(this, MyShows.class);
 	    startActivity(intent);
 	}
+    
+    public int firstAiredRightForm(String strDate){
+    	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyMMdd");
+		String newStrDate="";
+		
+		try {
+			newStrDate = myFormat.format(fromUser.parse(strDate));
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+		return Integer.parseInt(newStrDate);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -224,8 +252,6 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
     
-    
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -260,11 +286,6 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
         return super.onOptionsItemSelected(item);
-    }
-    
-	public void onSearch(View view){
-    	Intent intent = new Intent(this, SearchResultsActivity.class);
-        startActivity(intent);
     }
 
     /**

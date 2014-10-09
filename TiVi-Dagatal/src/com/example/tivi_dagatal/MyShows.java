@@ -20,9 +20,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
 
 public class MyShows extends ActionBarActivity {
 
@@ -31,18 +31,27 @@ public class MyShows extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_shows);
 		
-		//setLayout();
-		
-		DbUtils dbHelper = new DbUtils(this);
-		List<Show> showList = dbHelper.getAllShows();
-		for(Show show : showList){
-			addShow(show);
-		}
+		setLayout();
 	}
 	
-	public void addShow(final Show show) {		
-		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.my_shows_layout);
+	public void setLayout() {
+		DbUtils dbHelper = new DbUtils(this);
+		List<Show> showList = dbHelper.getAllShows();
 		
+		LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+    	ScrollView sv = new ScrollView(this);
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	
+    	for(Show show : showList){
+    		addShow(show, ll);
+    	}
+    	
+    	sv.addView(ll);
+	    setContentView(sv);	
+    }
+	
+	public void addShow(final Show show, LinearLayout mainLayout) {		
 		LinearLayout ll_1 = new LinearLayout(this);
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
 		
@@ -75,6 +84,11 @@ public class MyShows extends ActionBarActivity {
 		Button btn_delete = new Button(this);
 		btn_delete.setText("Eyða");
 		btn_delete.setTextSize(10);
+		btn_delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	removeFromMyEpisodes(show);
+            }
+        });
 
 		ll_3.addView(btn_cal);
 		ll_3.addView(btn_info);
@@ -151,15 +165,11 @@ public class MyShows extends ActionBarActivity {
 		dbHelper.putShowOnCal(show);
 	}
 	
-	public void setLayout() {
-		ScrollView sv = new ScrollView(this);
-    	
-    	LinearLayout ll = new LinearLayout(this);
-    	ll.setOrientation(LinearLayout.VERTICAL);
-    	ll.setId(R.id.calendar_layout);
-    	
-    	sv.addView(ll);
-    	
-    	setContentView(sv);
-    }
+	public void removeFromMyEpisodes(Show show){
+		DbUtils dbHelper = new DbUtils(this);
+		dbHelper.deleteShow(show);
+		//hér kemur mjög ljótt refresh:
+		finish();
+		startActivity(getIntent());
+	}
 }
