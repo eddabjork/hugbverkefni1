@@ -28,19 +28,19 @@ public class MyEpisodesList extends ActionBarActivity {
 		setContentView(R.layout.activity_my_episodes_list);
 		
 		Episode episode = new Episode();
+		episode.setTitle("Dance Moms");
 		addShow(episode);
-		episode.setTitle("Dance moms");
 	}
 	
-	public void addShow(final Dtos.Episode episode) {		
+	public void addShow(final Episode episode) {		
 		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.episode_layout);
 		
 		LinearLayout ll_1 = new LinearLayout(this);
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
 		
 		ImageView image = new ImageView(this);
-		new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
-		//image.setImageResource(R.drawable.ic_launcher);
+		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
+		image.setImageResource(R.drawable.ic_launcher);
 		
 		LinearLayout ll_2 = new LinearLayout(this);
 		ll_2.setOrientation(LinearLayout.VERTICAL);
