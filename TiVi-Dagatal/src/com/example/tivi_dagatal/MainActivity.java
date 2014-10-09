@@ -227,11 +227,24 @@ public class MainActivity extends ActionBarActivity {
         View x = new View(this);
     	int id = item.getItemId();
         if (id == R.id.action_settings) {
-        	TraktClient search = new TraktClient();
-        	List<Show> searchShows = search.searchShow("big bang theory");
-        	Log.v("title", searchShows.get(0).getTitle());
+        	// test search
+        	TraktClient trakt = new TraktClient();
+        	List<Show> searchShows = trakt.searchShow("big bang theory");
+        	
+        	// test IMDb rating
         	IMDbClient.getIMDbRating(searchShows.get(0));
         	Log.v("rating", searchShows.get(0).getImdbRating());
+        	
+        	// test episodes for calendar
+        	List<String> calendarShows = new ArrayList<String>();
+        	calendarShows.add("modern-family");
+        	calendarShows.add("arrow");
+        	calendarShows.add("new-girl");
+        	List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(calendarShows);
+        	for(Episode ep : calendarEpisodes) {
+        		Log.v("title and date",  ep.getTitle() + " : " + ep.getFirstAired());
+        	}
+        	
             return true;
         }
         //TODO: Breyta id i staekkunaglegs-takkann a lyklabordinu seinna

@@ -5,7 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import Dtos.Episode;
@@ -18,12 +22,45 @@ import android.util.Log;
 public class TraktClient {
 	
 	private String APIkey = "1b7308cb59d642b6548e8c8da531695b";
+	private Date lastMonday = getLastMonday();
+	private Date nextMonday = getNextMonday();
+	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	
 	private List<Show> searchShows = new ArrayList<Show>();
 	private List<Episode> calendarEpisodes = new ArrayList<Episode>();
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();
 	
 	public TraktClient(){}
+	
+	public static Date getLastMonday(){
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		c = nullifyTime(c);
+		Date lastMonday = c.getTime();
+		format.format(lastMonday);
+		
+		return lastMonday;
+	}
+	
+	public static Date getNextMonday(){
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		c.add(Calendar.DATE, 7);
+		c = nullifyTime(c);
+		Date nextMonday = c.getTime();
+		format.format(nextMonday);
+		
+		return nextMonday;
+	}
+	
+	public static Calendar nullifyTime(Calendar c){
+		c.set(Calendar.HOUR_OF_DAY,0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND,0);
+		return c;
+	}
 	
 	public List<Show> searchShow(final String title) {
 			
@@ -67,9 +104,15 @@ public class TraktClient {
 	public List<Show> readShowsArrayForSearch(JsonReader reader) throws IOException {
 		List<Show> shows = new ArrayList<Show>();
 		
+		int count = 0;
 		reader.beginArray();
 		while (reader.hasNext()) {
-			shows.add(readShowForSearch(reader));
+			if(count > 20) {
+				reader.skipValue();
+			} else {
+				shows.add(readShowForSearch(reader));
+				count++;
+			}
 		}
 		reader.endArray();
 		return shows;
@@ -77,10 +120,9 @@ public class TraktClient {
  
 	 public Show readShowForSearch(JsonReader reader) throws IOException {
 		Show show = new Show();
-		int count = 0;
 		reader.beginObject();
 		
-		while (reader.hasNext() && count < 20) {
+		while (reader.hasNext()) {
 		  String name = reader.nextName();
 		  if (name.equals("title")) {
 			  try {
@@ -144,7 +186,6 @@ public class TraktClient {
 		  } else {
 		    reader.skipValue();
 		  }
-		  count++;
 		}
 		reader.endObject();
 		return show;
@@ -235,7 +276,7 @@ public class TraktClient {
 							final InputStream is = url.openStream();
 							JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 							try {
-								calendarEpisodes = readEpisodesArrayForCalendar(reader, dataTitle);
+								calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle));
 							} finally {
 								reader.close();
 							}
@@ -301,7 +342,10 @@ public class TraktClient {
 		
 		reader.beginArray();
 		while (reader.hasNext()) {
-			episodes.add(readEpisodeForCalendar(reader, showDataTitle));
+			Episode episode = readEpisodeForCalendar(reader, showDataTitle);
+			if(episode != null) {
+				episodes.add(episode);
+			}
 		}
 		reader.endArray();
 		return episodes;
@@ -310,6 +354,8 @@ public class TraktClient {
 	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle) throws IOException {
 		Episode episode = new Episode();
 		reader.beginObject();
+		
+		boolean inTimePeriod = false;
 		
 		while (reader.hasNext()) {
 			String name = reader.nextName();
@@ -339,9 +385,22 @@ public class TraktClient {
 				} catch(Exception e){
 					reader.skipValue();
 				}
-			} else if (name.equals("first_aired")) {
+			} else if (name.equals("first_aired_iso")) {
 				try {
-					episode.setFirstAired(reader.nextString());
+					String airDay = reader.nextString().substring(0,19);
+					episode.setFirstAired(airDay);
+					
+					Date showDate = new Date();
+					try {
+			    		showDate = format.parse(airDay);
+					} catch (ParseException e) {
+						Log.e("date format", "Could not parse date for: " + showDate);
+						e.printStackTrace();
+					}
+					
+					if(showDate.after(lastMonday) && showDate.before(nextMonday)) {
+						inTimePeriod = true;
+					}
 				} catch(Exception e){
 					reader.skipValue();
 				}
@@ -356,7 +415,10 @@ public class TraktClient {
 			}
 		}
 		reader.endObject();
-		return episode;
+		if(inTimePeriod){
+			return episode;
+		}
+		return null;
 	}
 	
 	public void readImages(JsonReader reader, Episode episode) throws IOException{
