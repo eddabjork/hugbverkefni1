@@ -41,7 +41,7 @@ public class MyShows extends ActionBarActivity {
 	}
 	
 	public void addShow(final Show show) {		
-		ScrollView mainLayout = (ScrollView)findViewById(R.id.my_shows_layout);
+		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.my_shows_layout);
 		
 		LinearLayout ll_1 = new LinearLayout(this);
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
