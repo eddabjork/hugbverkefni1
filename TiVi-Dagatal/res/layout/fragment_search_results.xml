@@ -8,9 +8,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.tivi_dagatal.SearchResultsActivity$PlaceholderFragment" >
 
-    <TextView
+   <EditText
+        android:id="@+id/leitarbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search_test" />
+        android:layout_weight="1"
+        android:ems="10"/>
+
+    <Button
+        android:id="@+id/leita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/leita"
+        android:onClick="SearchStuff"/>
 
 </LinearLayout>
