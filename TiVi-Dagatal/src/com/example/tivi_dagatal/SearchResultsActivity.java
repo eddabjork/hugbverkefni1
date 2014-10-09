@@ -5,6 +5,7 @@ import java.util.List;
 import Clients.TraktClient;
 import Dtos.Show;
 import android.app.ActionBar.LayoutParams;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -40,7 +41,7 @@ public class SearchResultsActivity extends ActionBarActivity {
     	for (Show show : searchShows){
         	TextView textView = new TextView(this);
     	    textView.setText(show.getTitle());
-    	    textView.setId(0);
+    	    textView.setTextSize(16);
     	    textView.setLayoutParams(lparams);
     	    ll.addView(textView);
     	}
@@ -84,12 +85,16 @@ public class SearchResultsActivity extends ActionBarActivity {
 			SearchStuff(x);
 			return true;
 		}
+		if (id == R.id.search){
+			onSearch(x);
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	/*public void onSearch(View view){
+	public void onSearch(View view){
     	Intent intent = new Intent(this, SearchResultsActivity.class);
         startActivity(intent);
-    }*/
+    }
 
 }
