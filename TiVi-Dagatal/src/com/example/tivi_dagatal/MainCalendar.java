@@ -3,21 +3,17 @@ package com.example.tivi_dagatal;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import Clients.IMDbClient;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
-import Dtos.Show;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,7 +27,7 @@ import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainCalendar extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -39,9 +35,6 @@ public class MainActivity extends ActionBarActivity {
         
         setLayout();
         fillInDates();
-        
-        //dummyTestEpisodes();
-        //dummyTestDB();
         
         DbUtils dbHelper = new DbUtils(this);
         List<String> dataTitles = dbHelper.getOnCalShows();
@@ -52,74 +45,6 @@ public class MainActivity extends ActionBarActivity {
         for (Episode episode : calendarEpisodes){
         	fillInEpisode(episode);
         }
-    }
-    
-    public void dummyTestDB(){
-    	DbUtils dbHelper = new DbUtils(this);
-        
-        Show show = new Show();
-        show.setTitle("New Girl");
-        show.setDataTitle("new-girl");
-        show.setPoster("kallaposter");
-        dbHelper.saveShow(show);
-        
-        dbHelper.takeShowOffCal(show);
-        
-        Show show2 = new Show();
-        show2.setTitle("Big Bang Theory");
-        show2.setDataTitle("big-bang-theory");
-        show2.setPoster("kallaposter2");
-        dbHelper.saveShow(show2);
-        
-        dbHelper.putShowOnCal(show2);
-        
-        for(Show _show: dbHelper.getAllShows()) {
-        	Log.e("stuff from db - before delete", _show.getTitle());
-        }
-        
-        for(String __show: dbHelper.getOnCalShows()) {
-        	Log.e("on cal show", __show);
-        }
-        
-        dbHelper.deleteShow(show);
-        
-        for(Show _show: dbHelper.getAllShows()) {
-        	Log.e("stuff from db", _show.getTitle());
-        }
-    }
-    
-    //eyða..
-    public void dummyTestEpisodes(){
-    	Episode ep1 = new Episode();
-  		ep1.setTitle("The Walking Dead");
-  		ep1.setFirstAired("141006");
-  		
-  		Episode ep2 = new Episode();
-  		ep2.setTitle("Once Upon a Time");
-  		ep2.setFirstAired("141006");
-  		
-  		Episode ep3 = new Episode();
-  		ep3.setTitle("The Big Bang Theory");
-  		ep3.setFirstAired("141007");
-  		
-  		Episode ep4 = new Episode();
-  		ep4.setTitle("New Girl");
-  		ep4.setFirstAired("141008");
-  		
-  		Episode ep5 = new Episode();
-  		ep5.setTitle("The Mindy Project");
-  		ep5.setFirstAired("141008");
-  		
-  		Episode ep6 = new Episode();
-  		ep6.setTitle("Modern Family");
-  		ep6.setFirstAired("141009");
-  		
-  		fillInEpisode(ep1);
-  		fillInEpisode(ep2);
-  		fillInEpisode(ep3);
-  		fillInEpisode(ep4);
-  		fillInEpisode(ep5);
-  		fillInEpisode(ep6);
     }
     
     public void setLayout() {
@@ -223,9 +148,9 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void fillInEpisode(Episode episode) {		
 		String title = episode.getDataTitle();
-		int ep_id = firstAiredRightForm(episode.getFirstAired());
+		int date_id = firstAiredRightForm(episode.getFirstAired());
 	
-		LinearLayout ll = (LinearLayout)findViewById(ep_id);
+		LinearLayout ll = (LinearLayout)findViewById(date_id);
 		TextView textView = new TextView(this);
 	    textView.setText(title);
 	    textView.setPadding(20,0,0,0);
@@ -265,32 +190,8 @@ public class MainActivity extends ActionBarActivity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         View x = new View(this);
     	int id = item.getItemId();
-        if (id == R.id.action_settings) {
-        	// test search
-        	TraktClient trakt = new TraktClient();
-        	List<Show> searchShows = trakt.searchShow("big bang theory");
-        	
-        	// test IMDb rating
-        	IMDbClient.getIMDbRating(searchShows.get(0));
-        	Log.v("rating", searchShows.get(0).getImdbRating());
-        	
-        	// test episodes for calendar
-        	List<String> calendarShows = new ArrayList<String>();
-        	calendarShows.add("modern-family");
-        	calendarShows.add("arrow");
-        	calendarShows.add("new-girl");
-        	List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(calendarShows);
-        	for(Episode ep : calendarEpisodes) {
-        		Log.v("title and date",  ep.getTitle() + " : " + ep.getFirstAired());
-        	}
-        	
-            return true;
-        }
         //TODO: Breyta id i staekkunaglegs-takkann a lyklabordinu seinna
 		if (id == R.id.search){
 			onSearch(x);
