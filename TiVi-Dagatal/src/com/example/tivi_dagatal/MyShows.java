@@ -59,7 +59,7 @@ public class MyShows extends ActionBarActivity {
 		
 		ImageView image = new ImageView(this);
 		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
-		image.setImageResource(R.drawable.ic_launcher);
+		image.setImageResource(R.drawable.ic_action_picture);
 		
 		LinearLayout ll_2 = new LinearLayout(this);
 		ll_2.setOrientation(LinearLayout.VERTICAL);
@@ -71,7 +71,7 @@ public class MyShows extends ActionBarActivity {
 		ll_3.setOrientation(LinearLayout.HORIZONTAL);
 		
 		Button btn_cal = new Button(this);
-		btn_cal.setText("Setja á dagatal");
+		btn_cal.setText(getResources().getString(R.string.btn_cal));
 		btn_cal.setTextSize(10);
 		btn_cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -80,11 +80,11 @@ public class MyShows extends ActionBarActivity {
         });
 		
 		Button btn_info = new Button(this);
-		btn_info.setText("Upplýsingar");
+		btn_info.setText(getResources().getString(R.string.btn_info));
 		btn_info.setTextSize(10);
 
 		Button btn_delete = new Button(this);
-		btn_delete.setText("Eyða");
+		btn_delete.setText(getResources().getString(R.string.btn_delete));
 		btn_delete.setTextSize(10);
 		btn_delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

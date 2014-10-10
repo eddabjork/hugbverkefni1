@@ -1077,8 +1077,10 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int ic_action_search=0x7f020057;
-        public static final int ic_launcher=0x7f020058;
+        public static final int ic_action_picture=0x7f020057;
+        public static final int ic_action_search=0x7f020058;
+        public static final int ic_launcher=0x7f020059;
+        public static final int temp_icon=0x7f02005a;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;
@@ -1256,17 +1258,39 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
-        public static final int action_settings=0x7f0b000f;
+        public static final int action_settings=0x7f0b0011;
         public static final int app_name=0x7f0b000e;
+        public static final int apr_label=0x7f0b0022;
+        public static final int aug_label=0x7f0b0026;
+        public static final int btn_cal=0x7f0b002b;
+        public static final int btn_delete=0x7f0b002d;
+        public static final int btn_info=0x7f0b002c;
+        public static final int dec_label=0x7f0b002a;
+        public static final int feb_label=0x7f0b0020;
+        public static final int fri_label=0x7f0b001d;
         public static final int hello_world=0x7f0b000d;
-        public static final int leita=0x7f0b0014;
-        public static final int leitarbox=0x7f0b0015;
-        public static final int search_hint=0x7f0b0011;
-        public static final int search_test=0x7f0b0013;
-        public static final int search_title=0x7f0b0010;
-        public static final int title_activity_my_episodes_list=0x7f0b0016;
-        public static final int title_activity_my_shows=0x7f0b0017;
-        public static final int title_activity_search_results=0x7f0b0012;
+        public static final int jan_label=0x7f0b001f;
+        public static final int jul_label=0x7f0b0025;
+        public static final int jun_label=0x7f0b0024;
+        public static final int leita=0x7f0b0015;
+        public static final int leitarbox=0x7f0b0016;
+        public static final int mar_label=0x7f0b0021;
+        public static final int may_label=0x7f0b0023;
+        public static final int mon_label=0x7f0b0019;
+        public static final int nov_label=0x7f0b0029;
+        public static final int oct_label=0x7f0b0028;
+        public static final int sat_label=0x7f0b001e;
+        public static final int search_hint=0x7f0b0013;
+        public static final int search_test=0x7f0b0014;
+        public static final int search_title=0x7f0b0012;
+        public static final int sep_label=0x7f0b0027;
+        public static final int sun_label=0x7f0b0018;
+        public static final int temp_btn_my_episodes=0x7f0b0017;
+        public static final int thu_label=0x7f0b001c;
+        public static final int title_activity_my_shows=0x7f0b0010;
+        public static final int title_activity_search_results=0x7f0b000f;
+        public static final int tue_label=0x7f0b001a;
+        public static final int wed_label=0x7f0b001b;
     }
     public static final class style {
         /** 

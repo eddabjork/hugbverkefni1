@@ -54,6 +54,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     
+    //eyğa..
     public void dummyTestDB(){
     	DbUtils dbHelper = new DbUtils(this);
         
@@ -132,7 +133,7 @@ public class MainActivity extends ActionBarActivity {
     	ll.setId(R.id.calendar_layout);
     	
         Button btn = new Button(this);
-        btn.setText("Mínir şættir");
+        btn.setText(getResources().getString(R.string.temp_btn_my_episodes));
         btn.setLayoutParams(lparams_wrap);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -151,19 +152,19 @@ public class MainActivity extends ActionBarActivity {
 		LinearLayout ll = (LinearLayout)findViewById(R.id.calendar_layout);
 
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		setDateLayout("SUN", cal, ll);
+		setDateLayout(getResources().getString(R.string.sun_label), cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		setDateLayout("MÁN", cal, ll);
+		setDateLayout(getResources().getString(R.string.mon_label), cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-		setDateLayout("ŞRI", cal, ll);
+		setDateLayout(getResources().getString(R.string.tue_label), cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-		setDateLayout("MIĞ", cal, ll);
+		setDateLayout(getResources().getString(R.string.wed_label), cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-		setDateLayout("FIM", cal, ll);
+		setDateLayout(getResources().getString(R.string.thu_label), cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		setDateLayout("FÖS", cal, ll);
+		setDateLayout(getResources().getString(R.string.fri_label), cal, ll);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		setDateLayout("LAU", cal, ll);
+		setDateLayout(getResources().getString(R.string.sat_label), cal, ll);
 	}
 
 	public void setDateLayout(String day_name, Calendar cal, LinearLayout mainLayout) {		
@@ -181,8 +182,7 @@ public class MainActivity extends ActionBarActivity {
 		textView_day.setGravity(Gravity.CENTER);
 		textView_day.setTextSize(20);
 		TextView textView_month = new TextView(this);
-		//hafa meğ*
-		//textView_month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
+		textView_month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		textView_month.setGravity(Gravity.CENTER);
 		textView_month.setTextSize(10);
 		
@@ -191,8 +191,8 @@ public class MainActivity extends ActionBarActivity {
 		String date = new SimpleDateFormat("yyMMdd").format(cal.getTime());
 		ll_2.setId(Integer.parseInt(date));
 		
-		//taka út*
-		textView_month.setText(date);
+		//til ağ athuga id
+		//textView_month.setText(date);
 		
 		ll_1.addView(textView_name);
 		ll_1.addView(textView_day);
@@ -214,7 +214,21 @@ public class MainActivity extends ActionBarActivity {
 	public String getMonthForInt(int num) {
         String month = "wrong";
         DateFormatSymbols dfs = new DateFormatSymbols();
-        String[] months = {"janúar","febrúar","mars","apríl","maí","júní","júlí","ágúst","september","október","nóvember","desember"};
+        //String[] months = {"janúar","febrúar","mars","apríl","maí","júní","júlí","ágúst","september","október","nóvember","desember"};
+        String[] months = {
+        	getResources().getString(R.string.jan_label),
+        	getResources().getString(R.string.feb_label),
+        	getResources().getString(R.string.mar_label),
+        	getResources().getString(R.string.apr_label),
+        	getResources().getString(R.string.may_label),
+        	getResources().getString(R.string.jun_label),
+        	getResources().getString(R.string.jul_label),
+        	getResources().getString(R.string.aug_label),
+        	getResources().getString(R.string.sep_label),
+        	getResources().getString(R.string.oct_label),
+        	getResources().getString(R.string.nov_label),
+        	getResources().getString(R.string.dec_label)
+        };
         if (num >= 0 && num <= 11 ) {
             month = months[num];
         }

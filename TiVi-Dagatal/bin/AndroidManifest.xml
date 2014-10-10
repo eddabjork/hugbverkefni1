@@ -12,7 +12,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/temp_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -43,10 +43,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tivi_dagatal.MainActivity" />
-        </activity>
-        <activity
-            android:name=".MyEpisodesList"
-            android:label="@string/title_activity_my_episodes_list" >
         </activity>
         <activity
             android:name=".MyShows"
