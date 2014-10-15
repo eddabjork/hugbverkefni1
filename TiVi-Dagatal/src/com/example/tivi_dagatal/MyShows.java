@@ -58,8 +58,8 @@ public class MyShows extends ActionBarActivity {
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
 		
 		ImageView image = new ImageView(this);
-		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
-		image.setImageResource(R.drawable.ic_action_picture);
+		image.setImageResource(R.drawable.ic_launcher);
+		//ImageView image = createImage();
 		
 		LinearLayout ll_2 = new LinearLayout(this);
 		ll_2.setOrientation(LinearLayout.VERTICAL);
@@ -101,6 +101,22 @@ public class MyShows extends ActionBarActivity {
 		ll_1.addView(ll_2);
 		mainLayout.addView(ll_1);
 		mainLayout.addView(makeLine());
+	}
+	
+	//virkar ei
+	public ImageView createImage() {
+		ImageView image = new ImageView(this);
+		new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
+		image.buildDrawingCache();
+		Bitmap bmap = image.getDrawingCache();
+		
+		ImageView image2 = new ImageView(this);
+		image2.setImageBitmap(bmap);
+		
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
+		image2.setLayoutParams(layoutParams);
+		
+		return image2;
 	}
 	
 	public View makeLine(){
