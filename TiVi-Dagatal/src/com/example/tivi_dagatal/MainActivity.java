@@ -243,11 +243,20 @@ public class MainActivity extends ActionBarActivity {
 		TextView textView = new TextView(this);
 	    textView.setText(title);
 	    textView.setPadding(20,0,0,0);
-	    ll.addView(textView);	
+	    try {
+	    	ll.addView(textView);	
+	    } catch(Exception e) {
+	    	
+	    }
 	}
 	
 	public void onSearch(View view){
     	Intent intent = new Intent(this, SearchResultsActivity.class);
+        startActivity(intent);
+    }
+	
+	public void onHome(View view){
+    	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 	
@@ -308,6 +317,10 @@ public class MainActivity extends ActionBarActivity {
         //TODO: Breyta id i staekkunaglegs-takkann a lyklabordinu seinna
 		if (id == R.id.search){
 			onSearch(x);
+			return true;
+		}
+		if (id == R.id.action_home){
+			onHome(x);
 			return true;
 		}
         return super.onOptionsItemSelected(item);

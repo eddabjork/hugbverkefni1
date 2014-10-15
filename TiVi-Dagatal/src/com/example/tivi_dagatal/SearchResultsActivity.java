@@ -101,11 +101,20 @@ public class SearchResultsActivity extends ActionBarActivity {
 			onSearch(x);
 			return true;
 		}
+		if (id == R.id.action_home){
+			onHome(x);
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	
 	public void onSearch(View view){
     	Intent intent = new Intent(this, SearchResultsActivity.class);
+        startActivity(intent);
+    }
+	
+	public void onHome(View view){
+    	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

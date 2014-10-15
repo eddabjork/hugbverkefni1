@@ -5,6 +5,7 @@ import java.util.List;
 
 import Data.DbUtils;
 import Dtos.Show;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -175,8 +176,13 @@ public class MyShows extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+		View x = new View(this);
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			return true;
+		}
+		if (id == R.id.action_home){
+			onHome(x);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -198,4 +204,9 @@ public class MyShows extends ActionBarActivity {
 			return rootView;
 		}
 	}
+	
+	public void onHome(View view){
+    	Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
