@@ -1,3 +1,10 @@
+/**
+ * Nafn:		Steinunn Friðgeirsdóttir
+ * Dagsetning:	3. október 2014
+ * Markmið:		Klasinn tekur við leitarorði og birtir leitarniðurstöður
+ * 				frá client. Niðurstöðurnar eru settar í view sem er
+ * 				búið til jafn óðum.
+ **/
 package Main;
 
 import java.util.List;
@@ -32,38 +39,44 @@ public class SearchResultsActivity extends ActionBarActivity {
 		setContentView(R.layout.fragment_search_results);
 	}
 
+	//Notkun: SearchStuff(view)
+	//Eftirskilyrði: Búið er að búa til nýtt view sem inniheldur
+	//				 leitarniðurstöður frá því orði sem var í leitarboxi
+	//				 ásamt tökkum til að bæta birtum þáttaröðum á lista.
 	public void SearchStuff(View view){
-
-				EditText wordText = (EditText) findViewById(R.id.leitarbox);
-				String word = wordText.getText().toString();
-				
-				TraktClient search = new TraktClient();
-		    	List<Show> searchShows = search.searchShow(word);
-		    	LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
-		                LayoutParams.MATCH_PARENT);
-            	ScrollView sv = new ScrollView(this);
-		    	LinearLayout llv = new LinearLayout(this);
-		    	llv.setOrientation(LinearLayout.VERTICAL);
-		    	for (final Show show : searchShows){
-		        	TextView textView = new TextView(this);
-		    	    textView.setText(show.getTitle());
-		    	    textView.setTextSize(30);
-		    	    textView.setLayoutParams(lparams);
-		    	    Button button = new Button(this);
-		    	    button.setText("Bï¿½ta ï¿½ ï¿½ï¿½ttirnir mï¿½nir");
-		    	    button.setLayoutParams(lparams);
-		            button.setOnClickListener(new View.OnClickListener() {
-		                public void onClick(View view) {
-		                	dbHelper.saveShow(show);
-		                }
-		            });
-		    	    llv.addView(textView);
-		    	    llv.addView(button);
-		    	}
-		    	//Add the linearLayout view to the scroll view
-		    	sv.addView(llv);
-			    //Show the new view
-			    setContentView(sv);		
+		EditText wordText = (EditText) findViewById(R.id.leitarbox);
+		String word = wordText.getText().toString();
+		
+		TraktClient search = new TraktClient();
+		List<Show> searchShows = search.searchShow(word);
+		LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+	            LayoutParams.MATCH_PARENT);
+		ScrollView sv = new ScrollView(this);
+		LinearLayout llv = new LinearLayout(this);
+		llv.setOrientation(LinearLayout.VERTICAL);
+		for (final Show show : searchShows){
+	    	TextView textView = new TextView(this);
+		    textView.setText(show.getTitle());
+		    textView.setTextSize(30);
+		    textView.setLayoutParams(lparams);
+		    Button button = new Button(this);
+		    button.setText("Bï¿½ta ï¿½ ï¿½ï¿½ttirnir mï¿½nir");
+		    button.setLayoutParams(lparams);
+	        button.setOnClickListener(new View.OnClickListener() {
+	        	//Notkun: dbHelper.saveShow(show)
+	        	//Eftirskilyrði: show hefur verið bætt í gagnasafn
+	            public void onClick(View view) {
+	            	dbHelper.saveShow(show);
+	            }
+	        });
+	        //Bæta titli og takka í linearlayout
+		    llv.addView(textView);
+		    llv.addView(button);
+		}
+		//Bæta linearlayoutinu í scrollview
+		sv.addView(llv);
+	    //Birta nýja viewið
+	    setContentView(sv);		
 	}
 
 	@Override
@@ -94,11 +107,15 @@ public class SearchResultsActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	//Notkun: onSearch(view)
+	//Eftirskilyrði: Leitaractivity hefur verið startað.
 	public void onSearch(View view){
     	Intent intent = new Intent(this, SearchResultsActivity.class);
         startActivity(intent);
     }
 	
+	//Notkun: onSearch(view)
+	//Eftirskilyrði: Heimaskjánum hefur verið startað.
 	public void onHome(View view){
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
