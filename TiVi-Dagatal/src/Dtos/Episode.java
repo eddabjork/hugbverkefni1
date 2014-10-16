@@ -1,8 +1,3 @@
-/**
- * Nafn:		Steinunn Friðgeirsdóttir
- * Dagsetning:	2. október 2014
- * Markmið:		Klasinn er hlutur sem geymir upplýsingar um stakan þátt.
- */
 package Dtos;
 
 public class Episode {

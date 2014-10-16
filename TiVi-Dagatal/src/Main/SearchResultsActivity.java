@@ -65,7 +65,42 @@ public class SearchResultsActivity extends ActionBarActivity {
 			    //Show the new view
 			    setContentView(sv);		
 	}
-
+	
+	
+    /*private void handleIntent(Intent intent) {
+        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+            // handles a click on a search suggestion; launches activity to show word
+            Intent wordIntent = new Intent(this, SearchResultsActivity.class);
+            wordIntent.setData(intent.getData());
+            startActivity(wordIntent);
+        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            // handles a search query
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //SearchStuff(query);
+        }
+    }*/
+	
+	public void SearchStuff(String word){
+		TraktClient search = new TraktClient();
+    	List<Show> searchShows = search.searchShow(word);
+    	LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT);
+    	ScrollView sv = new ScrollView(this);
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	for (Show show : searchShows){
+        	TextView textView = new TextView(this);
+    	    textView.setText(show.getTitle());
+    	    textView.setId(0);
+    	    textView.setLayoutParams(lparams);
+    	    ll.addView(textView);
+    	}
+    	//Add the linearLayout view to the scroll view
+    	sv.addView(ll);
+	    //Show the new view
+	    setContentView(sv);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
