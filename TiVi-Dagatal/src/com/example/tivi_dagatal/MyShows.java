@@ -60,7 +60,8 @@ public class MyShows extends ActionBarActivity {
 		
 		ImageView image = new ImageView(this);
 		image.setImageResource(R.drawable.ic_launcher);
-		//ImageView image = createImage();
+		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
+		//image.buildDrawingCache()
 		
 		LinearLayout ll_2 = new LinearLayout(this);
 		ll_2.setOrientation(LinearLayout.VERTICAL);
@@ -104,22 +105,6 @@ public class MyShows extends ActionBarActivity {
 		mainLayout.addView(makeLine());
 	}
 	
-	//virkar ei
-	public ImageView createImage() {
-		ImageView image = new ImageView(this);
-		new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
-		image.buildDrawingCache();
-		Bitmap bmap = image.getDrawingCache();
-		
-		ImageView image2 = new ImageView(this);
-		image2.setImageBitmap(bmap);
-		
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
-		image2.setLayoutParams(layoutParams);
-		
-		return image2;
-	}
-	
 	public View makeLine(){
 		 View v = new View(this);
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -159,23 +144,18 @@ public class MyShows extends ActionBarActivity {
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.deleteShow(show);
-		//hér kemur mjög ljótt refresh:
 		finish();
 		startActivity(getIntent());
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.my_episodes_list, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		View x = new View(this);
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
@@ -188,9 +168,6 @@ public class MyShows extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
