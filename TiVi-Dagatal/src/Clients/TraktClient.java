@@ -21,6 +21,7 @@ import java.util.List;
 import Dtos.Episode;
 import Dtos.Show;
 import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 
 
@@ -74,7 +75,7 @@ public class TraktClient {
 	}
 	
 	//Notkun: 		 shows = searchShow(title)
-	//Eftirskilyrði: shows er listi af þáttaröðum sem eru niðurstöður þegar 
+	//Eftirskilyrði: shows er listi af þáttum sem eru niðurstöður þegar 
 	//				 leitað er eftir strengnum title
 	public List<Show> searchShow(final String title) {
 			
@@ -116,8 +117,8 @@ public class TraktClient {
 	}
 	
 	//Notkun: 		 shows = readShowsArrayForSearch(reader)
-	//Eftirskilyrði: shows er listi af þáttaröðum sem eru niðurstöður úr leit
-	//				 sem lesið er úr json upplýsingum sem reader geymir
+	//Eftirskilyrði: shows er listi af þáttum sem eru niðurstöður þegar 
+	//				 leitað er eftir strengnum title
 	public List<Show> readShowsArrayForSearch(JsonReader reader) throws IOException {
 		List<Show> shows = new ArrayList<Show>();
 		
@@ -135,9 +136,6 @@ public class TraktClient {
 		return shows;
 	}
  
-	 //Notkun: 		  show = readShowForSearch(reader)
-	 //Eftirskilyrði: show er þáttur sem er lesinn er úr staki
-	 //				  úr json upplýsingum sem reader geymir
 	 public Show readShowForSearch(JsonReader reader) throws IOException {
 		Show show = new Show();
 		reader.beginObject();
@@ -211,8 +209,6 @@ public class TraktClient {
 		return show;
 	  }
 	 
-	 //Notkun: 		  readImages(reader, show)
-	 //Eftirskilyrði: slóðir á myndir fyrir show hafa verið stilltar á show
 	 public void readImages(JsonReader reader, Show show) throws IOException{
 		 reader.beginObject();
 		 while(reader.hasNext()){
@@ -242,9 +238,6 @@ public class TraktClient {
 		 reader.endObject();
 	 }
 	 
-	 //Notkun: 		  episodes = getCalendarEpisodes(dataTitles)
-	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
-	 //				  birtir á dagatali
 	 public List<Episode> getCalendarEpisodes(List<String> dataTitles){
 		 for(final String dataTitle : dataTitles){	 		 
 		 
@@ -326,8 +319,6 @@ public class TraktClient {
 		 return calendarEpisodes;
 	 }
 	 
-	 //Notkun: 		  seasons = readSeasonsArrayForCalendar(reader)
-	 //Eftirskilyrði: seasons er listi af númerum á þeim seríum sem á að leita eftir
 	 public List<String> readSeasonsArrayForCalendar(JsonReader reader) throws IOException {
 	    List<String> seasons = new ArrayList<String>();
 	    int count = 0;
@@ -344,8 +335,6 @@ public class TraktClient {
 	    return seasons;
 	 }
 	 
-	 //Notkun: 		  season = readSeasonForCalendar(reader)
-	 //Eftirskilyrði: season er númer á seríu sem á að leita eftir
 	 public String readSeasonForCalendar(JsonReader reader) throws IOException {
 		reader.beginObject();
 		String season = "";
@@ -366,9 +355,6 @@ public class TraktClient {
 		return season;
 	  }
 	 
-	 //Notkun: 		  episodes = readEpisodesArrayForCalendar(reader, showDataTitle)
-	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
-	 //				  birtir á dagatali
 	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle) throws IOException {
 		List<Episode> episodes = new ArrayList<Episode>();
 		
@@ -382,9 +368,7 @@ public class TraktClient {
 		reader.endArray();
 		return episodes;
 	}
-	
-	//Notkun: 		 episode = readEpisodeForCalendar(reader, showDataTitle)
-	//Eftirskilyrði: episode er þáttur sem á að vera birtur á dagatali
+	 
 	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle) throws IOException {
 		Episode episode = new Episode();
 		reader.beginObject();
@@ -455,8 +439,6 @@ public class TraktClient {
 		return null;
 	}
 	
-	//Notkun: 		 readImages(reader, episode)
-	//Eftirskilyrði: slóðir á myndir fyrir episode hafa verið stilltar á episode
 	public void readImages(JsonReader reader, Episode episode) throws IOException{
 		 reader.beginObject();
 		 while(reader.hasNext()){

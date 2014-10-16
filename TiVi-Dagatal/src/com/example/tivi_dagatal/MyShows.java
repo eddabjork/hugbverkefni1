@@ -1,14 +1,7 @@
-package Main;
+package com.example.tivi_dagatal;
 
 import java.io.InputStream;
 import java.util.List;
-
-import com.example.tivi_dagatal.R;
-import com.example.tivi_dagatal.R.drawable;
-import com.example.tivi_dagatal.R.id;
-import com.example.tivi_dagatal.R.layout;
-import com.example.tivi_dagatal.R.menu;
-import com.example.tivi_dagatal.R.string;
 
 import Data.DbUtils;
 import Dtos.Show;

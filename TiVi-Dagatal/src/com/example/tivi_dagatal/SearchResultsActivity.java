@@ -1,11 +1,6 @@
-package Main;
+package com.example.tivi_dagatal;
 
 import java.util.List;
-
-import com.example.tivi_dagatal.R;
-import com.example.tivi_dagatal.R.id;
-import com.example.tivi_dagatal.R.layout;
-import com.example.tivi_dagatal.R.menu;
 
 import Clients.TraktClient;
 import Data.DbUtils;

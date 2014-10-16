@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="Main.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +25,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="Main.SearchResultsActivity"
+            android:name=".SearchResultsActivity"
             android:label="@string/title_activity_search_results"
-            android:parentActivityName="Main.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +45,7 @@
                 android:value="com.example.tivi_dagatal.MainActivity" />
         </activity>
         <activity
-            android:name="Main.MyShows"
+            android:name=".MyShows"
             android:label="@string/title_activity_my_shows" >
         </activity>
     </application>
