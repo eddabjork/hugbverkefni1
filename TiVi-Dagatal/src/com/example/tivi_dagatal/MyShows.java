@@ -1,5 +1,11 @@
-package com.example.tivi_dagatal;
+/** Nafn: 		Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	9. október 2014
+ * Markmið: 	Stilla upp útlit fyrir Þættirnir-mínir lista sem
+ * 				inniheldur alla þá þætti notandi hefur sett á tilsvarandi lista
+ * 				(í gegnum search)
+ */
 
+package com.example.tivi_dagatal;
 import java.io.InputStream;
 import java.util.List;
 
@@ -28,7 +34,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MyShows extends ActionBarActivity {
-
+	/** Saves current state and sets the view */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,6 +43,9 @@ public class MyShows extends ActionBarActivity {
 		setLayout();
 	}
 	
+	//Notkun:		 setLayout();
+  	//Eftirskilyrði: Búið er að setja upp útlit fyrir Þættirnir-mínir listi, sem er LinearLayout
+	//				 innan í ScrollView, og viðeigandi þáttaraðir hafa verið settir þar inn.
 	public void setLayout() {
 		DbUtils dbHelper = new DbUtils(this);
 		List<Show> showList = dbHelper.getAllShows();
@@ -54,12 +63,17 @@ public class MyShows extends ActionBarActivity {
 	    setContentView(sv);	
     }
 	
+	//Notkun:		 addShow(show, mainLayout);
+  	//Eftirskilyrði: Búið er að búa til view fyrir sérhverja þáttaröð, sem samanstendur
+	//				 af mynd þáttaraðar, titil og þrjá takka (bæta við/fjarlægja úr dagatali,
+	//				 upplýsingar og fjarlægja). Þetta view er svo bætt við í aðal LinearLayout.
 	public void addShow(final Show show, LinearLayout mainLayout) {		
 		LinearLayout ll_1 = new LinearLayout(this);
 		ll_1.setOrientation(LinearLayout.HORIZONTAL);
 		
 		ImageView image = new ImageView(this);
 		image.setImageResource(R.drawable.ic_launcher);
+		//ennþá verið að vinna í að setja inn rétta mynd.
 		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
 		//image.buildDrawingCache()
 		
@@ -105,6 +119,8 @@ public class MyShows extends ActionBarActivity {
 		mainLayout.addView(makeLine());
 	}
 	
+	//Notkun:		 line = makeLine();
+  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
 	public View makeLine(){
 		 View v = new View(this);
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -112,12 +128,19 @@ public class MyShows extends ActionBarActivity {
 		 return v;
 	 }
 	
+	/*
+     * Nafn: Kristín Fjóla Tómasdóttir
+     * Dagsetning: 9. október 2014
+     * Markmið: Ná í myndir með samhliða þræðavinnslu
+     * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 		public DownloadImageTask(ImageView bmImage) {
 			this.bmImage = bmImage;
 		}
 		
+		//Notkun:		 bm = doInBackground(urls);
+	  	//Eftirskilyrði: bm er myndin sem er sótt frá urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -131,16 +154,22 @@ public class MyShows extends ActionBarActivity {
 			return mIcon11;
 		}
 		
+		//Notkun:		 onPostExecute(result);
+	  	//Eftirskilyrði: búið er að setja myndina result á rétt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
 	}
 	
+	//Notkun:		 addToCal(show);
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.putShowOnCal(show);
 	}
 	
+	//Notkun:		 removeFromMyEpisodes(show);
+  	//Eftirskilyrði: Búið er eyða út show úr gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.deleteShow(show);
@@ -148,12 +177,16 @@ public class MyShows extends ActionBarActivity {
 		startActivity(getIntent());
 	}
 
+	/** Inflate the menu; this adds items to the action bar if it is present */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.my_episodes_list, menu);
 		return true;
 	}
 
+	/** Handles presses on the action bar 
+	 *  Parameter item: the item that was pressed on
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		View x = new View(this);
@@ -168,6 +201,9 @@ public class MyShows extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+     * A placeholder fragment containing a simple view.
+     */
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -182,6 +218,8 @@ public class MyShows extends ActionBarActivity {
 		}
 	}
 	
+	//Notkun:		 onHome(view);
+  	//Eftirskilyrði: Upphafsskjár (sem inniheldur viku-dagatal) hefur opnast.
 	public void onHome(View view){
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

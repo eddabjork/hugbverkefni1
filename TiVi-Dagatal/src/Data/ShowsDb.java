@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
- * Dagsetning: 	4. oktÃ³ber 2014
- * MarkmiÃ°: 	BÃºa til gagnagrunn fyrir Ã¾Ã¦tti sem eiga aÃ° vera
- * 				Ã­ listanum ÃÃ¦ttirnir MÃ­nir.
+ * Nafn: 		Edda Björk Konráğsdóttir
+ * Dagsetning: 	4. október 2014
+ * Markmiğ: 	Búa til gagnagrunn fyrir şætti sem eiga ağ vera
+ * 				í listanum Şættirnir Mínir.
  */
 package Data;
 
@@ -36,13 +36,13 @@ public class ShowsDb extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
-	//EftirskilyrÃ°i: BÃºiÃ° er aÃ° bÃºa til gagnagrunninn db 
+	//Eftirskilyrği: Búiğ er ağ búa til gagnagrunninn db 
 	public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 	 
-    //EftirskilyrÃ°i: BÃºiÃ° er aÃ° uppfÃ¦ra gagnagrunninn db Ãºr oldVersion
-	//				 Ã­ newVersion
+    //Eftirskilyrği: Búiğ er ağ uppfæra gagnagrunninn db úr oldVersion
+	//				 í newVersion
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over

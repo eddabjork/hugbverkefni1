@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
- * Dagsetning: 	4. oktÃ³ber 2014
- * MarkmiÃ°:		Skilgreina og geyma breytur fyrir gagnagrunninn sem geymir
- * 				Ã¾Ã¦ttina sem eru Ã­ ÃÃ¦ttirnir MÃ­nir listanum.
+ * Nafn: 		Edda Björk Konráğsdóttir
+ * Dagsetning: 	4. október 2014
+ * Markmiğ:		Skilgreina og geyma breytur fyrir gagnagrunninn sem geymir
+ * 				şættina sem eru í Şættirnir Mínir listanum.
  */
 package Data;
 

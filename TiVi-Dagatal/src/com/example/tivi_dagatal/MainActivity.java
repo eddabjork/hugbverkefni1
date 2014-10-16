@@ -1,5 +1,11 @@
-package com.example.tivi_dagatal;
+/*
+ * Nafn: 		Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	2. október 2014
+ * Markmið: 	Stilla upp útlit fyrir upphafsskjá, þ.e. sýna viku-dagatal sem
+ * 				inniheldur alla þá þætti eru eiga að vera á dagatali.
+ */
 
+package com.example.tivi_dagatal;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +34,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
+	/** Saves current state and sets the view */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -47,6 +54,9 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     
+    //Notkun:		 setLayout();
+  	//Eftirskilyrði: Búið er að setja upp grunnlag útlits, sem inniheldur 
+  	//				 einn takka og LinearLayout innan í ScrollView
     public void setLayout() {
         LayoutParams lparams_wrap = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 
@@ -71,6 +81,10 @@ public class MainActivity extends ActionBarActivity {
     	setContentView(sv);
     }
     
+    //Notkun:		 fillInDates();
+  	//Eftirskilyrði: Búið er að búa til view fyrir sérhvern dag vikunnar (alls 7) þar
+    //				 sem fram kemur dagsetning og Layout-pláss fyrir dagatals-þætti
+    //				 Þau eru svo sett inn í aðal LinearLayout í grunnlagi útlits.
     public void fillInDates() {
 		Calendar cal = Calendar.getInstance();
 		LinearLayout ll = (LinearLayout)findViewById(R.id.calendar_layout);
@@ -90,7 +104,13 @@ public class MainActivity extends ActionBarActivity {
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
 		setDateLayout(getResources().getString(R.string.sat_label), cal, ll);
 	}
-
+    
+    //Notkun:		 setDateLayout(day_name, calendar, mainLayout);
+  	//Eftirskilyrði: Búið er að búa til view fyrir einn dag þar sem fram kemur
+    //				 dagur vikunnar, dagur mánaðars og mánuðurinn sjálfur.
+    //				 Einnig er búið að búa til LinearLayout inni í þessu view sem er 
+    //				 með id (dagsetningin á forminu yyMMdd) svo hægt sé að bæta 
+    //				 við þætti á réttan stað.
 	public void setDateLayout(String day_name, Calendar cal, LinearLayout mainLayout) {		
 		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -125,13 +145,18 @@ public class MainActivity extends ActionBarActivity {
 		mainLayout.addView(makeLine());
 	}
 	
-	 public View makeLine(){
+	//Notkun:		 line = makeLine();
+  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
+	public View makeLine(){
 		 View v = new View(this);
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
 	 }
 	
+	//Notkun:		 month = getMonthFromInt(number);
+  	//Eftirskilyrði: month er nafn mánuðs miðað við number þar sem 
+	//				 0=janúar,..,11=desember.
 	public String getMonthForInt(int num) {
         String month = "wrong";
         DateFormatSymbols dfs = new DateFormatSymbols();
@@ -155,6 +180,10 @@ public class MainActivity extends ActionBarActivity {
         return month;
     }
 	
+	//Notkun:		 fillInEpisode(episode);
+  	//Eftirskilyrði: Búið að setja inn alla þætti sem eru stilltir á "á dagatali"
+	//				 á réttan stað (þ.e. bæta við í view-ið sem hefur id-ið
+	//				 dagsetninguna þegar þátturinn var frumsýndur)
 	public void fillInEpisode(Episode episode) {		
 		String title = episode.getDataTitle();
 		int ep_id = firstAiredRightForm(episode.getFirstAired());
@@ -170,21 +199,30 @@ public class MainActivity extends ActionBarActivity {
 	    }
 	}
 	
+	//Notkun:		 onSearch(view);
+  	//Eftirskilyrði: Skjár sem inniheldur Leitar-activity-ið hefur opnast.
 	public void onSearch(View view){
     	Intent intent = new Intent(this, SearchResultsActivity.class);
         startActivity(intent);
     }
 	
+	//Notkun:		 onHome(view);
+  	//Eftirskilyrði: Upphafsskjár (sem inniheldur viku-dagatal) hefur opnast.
 	public void onHome(View view){
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 	
+	//Notkun:		 see_my_episodes(view);
+  	//Eftirskilyrði: Skjár sem inniheldur Mína-þætti-activity-ið hefur opnast.
 	public void see_my_episodes(View view) {
 		Intent intent = new Intent(this, MyShows.class);
 	    startActivity(intent);
 	}
     
+	//Notkun:		 number = firstAiredRightForm(strDate);
+  	//Eftirskilyrði: strDate er dagsetningu á forminu: yyyy-MM-dd'T'HH:mm:ss 
+	//				 number er talan yyMMdd.
     public int firstAiredRightForm(String strDate){
     	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyMMdd");
@@ -198,6 +236,7 @@ public class MainActivity extends ActionBarActivity {
 		return Integer.parseInt(newStrDate);
     }
 
+    /** Inflate the menu; this adds items to the action bar if it is present */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -206,6 +245,9 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
     
+    /** Handles presses on the action bar 
+	 *  Parameter item: the item that was pressed on
+	 */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         View x = new View(this);
@@ -225,6 +267,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * A placeholder fragment containing a simple view.
+     */
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
