@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Kristín Fjóla Tómasdóttir
+ * Dagsetning: 	2. október 2014
+ * Markmið: 	Biðill sem nær í upplýsingar um þáttaraðir og þætti frá 
+ * 				vefþjónustu https://trakt.tv/. 
+ */
 package Clients;
 
 import java.io.IOException;
@@ -32,6 +38,8 @@ public class TraktClient {
 	
 	public TraktClient(){}
 	
+	//Notkun: 		 date = getLastMonday()
+	//Eftirskilyrði: date er síðasliðinn mánudagur
 	public static Date getLastMonday(){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -43,6 +51,8 @@ public class TraktClient {
 		return lastMonday;
 	}
 	
+	//Notkun: 		 date = getNextMonday()
+	//Eftirskilyrði: date er næstkomandi mánudagur
 	public static Date getNextMonday(){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -55,6 +65,8 @@ public class TraktClient {
 		return nextMonday;
 	}
 	
+	//Notkun: 		 calendar = nullifyTime(c)
+	//Eftirskilyrði: Tíminn á deginum calendar hefur verið settur á 00:00:00
 	public static Calendar nullifyTime(Calendar c){
 		c.set(Calendar.HOUR_OF_DAY,0);
 		c.set(Calendar.MINUTE, 0);
@@ -62,6 +74,9 @@ public class TraktClient {
 		return c;
 	}
 	
+	//Notkun: 		 shows = searchShow(title)
+	//Eftirskilyrði: shows er listi af þáttum sem eru niðurstöður þegar 
+	//				 leitað er eftir strengnum title
 	public List<Show> searchShow(final String title) {
 			
 		Thread thread = new Thread(new Runnable() {       	
@@ -101,6 +116,9 @@ public class TraktClient {
 		return searchShows;	
 	}
 	
+	//Notkun: 		 shows = readShowsArrayForSearch(reader)
+	//Eftirskilyrði: shows er listi af þáttum sem eru niðurstöður þegar 
+	//				 leitað er eftir strengnum title
 	public List<Show> readShowsArrayForSearch(JsonReader reader) throws IOException {
 		List<Show> shows = new ArrayList<Show>();
 		

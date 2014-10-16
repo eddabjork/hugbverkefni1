@@ -1,3 +1,10 @@
+/**
+ * Nafn: 		Kristín Fjóla Tómasdóttir
+ * Dagsetning: 	5. október 2014
+ * Markmið: 	Biðill sem nær í upplýsingar um þáttaraðir og þætti frá 
+ * 				vefþjónustu https://imdb.com/. 
+ */
+
 package Clients;
 
 import java.io.IOException;
@@ -13,6 +20,8 @@ import android.util.Log;
 
 public class IMDbClient {
 	
+	//Notkun: 			getIMDbRating(show)
+	//Eftirskilyrði: 	IMDb einkunn er stillt á show
 	public static void getIMDbRating(final Show show){
 		
 		Thread thread = new Thread(new Runnable() {       	
@@ -49,7 +58,9 @@ public class IMDbClient {
             e.printStackTrace();
         }
 	}
-	 
+	
+	//Notkun: 			readShow(reader, show)
+	//Eftirskilyrði: 	IMDb einkunn er stillt á show
 	public static void readShow(JsonReader reader, Show show) throws IOException {
 		reader.beginObject();
 		
