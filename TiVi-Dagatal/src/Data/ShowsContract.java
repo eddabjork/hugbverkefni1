@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Edda Björk Konráðsdóttir
+ * Dagsetning: 	4. október 2014
+ * Markmið:		Skilgreina og geyma breytur fyrir gagnagrunninn sem geymir
+ * 				þættina sem eru í Þættirnir Mínir listanum.
+ */
 package Data;
 
 import android.provider.BaseColumns;

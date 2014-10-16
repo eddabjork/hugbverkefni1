@@ -1,3 +1,10 @@
+/**
+ * Nafn: 		Edda Björk Konráðsdóttir
+ * Dagsetning: 	9. október 2014
+ * Markmið: 	Klasinn leyfir að bæta gögnum í gagnagrunninn, sækja gögn
+ * 				og eyða þeim. Hjálparklasi til að framkvæma aðgerðir á 
+ * 				gagnagrunninn.
+ */
 package Data;
 
 import java.util.ArrayList;
@@ -17,6 +24,9 @@ public class DbUtils {
 		this.context = context;
 	}
 	
+	//Notkun: db.getOnCalShows()
+	//Eftirskilyrði: Búið að er að sækja alla þætti sem eru á dagatali
+	//				 úr gagnagrunninum db
 	public List<String> getOnCalShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -40,7 +50,9 @@ public class DbUtils {
     	return results;
     }
     
-    public List<Show> getAllShows() {
+    //Noktun: db.getAllShows()
+	//Eftirskilyrði: Búið er að sækja alla þætti úr gagnagrunninum db
+	public List<Show> getAllShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
     	
@@ -68,6 +80,8 @@ public class DbUtils {
     	return results;
     }
     
+	//Noktun: db.saveShow(show)
+	//Eftirskilyrði: Búið er að vista þáttinn show í gagnagrunninn db
     public void saveShow(Show show) {
     	ShowsDb showDb = new ShowsDb(this.context);
     	SQLiteDatabase db = showDb.getWritableDatabase();
@@ -81,6 +95,9 @@ public class DbUtils {
     	return;
     }
     
+    //Notkun: db.putShowOnCal(show)
+    //Eftirskilyrði: Búið er að uppfæra gagnagrunninn db þannig að þátturinn
+    //				 show sé á dagatalinu
     public void putShowOnCal(Show show) {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -96,6 +113,9 @@ public class DbUtils {
         
     }
     
+    //Notkun: db.takeShowOffcal(show)
+    //Eftirskilyrði: Búið er að uppfæra gagnagrunninn db þannig að
+    //				 þátturinn show sé ekki lengur á dagatalinu
     public void takeShowOffCal(Show show) {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -111,6 +131,8 @@ public class DbUtils {
         
     }
     
+    //Notkun: db.deleteShow(show)
+    //Eftirskilyrði: Búið er að eyða þættinum show úr gagnagrunninum db
     public void deleteShow(Show show){
     	ShowsDb showDb = new ShowsDb(this.context);
     	SQLiteDatabase db = showDb.getWritableDatabase();

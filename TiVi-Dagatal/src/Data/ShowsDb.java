@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Edda Björk Konráðsdóttir
+ * Dagsetning: 	4. október 2014
+ * Markmið: 	Búa til gagnagrunn fyrir þætti sem eiga að vera
+ * 				í listanum Þættirnir Mínir.
+ */
 package Data;
 
 import Data.ShowsContract.ShowsEntry;
@@ -30,11 +36,14 @@ public class ShowsDb extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
-	 public void onCreate(SQLiteDatabase db) {
+	//Eftirskilyrði: Búið er að búa til gagnagrunninn db 
+	public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 	 
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    //Eftirskilyrði: Búið er að uppfæra gagnagrunninn db úr oldVersion
+	//				 í newVersion
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(SQL_DELETE_ENTRIES);

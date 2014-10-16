@@ -9,6 +9,7 @@ import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +25,6 @@ public class SearchResultsActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_search_results);
-		//handleIntent(getIntent());
-		//SearchStuff("Friends");		
 	}
 
 	public void SearchStuff(View view){
@@ -46,7 +45,7 @@ public class SearchResultsActivity extends ActionBarActivity {
 		    	    textView.setTextSize(30);
 		    	    textView.setLayoutParams(lparams);
 		    	    Button button = new Button(this);
-		    	    button.setText("Bæta á Þættirnir mínir");
+		    	    button.setText("Bï¿½ta ï¿½ ï¿½ï¿½ttirnir mï¿½nir");
 		    	    button.setLayoutParams(lparams);
 		            button.setOnClickListener(new View.OnClickListener() {
 		                public void onClick(View view) {
@@ -76,6 +75,27 @@ public class SearchResultsActivity extends ActionBarActivity {
         }
     }*/
 	
+	public void SearchStuff(String word){
+		TraktClient search = new TraktClient();
+    	List<Show> searchShows = search.searchShow(word);
+    	LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT);
+    	ScrollView sv = new ScrollView(this);
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	for (Show show : searchShows){
+        	TextView textView = new TextView(this);
+    	    textView.setText(show.getTitle());
+    	    textView.setId(0);
+    	    textView.setLayoutParams(lparams);
+    	    ll.addView(textView);
+    	}
+    	//Add the linearLayout view to the scroll view
+    	sv.addView(ll);
+	    //Show the new view
+	    setContentView(sv);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -91,10 +111,6 @@ public class SearchResultsActivity extends ActionBarActivity {
 		View x = new View(this);
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			return true;
-		}
-		if (id == R.id.leita){
-			SearchStuff(x);
 			return true;
 		}
 		if (id == R.id.search){
