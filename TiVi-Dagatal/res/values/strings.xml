@@ -13,6 +13,7 @@
     <string name="search_test">Leitin að skila engu!</string>
     <string name="leita">Leita</string>
     <string name="leitarbox">Leitin hér</string>
+    <string name="search_add">Bæta við í Þættirnir mínir</string>
     
     <string name="temp_btn_my_episodes">Þættirnir mínir</string>
     <string name="sun_label">SUN</string>

@@ -54,7 +54,7 @@ public class SearchResultsActivity extends ActionBarActivity {
 		    textView.setTextSize(30);
 		    textView.setLayoutParams(lparams);
 		    Button button = new Button(this);
-		    button.setText("B�ta � ��ttirnir m�nir");
+		    button.setText(getResources().getString(R.string.search_add));
 		    button.setLayoutParams(lparams);
 	        button.setOnClickListener(new View.OnClickListener() {
 	        	//Notkun: dbHelper.saveShow(show)
