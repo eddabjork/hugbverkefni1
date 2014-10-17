@@ -51,16 +51,16 @@ public class MyShows extends ActionBarActivity {
 		List<Show> showList = dbHelper.getAllShows();
 		
 		LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-    	ScrollView sv = new ScrollView(this);
-    	LinearLayout ll = new LinearLayout(this);
-    	ll.setOrientation(LinearLayout.VERTICAL);
+    	ScrollView scrollView = new ScrollView(this);
+    	LinearLayout mainLayout = new LinearLayout(this);
+    	mainLayout.setOrientation(LinearLayout.VERTICAL);
     	
     	for(Show show : showList){
-    		addShow(show, ll);
+    		addShow(show, mainLayout);
     	}
     	
-    	sv.addView(ll);
-	    setContentView(sv);	
+    	scrollView.addView(mainLayout);
+	    setContentView(scrollView);	
     }
 	
 	//Notkun:		 addShow(show, mainLayout);
@@ -68,8 +68,8 @@ public class MyShows extends ActionBarActivity {
 	//				 af mynd þáttaraðar, titil og þrjá takka (bæta við/fjarlægja úr dagatali,
 	//				 upplýsingar og fjarlægja). Þetta view er svo bætt við í aðal LinearLayout.
 	public void addShow(final Show show, LinearLayout mainLayout) {		
-		LinearLayout ll_1 = new LinearLayout(this);
-		ll_1.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout episodeLayout = new LinearLayout(this);
+		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
 		ImageView image = new ImageView(this);
 		image.setImageResource(R.drawable.ic_launcher);
@@ -77,45 +77,45 @@ public class MyShows extends ActionBarActivity {
 		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
 		//image.buildDrawingCache()
 		
-		LinearLayout ll_2 = new LinearLayout(this);
-		ll_2.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout titleButtonsLayout = new LinearLayout(this);
+		titleButtonsLayout.setOrientation(LinearLayout.VERTICAL);
 		
 		TextView title = new TextView(this);
 		title.setText(show.getTitle());
 		
-		LinearLayout ll_3 = new LinearLayout(this);
-		ll_3.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout buttonsLayout = new LinearLayout(this);
+		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
-		Button btn_cal = new Button(this);
-		btn_cal.setText(getResources().getString(R.string.btn_cal));
-		btn_cal.setTextSize(10);
-		btn_cal.setOnClickListener(new View.OnClickListener() {
+		Button calendarButton = new Button(this);
+		calendarButton.setText(getResources().getString(R.string.btn_cal));
+		calendarButton.setTextSize(10);
+		calendarButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	addToCal(show);
             }
         });
 		
-		Button btn_info = new Button(this);
-		btn_info.setText(getResources().getString(R.string.btn_info));
-		btn_info.setTextSize(10);
+		Button infoButton = new Button(this);
+		infoButton.setText(getResources().getString(R.string.btn_info));
+		infoButton.setTextSize(10);
 
-		Button btn_delete = new Button(this);
-		btn_delete.setText(getResources().getString(R.string.btn_delete));
-		btn_delete.setTextSize(10);
-		btn_delete.setOnClickListener(new View.OnClickListener() {
+		Button deleteButton = new Button(this);
+		deleteButton.setText(getResources().getString(R.string.btn_delete));
+		deleteButton.setTextSize(10);
+		deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	removeFromMyEpisodes(show);
             }
         });
 
-		ll_3.addView(btn_cal);
-		ll_3.addView(btn_info);
-		ll_3.addView(btn_delete);
-		ll_2.addView(title);
-		ll_2.addView(ll_3);
-		ll_1.addView(image);
-		ll_1.addView(ll_2);
-		mainLayout.addView(ll_1);
+		buttonsLayout.addView(calendarButton);
+		buttonsLayout.addView(infoButton);
+		buttonsLayout.addView(deleteButton);
+		titleButtonsLayout.addView(title);
+		titleButtonsLayout.addView(buttonsLayout);
+		episodeLayout.addView(image);
+		episodeLayout.addView(titleButtonsLayout);
+		mainLayout.addView(episodeLayout);
 		mainLayout.addView(makeLine());
 	}
 	

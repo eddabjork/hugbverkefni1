@@ -58,27 +58,27 @@ public class MainActivity extends ActionBarActivity {
   	//Eftirskilyrði: Búið er að setja upp grunnlag útlits, sem inniheldur 
   	//				 einn takka og LinearLayout innan í ScrollView
     public void setLayout() {
-        LayoutParams lparams_wrap = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 
-    	ScrollView sv = new ScrollView(this);
+    	ScrollView scrollView = new ScrollView(this);
     	
-    	LinearLayout ll = new LinearLayout(this);
-    	ll.setOrientation(LinearLayout.VERTICAL);
-    	ll.setId(R.id.calendar_layout);
+    	LinearLayout linearLayout = new LinearLayout(this);
+    	linearLayout.setOrientation(LinearLayout.VERTICAL);
+    	linearLayout.setId(R.id.calendar_layout);
     	
-        Button btn = new Button(this);
-        btn.setText(getResources().getString(R.string.temp_btn_my_episodes));
-        btn.setLayoutParams(lparams_wrap);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button button = new Button(this);
+        button.setText(getResources().getString(R.string.temp_btn_my_episodes));
+        button.setLayoutParams(layoutParams);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	see_my_episodes(view);
+            	seeMyEpisodes(view);
             }
         });
     	
-    	ll.addView(btn);
-    	sv.addView(ll);
+    	linearLayout.addView(button);
+    	scrollView.addView(linearLayout);
     	
-    	setContentView(sv);
+    	setContentView(scrollView);
     }
     
     //Notkun:		 fillInDates();
@@ -87,61 +87,61 @@ public class MainActivity extends ActionBarActivity {
     //				 Þau eru svo sett inn í aðal LinearLayout í grunnlagi útlits.
     public void fillInDates() {
 		Calendar cal = Calendar.getInstance();
-		LinearLayout ll = (LinearLayout)findViewById(R.id.calendar_layout);
+		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.calendar_layout);
 
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		setDateLayout(getResources().getString(R.string.sun_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.sun_label), cal, mainLayout);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		setDateLayout(getResources().getString(R.string.mon_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.mon_label), cal, mainLayout);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-		setDateLayout(getResources().getString(R.string.tue_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.tue_label), cal, mainLayout);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-		setDateLayout(getResources().getString(R.string.wed_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.wed_label), cal, mainLayout);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-		setDateLayout(getResources().getString(R.string.thu_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.thu_label), cal, mainLayout);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		setDateLayout(getResources().getString(R.string.fri_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.fri_label), cal, mainLayout);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		setDateLayout(getResources().getString(R.string.sat_label), cal, ll);
+		setDateLayout(getResources().getString(R.string.sat_label), cal, mainLayout);
 	}
     
-    //Notkun:		 setDateLayout(day_name, calendar, mainLayout);
+    //Notkun:		 setDateLayout(dayName, calendar, mainLayout);
   	//Eftirskilyrði: Búið er að búa til view fyrir einn dag þar sem fram kemur
     //				 dagur vikunnar, dagur mánaðars og mánuðurinn sjálfur.
     //				 Einnig er búið að búa til LinearLayout inni í þessu view sem er 
     //				 með id (dagsetningin á forminu yyMMdd) svo hægt sé að bæta 
     //				 við þætti á réttan stað.
-	public void setDateLayout(String day_name, Calendar cal, LinearLayout mainLayout) {		
-		LinearLayout ll = new LinearLayout(this);
-		ll.setOrientation(LinearLayout.HORIZONTAL);
-		ll.setPadding(16,8,16,8);
+	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {		
+		LinearLayout dayLayout = new LinearLayout(this);
+		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
+		dayLayout.setPadding(16,8,16,8);
 		
-		LinearLayout ll_1 = new LinearLayout(this);
-		ll_1.setOrientation(LinearLayout.VERTICAL);
-		TextView textView_name = new TextView(this);
-		textView_name.setText(day_name);
-		textView_name.setGravity(Gravity.CENTER);
-		TextView textView_day = new TextView(this);
-		textView_day.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
-		textView_day.setGravity(Gravity.CENTER);
-		textView_day.setTextSize(20);
-		TextView textView_month = new TextView(this);
-		textView_month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
-		textView_month.setGravity(Gravity.CENTER);
-		textView_month.setTextSize(10);
+		LinearLayout dateLayout = new LinearLayout(this);
+		dateLayout.setOrientation(LinearLayout.VERTICAL);
+		TextView dateName = new TextView(this);
+		dateName.setText(dayName);
+		dateName.setGravity(Gravity.CENTER);
+		TextView dateDay = new TextView(this);
+		dateDay.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+		dateDay.setGravity(Gravity.CENTER);
+		dateDay.setTextSize(20);
+		TextView dateMonth = new TextView(this);
+		dateMonth.setText(getMonthForInt(cal.get(Calendar.MONTH)));
+		dateMonth.setGravity(Gravity.CENTER);
+		dateMonth.setTextSize(10);
+		dateLayout.addView(dateName);
+		dateLayout.addView(dateDay);
+		dateLayout.addView(dateMonth);
 		
-		LinearLayout ll_2 = new LinearLayout(this);
-		ll_2.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout episodesLayout = new LinearLayout(this);
+		episodesLayout.setOrientation(LinearLayout.VERTICAL);
 		String date = new SimpleDateFormat("yyMMdd").format(cal.getTime());
-		ll_2.setId(Integer.parseInt(date));
+		episodesLayout.setId(Integer.parseInt(date));
 		
-		ll_1.addView(textView_name);
-		ll_1.addView(textView_day);
-		ll_1.addView(textView_month);
-		ll.addView(ll_1);
-		ll.addView(ll_2);
+		dayLayout.addView(dateLayout);
+		dayLayout.addView(episodesLayout);
 		
-		mainLayout.addView(ll);
+		mainLayout.addView(dayLayout);
 		mainLayout.addView(makeLine());
 	}
 	
@@ -159,7 +159,6 @@ public class MainActivity extends ActionBarActivity {
 	//				 0=janúar,..,11=desember.
 	public String getMonthForInt(int num) {
         String month = "wrong";
-        DateFormatSymbols dfs = new DateFormatSymbols();
         String[] months = {
         	getResources().getString(R.string.jan_label),
         	getResources().getString(R.string.feb_label),
@@ -186,14 +185,14 @@ public class MainActivity extends ActionBarActivity {
 	//				 dagsetninguna þegar þátturinn var frumsýndur)
 	public void fillInEpisode(Episode episode) {		
 		String title = episode.getDataTitle();
-		int ep_id = firstAiredRightForm(episode.getFirstAired());
+		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
-		LinearLayout ll = (LinearLayout)findViewById(ep_id);
+		LinearLayout linearLayout = (LinearLayout)findViewById(episodeId);
 		TextView textView = new TextView(this);
 	    textView.setText(title);
 	    textView.setPadding(20,0,0,0);
 	    try {
-	    	ll.addView(textView);	
+	    	linearLayout.addView(textView);	
 	    } catch(Exception e) {
 	    	
 	    }
@@ -213,17 +212,17 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 	
-	//Notkun:		 see_my_episodes(view);
+	//Notkun:		 seeMyEpisodes(view);
   	//Eftirskilyrði: Skjár sem inniheldur Mína-þætti-activity-ið hefur opnast.
-	public void see_my_episodes(View view) {
+	public void seeMyEpisodes(View view) {
 		Intent intent = new Intent(this, MyShows.class);
 	    startActivity(intent);
 	}
     
-	//Notkun:		 number = firstAiredRightForm(strDate);
+	//Notkun:		 number = getFirstAiredInRightForm(strDate);
   	//Eftirskilyrði: strDate er dagsetningu á forminu: yyyy-MM-dd'T'HH:mm:ss 
 	//				 number er talan yyMMdd.
-    public int firstAiredRightForm(String strDate){
+    public int getFirstAiredInRightForm(String strDate){
     	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyMMdd");
 		String newStrDate="";
