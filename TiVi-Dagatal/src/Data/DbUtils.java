@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Edda Björk Konráðsdóttir
- * Dagsetning: 	9. október 2014
- * Markmið: 	Klasinn leyfir að bæta gögnum í gagnagrunninn, sækja gögn
- * 				og eyða þeim. Hjálparklasi til að framkvæma aðgerðir á 
+ * Nafn: 		Edda Bjï¿½rk Konrï¿½ï¿½sdï¿½ttir
+ * Dagsetning: 	9. oktï¿½ber 2014
+ * Markmiï¿½: 	Klasinn leyfir aï¿½ bï¿½ta gï¿½gnum ï¿½ gagnagrunninn, sï¿½kja gï¿½gn
+ * 				og eyï¿½a ï¿½eim. Hjï¿½lparklasi til aï¿½ framkvï¿½ma aï¿½gerï¿½ir ï¿½ 
  * 				gagnagrunninn.
  */
 package Data;
@@ -25,8 +25,8 @@ public class DbUtils {
 	}
 	
 	//Notkun: db.getOnCalShows()
-	//Eftirskilyrði: Búið að er að sækja alla þætti sem eru á dagatali
-	//				 úr gagnagrunninum db
+	//Eftirskilyrï¿½i: Bï¿½iï¿½ aï¿½ er aï¿½ sï¿½kja alla ï¿½ï¿½tti sem eru ï¿½ dagatali
+	//				 ï¿½r gagnagrunninum db
 	public List<String> getOnCalShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -51,7 +51,7 @@ public class DbUtils {
     }
     
     //Noktun: db.getAllShows()
-	//Eftirskilyrði: Búið er að sækja alla þætti úr gagnagrunninum db
+	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ sï¿½kja alla ï¿½ï¿½tti ï¿½r gagnagrunninum db
 	public List<Show> getAllShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -81,7 +81,7 @@ public class DbUtils {
     }
     
 	//Noktun: db.saveShow(show)
-	//Eftirskilyrði: Búið er að vista þáttinn show í gagnagrunninn db
+	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ vista ï¿½ï¿½ttinn show ï¿½ gagnagrunninn db
     public void saveShow(Show show) {
     	ShowsDb showDb = new ShowsDb(this.context);
     	SQLiteDatabase db = showDb.getWritableDatabase();
@@ -96,8 +96,8 @@ public class DbUtils {
     }
     
     //Notkun: db.putShowOnCal(show)
-    //Eftirskilyrði: Búið er að uppfæra gagnagrunninn db þannig að þátturinn
-    //				 show sé á dagatalinu
+    //Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ uppfï¿½ra gagnagrunninn db ï¿½annig aï¿½ ï¿½ï¿½tturinn
+    //				 show sï¿½ ï¿½ dagatalinu
     public void putShowOnCal(Show show) {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -114,8 +114,8 @@ public class DbUtils {
     }
     
     //Notkun: db.takeShowOffcal(show)
-    //Eftirskilyrði: Búið er að uppfæra gagnagrunninn db þannig að
-    //				 þátturinn show sé ekki lengur á dagatalinu
+    //Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ uppfï¿½ra gagnagrunninn db ï¿½annig aï¿½
+    //				 ï¿½ï¿½tturinn show sï¿½ ekki lengur ï¿½ dagatalinu
     public void takeShowOffCal(Show show) {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -132,7 +132,7 @@ public class DbUtils {
     }
     
     //Notkun: db.deleteShow(show)
-    //Eftirskilyrði: Búið er að eyða þættinum show úr gagnagrunninum db
+    //Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ eyï¿½a ï¿½ï¿½ttinum show ï¿½r gagnagrunninum db
     public void deleteShow(Show show){
     	ShowsDb showDb = new ShowsDb(this.context);
     	SQLiteDatabase db = showDb.getWritableDatabase();
@@ -141,5 +141,12 @@ public class DbUtils {
     			new String[] {show.getDataTitle()});
     	
     	return;
+    }
+    
+    //Noktun: db.isOnCal(show)
+    //EftirskilyrÃ°i: true ef show er Ã¡ dagatali Ã­ db, annars false
+    public boolean isOnCal(Show show) {
+    	List<String> onCalList = getOnCalShows();
+    	return onCalList.contains(show.getDataTitle());
     }
 }
