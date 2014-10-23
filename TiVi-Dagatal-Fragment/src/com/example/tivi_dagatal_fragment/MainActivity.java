@@ -60,9 +60,6 @@ public class MainActivity extends Activity {
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
      
-        //Það sem gerist fremst í appinu, á starti
-        startCalendar();
-        Log.v("Kláraði", "start calendar");
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -83,8 +80,6 @@ public class MainActivity extends Activity {
             }
         };
 
-
-        Log.v("Kláraði", "action bar toggle");
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
@@ -110,7 +105,8 @@ public class MainActivity extends Activity {
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        Log.v("Kláraði", "onCreate");
+        //Það sem gerist fremst í appinu, á starti
+        startCalendar();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
