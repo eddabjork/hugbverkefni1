@@ -5,6 +5,8 @@
  **/
 package Dtos;
 
+import java.util.List;
+
 public class Show {
 	private String title;
 	private String dataTitle;
@@ -19,7 +21,7 @@ public class Show {
 	private String imdbId;
 	private String tvdbId;
 	private boolean ended;
-	private String genres[];
+	private List<String> genres;
 	private String poster;
 	private String fanart;
 	private String banner;
@@ -79,7 +81,7 @@ public class Show {
 	
 	//Notkun: genres = show.getGenres()
 	//Eftirskilyrði: genres er tegund þáttaraðar.
-	public String[] getGenres() {
+	public List<String> getGenres() {
 		return genres;
 	}
 	
@@ -188,7 +190,7 @@ public class Show {
 
 	//Notkun: show.setGenres(genres)
 	//Eftirskilyrði: genres er tegund show.
-	public void setGenres(String[] genres) {
+	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
 

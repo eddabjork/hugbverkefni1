@@ -35,6 +35,8 @@ public class TraktClient {
 	private List<Show> searchShows = new ArrayList<Show>();
 	private List<Episode> calendarEpisodes = new ArrayList<Episode>();
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();
+	private Show showInfo = new Show();
+	private Episode episodeInfo = new Episode();
 	
 	public TraktClient(){}
 	
@@ -439,6 +441,123 @@ public class TraktClient {
 			 }
 		 }
 		 reader.endObject();
+	 }
+	
+	public Show getShowInfo(Show show){
+		URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/show/summary.json/" + APIkey + "/" + show.getDataTitle());
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for: " + show.getTitle());
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				showInfo = readShowInfo(reader);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find show: " + show.getTitle());
+			e.printStackTrace();
+		}
+		return showInfo;
+	}
+	
+	public Show readShowInfo(JsonReader reader) throws IOException {
+		Show show = new Show();
+		reader.beginObject();
+		
+		while (reader.hasNext()) {
+		  String name = reader.nextName();
+		  if (name.equals("title")) {
+			  try {
+				  show.setTitle(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if (name.equals("year")) {
+			  try {
+				  show.setYear(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("url")){
+			  try {
+				  String url = reader.nextString();
+				  show.setUrl(url);
+				  String dataTitle = url.substring(url.indexOf("show/") + 5,url.length());
+				  show.setDataTitle(dataTitle);
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("overview")){
+			  try {
+				  show.setOverview(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("country")){
+			  try {
+				  show.setCountry(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("network")){
+			  try {
+				  show.setNetwork(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("air_day")){
+			  try {
+				  show.setAirDay(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("air_time")){
+			  try {
+				  show.setAirTime(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("imdb_id")){
+			  try {
+				  show.setImdbId(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("first_aired_iso")){
+			  try {
+				  show.setFirstAired(reader.nextString());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("genres")){
+			  readGenres(reader, show);
+		  } else if(name.equals("images")){
+			  readImages(reader, show);
+		  } else {
+		    reader.skipValue();
+		  }
+		}
+		reader.endObject();
+		return show;
+	  }
+	
+	 //Notkun: 		  readGenres(reader, show)
+	 //Eftirskilyrði: 
+	 public void readGenres(JsonReader reader, Show show) throws IOException{			
+		reader.beginArray();
+		List<String> genres = new ArrayList<String>();
+		while (reader.hasNext()) {			
+			genres.add(reader.nextString());
+		}
+		reader.endArray();
+		show.setGenres(genres);
 	 }
 		  
 }
