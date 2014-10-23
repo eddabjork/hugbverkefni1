@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import Dtos.Episode;
 import Dtos.Show;
@@ -231,10 +232,11 @@ public class TraktClient {
 	 //Notkun: 		  episodes = getCalendarEpisodes(dataTitles)
 	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
 	 //				  birtir á dagatali
-	 public List<Episode> getCalendarEpisodes(List<String> dataTitles){
-		 for(final String dataTitle : dataTitles){
+	 public List<Episode> getCalendarEpisodes(Map<String, String> dataTitles){
+		 for(final String dataTitle : dataTitles.keySet()){
 			 
 			 getSeasonsForShow(dataTitle);
+			 String showTitle = dataTitles.get(dataTitle);
 			 
 	        // get episodes for newest 2 seasons
 			for(final String season : calendarSeasonsForShow) {		
@@ -250,7 +252,7 @@ public class TraktClient {
 					final InputStream is = url2.openStream();
 					JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 					try {
-						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle));
+						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle, showTitle));
 					} finally {
 						reader.close();
 					}
@@ -332,12 +334,12 @@ public class TraktClient {
 	 //Notkun: 		  episodes = readEpisodesArrayForCalendar(reader, showDataTitle)
 	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
 	 //				  birtir á dagatali
-	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle) throws IOException {
+	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle, String showTitle) throws IOException {
 		List<Episode> episodes = new ArrayList<Episode>();
 		
 		reader.beginArray();
 		while (reader.hasNext()) {
-			Episode episode = readEpisodeForCalendar(reader, showDataTitle);
+			Episode episode = readEpisodeForCalendar(reader, showDataTitle, showTitle);
 			if(episode != null) {
 				episodes.add(episode);
 			}
@@ -348,7 +350,7 @@ public class TraktClient {
 	
 	//Notkun: 		 episode = readEpisodeForCalendar(reader, showDataTitle)
 	//Eftirskilyrði: episode er þáttur sem á að vera birtur á dagatali
-	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle) throws IOException {
+	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle, String showTitle) throws IOException {
 		Episode episode = new Episode();
 		reader.beginObject();
 		
@@ -359,6 +361,7 @@ public class TraktClient {
 			if (name.equals("title")) {
 				try {
 					episode.setTitle(reader.nextString());
+					episode.setShowTitle(showTitle);
 				} catch(Exception e){
 					reader.skipValue();
 				}
@@ -373,6 +376,7 @@ public class TraktClient {
 					String episodeNr = reader.nextString();
 					String dataTitle = showDataTitle + "/" + episode.getSeason() + "/" + episodeNr;
 					episode.setDataTitle(dataTitle);
+					episode.setNumber(episodeNr);
 				} catch(Exception e){
 					reader.skipValue();
 				}

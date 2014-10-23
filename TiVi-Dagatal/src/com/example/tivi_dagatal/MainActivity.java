@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import Clients.TraktClient;
 import Data.DbUtils;
@@ -178,7 +179,7 @@ public class MainActivity extends ActionBarActivity {
 	//				 á réttan stað (þ.e. bæta við í view-ið sem hefur id-ið
 	//				 dagsetninguna þegar þátturinn var frumsýndur)
 	public void fillInEpisode(Episode episode) {		
-		String title = episode.getDataTitle();
+		String title = episode.getShowTitle() + ": " + episode.getNumber() + " " + episode.getTitle();
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
 		LinearLayout linearLayout = (LinearLayout)findViewById(episodeId);
@@ -277,10 +278,10 @@ public class MainActivity extends ActionBarActivity {
     }
     	
 	
-	private class CalendarShowsTask extends AsyncTask<Void, Integer, List<String>> {
-		protected List<String> doInBackground(Void... voids) {
+	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
+		protected Map<String, String> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(MainActivity.this);
-	        List<String> dataTitles = dbHelper.getOnCalShows();
+	        Map<String, String> dataTitles = dbHelper.getOnCalShows();
 			return dataTitles;
 		}
 		
@@ -288,13 +289,13 @@ public class MainActivity extends ActionBarActivity {
 			//setProgressPercent(progress[0]);
 		}
 		
-		protected void onPostExecute(List<String> dataTitles) {
+		protected void onPostExecute(Map<String, String> dataTitles) {
 			new CalendarEpisodesTask().execute(dataTitles);
 		}
 	}
 	
-	private class CalendarEpisodesTask extends AsyncTask<List<String>, Integer, List<Episode>> {
-		protected List<Episode> doInBackground(List<String>... dataTitles) {         
+	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
+		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {         
 			TraktClient trakt = new TraktClient();
 	        List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0]);
 			return calendarEpisodes;

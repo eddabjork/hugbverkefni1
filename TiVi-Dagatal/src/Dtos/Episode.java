@@ -17,6 +17,7 @@ public class Episode {
 	private String firstAired;
 	private String screen;
 	private String ratingPercentage;
+	private String showTitle;
 	
 	public Episode(){}
 	
@@ -92,6 +93,12 @@ public class Episode {
 		return dataTitle;
 	}
 	
+	//Notkun: showTitle = episode.getShowTitle()
+	//Eftirskilyrði: showTitle er titill þáttaraðarinnar sem episode tilheyrir.
+	public String getShowTitle(){
+		return showTitle;
+	}
+	
 	
 	/*Setters*/
 	
@@ -159,5 +166,12 @@ public class Episode {
 	//Eftirskilyrði: dataTitle er trakt auðkenni episode.
 	public void setDataTitle(String dataTitle){
 		this.dataTitle = dataTitle;
+	}
+	
+	
+	//Notkun: episode.setShowTitle(showTitle)
+	//Eftirskilyrði: showTitle er titill þáttaraðarinnar sem episode tilheyrir.
+	public void setShowTitle(String showTitle){
+		this.showTitle = showTitle;
 	}
 }

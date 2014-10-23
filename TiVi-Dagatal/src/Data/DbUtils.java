@@ -8,7 +8,9 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Data.ShowsContract.ShowsEntry;
 import Dtos.Show;
@@ -16,6 +18,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DbUtils {
 	private Context context;
@@ -27,7 +30,7 @@ public class DbUtils {
 	//Notkun: db.getOnCalShows()
 	//Eftirskilyr�i: B�i� a� er a� s�kja alla ��tti sem eru � dagatali
 	//				 �r gagnagrunninum db
-	public List<String> getOnCalShows() {
+	public Map<String, String> getOnCalShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
     	
@@ -42,10 +45,12 @@ public class DbUtils {
         		null,
         		null);
         
-        List<String> results = new ArrayList<String>();
+        Map<String, String> results = new HashMap<String, String>();
         
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            results.add(cursor.getString(cursor.getColumnIndex(ShowsEntry.COLUMN_NAME_DATATITLE)));
+            String dataTitle = cursor.getString(cursor.getColumnIndex(ShowsEntry.COLUMN_NAME_DATATITLE));
+            String title = cursor.getString(cursor.getColumnIndex(ShowsEntry.COLUMN_NAME_TITLE));
+            results.put(dataTitle, title);
         }
     	return results;
     }
@@ -146,7 +151,7 @@ public class DbUtils {
     //Noktun: db.isOnCal(show)
     //Eftirskilyrði: true ef show er á dagatali í db, annars false
     public boolean isOnCal(Show show) {
-    	List<String> onCalList = getOnCalShows();
-    	return onCalList.contains(show.getDataTitle());
+    	Map<String, String> onCalList = getOnCalShows();
+    	return onCalList.keySet().contains(show.getDataTitle());
     }
 }
