@@ -15,8 +15,10 @@ import java.util.List;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
+import Dtos.Show;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -42,16 +44,8 @@ public class MainActivity extends ActionBarActivity {
         
         setLayout();
         fillInDates();
-        
-        DbUtils dbHelper = new DbUtils(this);
-        List<String> dataTitles = dbHelper.getOnCalShows();
-        
-        TraktClient trakt = new TraktClient();
-        List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles);
-        
-        for (Episode episode : calendarEpisodes){
-        	fillInEpisode(episode);
-        }
+   
+        new CalendarShowsTask().execute();
     }
     
     //Notkun:		 setLayout();
@@ -281,4 +275,39 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
+    	
+	
+	private class CalendarShowsTask extends AsyncTask<Void, Integer, List<String>> {
+		protected List<String> doInBackground(Void... voids) {
+			DbUtils dbHelper = new DbUtils(MainActivity.this);
+	        List<String> dataTitles = dbHelper.getOnCalShows();
+			return dataTitles;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(List<String> dataTitles) {
+			new CalendarEpisodesTask().execute(dataTitles);
+		}
+	}
+	
+	private class CalendarEpisodesTask extends AsyncTask<List<String>, Integer, List<Episode>> {
+		protected List<Episode> doInBackground(List<String>... dataTitles) {         
+			TraktClient trakt = new TraktClient();
+	        List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0]);
+			return calendarEpisodes;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(List<Episode> calendarEpisodes) {
+			for (Episode episode : calendarEpisodes){
+	        	fillInEpisode(episode);
+	        }
+		}
+	}
 }

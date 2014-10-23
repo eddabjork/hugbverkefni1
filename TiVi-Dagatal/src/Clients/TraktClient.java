@@ -76,41 +76,27 @@ public class TraktClient {
 	//Notkun: 		 shows = searchShow(title)
 	//Eftirskilyrði: shows er listi af þáttum sem eru niðurstöður þegar 
 	//				 leitað er eftir strengnum title
-	public List<Show> searchShow(final String title) {
-			
-		Thread thread = new Thread(new Runnable() {       	
-        	@Override
-            public void run() {
-		        URL url = null;
-		        try {
-					url = new URL("http://api.trakt.tv/search/shows.json/" + APIkey + "?query=" + title.replaceAll("\\s+","+"));
-				} catch (MalformedURLException e) {
-					Log.e("URL error", "Could not make url for: " + title);
-					e.printStackTrace();
+	public List<Show> searchShow(final String title) {			
+	        URL url = null;
+	        try {
+				url = new URL("http://api.trakt.tv/search/shows.json/" + APIkey + "?query=" + title.replaceAll("\\s+","+"));
+			} catch (MalformedURLException e) {
+				Log.e("URL error", "Could not make url for: " + title);
+				e.printStackTrace();
+			}
+	        
+	        try {
+				final InputStream is = url.openStream();
+				JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+				try {
+					searchShows = readShowsArrayForSearch(reader);
+				} finally {
+					reader.close();
 				}
-		        
-		        try {
-					final InputStream is = url.openStream();
-					JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-					try {
-						searchShows = readShowsArrayForSearch(reader);
-					} finally {
-						reader.close();
-					}
-				} catch (IOException e) {
-					Log.e("API error", "Could not find show: " + title);
-					e.printStackTrace();
-				}
-		        
-        	}
-		});
-		thread.start();
-		
-		try {
-			thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+			} catch (IOException e) {
+				Log.e("API error", "Could not find show: " + title);
+				e.printStackTrace();
+			}
 		
 		return searchShows;	
 	}
@@ -246,85 +232,62 @@ public class TraktClient {
 	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
 	 //				  birtir á dagatali
 	 public List<Episode> getCalendarEpisodes(List<String> dataTitles){
-		 for(final String dataTitle : dataTitles){	 		 
-		 
-			 // get the newest 2 seasons for the show
-			 Thread thread1 = new Thread(new Runnable() {       	
-	        	@Override
-	            public void run() {
-			        URL url = null;
-			        try {
-						url = new URL("http://api.trakt.tv/show/seasons.json/" + APIkey + "/" + dataTitle);
-					} catch (MalformedURLException e) {
-						Log.e("URL error", "Could not make url for: " + dataTitle);
-						e.printStackTrace();
+		 for(final String dataTitle : dataTitles){
+			 
+			 getSeasonsForShow(dataTitle);
+			 
+	        // get episodes for newest 2 seasons
+			for(final String season : calendarSeasonsForShow) {		
+		        URL url2 = null;
+		        try {
+					url2 = new URL("http://api.trakt.tv/show/season.json/" + APIkey + "/" + dataTitle + "/" + season);
+				} catch (MalformedURLException e) {
+					Log.e("URL error", "Could not make url for: " + dataTitle + " for season: " + season);
+					e.printStackTrace();
+				}
+		        
+		        try {
+					final InputStream is = url2.openStream();
+					JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+					try {
+						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle));
+					} finally {
+						reader.close();
 					}
-			        
-			        try {
-						final InputStream is = url.openStream();
-						JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-						try {
-							calendarSeasonsForShow = readSeasonsArrayForCalendar(reader);
-						} finally {
-							reader.close();
-						}
-					} catch (IOException e) {
-						Log.e("API error", "Could not find seasons for: " + dataTitle);
-						e.printStackTrace();
-					}
-			        
-	        	}
-			});
-			thread1.start();
-			
-			try {
-				thread1.join();
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
-			
-			for(final String season : calendarSeasonsForShow) {
-		
-				// get episodes for the newest 2 series
-				Thread thread2 = new Thread(new Runnable() {       	
-		        	@Override
-		            public void run() {
-				        URL url = null;
-				        try {
-							url = new URL("http://api.trakt.tv/show/season.json/" + APIkey + "/" + dataTitle + "/" + season);
-						} catch (MalformedURLException e) {
-							Log.e("URL error", "Could not make url for: " + dataTitle + " for season: " + season);
-							e.printStackTrace();
-						}
-				        
-				        try {
-							final InputStream is = url.openStream();
-							JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-							try {
-								calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle));
-							} finally {
-								reader.close();
-							}
-						} catch (IOException e) {
-							Log.e("API error", "Could not find episodes for seasons: " + dataTitle + " season: " + season);
-							e.printStackTrace();
-						}
-				        
-		        	}
-				});
-				thread2.start();
-				
-				try {
-					thread2.join();
-		        } catch (InterruptedException e) {
-		            e.printStackTrace();
-		        }
+				} catch (IOException e) {
+					Log.e("API error", "Could not find episodes for seasons: " + dataTitle + " season: " + season);
+					e.printStackTrace();
+				}
 			}
 			
 		 }		 
 		 
 		 return calendarEpisodes;
 	 }
+
+	public void getSeasonsForShow(String dataTitle){
+		// get the newest 2 seasons for the show
+		URL url = null;
+		try {
+			url = new URL("http://api.trakt.tv/show/seasons.json/" + APIkey + "/" + dataTitle);
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for: " + dataTitle);
+			e.printStackTrace();
+		}
+		
+		try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				calendarSeasonsForShow = readSeasonsArrayForCalendar(reader);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find seasons for: " + dataTitle);
+			e.printStackTrace();
+		}
+	}
 
 	 //Notkun: 		  seasons = readSeasonsArrayForCalendar(reader)
 	 //Eftirskilyrði: seasons er listi af númerum á þeim seríum sem á að leita eftir

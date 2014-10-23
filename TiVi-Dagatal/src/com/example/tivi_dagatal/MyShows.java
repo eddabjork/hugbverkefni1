@@ -9,6 +9,7 @@ package com.example.tivi_dagatal;
 import java.io.InputStream;
 import java.util.List;
 
+import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
 import android.content.Intent;
@@ -47,20 +48,7 @@ public class MyShows extends ActionBarActivity {
   	//Eftirskilyrði: Búið er að setja upp útlit fyrir Þættirnir-mínir listi, sem er LinearLayout
 	//				 innan í ScrollView, og viðeigandi þáttaraðir hafa verið settir þar inn.
 	public void setLayout() {
-		DbUtils dbHelper = new DbUtils(this);
-		List<Show> showList = dbHelper.getAllShows();
-		
-		LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-    	ScrollView scrollView = new ScrollView(this);
-    	LinearLayout mainLayout = new LinearLayout(this);
-    	mainLayout.setOrientation(LinearLayout.VERTICAL);
-    	
-    	for(Show show : showList){
-    		addShow(show, mainLayout);
-    	}
-    	
-    	scrollView.addView(mainLayout);
-	    setContentView(scrollView);	
+		new GetAllShowsTask().execute();
     }
 	
 	//Notkun:		 addShow(show, mainLayout);
@@ -161,6 +149,32 @@ public class MyShows extends ActionBarActivity {
 		}
 	}
 	
+	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
+		protected List<Show> doInBackground(Void... voids) {
+			DbUtils dbHelper = new DbUtils(MyShows.this);
+			List<Show> showList = dbHelper.getAllShows();
+			return showList;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(List<Show> showList) {
+			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+	    	ScrollView scrollView = new ScrollView(MyShows.this);
+	    	LinearLayout mainLayout = new LinearLayout(MyShows.this);
+	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
+	    	
+	    	for(Show show : showList){
+	    		addShow(show, mainLayout);
+	    	}
+	    	
+	    	scrollView.addView(mainLayout);
+		    setContentView(scrollView);	
+		}
+	}
+	
 	//Notkun:		 addToCal(show);
   	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
 	public void addToCal(Show show){
@@ -224,4 +238,7 @@ public class MyShows extends ActionBarActivity {
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+	
+	
+	
 }

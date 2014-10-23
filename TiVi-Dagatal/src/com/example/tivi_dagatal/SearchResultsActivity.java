@@ -13,6 +13,7 @@ import Data.DbUtils;
 import Dtos.Show;
 import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -39,38 +40,17 @@ public class SearchResultsActivity extends ActionBarActivity {
 	//				 ásamt tökkum til að bæta birtum þáttaröðum á lista.
 	public void SearchStuff(View view){
 		EditText wordText = (EditText) findViewById(R.id.leitarbox);
-		String word = wordText.getText().toString();
+		String word = wordText.getText().toString();		
 		
-		TraktClient search = new TraktClient();
-		List<Show> searchShows = search.searchShow(word);
-		LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
-	            LayoutParams.MATCH_PARENT);
-		ScrollView sv = new ScrollView(this);
-		LinearLayout llv = new LinearLayout(this);
-		llv.setOrientation(LinearLayout.VERTICAL);
-		for (final Show show : searchShows){
-	    	TextView textView = new TextView(this);
-		    textView.setText(show.getTitle());
-		    textView.setTextSize(30);
-		    textView.setLayoutParams(lparams);
-		    Button button = new Button(this);
-		    button.setText(getResources().getString(R.string.search_add));
-		    button.setLayoutParams(lparams);
-	        button.setOnClickListener(new View.OnClickListener() {
-	        	//Notkun: dbHelper.saveShow(show)
-	        	//Eftirskilyrði: show hefur verið bætt í gagnasafn
-	            public void onClick(View view) {
-	            	dbHelper.saveShow(show);
-	            }
-	        });
-	        //Bæta titli og takka í linearlayout
-		    llv.addView(textView);
-		    llv.addView(button);
-		}
-		//Bæta linearlayoutinu í scrollview
-		sv.addView(llv);
-	    //Birta nýja viewið
-	    setContentView(sv);		
+		// measure call time
+		long startTime = System.nanoTime();
+		
+		new SearchShowsTask().execute(word);
+		
+ 		long endTime = System.nanoTime();
+ 		long duration_milli = (endTime - startTime)/1000000;  //divide by 1000000 to get milliseconds.
+ 		Log.v("async call time:", duration_milli+"");
+         
 	}
 
 	@Override
@@ -114,5 +94,48 @@ public class SearchResultsActivity extends ActionBarActivity {
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+	
+	private class SearchShowsTask extends AsyncTask<String, Integer, List<Show>> {
+		protected List<Show> doInBackground(String... queries) {         
+			TraktClient search = new TraktClient();	    	 
+			List<Show> searchShows = search.searchShow(queries[0]);  
+			return searchShows;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(List<Show> searchShows) {
+			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+			LayoutParams.MATCH_PARENT);
+			ScrollView sv = new ScrollView(SearchResultsActivity.this);
+			LinearLayout llv = new LinearLayout(SearchResultsActivity.this);
+			llv.setOrientation(LinearLayout.VERTICAL);
+			for (final Show show : searchShows){
+				TextView textView = new TextView(SearchResultsActivity.this);
+				textView.setText(show.getTitle());
+				textView.setTextSize(30);
+				textView.setLayoutParams(lparams);
+				Button button = new Button(SearchResultsActivity.this);
+				button.setText(getResources().getString(R.string.search_add));
+				button.setLayoutParams(lparams);
+				button.setOnClickListener(new View.OnClickListener() {
+					//Notkun: dbHelper.saveShow(show)
+					//Eftirskilyrði: show hefur verið bætt í gagnasafn
+					public void onClick(View view) {
+						dbHelper.saveShow(show);
+					}
+				});
+				//Bæta titli og takka í linearlayout
+				llv.addView(textView);
+				llv.addView(button);
+			}
+			//Bæta linearlayoutinu í scrollview
+			sv.addView(llv);
+			//Birta nýja viewið
+			setContentView(sv);	
+		}
+	}
 
 }
