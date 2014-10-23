@@ -14,7 +14,6 @@
     <string name="leita">Leita</string>
     <string name="leitarbox">Leitin hér</string>
     <string name="search_add">Bæta við í Þættirnir mínir</string>
-    <string name="btn_rem_cal">Taka af Þættirnir mínir</string>
     
     <string name="temp_btn_my_episodes">Þættirnir mínir</string>
     <string name="sun_label">SUN</string>
@@ -36,6 +35,9 @@
     <string name="oct_label">október</string>
     <string name="nov_label">nóvember</string>
     <string name="dec_label">desember</string>
+    
+    <string name="btn_put_cal">Setja á dagatal</string>
+    <string name="btn_rem_cal">Taka af dagatal</string>
     <string name="btn_cal">Setja á dagatal</string>
     <string name="btn_info">Upplýsingar</string>
     <string name="btn_delete">Eyða</string>

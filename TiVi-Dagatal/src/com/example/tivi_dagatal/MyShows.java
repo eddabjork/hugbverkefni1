@@ -74,12 +74,34 @@ public class MyShows extends ActionBarActivity {
 		LinearLayout buttonsLayout = new LinearLayout(this);
 		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
-		Button calendarButton = new Button(this);
-		calendarButton.setText(getResources().getString(R.string.btn_cal));
+		final Button calendarButton = new Button(this);
+		DbUtils dbHelper = new DbUtils(this);
+		// 0 -> onCal=false
+		// 1 -> onCal=true
+		boolean onCal = dbHelper.isOnCal(show);
+		if(onCal) {
+			calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
+			calendarButton.setTag(1);
+		}
+		else {
+			calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+			calendarButton.setTag(0);
+		}
 		calendarButton.setTextSize(10);
 		calendarButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	addToCal(show);
+				final int status =(Integer) view.getTag();
+				if(status == 1) {
+					remFromCal(show);
+					view.setTag(0);
+					calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+				}
+				else {
+					addToCal(show);
+					view.setTag(1);
+					calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
+					
+				}
             }
         });
 		
@@ -180,6 +202,13 @@ public class MyShows extends ActionBarActivity {
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.putShowOnCal(show);
+	}
+	
+	//Notkun:		 remFromCal(show);
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=false fyrir show.
+	public void remFromCal(Show show){
+		DbUtils dbHelper = new DbUtils(this);
+		dbHelper.takeShowOffCal(show);
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);

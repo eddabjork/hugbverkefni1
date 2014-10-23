@@ -46,7 +46,11 @@
         </activity>
         <activity
             android:name=".MyShows"
-            android:label="@string/title_activity_my_shows" >
+            android:label="@string/title_activity_my_shows"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tivi_dagatal.MainActivity" />
         </activity>
     </application>
 
