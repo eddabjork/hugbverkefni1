@@ -6,16 +6,17 @@
  */
 
 package com.example.tivi_dagatal;
+import Clients.TraktClient;
 import java.io.InputStream;
 import java.util.List;
 
-import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,9 +30,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MyShows extends ActionBarActivity {
@@ -59,12 +60,47 @@ public class MyShows extends ActionBarActivity {
 		LinearLayout episodeLayout = new LinearLayout(this);
 		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
-		ImageView image = new ImageView(this);
-		image.setImageResource(R.drawable.ic_launcher);
-		//ennþá verið að vinna í að setja inn rétta mynd.
-		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
-		//image.buildDrawingCache()
+		ImageView image = getImage(show);
+		LinearLayout titleButtonsLayout = getTitleButtonsLayout(show);
 		
+		episodeLayout.addView(image);
+		episodeLayout.addView(titleButtonsLayout);
+		mainLayout.addView(episodeLayout);
+		mainLayout.addView(makeLine());
+	}
+	
+	public ImageView getImage(Show show){
+		ImageView image = new ImageView(this);
+		//image.setImageResource(R.drawable.ic_launcher);
+		String imgUrl = show.getPoster();
+		new DownloadImageTask(image).execute(imgUrl);
+		image.buildDrawingCache();
+		
+		//image.setLayoutParams(new FrameLayout.LayoutParams(100,100));
+		//image.getLayoutParams().width = 100;
+		
+		return image;
+	}
+	
+	public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+	    int width = bm.getWidth();
+	    int height = bm.getHeight();
+	    float scaleWidth = ((float) newWidth) / width;
+	    float scaleHeight = ((float) newHeight) / height;
+	    // CREATE A MATRIX FOR THE MANIPULATION
+	    Matrix matrix = new Matrix();
+	    // RESIZE THE BIT MAP
+	    matrix.postScale(scaleWidth, scaleHeight);
+
+	    // "RECREATE" THE NEW BITMAP
+	    Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+	    return resizedBitmap;
+	}
+	
+	//Notkun:		 titleButtonsLayout = getTitleButtonsLayout(show);
+  	//Eftirskilyrði: titleButtonsLayout er layout sem inniheldur titil
+	//				 þáttaraðar show og takka sem tengast honum
+	public LinearLayout getTitleButtonsLayout(final Show show) {
 		LinearLayout titleButtonsLayout = new LinearLayout(this);
 		titleButtonsLayout.setOrientation(LinearLayout.VERTICAL);
 		
@@ -74,10 +110,36 @@ public class MyShows extends ActionBarActivity {
 		LinearLayout buttonsLayout = new LinearLayout(this);
 		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
+		Button calendarButton = getCalButton(show);
+		
+		Button infoButton = new Button(this);
+		infoButton.setText(getResources().getString(R.string.btn_info));
+		infoButton.setTextSize(10);
+
+		Button deleteButton = new Button(this);
+		deleteButton.setText(getResources().getString(R.string.btn_delete));
+		deleteButton.setTextSize(10);
+		deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	removeFromMyEpisodes(show);
+            }
+        });
+
+		buttonsLayout.addView(calendarButton);
+		buttonsLayout.addView(infoButton);
+		buttonsLayout.addView(deleteButton);
+		titleButtonsLayout.addView(title);
+		titleButtonsLayout.addView(buttonsLayout);
+		return titleButtonsLayout;
+	}
+	
+	//Notkun:		 calButton = getCalButton(show)
+  	//Eftirskilyrði: calButton er takki sem stjórnar því hvort show
+	//				 sé á dagatali
+	public Button getCalButton(final Show show){
 		final Button calendarButton = new Button(this);
 		DbUtils dbHelper = new DbUtils(this);
-		// 0 -> onCal=false
-		// 1 -> onCal=true
+		// 0 -> onCal=false; 1 -> onCal=true
 		boolean onCal = dbHelper.isOnCal(show);
 		if(onCal) {
 			calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
@@ -99,34 +161,11 @@ public class MyShows extends ActionBarActivity {
 				else {
 					addToCal(show);
 					view.setTag(1);
-					calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
-					
+					calendarButton.setText(getResources().getString(R.string.btn_rem_cal));	
 				}
             }
         });
-		
-		Button infoButton = new Button(this);
-		infoButton.setText(getResources().getString(R.string.btn_info));
-		infoButton.setTextSize(10);
-
-		Button deleteButton = new Button(this);
-		deleteButton.setText(getResources().getString(R.string.btn_delete));
-		deleteButton.setTextSize(10);
-		deleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	removeFromMyEpisodes(show);
-            }
-        });
-
-		buttonsLayout.addView(calendarButton);
-		buttonsLayout.addView(infoButton);
-		buttonsLayout.addView(deleteButton);
-		titleButtonsLayout.addView(title);
-		titleButtonsLayout.addView(buttonsLayout);
-		episodeLayout.addView(image);
-		episodeLayout.addView(titleButtonsLayout);
-		mainLayout.addView(episodeLayout);
-		mainLayout.addView(makeLine());
+		return calendarButton;
 	}
 	
 	//Notkun:		 line = makeLine();
@@ -161,7 +200,7 @@ public class MyShows extends ActionBarActivity {
 				Log.e("Error", e.getMessage());
 				e.printStackTrace();
 			}
-			return mIcon11;
+			return fixBitmapSize(mIcon11);
 		}
 		
 		//Notkun:		 onPostExecute(result);
@@ -169,6 +208,37 @@ public class MyShows extends ActionBarActivity {
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
+	}
+	
+	public Bitmap fixBitmapSize(Bitmap originalBmp){
+		int x = originalBmp.getWidth();
+		int y = originalBmp.getHeight();
+		int startX;
+		int startY;
+		Bitmap scaledBmp;
+		double scale;
+		
+		int width = 100;
+		int height = 100;
+		
+		if(x >= y){
+			scale = y/height;
+			scaledBmp = Bitmap.createScaledBitmap(originalBmp, (int)(x/scale), 100, false);
+			x = scaledBmp.getWidth();
+			y = scaledBmp.getHeight();
+			startY = 0;
+			startX = (x-y)/2;
+		}
+		else{
+			scale = x/width;
+			scaledBmp = Bitmap.createScaledBitmap(originalBmp, 100, (int)(y/scale), false);
+			x = scaledBmp.getWidth();
+			y = scaledBmp.getHeight();
+			startX = 0;
+			startY = (y-x)/2;
+		}
+		
+		return Bitmap.createBitmap(scaledBmp, startX,startY,width,height);
 	}
 	
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
