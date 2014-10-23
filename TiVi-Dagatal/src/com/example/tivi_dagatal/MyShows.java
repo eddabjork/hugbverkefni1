@@ -1,15 +1,22 @@
-/** Nafn: 		Jóhanna Agnes Magnúsdóttir
- * Dagsetning: 	9. október 2014
- * Markmið: 	Stilla upp útlit fyrir Þættirnir-mínir lista sem
- * 				inniheldur alla þá þætti notandi hefur sett á tilsvarandi lista
- * 				(í gegnum search)
+/** Nafn: 		Jï¿½hanna Agnes Magnï¿½sdï¿½ttir
+ * Dagsetning: 	9. oktï¿½ber 2014
+ * Markmiï¿½: 	Stilla upp ï¿½tlit fyrir ï¿½ï¿½ttirnir-mï¿½nir lista sem
+ * 				inniheldur alla ï¿½ï¿½ ï¿½ï¿½tti notandi hefur sett ï¿½ tilsvarandi lista
+ * 				(ï¿½ gegnum search)
  */
 
 package com.example.tivi_dagatal;
 import Clients.TraktClient;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< Updated upstream
+=======
+import com.example.tivi_dagatal.Animator;
+
+import Clients.TraktClient;
+>>>>>>> Stashed changes
 import Data.DbUtils;
 import Dtos.Show;
 import android.content.Intent;
@@ -22,6 +29,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +45,8 @@ import android.widget.TextView;
 
 public class MyShows extends ActionBarActivity {
 	/** Saves current state and sets the view */
+	private Integer id;
+	private List<String> open = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,16 +56,16 @@ public class MyShows extends ActionBarActivity {
 	}
 	
 	//Notkun:		 setLayout();
-  	//Eftirskilyrði: Búið er að setja upp útlit fyrir Þættirnir-mínir listi, sem er LinearLayout
-	//				 innan í ScrollView, og viðeigandi þáttaraðir hafa verið settir þar inn.
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ setja upp ï¿½tlit fyrir ï¿½ï¿½ttirnir-mï¿½nir listi, sem er LinearLayout
+	//				 innan ï¿½ ScrollView, og viï¿½eigandi ï¿½ï¿½ttaraï¿½ir hafa veriï¿½ settir ï¿½ar inn.
 	public void setLayout() {
 		new GetAllShowsTask().execute();
     }
 	
 	//Notkun:		 addShow(show, mainLayout);
-  	//Eftirskilyrði: Búið er að búa til view fyrir sérhverja þáttaröð, sem samanstendur
-	//				 af mynd þáttaraðar, titil og þrjá takka (bæta við/fjarlægja úr dagatali,
-	//				 upplýsingar og fjarlægja). Þetta view er svo bætt við í aðal LinearLayout.
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir sï¿½rhverja ï¿½ï¿½ttarï¿½ï¿½, sem samanstendur
+	//				 af mynd ï¿½ï¿½ttaraï¿½ar, titil og ï¿½rjï¿½ takka (bï¿½ta viï¿½/fjarlï¿½gja ï¿½r dagatali,
+	//				 upplï¿½singar og fjarlï¿½gja). ï¿½etta view er svo bï¿½tt viï¿½ ï¿½ aï¿½al LinearLayout.
 	public void addShow(final Show show, LinearLayout mainLayout) {		
 		LinearLayout episodeLayout = new LinearLayout(this);
 		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -71,10 +81,17 @@ public class MyShows extends ActionBarActivity {
 	
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(this);
+<<<<<<< Updated upstream
 		//image.setImageResource(R.drawable.ic_launcher);
 		String imgUrl = show.getPoster();
 		new DownloadImageTask(image).execute(imgUrl);
 		image.buildDrawingCache();
+=======
+		image.setImageResource(R.drawable.ic_launcher);
+		//ennï¿½ï¿½ veriï¿½ aï¿½ vinna ï¿½ aï¿½ setja inn rï¿½tta mynd.
+		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
+		//image.buildDrawingCache()
+>>>>>>> Stashed changes
 		
 		//image.setLayoutParams(new FrameLayout.LayoutParams(100,100));
 		//image.getLayoutParams().width = 100;
@@ -165,22 +182,70 @@ public class MyShows extends ActionBarActivity {
 				}
             }
         });
+<<<<<<< Updated upstream
 		return calendarButton;
+=======
+		
+		Button infoButton = new Button(this);
+		infoButton.setText(getResources().getString(R.string.btn_info));
+		infoButton.setTextSize(10);
+		final TextView info = new TextView(this);
+		info.setText("her koma upplysingar");
+		info.setVisibility(View.GONE);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		info.setLayoutParams(layoutParams);
+		info.setGravity(Gravity.CENTER);
+		info.setId(getNextId());
+		Animator.setHeightForWrapContent(this, info);
+		infoButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				Animator animation = null;
+                if(open.contains(""+info.getId())) {
+                    animation = new Animator(info, 500, 1);
+                    open.remove(""+info.getId());
+                } else {
+                    animation = new Animator(info, 500, 0);
+                    open.add(""+info.getId());
+                }
+                info.startAnimation(animation);
+			}
+		});
+
+		Button deleteButton = new Button(this);
+		deleteButton.setText(getResources().getString(R.string.btn_delete));
+		deleteButton.setTextSize(10);
+		deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	removeFromMyEpisodes(show);
+            }
+        });
+
+		buttonsLayout.addView(calendarButton);
+		buttonsLayout.addView(infoButton);
+		buttonsLayout.addView(deleteButton);
+		titleButtonsLayout.addView(title);
+		titleButtonsLayout.addView(buttonsLayout);
+		episodeLayout.addView(image);
+		episodeLayout.addView(titleButtonsLayout);
+		mainLayout.addView(episodeLayout);
+		mainLayout.addView(info);
+		mainLayout.addView(makeLine());
+>>>>>>> Stashed changes
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
+  	//Eftirskilyrï¿½i: line er nï¿½na view hlutur sem er einfï¿½ld, ï¿½unn, grï¿½ lï¿½na.
 	public View makeLine(){
 		 View v = new View(this);
-		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
+		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 3, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
 	 }
 	
 	/*
-     * Nafn: Kristín Fjóla Tómasdóttir
-     * Dagsetning: 9. október 2014
-     * Markmið: Ná í myndir með samhliða þræðavinnslu
+     * Nafn: Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+     * Dagsetning: 9. oktï¿½ber 2014
+     * Markmiï¿½: Nï¿½ ï¿½ myndir meï¿½ samhliï¿½a ï¿½rï¿½ï¿½avinnslu
      * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
@@ -189,7 +254,7 @@ public class MyShows extends ActionBarActivity {
 		}
 		
 		//Notkun:		 bm = doInBackground(urls);
-	  	//Eftirskilyrði: bm er myndin sem er sótt frá urls.
+	  	//Eftirskilyrï¿½i: bm er myndin sem er sï¿½tt frï¿½ urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -204,7 +269,7 @@ public class MyShows extends ActionBarActivity {
 		}
 		
 		//Notkun:		 onPostExecute(result);
-	  	//Eftirskilyrði: búið er að setja myndina result á rétt ImageView.
+	  	//Eftirskilyrï¿½i: bï¿½iï¿½ er aï¿½ setja myndina result ï¿½ rï¿½tt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
@@ -268,21 +333,21 @@ public class MyShows extends ActionBarActivity {
 	}
 	
 	//Notkun:		 addToCal(show);
-  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ uppfï¿½ra gagnagrunn ï¿½.a. gildiï¿½ on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.putShowOnCal(show);
 	}
 	
 	//Notkun:		 remFromCal(show);
-  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=false fyrir show.
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ uppfï¿½ra gagnagrunn ï¿½.a. gildiï¿½ on_calendar=false fyrir show.
 	public void remFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.takeShowOffCal(show);
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);
-  	//Eftirskilyrði: Búið er eyða út show úr gagnagrunni.
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er eyï¿½a ï¿½t show ï¿½r gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(this);
 		dbHelper.deleteShow(show);
@@ -332,11 +397,16 @@ public class MyShows extends ActionBarActivity {
 	}
 	
 	//Notkun:		 onHome(view);
-  	//Eftirskilyrði: Upphafsskjár (sem inniheldur viku-dagatal) hefur opnast.
+  	//Eftirskilyrï¿½i: Upphafsskjï¿½r (sem inniheldur viku-dagatal) hefur opnast.
 	public void onHome(View view){
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+	
+	private int getNextId() {
+		id = (id == null) ? 0 : id+1;
+		return id;
+	}
 	
 	
 	

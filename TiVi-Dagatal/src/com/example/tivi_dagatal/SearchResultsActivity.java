@@ -126,7 +126,7 @@ public class SearchResultsActivity extends ActionBarActivity {
 					public void onClick(View view) {
 		            	if(((Button)view).getText().toString() == getResources().getString(R.string.search_add)) {
 		            		dbHelper.saveShow(show);
-		            		((Button) view).setText(getResources().getString(R.string.btn_rem_cal));
+		            		((Button) view).setText(getResources().getString(R.string.take_off_list));
 		            	} else {
 		            		dbHelper.deleteShow(show);
 		            		((Button) view).setText(getResources().getString(R.string.search_add));
