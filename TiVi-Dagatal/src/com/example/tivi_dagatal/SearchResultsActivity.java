@@ -1,8 +1,8 @@
-/** Nafn:		Steinunn Friï¿½geirsdï¿½ttir
- * Dagsetning:	3. oktï¿½ber 2014
- * Markmiï¿½:		Klasinn tekur viï¿½ leitarorï¿½i og birtir leitarniï¿½urstï¿½ï¿½ur
- * 				frï¿½ client. Niï¿½urstï¿½ï¿½urnar eru settar ï¿½ view sem er
- * 				bï¿½iï¿½ til jafn ï¿½ï¿½um.
+/** Nafn:		Steinunn Friðgeirsdóttir
+ * Dagsetning:	3. október 2014
+ * Markmið:		Klasinn tekur við leitarorði og birtir leitarniðurstöður
+ * 				frá client. Niðurstöðurnar eru settar í view sem er
+ * 				búið til jafn óðum.
  **/
 package com.example.tivi_dagatal;
 
@@ -12,7 +12,6 @@ import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
 import android.app.ActionBar.LayoutParams;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -35,9 +34,9 @@ public class SearchResultsActivity extends ActionBarActivity {
 	}
 
 	//Notkun: SearchStuff(view)
-	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ bï¿½a til nï¿½tt view sem inniheldur
-	//				 leitarniï¿½urstï¿½ï¿½ur frï¿½ ï¿½vï¿½ orï¿½i sem var ï¿½ leitarboxi
-	//				 ï¿½samt tï¿½kkum til aï¿½ bï¿½ta birtum ï¿½ï¿½ttarï¿½ï¿½um ï¿½ lista.
+	//Eftirskilyrði: Búið er að búa til nýtt view sem inniheldur
+	//				 leitarniðurstöður frá því orði sem var í leitarboxi
+	//				 ásamt tökkum til að bæta birtum þáttaröðum á lista.
 	public void SearchStuff(View view){
 		EditText wordText = (EditText) findViewById(R.id.leitarbox);
 		String word = wordText.getText().toString();
@@ -58,25 +57,19 @@ public class SearchResultsActivity extends ActionBarActivity {
 		    button.setText(getResources().getString(R.string.search_add));
 		    button.setLayoutParams(lparams);
 	        button.setOnClickListener(new View.OnClickListener() {
-	        	//Eftirskilyrï¿½i: show hefur veriï¿½ bï¿½tt ï¿½ gagnasafn eÃ°a 
-	        	//				  eytt Ãºr Ã¾vÃ­
+	        	//Notkun: dbHelper.saveShow(show)
+	        	//Eftirskilyrði: show hefur verið bætt í gagnasafn
 	            public void onClick(View view) {
-	            	if(((Button)view).getText().toString() == getResources().getString(R.string.search_add)) {
-	            		dbHelper.saveShow(show);
-	            		((Button) view).setText(getResources().getString(R.string.take_show_off_cal));
-	            	} else {
-	            		dbHelper.deleteShow(show);
-	            		((Button) view).setText(getResources().getString(R.string.search_add));
-	            	}
+	            	dbHelper.saveShow(show);
 	            }
 	        });
-	        //Bï¿½ta titli og takka ï¿½ linearlayout
+	        //Bæta titli og takka í linearlayout
 		    llv.addView(textView);
 		    llv.addView(button);
 		}
-		//Bï¿½ta linearlayoutinu ï¿½ scrollview
+		//Bæta linearlayoutinu í scrollview
 		sv.addView(llv);
-	    //Birta nï¿½ja viewiï¿½
+	    //Birta nýja viewið
 	    setContentView(sv);		
 	}
 
@@ -109,14 +102,14 @@ public class SearchResultsActivity extends ActionBarActivity {
 	}
 	
 	//Notkun: onSearch(view)
-	//Eftirskilyrï¿½i: Leitaractivity hefur veriï¿½ startaï¿½.
+	//Eftirskilyrði: Leitaractivity hefur verið startað.
 	public void onSearch(View view){
     	Intent intent = new Intent(this, SearchResultsActivity.class);
         startActivity(intent);
     }
 	
 	//Notkun: onSearch(view)
-	//Eftirskilyrï¿½i: Heimaskjï¿½num hefur veriï¿½ startaï¿½.
+	//Eftirskilyrði: Heimaskjánum hefur verið startað.
 	public void onHome(View view){
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
