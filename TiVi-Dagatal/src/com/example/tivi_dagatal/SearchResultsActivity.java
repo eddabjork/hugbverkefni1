@@ -17,9 +17,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -32,6 +34,32 @@ public class SearchResultsActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_search_results);
+		
+		setEnterKeyListener();
+	}
+	
+	// veit ekki hvernig þetta er í síma, en mjög hægt í emulator :(
+	public void setEnterKeyListener(){
+		EditText editText = (EditText) findViewById(R.id.leitarbox);
+		editText.setOnKeyListener(new OnKeyListener()
+		{
+		    public boolean onKey(View v, int keyCode, KeyEvent event)
+		    {
+		        if (event.getAction() == KeyEvent.ACTION_DOWN)
+		        {
+		            switch (keyCode)
+		            {
+		                case KeyEvent.KEYCODE_DPAD_CENTER:
+		                case KeyEvent.KEYCODE_ENTER:
+		                	SearchStuff(v);
+		                    return true;
+		                default:
+		                    break;
+		            }
+		        }
+		        return false;
+		    }
+		});
 	}
 
 	//Notkun: SearchStuff(view)
