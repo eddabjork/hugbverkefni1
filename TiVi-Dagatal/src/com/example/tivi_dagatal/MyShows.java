@@ -67,11 +67,10 @@ public class MyShows extends ActionBarActivity {
 		LinearLayout episodeLayout = new LinearLayout(this);
 		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
-		ImageView image = getImage(show);
-		LinearLayout titleButtonsLayout = getTitleButtonsLayout(show);
+		setTitleButtonLayout(show,episodeLayout);
 		
 		Button dummy = new Button(this);
-		dummy.setText("uppl");
+		dummy.setText("V");
 		
 		final TextView info = new TextView(this);
 		info.setText("her koma upplysingar");
@@ -95,8 +94,6 @@ public class MyShows extends ActionBarActivity {
 			}
 		});
 		
-		episodeLayout.addView(image);
-		episodeLayout.addView(titleButtonsLayout);
 		episodeLayout.addView(dummy);
 		mainLayout.addView(episodeLayout);
 		mainLayout.addView(info);
@@ -105,17 +102,10 @@ public class MyShows extends ActionBarActivity {
 	
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(this);
-		//image.setImageResource(R.drawable.ic_launcher);
-		String imgUrl = show.getPoster();
-		new DownloadImageTask(image).execute(imgUrl);
-		image.buildDrawingCache();
 		image.setImageResource(R.drawable.ic_launcher);
-		//enn�� veri� a� vinna � a� setja inn r�tta mynd.
-		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
-		//image.buildDrawingCache()
-		
-		//image.setLayoutParams(new FrameLayout.LayoutParams(100,100));
-		//image.getLayoutParams().width = 100;
+		//String imgUrl = show.getPoster();
+		//new DownloadImageTask(image).execute(imgUrl);
+		//image.buildDrawingCache();
 		
 		return image;
 	}
@@ -138,22 +128,12 @@ public class MyShows extends ActionBarActivity {
 	//Notkun:		 titleButtonsLayout = getTitleButtonsLayout(show);
   	//Eftirskilyr�i: titleButtonsLayout er layout sem inniheldur titil
 	//				 ��ttara�ar show og takka sem tengast honum
-	public LinearLayout getTitleButtonsLayout(final Show show) {
-		LinearLayout titleButtonsLayout = new LinearLayout(this);
-		titleButtonsLayout.setOrientation(LinearLayout.VERTICAL);
-		
+	public void setTitleButtonLayout(final Show show, LinearLayout episodeLayout) {
 		TextView title = new TextView(this);
 		title.setText(show.getTitle());
 		
-		LinearLayout buttonsLayout = new LinearLayout(this);
-		buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
-		
 		Button calendarButton = getCalButton(show);
 		
-		Button infoButton = new Button(this);
-		infoButton.setText(getResources().getString(R.string.btn_info));
-		infoButton.setTextSize(10);
-
 		Button deleteButton = new Button(this);
 		deleteButton.setText(getResources().getString(R.string.btn_delete));
 		deleteButton.setTextSize(10);
@@ -163,12 +143,9 @@ public class MyShows extends ActionBarActivity {
             }
         });
 
-		buttonsLayout.addView(calendarButton);
-		buttonsLayout.addView(infoButton);
-		buttonsLayout.addView(deleteButton);
-		titleButtonsLayout.addView(title);
-		titleButtonsLayout.addView(buttonsLayout);
-		return titleButtonsLayout;
+		episodeLayout.addView(title);
+		episodeLayout.addView(calendarButton);
+		episodeLayout.addView(deleteButton);
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
@@ -210,7 +187,7 @@ public class MyShows extends ActionBarActivity {
   	//Eftirskilyr�i: line er n�na view hlutur sem er einf�ld, �unn, gr� l�na.
 	public View makeLine(){
 		 View v = new View(this);
-		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 3, (float) 0.80));
+		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
 	 }
