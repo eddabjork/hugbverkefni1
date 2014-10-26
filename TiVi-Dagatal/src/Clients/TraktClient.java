@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import Dtos.Episode;
+import Dtos.Season;
 import Dtos.Show;
 import android.util.JsonReader;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class TraktClient {
 	private List<Episode> calendarEpisodes = new ArrayList<Episode>();
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();
 	private Show showInfo = new Show();
+	private List<Season> seasonsForShowInfo = new ArrayList<Season>();
 	private Episode episodeInfo = new Episode();
 	
 	public TraktClient(){}
@@ -237,7 +239,7 @@ public class TraktClient {
 	 public List<Episode> getCalendarEpisodes(Map<String, String> dataTitles){
 		 for(final String dataTitle : dataTitles.keySet()){
 			 
-			 getSeasonsForShow(dataTitle);
+			 getSeasonsForShow(dataTitle, false);
 			 String showTitle = dataTitles.get(dataTitle);
 			 
 	        // get episodes for newest 2 seasons
@@ -269,7 +271,7 @@ public class TraktClient {
 		 return calendarEpisodes;
 	 }
 
-	public void getSeasonsForShow(String dataTitle){
+	public void getSeasonsForShow(String dataTitle, boolean forInfo){
 		// get the newest 2 seasons for the show
 		URL url = null;
 		try {
@@ -283,7 +285,11 @@ public class TraktClient {
 			final InputStream is = url.openStream();
 			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 			try {
-				calendarSeasonsForShow = readSeasonsArrayForCalendar(reader);
+				if(forInfo){
+					seasonsForShowInfo = readSeasonsArrayForShowInfo(reader);
+				} else {
+					calendarSeasonsForShow = readSeasonsArrayForCalendar(reader);
+				}
 			} finally {
 				reader.close();
 			}
@@ -311,6 +317,18 @@ public class TraktClient {
 	    return seasons;
 	 }
 	 
+	 //Notkun: 		  
+	 //Eftirskilyrði: 
+	 public List<Season> readSeasonsArrayForShowInfo(JsonReader reader) throws IOException {
+	    List<Season> seasons = new ArrayList<Season>();
+	    reader.beginArray();
+	    while (reader.hasNext()) {	 
+	    	seasons.add(readSeasonForShowInfo(reader));
+	    }
+	    reader.endArray();
+	    return seasons;
+	 }
+	 
 	 //Notkun: 		  season = readSeasonForCalendar(reader)
 	 //Eftirskilyrði: season er númer á seríu sem á að leita eftir
 	 public String readSeasonForCalendar(JsonReader reader) throws IOException {
@@ -322,6 +340,40 @@ public class TraktClient {
 		  if (name.equals("season")) {
 			  try {
 				  season = Integer.toString(reader.nextInt());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else {
+		    reader.skipValue();
+		  }
+		}
+		reader.endObject();
+		return season;
+	  }
+	 
+	 //Notkun: 		  
+	 //Eftirskilyrði:
+	 public Season readSeasonForShowInfo(JsonReader reader) throws IOException {
+		reader.beginObject();
+		Season season = new Season();
+		
+		while (reader.hasNext()) {
+		  String name = reader.nextName();
+		  if (name.equals("season")) {
+			  try {
+				  season.setSeasonNumber(reader.nextInt());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if (name.equals("episodes")) {
+			  try {
+				  season.setTotalEpisodes(reader.nextInt());
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if (name.equals("url")) {
+			  try {
+				  season.setUrl(reader.nextString());
 			  } catch(Exception e){
 				  reader.skipValue();
 			  }
@@ -457,6 +509,8 @@ public class TraktClient {
 			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 			try {
 				showInfo = readShowInfo(reader);
+				getSeasonsForShow(show.getDataTitle(), true);
+				showInfo.setSeasons(seasonsForShowInfo);
 			} finally {
 				reader.close();
 			}
