@@ -613,5 +613,32 @@ public class TraktClient {
 		reader.endArray();
 		show.setGenres(genres);
 	 }
+	 
+	 //Notkun: 		  
+	 //Eftirskilyrði: 
+	 public void getEpisodesForSeasonForShowInfo(Show show, Season season){
+		List<Episode> episodes = new ArrayList<Episode>();
+        URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/show/season.json/" + APIkey + "/" + show.getDataTitle() + "/" + season.getSeasonNumber());
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for: " + show.getDataTitle() + " for season: " + season.getSeasonNumber());
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				episodes.addAll(readEpisodesArrayForCalendar(reader, show.getDataTitle(), show.getTitle()));
+				season.getEpisodes().addAll(episodes);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find episodes for season: " + show.getDataTitle() + " season: " + season.getSeasonNumber());
+			e.printStackTrace();
+		}
+	 }
 		  
 }
