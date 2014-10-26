@@ -319,9 +319,10 @@ public class MainActivity extends ActionBarActivity {
 	private class ShowInfoTask extends AsyncTask<Void, Integer, Show> {
 		protected Show doInBackground(Void... voids) {
 			TraktClient client = new TraktClient();
-			Show show = new Show("Walking dead");
-			show.setDataTitle("the-walking-dead");
+			Show show = new Show("Friends");
+			show.setDataTitle("friends");
 			show = client.getShowInfo(show);
+			client.getEpisodesForSeasonForShowInfo(show, show.getSeasons().get(0));
 			return show;
 		}
 		
@@ -336,6 +337,12 @@ public class MainActivity extends ActionBarActivity {
 			}
 			for(Season season: show.getSeasons()){
 				Log.v("season", season.getSeasonNumber()+"");
+			}
+			Season season = show.getSeasons().get(0);
+			Log.v("season", season.getSeasonNumber()+"");
+			for(Episode episode : season.getEpisodes()){
+				Log.v("episode title", episode.getTitle());
+				Log.v("episode nr", episode.getNumber());
 			}
 		}
 	}
