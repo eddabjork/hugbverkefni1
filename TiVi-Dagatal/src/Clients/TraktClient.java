@@ -38,7 +38,7 @@ public class TraktClient {
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();
 	private Show showInfo = new Show();
 	private List<Season> seasonsForShowInfo = new ArrayList<Season>();
-	private Episode episodeInfo = new Episode();
+	private List<Show> popularShows = new ArrayList<Show>();
 	
 	public TraktClient(){}
 	
@@ -192,6 +192,14 @@ public class TraktClient {
 			  } catch(Exception e){
 				  reader.skipValue();
 			  }
+		  } else if(name.equals("ended")){
+			  try {
+				  show.setEnded(Boolean.parseBoolean(reader.nextString()));
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("genres")){
+			  readGenres(reader, show);
 		  } else if(name.equals("images")){
 			  readImages(reader, show);
 		  } else {
@@ -641,5 +649,32 @@ public class TraktClient {
 		}
         return season;
 	 }
+	 
+	//Notkun: 		 
+	//Eftirskilyrði: 
+	public List<Show> popularShows() {			
+        URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/shows/trending.json/" + APIkey);
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for trending shows");
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				popularShows = readShowsArrayForSearch(reader);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find trending shows");
+			e.printStackTrace();
+		}
+		
+		return popularShows;	
+	}
 		  
 }

@@ -250,7 +250,8 @@ public class MainActivity extends ActionBarActivity {
     	int id = item.getItemId();
         if (id == R.id.action_settings) {     
         	// test show info
-        	new ShowInfoTask().execute();
+        	//new ShowInfoTask().execute();
+        	new PopularShowsTask().execute();
             return true;
         }
         
@@ -347,5 +348,21 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 	
-	
+	private class PopularShowsTask extends AsyncTask<Void, Integer, List<Show>> {
+		protected List<Show> doInBackground(Void... voids) {
+			TraktClient client = new TraktClient();
+			List<Show> shows = client.popularShows();
+			return shows;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(List<Show> shows) {
+			for(Show show: shows){
+				Log.v("title", show.getTitle());
+			}
+		}
+	}
 }
