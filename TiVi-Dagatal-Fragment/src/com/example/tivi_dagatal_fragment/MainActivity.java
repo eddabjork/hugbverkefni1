@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         //Það sem gerist fremst í appinu, á starti
-        startCalendar();
+        //startCalendar();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -334,10 +334,23 @@ public class MainActivity extends Activity {
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = new TestFragment();
-        Bundle args = new Bundle();
-        args.putInt(TestFragment.ARG_NUMBER, position);
-        fragment.setArguments(args);
+        Fragment fragment = null;
+        switch (position) {
+        case 0:
+            fragment = new FragmentCal();
+            break;
+        case 1:
+            fragment = new FragmentList();
+            break;
+        case 2:
+            fragment = new FragmentSearch();
+            break;
+        case 3:
+            fragment = new FragmentPopular();
+            break; 
+        default:
+            break;
+        }
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
@@ -364,34 +377,6 @@ public class MainActivity extends Activity {
         //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
-    }
-    
-
-    /**
-     * Fragment that appears in the "content_frame", shows a planet
-     */
-    public static class TestFragment extends Fragment {
-        public static final String ARG_NUMBER = "number";
-
-        public TestFragment() {
-            // Empty constructor required for fragment subclasses
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_test, container, false);
-            int i = getArguments().getInt(ARG_NUMBER);
-            String planet = getResources().getStringArray(R.array.drawer_title_array)[i];
-
-            int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
-                            "drawable", getActivity().getPackageName());
-            ((ImageView) rootView.findViewById(R.id.image)).setImageResource(imageId);
-            getActivity().setTitle(planet);
-            
-            
-            return rootView;
-        }
     }
     
 	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
