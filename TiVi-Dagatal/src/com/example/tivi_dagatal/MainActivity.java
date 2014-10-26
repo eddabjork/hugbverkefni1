@@ -16,6 +16,7 @@ import java.util.Map;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
+import Dtos.Season;
 import Dtos.Show;
 import android.content.Intent;
 import android.graphics.Color;
@@ -247,7 +248,9 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         View x = new View(this);
     	int id = item.getItemId();
-        if (id == R.id.action_settings) {       	
+        if (id == R.id.action_settings) {     
+        	// test show info
+        	new ShowInfoTask().execute();
             return true;
         }
         
@@ -312,4 +315,30 @@ public class MainActivity extends ActionBarActivity {
 	        }
 		}
 	}
+	
+	private class ShowInfoTask extends AsyncTask<Void, Integer, Show> {
+		protected Show doInBackground(Void... voids) {
+			TraktClient client = new TraktClient();
+			Show show = new Show("Walking dead");
+			show.setDataTitle("the-walking-dead");
+			show = client.getShowInfo(show);
+			return show;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(Show show) {
+			Log.v("title", show.getTitle());
+			for(String genre: show.getGenres()){
+				Log.v("genre", genre);
+			}
+			for(Season season: show.getSeasons()){
+				Log.v("season", season.getSeasonNumber()+"");
+			}
+		}
+	}
+	
+	
 }

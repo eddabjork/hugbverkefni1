@@ -26,6 +26,7 @@ public class Show {
 	private String fanart;
 	private String banner;
 	private String imdbRating;
+	private List<Season> seasons;
 	
 	public Show(){}
 	
@@ -144,6 +145,12 @@ public class Show {
 		return imdbRating;
 	}
 	
+	//Notkun: show.getSeasons(seasons)
+	//Eftirskilyrði: seasons eru seríur show.
+	public List<Season> getSeasons() {
+		return seasons;
+	}
+	
 	/*Setters*/
 	
 	//Notkun: show.setAirDay(airDay)
@@ -252,5 +259,11 @@ public class Show {
 	//Eftirskilyrði: rating er IMDb einkunn show.
 	public void setImdbRating(String rating){
 		this.imdbRating = rating;
+	}
+	
+	//Notkun: show.setSeasons(seasons)
+	//Eftirskilyrði: seasons eru seríur show.
+	public void setSeasons(List<Season> seasons) {
+		this.seasons = seasons;
 	}
 }
