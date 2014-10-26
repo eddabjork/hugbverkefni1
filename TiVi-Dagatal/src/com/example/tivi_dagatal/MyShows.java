@@ -11,12 +11,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< Updated upstream
-=======
 import com.example.tivi_dagatal.Animator;
 
 import Clients.TraktClient;
->>>>>>> Stashed changes
 import Data.DbUtils;
 import Dtos.Show;
 import android.content.Intent;
@@ -73,25 +70,49 @@ public class MyShows extends ActionBarActivity {
 		ImageView image = getImage(show);
 		LinearLayout titleButtonsLayout = getTitleButtonsLayout(show);
 		
+		Button dummy = new Button(this);
+		dummy.setText("uppl");
+		
+		final TextView info = new TextView(this);
+		info.setText("her koma upplysingar");
+		info.setVisibility(View.GONE);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		info.setLayoutParams(layoutParams);
+		info.setGravity(Gravity.CENTER);
+		info.setId(getNextId());
+		Animator.setHeightForWrapContent(this, info);
+		dummy.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				Animator animation = null;
+                if(open.contains(""+info.getId())) {
+                    animation = new Animator(info, 500, 1);
+                    open.remove(""+info.getId());
+                } else {
+                    animation = new Animator(info, 500, 0);
+                    open.add(""+info.getId());
+                }
+                info.startAnimation(animation);
+			}
+		});
+		
 		episodeLayout.addView(image);
 		episodeLayout.addView(titleButtonsLayout);
+		episodeLayout.addView(dummy);
 		mainLayout.addView(episodeLayout);
+		mainLayout.addView(info);
 		mainLayout.addView(makeLine());
 	}
 	
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(this);
-<<<<<<< Updated upstream
 		//image.setImageResource(R.drawable.ic_launcher);
 		String imgUrl = show.getPoster();
 		new DownloadImageTask(image).execute(imgUrl);
 		image.buildDrawingCache();
-=======
 		image.setImageResource(R.drawable.ic_launcher);
 		//ennï¿½ï¿½ veriï¿½ aï¿½ vinna ï¿½ aï¿½ setja inn rï¿½tta mynd.
 		//new DownloadImageTask(image).execute("http://slurm.trakt.us/images/episodes/124-1-1.22.jpg");
 		//image.buildDrawingCache()
->>>>>>> Stashed changes
 		
 		//image.setLayoutParams(new FrameLayout.LayoutParams(100,100));
 		//image.getLayoutParams().width = 100;
@@ -115,8 +136,8 @@ public class MyShows extends ActionBarActivity {
 	}
 	
 	//Notkun:		 titleButtonsLayout = getTitleButtonsLayout(show);
-  	//Eftirskilyrði: titleButtonsLayout er layout sem inniheldur titil
-	//				 þáttaraðar show og takka sem tengast honum
+  	//Eftirskilyrï¿½i: titleButtonsLayout er layout sem inniheldur titil
+	//				 ï¿½ï¿½ttaraï¿½ar show og takka sem tengast honum
 	public LinearLayout getTitleButtonsLayout(final Show show) {
 		LinearLayout titleButtonsLayout = new LinearLayout(this);
 		titleButtonsLayout.setOrientation(LinearLayout.VERTICAL);
@@ -151,8 +172,8 @@ public class MyShows extends ActionBarActivity {
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
-  	//Eftirskilyrði: calButton er takki sem stjórnar því hvort show
-	//				 sé á dagatali
+  	//Eftirskilyrï¿½i: calButton er takki sem stjï¿½rnar ï¿½vï¿½ hvort show
+	//				 sï¿½ ï¿½ dagatali
 	public Button getCalButton(final Show show){
 		final Button calendarButton = new Button(this);
 		DbUtils dbHelper = new DbUtils(this);
@@ -182,55 +203,7 @@ public class MyShows extends ActionBarActivity {
 				}
             }
         });
-<<<<<<< Updated upstream
 		return calendarButton;
-=======
-		
-		Button infoButton = new Button(this);
-		infoButton.setText(getResources().getString(R.string.btn_info));
-		infoButton.setTextSize(10);
-		final TextView info = new TextView(this);
-		info.setText("her koma upplysingar");
-		info.setVisibility(View.GONE);
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		info.setLayoutParams(layoutParams);
-		info.setGravity(Gravity.CENTER);
-		info.setId(getNextId());
-		Animator.setHeightForWrapContent(this, info);
-		infoButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				Animator animation = null;
-                if(open.contains(""+info.getId())) {
-                    animation = new Animator(info, 500, 1);
-                    open.remove(""+info.getId());
-                } else {
-                    animation = new Animator(info, 500, 0);
-                    open.add(""+info.getId());
-                }
-                info.startAnimation(animation);
-			}
-		});
-
-		Button deleteButton = new Button(this);
-		deleteButton.setText(getResources().getString(R.string.btn_delete));
-		deleteButton.setTextSize(10);
-		deleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	removeFromMyEpisodes(show);
-            }
-        });
-
-		buttonsLayout.addView(calendarButton);
-		buttonsLayout.addView(infoButton);
-		buttonsLayout.addView(deleteButton);
-		titleButtonsLayout.addView(title);
-		titleButtonsLayout.addView(buttonsLayout);
-		episodeLayout.addView(image);
-		episodeLayout.addView(titleButtonsLayout);
-		mainLayout.addView(episodeLayout);
-		mainLayout.addView(info);
-		mainLayout.addView(makeLine());
->>>>>>> Stashed changes
 	}
 	
 	//Notkun:		 line = makeLine();
