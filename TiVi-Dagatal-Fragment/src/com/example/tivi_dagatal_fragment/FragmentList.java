@@ -1,18 +1,22 @@
 package com.example.tivi_dagatal_fragment;
 
+import java.io.InputStream;
 import java.util.List;
 
 import Data.DbUtils;
 import Dtos.Show;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
@@ -156,5 +160,69 @@ public class FragmentList extends Fragment {
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
+	}
+	
+	public ImageView getImage(Show show){
+		ImageView image = new ImageView(getActivity());
+		image.setImageResource(R.drawable.ic_launcher);
+		//String imgUrl = show.getPoster();
+		//new DownloadImageTask(image).execute(imgUrl);
+		//image.buildDrawingCache();
+		return image;
+	}
+	
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+		ImageView bmImage;
+		public DownloadImageTask(ImageView bmImage) {
+			this.bmImage = bmImage;
+		}
+		
+		protected Bitmap doInBackground(String... urls) {
+			String urldisplay = urls[0];
+			Bitmap mIcon11 = null;
+			try {
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				mIcon11 = BitmapFactory.decodeStream(in);
+			} catch (Exception e) {
+				Log.e("Error", e.getMessage());
+				e.printStackTrace();
+			}
+			return fixBitmapSize(mIcon11);
+		}
+		
+		protected void onPostExecute(Bitmap result) {
+			bmImage.setImageBitmap(result);
+		}
+	}
+	
+	public Bitmap fixBitmapSize(Bitmap originalBmp){
+		int x = originalBmp.getWidth();
+		int y = originalBmp.getHeight();
+		int startX;
+		int startY;
+		Bitmap scaledBmp;
+		double scale;
+		
+		int width = 100;
+		int height = 100;
+		
+		if(x >= y){
+			scale = y/height;
+			scaledBmp = Bitmap.createScaledBitmap(originalBmp, (int)(x/scale), 100, false);
+			x = scaledBmp.getWidth();
+			y = scaledBmp.getHeight();
+			startY = 0;
+			startX = (x-y)/2;
+		}
+		else{
+			scale = x/width;
+			scaledBmp = Bitmap.createScaledBitmap(originalBmp, 100, (int)(y/scale), false);
+			x = scaledBmp.getWidth();
+			y = scaledBmp.getHeight();
+			startX = 0;
+			startY = (y-x)/2;
+		}
+		
+		return Bitmap.createBitmap(scaledBmp, startX,startY,width,height);
 	}	
 }
