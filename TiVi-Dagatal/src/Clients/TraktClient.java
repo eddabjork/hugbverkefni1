@@ -38,7 +38,7 @@ public class TraktClient {
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();
 	private Show showInfo = new Show();
 	private List<Season> seasonsForShowInfo = new ArrayList<Season>();
-	private Episode episodeInfo = new Episode();
+	private List<Show> popularShows = new ArrayList<Show>();
 	
 	public TraktClient(){}
 	
@@ -192,6 +192,14 @@ public class TraktClient {
 			  } catch(Exception e){
 				  reader.skipValue();
 			  }
+		  } else if(name.equals("ended")){
+			  try {
+				  show.setEnded(Boolean.parseBoolean(reader.nextString()));
+			  } catch(Exception e){
+				  reader.skipValue();
+			  }
+		  } else if(name.equals("genres")){
+			  readGenres(reader, show);
 		  } else if(name.equals("images")){
 			  readImages(reader, show);
 		  } else {
@@ -256,7 +264,7 @@ public class TraktClient {
 					final InputStream is = url2.openStream();
 					JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 					try {
-						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle, showTitle));
+						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle, showTitle, false));
 					} finally {
 						reader.close();
 					}
@@ -388,12 +396,12 @@ public class TraktClient {
 	 //Notkun: 		  episodes = readEpisodesArrayForCalendar(reader, showDataTitle)
 	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
 	 //				  birtir á dagatali
-	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle, String showTitle) throws IOException {
+	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo) throws IOException {
 		List<Episode> episodes = new ArrayList<Episode>();
 		
 		reader.beginArray();
 		while (reader.hasNext()) {
-			Episode episode = readEpisodeForCalendar(reader, showDataTitle, showTitle);
+			Episode episode = readEpisodeForCalendar(reader, showDataTitle, showTitle, forInfo);
 			if(episode != null) {
 				episodes.add(episode);
 			}
@@ -404,7 +412,7 @@ public class TraktClient {
 	
 	//Notkun: 		 episode = readEpisodeForCalendar(reader, showDataTitle)
 	//Eftirskilyrði: episode er þáttur sem á að vera birtur á dagatali
-	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle, String showTitle) throws IOException {
+	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo) throws IOException {
 		Episode episode = new Episode();
 		reader.beginObject();
 		
@@ -470,7 +478,7 @@ public class TraktClient {
 			}
 		}
 		reader.endObject();
-		if(inTimePeriod){
+		if(inTimePeriod || forInfo){
 			return episode;
 		}
 		return null;
@@ -616,7 +624,7 @@ public class TraktClient {
 	 
 	 //Notkun: 		  
 	 //Eftirskilyrði: 
-	 public void getEpisodesForSeasonForShowInfo(Show show, Season season){
+	 public Season getEpisodesForSeasonForShowInfo(Show show, Season season){
 		List<Episode> episodes = new ArrayList<Episode>();
         URL url = null;
         try {
@@ -630,8 +638,8 @@ public class TraktClient {
 			final InputStream is = url.openStream();
 			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 			try {
-				episodes.addAll(readEpisodesArrayForCalendar(reader, show.getDataTitle(), show.getTitle()));
-				season.getEpisodes().addAll(episodes);
+				episodes.addAll(readEpisodesArrayForCalendar(reader, show.getDataTitle(), show.getTitle(), true));
+				season.setEpisodes(episodes);
 			} finally {
 				reader.close();
 			}
@@ -639,6 +647,34 @@ public class TraktClient {
 			Log.e("API error", "Could not find episodes for season: " + show.getDataTitle() + " season: " + season.getSeasonNumber());
 			e.printStackTrace();
 		}
+        return season;
 	 }
+	 
+	//Notkun: 		 
+	//Eftirskilyrði: 
+	public List<Show> popularShows() {			
+        URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/shows/trending.json/" + APIkey);
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for trending shows");
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				popularShows = readShowsArrayForSearch(reader);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find trending shows");
+			e.printStackTrace();
+		}
+		
+		return popularShows;	
+	}
 		  
 }
