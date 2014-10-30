@@ -6,12 +6,15 @@
 
 package Dtos;
 
+import java.util.List;
+
 public class Season {
 	private String title;
 	private int seasonNumber;
-	private int episodes;
+	private int totalEpisodes;
 	private String url;
 	private String poster;
+	private List<Episode> episodes;
 	
 	public Season(){}
 	
@@ -27,10 +30,10 @@ public class Season {
 		return seasonNumber;
 	}
 	
-	//Notkun: episodes = season.getEpisodes()
+	//Notkun: episodes = season.getTotalEpisodes()
 	//Eftirskilyrði: episodes er fjöldi þátta í season.
-	public int getEpisodes() {
-		return episodes;
+	public int getTotalEpisodes() {
+		return totalEpisodes;
 	}
 		
 	//Notkun: url = show.getUrl()
@@ -45,6 +48,12 @@ public class Season {
 		return poster;
 	}
 	
+	//Notkun: episodes = season.getEpisodes()
+	//Eftirskilyrði: episodes eru allir þættirnir í season.
+	public List<Episode> getEpisodes() {
+		return episodes;
+	}
+	
 	/*Setters*/
 	
 	//Notkun: season.setSeasonNumber(seasonNumber)
@@ -53,10 +62,10 @@ public class Season {
 		this.seasonNumber = seasonNumber;
 	}
 	
-	//Notkun: season.setEpisodes(episodes)
-	//Eftirskilyrði: season hefur episodes marga þætti.
-	public void setEpisodes(int episodes) {
-		this.episodes = episodes;
+	//Notkun: season.setTotalEpisodes(totalEpisodes)
+	//Eftirskilyrði: season hefur totalEpisodes marga þætti.
+	public void setTotalEpisodes(int totalEpisodes) {
+		this.totalEpisodes = totalEpisodes;
 	}
 	
 	//Notkun: season.setUrl(url)
@@ -69,5 +78,11 @@ public class Season {
 	//Eftirskilyrði: poster er url á aðalmynd season.
 	public void setPoster(String poster) {
 		this.poster = poster;
+	}
+	
+	//Notkun: season.setEpisodes(episodes)
+	//Eftirskilyrði: episodes eru allir þættirnir í season.
+	public void setEpisodes(List<Episode> episodes) {
+		this.episodes = episodes;
 	}
 }

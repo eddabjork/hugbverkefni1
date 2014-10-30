@@ -5,6 +5,8 @@
  **/
 package Dtos;
 
+import java.util.List;
+
 public class Show {
 	private String title;
 	private String dataTitle;
@@ -19,11 +21,12 @@ public class Show {
 	private String imdbId;
 	private String tvdbId;
 	private boolean ended;
-	private String genres[];
+	private List<String> genres;
 	private String poster;
 	private String fanart;
 	private String banner;
 	private String imdbRating;
+	private List<Season> seasons;
 	
 	public Show(){}
 	
@@ -79,7 +82,7 @@ public class Show {
 	
 	//Notkun: genres = show.getGenres()
 	//Eftirskilyrði: genres er tegund þáttaraðar.
-	public String[] getGenres() {
+	public List<String> getGenres() {
 		return genres;
 	}
 	
@@ -142,6 +145,12 @@ public class Show {
 		return imdbRating;
 	}
 	
+	//Notkun: show.getSeasons(seasons)
+	//Eftirskilyrði: seasons eru seríur show.
+	public List<Season> getSeasons() {
+		return seasons;
+	}
+	
 	/*Setters*/
 	
 	//Notkun: show.setAirDay(airDay)
@@ -188,7 +197,7 @@ public class Show {
 
 	//Notkun: show.setGenres(genres)
 	//Eftirskilyrði: genres er tegund show.
-	public void setGenres(String[] genres) {
+	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
 
@@ -250,5 +259,11 @@ public class Show {
 	//Eftirskilyrði: rating er IMDb einkunn show.
 	public void setImdbRating(String rating){
 		this.imdbRating = rating;
+	}
+	
+	//Notkun: show.setSeasons(seasons)
+	//Eftirskilyrði: seasons eru seríur show.
+	public void setSeasons(List<Season> seasons) {
+		this.seasons = seasons;
 	}
 }
