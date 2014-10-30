@@ -37,6 +37,7 @@ public class FragmentSearch extends Fragment {
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, results)
                        .commit();
+        Log.v("kláraði fragment man", " júhú");
 	}
 	
 }

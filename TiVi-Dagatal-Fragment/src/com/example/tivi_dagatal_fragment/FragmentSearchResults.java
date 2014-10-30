@@ -19,7 +19,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class FragmentSearchResults extends Fragment{
-	DbUtils dbHelper = new DbUtils(this.getActivity());
+	private DbUtils dbHelper = new DbUtils(this.getActivity());
+	private ScrollView scrollView;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,12 +29,20 @@ public class FragmentSearchResults extends Fragment{
 		
 		Bundle bundle = this.getArguments();
 		char[] aWord = bundle.getCharArray("key");
-		
 		String word =  new String(aWord);
 		Log.v("Strengurinn er", word);
-		new SearchShowsTask().execute(word);
+		
+		//scrollView = new ScrollView(getActivity());
+		
+		setLayout(word);
+
+		//rootView = scrollView;
         return rootView;
     }
+	
+	public void setLayout(String word){
+		new SearchShowsTask().execute(word);
+	}
 
 	private class SearchShowsTask extends AsyncTask<String, Integer, List<Show>> {
 		protected List<Show> doInBackground(String... queries) {         
