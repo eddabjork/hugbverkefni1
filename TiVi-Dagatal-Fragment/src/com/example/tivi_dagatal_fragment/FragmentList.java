@@ -6,6 +6,7 @@ import java.util.List;
 import Data.DbUtils;
 import Dtos.Show;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -16,9 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -30,18 +33,26 @@ public class FragmentList extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
 		
-		//Til að testa
+		/******TEST ÞÆTTIR
 		DbUtils dbHelper = new DbUtils(getActivity());
 		Show show1 = new Show();
         show1.setTitle("New Girl");
         show1.setDataTitle("new-girl");
         show1.setPoster("kallaposter");
         dbHelper.saveShow(show1);
+        //
 		Show show2 = new Show();
         show2.setTitle("Big Bang Theory");
         show2.setDataTitle("big-bang-theory");
         show2.setPoster("kallaposter2");
         dbHelper.saveShow(show2);
+        //
+        Show show3 = new Show();
+        show3.setTitle("Arrow");
+        show3.setDataTitle("arrow");
+        show3.setPoster("kallaposter2");
+        dbHelper.saveShow(show3);
+        END TEST****/
         
         
 		scrollView = new ScrollView(getActivity());
@@ -78,34 +89,44 @@ public class FragmentList extends Fragment {
 	}
 	
 	public void addShow(final Show show, LinearLayout mainLayout){
+		addTitleButtonsLayout(show, mainLayout);
+		addLine(mainLayout);
+	}
+	
+	public void addTitleButtonsLayout(final Show show, final LinearLayout mainLayout){
 		LinearLayout episodeLayout = new LinearLayout(getActivity());
 		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
 		
-		setTitleButtonLayout(show, episodeLayout);
-		
-		mainLayout.addView(episodeLayout);
-		mainLayout.addView(makeLine());
-
-	}
-	
-	public void setTitleButtonLayout(final Show show, LinearLayout episodeLayout){
 		TextView title = new TextView(getActivity());
 		title.setText(show.getTitle());
 		
 		Button calendarButton = getCalButton(show);
+		//calendarButton.setBackgroundColor(Color.TRANSPARENT);
 		
 		Button deleteButton = new Button(getActivity());
 		deleteButton.setText(getResources().getString(R.string.btn_delete));
 		deleteButton.setTextSize(10);
+		//deleteButton.setBackgroundColor(Color.TRANSPARENT);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	removeFromMyEpisodes(show);
+            }
+        });
+		
+		ImageButton infoButton = new ImageButton(getActivity());
+		infoButton.setImageResource(R.drawable.down_arrow);
+		infoButton.setBackgroundColor(Color.TRANSPARENT);
+		infoButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	insertInfo(show, mainLayout);
             }
         });
 
 		episodeLayout.addView(title);
 		episodeLayout.addView(calendarButton);
 		episodeLayout.addView(deleteButton);
+		episodeLayout.addView(infoButton);	
+		mainLayout.addView(episodeLayout);
 	}
 	
 	public Button getCalButton(final Show show){
@@ -143,23 +164,36 @@ public class FragmentList extends Fragment {
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
+		MainActivity.cache.remove("calendarEpisodes");
+		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
 	public void remFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
+		MainActivity.cache.remove("calendarEpisodes");
+		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
+		FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                       .replace(R.id.content_frame, new FragmentList())
+                       .commit();
 	}
 	
-	public View makeLine(){
+	// Pláss fyrir Eddu-stöff
+	public void insertInfo(Show show, LinearLayout mainLayout){
+		// do something
+	}
+	
+	public void addLine(LinearLayout mainLayout){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
-		 return v;
+		 mainLayout.addView(v);
 	}
 	
 	public ImageView getImage(Show show){

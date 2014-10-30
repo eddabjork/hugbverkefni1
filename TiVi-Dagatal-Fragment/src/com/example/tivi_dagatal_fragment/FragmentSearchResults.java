@@ -55,6 +55,7 @@ public class FragmentSearchResults extends Fragment{
 			for (final Show show : searchShows){
 				TextView textView = new TextView(getActivity());
 				textView.setText(show.getTitle());
+				Log.v("Þáttur heitir ", show.getTitle());
 				textView.setLayoutParams(lparams);
 				Button button = new Button(getActivity());
 				button.setText(getResources().getString(R.string.search_add));
