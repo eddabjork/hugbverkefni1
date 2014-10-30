@@ -6,6 +6,7 @@ import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
 import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class FragmentSearchResults extends Fragment{
-	private DbUtils dbHelper = new DbUtils(this.getActivity());
+	private DbUtils dbHelper;
 	private ScrollView scrollView;
 	
 	@Override
@@ -43,6 +44,11 @@ public class FragmentSearchResults extends Fragment{
 	public void setLayout(String word){
 		new SearchShowsTask().execute(word);
 	}
+	
+	public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        dbHelper = new DbUtils(activity);
+    }
 
 	private class SearchShowsTask extends AsyncTask<String, Integer, List<Show>> {
 		protected List<Show> doInBackground(String... queries) {         
@@ -63,7 +69,7 @@ public class FragmentSearchResults extends Fragment{
 			for (final Show show : searchShows){
 				TextView textView = new TextView(getActivity());
 				textView.setText(show.getTitle());
-				Log.v("Þáttur heitir ", show.getTitle());
+				Log.v("ï¿½ï¿½ttur heitir ", show.getTitle());
 				textView.setLayoutParams(lparams);
 				Button button = new Button(getActivity());
 				button.setText(getResources().getString(R.string.search_add));
