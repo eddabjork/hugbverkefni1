@@ -13,12 +13,12 @@
     </string-array>
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
-    <array name="nav_drawer_icons">
+    <!-- <array name="nav_drawer_icons">
         <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_launcher</item>
-    </array>
+    </array>-->
 
     
     <!-- Gamlir strengir -->

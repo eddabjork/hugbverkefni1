@@ -319,6 +319,7 @@ public class MainActivity extends Activity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Gamla búið
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -419,12 +420,6 @@ public class MainActivity extends Activity {
 		
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
-		}
-		
-		protected void onPostExecute(List<Episode> calendarEpisodes) {
-			for (Episode episode : calendarEpisodes){
-	        	fillInEpisode(episode);
-	        }
 		}
 	}
 }

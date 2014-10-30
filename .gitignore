@@ -13,3 +13,6 @@ TiVi-Dagatal/bin/classes.dex
 TiVi-Dagatal/bin/TiVi-Dagatal.apk
 TiVi-Dagatal/bin/TiVi-Dagatal.apk
 TiVi-Dagatal/project.properties
+*.class
+*.jar
+*.apk

@@ -9,13 +9,16 @@ package com.example.tivi_dagatal;
 import Clients.TraktClient;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.example.tivi_dagatal.Animator;
 
 import Clients.TraktClient;
 import Data.DbUtils;
+import Dtos.Season;
 import Dtos.Show;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,11 +28,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -44,6 +49,8 @@ public class MyShows extends ActionBarActivity {
 	/** Saves current state and sets the view */
 	private Integer id;
 	private List<String> open = new ArrayList<String>();
+	private LinearLayout mainLayout;
+	private MainScrollView mainScrollView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,41 +70,8 @@ public class MyShows extends ActionBarActivity {
   	//Eftirskilyr�i: B�i� er a� b�a til view fyrir s�rhverja ��ttar��, sem samanstendur
 	//				 af mynd ��ttara�ar, titil og �rj� takka (b�ta vi�/fjarl�gja �r dagatali,
 	//				 uppl�singar og fjarl�gja). �etta view er svo b�tt vi� � a�al LinearLayout.
-	public void addShow(final Show show, LinearLayout mainLayout) {		
-		LinearLayout episodeLayout = new LinearLayout(this);
-		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
-		
-		setTitleButtonLayout(show,episodeLayout);
-		
-		Button dummy = new Button(this);
-		dummy.setText("V");
-		
-		final TextView info = new TextView(this);
-		info.setText("her koma upplysingar");
-		info.setVisibility(View.GONE);
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		info.setLayoutParams(layoutParams);
-		info.setGravity(Gravity.CENTER);
-		info.setId(getNextId());
-		Animator.setHeightForWrapContent(this, info);
-		dummy.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				Animator animation = null;
-                if(open.contains(""+info.getId())) {
-                    animation = new Animator(info, 500, 1);
-                    open.remove(""+info.getId());
-                } else {
-                    animation = new Animator(info, 500, 0);
-                    open.add(""+info.getId());
-                }
-                info.startAnimation(animation);
-			}
-		});
-		
-		episodeLayout.addView(dummy);
-		mainLayout.addView(episodeLayout);
-		mainLayout.addView(info);
-		mainLayout.addView(makeLine());
+	public void addShow(final Show show) {	
+		new ShowInfoTask().execute(show);
 	}
 	
 	public ImageView getImage(Show show){
@@ -269,16 +243,105 @@ public class MyShows extends ActionBarActivity {
 		
 		protected void onPostExecute(List<Show> showList) {
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-	    	ScrollView scrollView = new ScrollView(MyShows.this);
-	    	LinearLayout mainLayout = new LinearLayout(MyShows.this);
+			mainScrollView = new MainScrollView(MyShows.this);
+	    	mainLayout = new LinearLayout(MyShows.this);
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
 	    	for(Show show : showList){
-	    		addShow(show, mainLayout);
+	    		addShow(show);
 	    	}
 	    	
-	    	scrollView.addView(mainLayout);
-		    setContentView(scrollView);	
+	    	mainScrollView.addView(mainLayout);
+		    setContentView(mainScrollView);	
+		}
+	}
+	
+	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
+		protected Show doInBackground(Show... shows) {
+			TraktClient client = new TraktClient();
+			Show show = client.getShowInfo(shows[0]);
+			return show;
+		}
+		
+		protected void onProgressUpdate(Integer... progress) {
+			//setProgressPercent(progress[0]);
+		}
+		
+		protected void onPostExecute(Show show) {
+			LinearLayout episodeLayout = new LinearLayout(MyShows.this);
+			episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
+			
+			setTitleButtonLayout(show,episodeLayout);
+			
+			Button dummy = new Button(MyShows.this);
+			dummy.setText("uppl");
+			
+			final ScrollView scrollView = new ScrollView(MyShows.this);
+			LinearLayout infoLayout = new LinearLayout(MyShows.this);
+			infoLayout.setOrientation(LinearLayout.VERTICAL);
+			final LinearLayout infoMain = new LinearLayout(MyShows.this);
+			infoMain.setOrientation(LinearLayout.VERTICAL);
+			
+			List<Season> seasons = show.getSeasons();
+			Collections.reverse(seasons);
+			for(Season season : seasons) {
+				TextView seasonbutton = new TextView(MyShows.this);
+				seasonbutton.setText("Sería " + season.getSeasonNumber());
+				seasonbutton.setGravity(Gravity.CENTER);
+				seasonbutton.setTextSize(20);
+				infoLayout.addView(seasonbutton);
+				final TextView episodes = new TextView(MyShows.this);
+				episodes.setVisibility(View.GONE);
+				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+				episodes.setLayoutParams(layoutParams);
+				episodes.setGravity(Gravity.CENTER);
+				episodes.setId(getNextId());
+				episodes.setText("hér koma þættir");
+				infoLayout.addView(episodes);
+				Animator.setHeightForWrapContent(MyShows.this, episodes);
+				seasonbutton.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View view) {
+						mainScrollView.setScrollingEnabled(false);
+						Animator animation = null;
+		                if(open.contains(""+episodes.getId())) {
+		                    animation = new Animator(episodes, 500, 1);
+		                    open.remove(""+episodes.getId());
+		                } else {
+		                    animation = new Animator(episodes, 500, 0);
+		                    open.add(""+episodes.getId());
+		                }
+		                episodes.startAnimation(animation);
+					}
+				});
+			}
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+			infoLayout.setLayoutParams(layoutParams);
+			infoLayout.setGravity(Gravity.CENTER);
+			scrollView.addView(infoLayout);
+			infoMain.setLayoutParams(layoutParams);
+			infoMain.setVisibility(View.GONE);
+			infoMain.setId(getNextId());
+			infoMain.addView(scrollView);
+			Animator.setHeightForWrapContent(MyShows.this, infoMain);
+			dummy.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View view) {
+					mainScrollView.setScrollingEnabled(true);
+					Animator animation = null;
+	                if(open.contains(""+infoMain.getId())) {
+	                    animation = new Animator(infoMain, 500, 1);
+	                    open.remove(""+infoMain.getId());
+	                } else {
+	                    animation = new Animator(infoMain, 500, 0);
+	                    open.add(""+infoMain.getId());
+	                }
+	                infoMain.startAnimation(animation);
+				}
+			});
+			
+			episodeLayout.addView(dummy);
+			mainLayout.addView(episodeLayout);
+			mainLayout.addView(infoMain);
+			mainLayout.addView(makeLine());
 		}
 	}
 	
@@ -328,6 +391,38 @@ public class MyShows extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	private class MainScrollView extends ScrollView {
+		private boolean scrollable = true;
+		
+		public MainScrollView(Context context) {
+			super(context);
+		}
+		
+		public void setScrollingEnabled(boolean enabled) {
+			scrollable = enabled;
+		}
+		
+		public boolean isScrollable() {
+			return scrollable;
+		}
+		
+		public boolean onTouchEvent(MotionEvent event) {
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				if(scrollable) return super.onTouchEvent(event);
+				return scrollable;
+			default:
+				return super.onTouchEvent(event);
+			}
+		}
+		
+		public boolean onInterceptTouchEvent(MotionEvent event) {
+			if(!scrollable) return false;
+			else return super.onInterceptTouchEvent(event);
+		}
+	}
+	
 
 	/**
      * A placeholder fragment containing a simple view.

@@ -20,7 +20,6 @@ public final class R {
         /**  Navigation strengir 
          */
         public static final int drawer_title_array=0x7f0c0000;
-        public static final int nav_drawer_icons=0x7f0c0001;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1086,6 +1085,7 @@ containing a value of this type.
         public static final int drawer_shadow=0x7f020057;
         public static final int ic_drawer=0x7f020058;
         public static final int ic_launcher=0x7f020059;
+        public static final int temp_icon=0x7f02005a;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1211,8 +1211,9 @@ containing a value of this type.
         public static final int fragment_list=0x7f03001b;
         public static final int fragment_popular=0x7f03001c;
         public static final int fragment_search=0x7f03001d;
-        public static final int fragment_test=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int fragment_search_results=0x7f03001e;
+        public static final int fragment_test=0x7f03001f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1294,7 +1295,13 @@ containing a value of this type.
         public static final int temp_btn_my_episodes=0x7f0a001b;
         public static final int thu_label=0x7f0a0020;
         public static final int title_activity_my_shows=0x7f0a0012;
-        /**  Gamlir strengir 
+        /**  <array name="nav_drawer_icons">
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+    </array>
+ Gamlir strengir 
          */
         public static final int title_activity_search_results=0x7f0a0011;
         public static final int tue_label=0x7f0a001e;

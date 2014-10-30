@@ -168,7 +168,7 @@ public class FragmentList extends Fragment {
 	
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
-		image.setImageResource(R.drawable.ic_launcher);
+		image.setImageResource(R.drawable.temp_icon);
 		//String imgUrl = show.getPoster();
 		//new DownloadImageTask(image).execute(imgUrl);
 		//image.buildDrawingCache();

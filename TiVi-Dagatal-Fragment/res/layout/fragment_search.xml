@@ -18,7 +18,7 @@
         android:id="@+id/leita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/leita"
-        android:onClick="SearchStuff"/>
+        android:text="@string/leita"/>
+        <!--android:onClick="searchClick"/>-->
 
 </LinearLayout>
