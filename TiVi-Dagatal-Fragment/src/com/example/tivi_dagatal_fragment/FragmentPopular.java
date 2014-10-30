@@ -7,6 +7,7 @@ import Data.DbUtils;
 import Dtos.Episode;
 import Dtos.Show;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ActionBar.LayoutParams;
 import android.os.AsyncTask;
@@ -94,6 +95,7 @@ public class FragmentPopular extends Fragment {
 		            	if(((Button)view).getText().toString() == getResources().getString(R.string.search_add)) {
 		            		dbHelper.saveShow(show);
 		            		((Button) view).setText(getResources().getString(R.string.take_off_list));
+		            		showDialog(show);
 		            	} else {
 		            		dbHelper.deleteShow(show);
 		            		((Button) view).setText(getResources().getString(R.string.search_add));
@@ -109,5 +111,10 @@ public class FragmentPopular extends Fragment {
 			//Birta n�ja viewi�
 			//setContentView(sv);	
 		}
+	}
+	
+	void showDialog(Show show) {
+	    DialogFragment newFragment = PutOnCalPopUp.newInstance(R.string.popup_put_cal, show);
+	    newFragment.show(getFragmentManager(), "dialog");
 	}
 }

@@ -1283,8 +1283,11 @@ containing a value of this type.
         public static final int mar_label=0x7f0a0025;
         public static final int may_label=0x7f0a0027;
         public static final int mon_label=0x7f0a001d;
+        public static final int neg_answer=0x7f0a0036;
         public static final int nov_label=0x7f0a002d;
         public static final int oct_label=0x7f0a002c;
+        public static final int popup_put_cal=0x7f0a0034;
+        public static final int pos_answer=0x7f0a0035;
         public static final int sat_label=0x7f0a0022;
         public static final int search_add=0x7f0a0019;
         public static final int search_hint=0x7f0a0015;
