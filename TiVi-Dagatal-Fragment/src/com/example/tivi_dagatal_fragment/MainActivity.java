@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
+    private Fragment fragment;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +139,6 @@ public class MainActivity extends Activity {
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = null;
         switch (position) {
         case 0:
             fragment = new FragmentCal();
@@ -166,6 +166,10 @@ public class MainActivity extends Activity {
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+    
+    public void searchClick(View view){
+    	((FragmentSearch) fragment).searchClick(view);
     }
 
     @Override
