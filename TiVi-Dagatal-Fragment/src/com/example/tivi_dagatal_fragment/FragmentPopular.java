@@ -27,7 +27,7 @@ public class FragmentPopular extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
-		
+		flushCash();
 		scrollView = new ScrollView(getActivity());
 		setLayout();
 		rootView = scrollView;

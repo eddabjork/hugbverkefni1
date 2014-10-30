@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 		int memClass = am.getMemoryClass();			
 		// Use 1/8th of the available memory for this memory cache.
 	    final int cacheSize = 1024 * 1024 * memClass / 8;
-	    cache = new LruCache<String, List<Episode>>(cacheSize);	    
+	    cache = new LruCache<String, List<Object>>(cacheSize);	    
 	    return cache;
 	}
     
