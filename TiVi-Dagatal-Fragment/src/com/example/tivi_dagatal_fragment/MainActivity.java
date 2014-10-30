@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
     private CharSequence mDrawerTitle;
     private Fragment fragment;
     public static LruCache cache;
+    public static long startTime = System.currentTimeMillis();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

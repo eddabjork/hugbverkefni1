@@ -35,10 +35,20 @@ public class FragmentCal extends Fragment {
 		
 		scrollView = new ScrollView(getActivity());
 		setLayout();
+		flushCash();
 		new CalendarShowsTask().execute();
 
 		view = scrollView;
         return view;
+	}
+	
+	public void flushCash(){
+		long time = System.currentTimeMillis();
+		long twelveHours = (long) (60000*60*12);
+		if((time - MainActivity.startTime) > twelveHours){
+			MainActivity.cache.remove("calendarEpisodes");
+			Log.v("cache", "Calendar episodes removed from cache");
+		}
 	}
 	
 	public void setLayout(){
@@ -185,7 +195,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	public void fillInEpisode(Episode episode) {		
-		String title = episode.getShowTitle() + ": " + episode.getNumber() + " " + episode.getTitle();
+		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")";
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);

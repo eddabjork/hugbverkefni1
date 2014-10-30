@@ -28,8 +28,8 @@ import android.util.Log;
 public class TraktClient {
 	
 	private String APIkey = "1b7308cb59d642b6548e8c8da531695b";
-	private Date lastMonday = getLastMonday();
-	private Date nextMonday = getNextMonday();
+	private Date lastSunday = getLastSunday();
+	private Date nextSunday = getNextSunday();
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 	private List<Show> searchShows = new ArrayList<Show>();
@@ -38,31 +38,31 @@ public class TraktClient {
 	
 	public TraktClient(){}
 	
-	//Notkun: 		 date = getLastMonday()
-	//Eftirskilyrði: date er síðasliðinn mánudagur
-	public static Date getLastMonday(){
+	//Notkun: 		 date = getLastSunday()
+	//Eftirskilyrði: date er síðasliðinn sunnudagur
+	public static Date getLastSunday(){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
-		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 		c = nullifyTime(c);
-		Date lastMonday = c.getTime();
-		format.format(lastMonday);
+		Date lastSunday = c.getTime();
+		format.format(lastSunday);
 		
-		return lastMonday;
+		return lastSunday;
 	}
 	
-	//Notkun: 		 date = getNextMonday()
-	//Eftirskilyrði: date er næstkomandi mánudagur
-	public static Date getNextMonday(){
+	//Notkun: 		 date = getNextSunday()
+	//Eftirskilyrði: date er næstkomandi sunnudagur
+	public static Date getNextSunday(){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
-		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 		c.add(Calendar.DATE, 7);
 		c = nullifyTime(c);
-		Date nextMonday = c.getTime();
-		format.format(nextMonday);
+		Date nextSunday = c.getTime();
+		format.format(nextSunday);
 		
-		return nextMonday;
+		return nextSunday;
 	}
 	
 	//Notkun: 		 calendar = nullifyTime(c)
@@ -399,7 +399,7 @@ public class TraktClient {
 						e.printStackTrace();
 					}
 					
-					if(showDate.after(lastMonday) && showDate.before(nextMonday)) {
+					if(showDate.after(lastSunday) && showDate.before(nextSunday)) {
 						inTimePeriod = true;
 					}
 				} catch(Exception e){
