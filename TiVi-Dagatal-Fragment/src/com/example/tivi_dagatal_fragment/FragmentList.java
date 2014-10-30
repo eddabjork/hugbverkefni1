@@ -30,7 +30,7 @@ public class FragmentList extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
 		
-		/****Til að testa
+		//Til að testa
 		DbUtils dbHelper = new DbUtils(getActivity());
 		Show show1 = new Show();
         show1.setTitle("New Girl");
@@ -42,7 +42,7 @@ public class FragmentList extends Fragment {
         show2.setDataTitle("big-bang-theory");
         show2.setPoster("kallaposter2");
         dbHelper.saveShow(show2);
-        */
+        
         
 		scrollView = new ScrollView(getActivity());
 		setLayout();
@@ -143,11 +143,15 @@ public class FragmentList extends Fragment {
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
+		MainActivity.cache.remove("calendarEpisodes");
+		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
 	public void remFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
+		MainActivity.cache.remove("calendarEpisodes");
+		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
 	public void removeFromMyEpisodes(Show show){

@@ -13,6 +13,7 @@ import android.app.Fragment;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,9 +148,18 @@ public class FragmentCal extends Fragment {
 	}
 	
 	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
-		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {         
-			TraktClient trakt = new TraktClient();
-	        List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0]);
+		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
+			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.cache.get("calendarEpisodes");
+	        
+	        if(calendarEpisodes == null || calendarEpisodes.size() == 0) {
+		    	Log.v("cache", "Calendar episodes not cached, retrieving new list");
+		    	TraktClient trakt = new TraktClient();
+		        calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0]);
+		    	MainActivity.cache.put("calendarEpisodes", calendarEpisodes);
+		    } else {
+		    	Log.v("cahce", "Cached episodes found");
+		    	Log.v("cache", "Cache response size: " + calendarEpisodes.size());
+		    }
 			return calendarEpisodes;
 		}
 		
