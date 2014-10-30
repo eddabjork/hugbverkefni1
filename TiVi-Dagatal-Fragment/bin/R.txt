@@ -239,6 +239,7 @@ int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable drawer_shadow 0x7f020057
 int drawable ic_drawer 0x7f020058
 int drawable ic_launcher 0x7f020059
+int drawable temp_icon 0x7f02005a
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b
@@ -336,8 +337,9 @@ int layout fragment_cal 0x7f03001a
 int layout fragment_list 0x7f03001b
 int layout fragment_popular 0x7f03001c
 int layout fragment_search 0x7f03001d
-int layout fragment_test 0x7f03001e
-int layout support_simple_spinner_dropdown_item 0x7f03001f
+int layout fragment_search_results 0x7f03001e
+int layout fragment_test 0x7f03001f
+int layout support_simple_spinner_dropdown_item 0x7f030020
 int menu main 0x7f0d0000
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_up_description 0x7f0a0002

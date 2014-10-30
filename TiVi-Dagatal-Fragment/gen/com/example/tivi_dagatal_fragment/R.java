@@ -1086,6 +1086,7 @@ containing a value of this type.
         public static final int drawer_shadow=0x7f020057;
         public static final int ic_drawer=0x7f020058;
         public static final int ic_launcher=0x7f020059;
+        public static final int temp_icon=0x7f02005a;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1211,8 +1212,9 @@ containing a value of this type.
         public static final int fragment_list=0x7f03001b;
         public static final int fragment_popular=0x7f03001c;
         public static final int fragment_search=0x7f03001d;
-        public static final int fragment_test=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int fragment_search_results=0x7f03001e;
+        public static final int fragment_test=0x7f03001f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
