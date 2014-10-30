@@ -60,4 +60,9 @@
     <string name="btn_cal">Setja á dagatal</string>
     <string name="btn_info">Upplýsingar</string>
     <string name="btn_delete">Eyða</string>
+    
+    <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
+    <string name="pos_answer">Já</string>
+    <string name="neg_answer">Nei</string>
+    
 </resources>
