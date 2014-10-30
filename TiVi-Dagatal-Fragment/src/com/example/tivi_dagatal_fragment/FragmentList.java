@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,15 +39,15 @@ public class FragmentList extends Fragment {
 		Show show1 = new Show();
         show1.setTitle("Flash");
         show1.setDataTitle("the-flash-2014");
-        show1.setPoster("kallaposter");
+        show1.setPoster("kallaposter1");
         dbHelper.saveShow(show1);
-        
+        //
 		Show show2 = new Show();
         show2.setTitle("Big Bang Theory");
         show2.setDataTitle("big-bang-theory");
         show2.setPoster("kallaposter2");
         dbHelper.saveShow(show2);
-        
+        //
         Show show3 = new Show();
         show3.setTitle("Arrow");
         show3.setDataTitle("arrow");
@@ -94,16 +95,17 @@ public class FragmentList extends Fragment {
 	}
 	
 	public void addTitleButtonsLayout(final Show show, final LinearLayout mainLayout){
-		LinearLayout episodeLayout = new LinearLayout(getActivity());
-		episodeLayout.setOrientation(LinearLayout.HORIZONTAL);
+		RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 		
 		TextView title = new TextView(getActivity());
 		title.setText(show.getTitle());
 		
 		Button calendarButton = getCalButton(show);
+		calendarButton.setId(1);
 		//calendarButton.setBackgroundColor(Color.TRANSPARENT);
 		
 		Button deleteButton = new Button(getActivity());
+		deleteButton.setId(2);
 		deleteButton.setText(getResources().getString(R.string.btn_delete));
 		deleteButton.setTextSize(10);
 		//deleteButton.setBackgroundColor(Color.TRANSPARENT);
@@ -114,6 +116,7 @@ public class FragmentList extends Fragment {
         });
 		
 		ImageButton infoButton = new ImageButton(getActivity());
+		infoButton.setId(3);
 		infoButton.setImageResource(R.drawable.down_arrow);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
 		infoButton.setOnClickListener(new View.OnClickListener() {
@@ -122,10 +125,24 @@ public class FragmentList extends Fragment {
             }
         });
 
-		episodeLayout.addView(title);
-		episodeLayout.addView(calendarButton);
-		episodeLayout.addView(deleteButton);
-		episodeLayout.addView(infoButton);	
+		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		
+		titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		calParams.addRule(RelativeLayout.LEFT_OF, 2);
+		calParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		delParams.addRule(RelativeLayout.LEFT_OF, 3);
+		delParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		
+		episodeLayout.addView(title, titleParams);
+		episodeLayout.addView(calendarButton, calParams);
+		episodeLayout.addView(deleteButton, delParams);
+		episodeLayout.addView(infoButton, infoParams);
 		mainLayout.addView(episodeLayout);
 	}
 	
