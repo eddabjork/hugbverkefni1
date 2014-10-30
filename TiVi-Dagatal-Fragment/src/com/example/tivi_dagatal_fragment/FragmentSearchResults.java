@@ -25,16 +25,12 @@ public class FragmentSearchResults extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
-		
 		scrollView = new ScrollView(getActivity());
 		
 		Bundle bundle = this.getArguments();
 		char[] aWord = bundle.getCharArray("key");
-		String word =  new String(aWord);
-		Log.v("Strengurinn er", word);
-		
+		String word =  new String(aWord);		
 		setLayout(word);
-		
 		rootView = scrollView;
 		
         return rootView;
@@ -63,7 +59,6 @@ public class FragmentSearchResults extends Fragment{
 			for (final Show show : searchShows){
 				TextView textView = new TextView(getActivity());
 				textView.setText(show.getTitle());
-				Log.v("Þáttur heitir ", show.getTitle());
 				textView.setLayoutParams(lparams);
 				Button button = new Button(getActivity());
 				button.setText(getResources().getString(R.string.search_add));
@@ -86,9 +81,7 @@ public class FragmentSearchResults extends Fragment{
 				llv.addView(button);
 			}
 			//Bï¿½ta linearlayoutinu ï¿½ scrollview
-			scrollView.addView(llv);
-			//Birta nï¿½ja viewiï¿½
-			//setContentView(sv);	
+			scrollView.addView(llv);	
 		}
 	}
 	
