@@ -95,6 +95,8 @@ public class FragmentSearchResults extends Fragment{
 			}
 			//B�ta linearlayoutinu � scrollview
 			scrollView.addView(llv);
+			//Birta n�ja viewi�
+			//setContentView(sv);	
 		}
 	}
 	

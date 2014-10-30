@@ -67,6 +67,7 @@ public class FragmentPopular extends Fragment {
 		    	Log.v("cahce", "Cached shows found");
 		    	Log.v("cache", "Cache shows size: " + popularShows.size());
 		    }
+			
 			return popularShows;
 		}
 		
