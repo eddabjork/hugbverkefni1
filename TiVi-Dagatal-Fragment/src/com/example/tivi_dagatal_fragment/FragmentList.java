@@ -91,20 +91,11 @@ public class FragmentList extends Fragment {
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
 	    	for(Show show : showList){
-	    		addShow(show);
+	    		new ShowInfoTask().execute(show);
 	    	}
 	    	
 	    	mainScrollView.addView(mainLayout);
 		}
-	}
-	
-	public void addShow(final Show show){
-		addTitleButtonsLayout(show);
-		addLine();
-	}
-	
-	public void addTitleButtonsLayout(final Show show) {
-		new ShowInfoTask().execute(show);
 	}
 	
 	public Button getCalButton(final Show show){
@@ -162,11 +153,11 @@ public class FragmentList extends Fragment {
                        .commit();
 	}
 	
-	public void addLine(){
+	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
-		 mainLayout.addView(v);
+		 return v;
 	}
 	
 	public ImageView getImage(Show show){
@@ -212,29 +203,32 @@ public class FragmentList extends Fragment {
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
-		
+		/**************ÞARF AÐ SPLITTA ÞESSU NIÐUR**************************/
 		protected void onPostExecute(Show show) {
 			RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 			
 			TextView title = new TextView(getActivity());
 			title.setText(show.getTitle());
+			title.setPadding(10,0,0,0);
 			
 			final Show _show = show;
 			
 			Button calendarButton = getCalButton(show);
 			calendarButton.setId(1);
-			//calendarButton.setBackgroundColor(Color.TRANSPARENT);
+			calendarButton.setBackgroundResource(R.drawable.pretty_button);
+			calendarButton.setPadding(5,0,5,0);
 			
 			Button deleteButton = new Button(getActivity());
 			deleteButton.setId(2);
 			deleteButton.setText(getResources().getString(R.string.btn_delete));
 			deleteButton.setTextSize(10);
-			//deleteButton.setBackgroundColor(Color.TRANSPARENT);
 			deleteButton.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View view) {
 	            	removeFromMyEpisodes(_show);
 	            }
 	        });
+			deleteButton.setBackgroundResource(R.drawable.pretty_button);
+			deleteButton.setPadding(5,0,5,0);
 			
 			ImageButton infoButton = new ImageButton(getActivity());
 			infoButton.setId(3);
@@ -262,7 +256,7 @@ public class FragmentList extends Fragment {
 				episodes.setLayoutParams(layoutParams);
 				episodes.setGravity(Gravity.CENTER);
 				episodes.setId(getNextId());
-				episodes.setText("hÃ©r koma Ã¾Ã¦ttir");
+				episodes.setText("hér koma þættir");
 				infoLayout.addView(episodes);
 				Animator.setHeightForWrapContent(getActivity(), episodes);
 				seasonbutton.setOnClickListener(new View.OnClickListener() {
@@ -306,7 +300,8 @@ public class FragmentList extends Fragment {
 			
 			RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			//RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(35, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			
 			titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -315,6 +310,7 @@ public class FragmentList extends Fragment {
 			calParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			delParams.addRule(RelativeLayout.LEFT_OF, 3);
 			delParams.addRule(RelativeLayout.CENTER_VERTICAL);
+			delParams.setMargins(5,5,0,0);
 			infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			
@@ -324,6 +320,7 @@ public class FragmentList extends Fragment {
 			episodeLayout.addView(infoButton, infoParams);
 			mainLayout.addView(episodeLayout);
 			mainLayout.addView(infoMain);
+			mainLayout.addView(makeLine());
 
 		}		
 	}
