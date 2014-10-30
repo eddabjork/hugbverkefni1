@@ -41,12 +41,13 @@ import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
-	private String[] mDrawerTitles;
+    private String[] mDrawerTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
+    private Fragment fragment;
     public static LruCache cache;
     
     @Override
@@ -123,203 +124,6 @@ public class MainActivity extends Activity {
 	    cache = new LruCache<String, List<Episode>>(cacheSize);	    
 	    return cache;
 	}
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Gamla
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public void startCalendar(){
-    	//super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        LinearLayout linearLayout = new LinearLayout(this);
-    	linearLayout.setOrientation(LinearLayout.VERTICAL);
-        
-        setLayout(linearLayout);
-        fillInDates(linearLayout);
-   
-        new CalendarShowsTask().execute();
-    }
-
-  //Notkun:		 setLayout();
-  	//Eftirskilyrði: Búið er að setja upp grunnlag útlits, sem inniheldur 
-  	//				 einn takka og LinearLayout innan í ScrollView
-    public void setLayout(LinearLayout linearLayout) {
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-
-    	ScrollView scrollView = new ScrollView(this);
-
-        Button button = new Button(this);
-        button.setText(getResources().getString(R.string.temp_btn_my_episodes));
-        button.setLayoutParams(layoutParams);
-        /*button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	seeMyEpisodes(view);
-            }
-        });*/
-    	
-    	linearLayout.addView(button);
-    	scrollView.addView(linearLayout);
-    	
-    	setContentView(scrollView);
-    }
-    
-    //Notkun:		 fillInDates();
-  	//Eftirskilyrði: Búið er að búa til view fyrir sérhvern dag vikunnar (alls 7) þar
-    //				 sem fram kemur dagsetning og Layout-pláss fyrir dagatals-þætti
-    //				 Þau eru svo sett inn í aðal LinearLayout í grunnlagi útlits.
-    public void fillInDates(LinearLayout mainLayout) {
-		Calendar cal = Calendar.getInstance();
-
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		setDateLayout(getResources().getString(R.string.sun_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		setDateLayout(getResources().getString(R.string.mon_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-		setDateLayout(getResources().getString(R.string.tue_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-		setDateLayout(getResources().getString(R.string.wed_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-		setDateLayout(getResources().getString(R.string.thu_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		setDateLayout(getResources().getString(R.string.fri_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		setDateLayout(getResources().getString(R.string.sat_label), cal, mainLayout);
-	}
-    
-    //Notkun:		 setDateLayout(dayName, calendar, mainLayout);
-  	//Eftirskilyrði: Búið er að búa til view fyrir einn dag þar sem fram kemur
-    //				 dagur vikunnar, dagur mánaðars og mánuðurinn sjálfur.
-    //				 Einnig er búið að búa til LinearLayout inni í þessu view sem er 
-    //				 með id (dagsetningin á forminu yyMMdd) svo hægt sé að bæta 
-    //				 við þætti á réttan stað.
-	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {		
-		LinearLayout dayLayout = new LinearLayout(this);
-		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
-		dayLayout.setPadding(16,8,16,8);
-		
-		LinearLayout dateLayout = new LinearLayout(this);
-		dateLayout.setOrientation(LinearLayout.VERTICAL);
-		TextView dateName = new TextView(this);
-		dateName.setText(dayName);
-		dateName.setGravity(Gravity.CENTER);
-		TextView dateDay = new TextView(this);
-		dateDay.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
-		dateDay.setGravity(Gravity.CENTER);
-		dateDay.setTextSize(20);
-		TextView dateMonth = new TextView(this);
-		dateMonth.setText(getMonthForInt(cal.get(Calendar.MONTH)));
-		dateMonth.setGravity(Gravity.CENTER);
-		dateMonth.setTextSize(10);
-		dateLayout.addView(dateName);
-		dateLayout.addView(dateDay);
-		dateLayout.addView(dateMonth);
-		
-		LinearLayout episodesLayout = new LinearLayout(this);
-		episodesLayout.setOrientation(LinearLayout.VERTICAL);
-		String date = new SimpleDateFormat("yyMMdd").format(cal.getTime());
-		episodesLayout.setId(Integer.parseInt(date));
-		
-		dayLayout.addView(dateLayout);
-		dayLayout.addView(episodesLayout);
-		
-		mainLayout.addView(dayLayout);
-		mainLayout.addView(makeLine());
-	}
-	
-	//Notkun:		 line = makeLine();
-  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
-	public View makeLine(){
-		 View v = new View(this);
-		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
-		 v.setBackgroundColor(Color.rgb(203,203,203));
-		 return v;
-	 }
-	
-	//Notkun:		 month = getMonthFromInt(number);
-  	//Eftirskilyrði: month er nafn mánuðs miðað við number þar sem 
-	//				 0=janúar,..,11=desember.
-	public String getMonthForInt(int num) {
-        String month = "wrong";
-        String[] months = {
-        	getResources().getString(R.string.jan_label),
-        	getResources().getString(R.string.feb_label),
-        	getResources().getString(R.string.mar_label),
-        	getResources().getString(R.string.apr_label),
-        	getResources().getString(R.string.may_label),
-        	getResources().getString(R.string.jun_label),
-        	getResources().getString(R.string.jul_label),
-        	getResources().getString(R.string.aug_label),
-        	getResources().getString(R.string.sep_label),
-        	getResources().getString(R.string.oct_label),
-        	getResources().getString(R.string.nov_label),
-        	getResources().getString(R.string.dec_label)
-        };
-        if (num >= 0 && num <= 11 ) {
-            month = months[num];
-        }
-        return month;
-    }
-	
-	//Notkun:		 fillInEpisode(episode);
-  	//Eftirskilyrði: Búið að setja inn alla þætti sem eru stilltir á "á dagatali"
-	//				 á réttan stað (þ.e. bæta við í view-ið sem hefur id-ið
-	//				 dagsetninguna þegar þátturinn var frumsýndur)
-	public void fillInEpisode(Episode episode) {		
-		String title = episode.getShowTitle() + ": " + episode.getNumber() + " " + episode.getTitle();
-		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
-	
-		LinearLayout linearLayout = (LinearLayout)findViewById(episodeId);
-		TextView textView = new TextView(this);
-	    textView.setText(title);
-	    textView.setPadding(20,0,0,0);
-	    try {
-	    	linearLayout.addView(textView);	
-	    } catch(Exception e) {
-	    	
-	    }
-	}
-	
-	//Notkun:		 onSearch(view);
-  	//Eftirskilyrði: Skjár sem inniheldur Leitar-activity-ið hefur opnast.
-	/*public void onSearch(View view){
-    	Intent intent = new Intent(this, SearchResultsActivity.class);
-        startActivity(intent);
-    }*/
-	
-	//Notkun:		 onHome(view);
-  	//Eftirskilyrði: Upphafsskjár (sem inniheldur viku-dagatal) hefur opnast.
-	public void onHome(View view){
-    	Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-	
-	//Notkun:		 seeMyEpisodes(view);
-  	//Eftirskilyrði: Skjár sem inniheldur Mína-þætti-activity-ið hefur opnast.
-	/*public void seeMyEpisodes(View view) {
-		Intent intent = new Intent(this, MyShows.class);
-	    startActivity(intent);
-	}*/
-    
-	//Notkun:		 number = getFirstAiredInRightForm(strDate);
-  	//Eftirskilyrði: strDate er dagsetningu á forminu: yyyy-MM-dd'T'HH:mm:ss 
-	//				 number er talan yyMMdd.
-    public int getFirstAiredInRightForm(String strDate){
-    	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		SimpleDateFormat myFormat = new SimpleDateFormat("yyMMdd");
-		String newStrDate="";
-		
-		try {
-			newStrDate = myFormat.format(fromUser.parse(strDate));
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
-		return Integer.parseInt(newStrDate);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Gamla búið
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -350,7 +154,6 @@ public class MainActivity extends Activity {
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = null;
         switch (position) {
         case 0:
             fragment = new FragmentCal();
@@ -378,6 +181,10 @@ public class MainActivity extends Activity {
         mDrawerList.setItemChecked(position, true);
         setTitle(mDrawerTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+    
+    public void searchClick(View view){
+    	((FragmentSearch) fragment).searchClick(view);
     }
 
     @Override
