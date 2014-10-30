@@ -11,6 +11,7 @@ import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,18 +41,20 @@ import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
-	private String[] mDrawerTitles;
+    private String[] mDrawerTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private Fragment fragment;
+    public static LruCache cache;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cache = createCache();
 
         mDrawerTitles = getResources().getStringArray(R.array.drawer_title_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -109,6 +113,17 @@ public class MainActivity extends Activity {
         //Það sem gerist fremst í appinu, á starti
         //startCalendar();
     }
+    
+    public LruCache createCache(){
+		// Get memory class of this device, exceeding this amount will throw an
+	    // OutOfMemory exception.
+		ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		int memClass = am.getMemoryClass();			
+		// Use 1/8th of the available memory for this memory cache.
+	    final int cacheSize = 1024 * 1024 * memClass / 8;
+	    cache = new LruCache<String, List<Episode>>(cacheSize);	    
+	    return cache;
+	}
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
