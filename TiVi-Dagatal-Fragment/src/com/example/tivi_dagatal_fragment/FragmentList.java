@@ -30,7 +30,7 @@ public class FragmentList extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
 		
-		/****Til að testa
+		//Til að testa
 		DbUtils dbHelper = new DbUtils(getActivity());
 		Show show1 = new Show();
         show1.setTitle("New Girl");
@@ -42,7 +42,7 @@ public class FragmentList extends Fragment {
         show2.setDataTitle("big-bang-theory");
         show2.setPoster("kallaposter2");
         dbHelper.saveShow(show2);
-        */
+        
         
 		scrollView = new ScrollView(getActivity());
 		setLayout();
@@ -164,7 +164,7 @@ public class FragmentList extends Fragment {
 	
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
-		image.setImageResource(R.drawable.ic_launcher);
+		image.setImageResource(R.drawable.temp_icon);
 		//String imgUrl = show.getPoster();
 		//new DownloadImageTask(image).execute(imgUrl);
 		//image.buildDrawingCache();
