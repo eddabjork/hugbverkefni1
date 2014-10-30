@@ -25,7 +25,6 @@ public class FragmentSearch extends Fragment {
 		
 		EditText wordText = (EditText) getView().findViewById(R.id.leitarbox);
 		String word = wordText.getText().toString();
-		Log.v("Word er hér ", word);
 		char[] aWord = word.toCharArray();
 		String key = "key";
 		Bundle bundle = new Bundle();
@@ -37,7 +36,6 @@ public class FragmentSearch extends Fragment {
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, results)
                        .commit();
-        Log.v("kláraði fragment man", " júhú");
 	}
 	
 }
