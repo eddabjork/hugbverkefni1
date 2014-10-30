@@ -10,6 +10,7 @@ import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 
 public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
+	private ProgressDialog progressDialog;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -148,6 +150,16 @@ public class FragmentCal extends Fragment {
 	}
 	
 	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
+		
+		protected void onPreExecute() {  
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle("Ná í þætti..");  
+            progressDialog.setMessage("Það er verið að ná í þættina þína.. chill out");  
+            progressDialog.setCancelable(false);  
+            progressDialog.setIndeterminate(false);  
+            progressDialog.show();  
+        }  
+		
 		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
 			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.cache.get("calendarEpisodes");
 	        
@@ -160,14 +172,12 @@ public class FragmentCal extends Fragment {
 		    	Log.v("cahce", "Cached episodes found");
 		    	Log.v("cache", "Cache response size: " + calendarEpisodes.size());
 		    }
+	        
 			return calendarEpisodes;
 		}
 		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
-		
 		protected void onPostExecute(List<Episode> calendarEpisodes) {
+			progressDialog.dismiss();  
 			for (Episode episode : calendarEpisodes){
 	        	fillInEpisode(episode);
 	        }

@@ -33,8 +33,8 @@ public class FragmentList extends Fragment {
 		//Til að testa
 		DbUtils dbHelper = new DbUtils(getActivity());
 		Show show1 = new Show();
-        show1.setTitle("New Girl");
-        show1.setDataTitle("new-girl");
+        show1.setTitle("Flash");
+        show1.setDataTitle("the-flash-2014");
         show1.setPoster("kallaposter");
         dbHelper.saveShow(show1);
 		Show show2 = new Show();
@@ -42,6 +42,11 @@ public class FragmentList extends Fragment {
         show2.setDataTitle("big-bang-theory");
         show2.setPoster("kallaposter2");
         dbHelper.saveShow(show2);
+        Show show3 = new Show();
+        show3.setTitle("Arrow");
+        show3.setDataTitle("arrow");
+        show3.setPoster("kallaposter3");
+        dbHelper.saveShow(show3);
         
         
 		scrollView = new ScrollView(getActivity());
