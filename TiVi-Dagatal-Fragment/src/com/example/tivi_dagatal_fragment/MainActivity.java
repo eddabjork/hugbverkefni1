@@ -130,9 +130,10 @@ public class MainActivity extends Activity {
         //startCalendar();
     }
     
+    // Notkun: cache = createCache()
+    // Eftir:  cache er pláss sem hefur verið tekið frá í cache-minni
     public LruCache createCache(){
-		// Get memory class of this device, exceeding this amount will throw an
-	    // OutOfMemory exception.
+		// Get memory class of this device, exceeding this amount will throw an OutOfMemory exception.
 		ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 		int memClass = am.getMemoryClass();			
 		// Use 1/8th of the available memory for this memory cache.

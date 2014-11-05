@@ -42,6 +42,8 @@ public class FragmentCal extends Fragment {
         return view;
 	}
 	
+	// Notkun: flushCash()
+	// Eftir:  þáttum á dagatali hefur verið eytt úr cache-minni
 	public void flushCash(){
 		long time = System.currentTimeMillis();
 		long twelveHours = (long) (60000*60*12);
@@ -143,24 +145,40 @@ public class FragmentCal extends Fragment {
 		 return v;
 	 }
 	
+	/**
+	 * Nafn: 		Kristín Fjóla Tómasdóttir
+	 * Dagsetning: 	23. október 2014
+	 * Markmið: 	CalendarShowsTask framkvæmir þráðavinnu sem nær í alla þætti 
+	 * 				frá gagnagrunni sem eiga að vera birtir á dagatali
+	 */
 	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
+		// Notkun: map = doInBackground(voids)
+		// Eftir:  map inniheldur gagna-titlana á þeim þáttum sem eiga að vera
+		//		   að vera birtir á dagatali
 		protected Map<String, String> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 	        Map<String, String> dataTitles = dbHelper.getOnCalShows();
 			return dataTitles;
 		}
 		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
-		
+		// Notkun: onPostExecute(dataTitles)
+		// Eftir:  nýr þráður byrjar sem nær í upplýsingar um þætti sem eiga 
+		//		   að vera birtir á dagatali
 		protected void onPostExecute(Map<String, String> dataTitles) {
 			new CalendarEpisodesTask().execute(dataTitles);
 		}
 	}
 	
+	/**
+	 * Nafn: 		Kristín Fjóla Tómasdóttir
+	 * Dagsetning: 	23. október 2014
+	 * Markmið: 	CalendarEpisodesTask framkvæmir þráðavinnu sem nær í alla þætti 
+	 * 				frá vefþjónustunni trakt.tv sem eiga að vera birtir á dagatali
+	 */
 	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
 		
+		// Notkun: onPreExecute()
+		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Ná í þætti..");  
@@ -170,6 +188,8 @@ public class FragmentCal extends Fragment {
             progressDialog.show();  
         }  
 		
+		// Notkun: episodes = doInBackground(dataTitles)
+		// Eftir:  episodes er listi af þáttum sem á að birta á dagatali
 		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
 			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.cache.get("calendarEpisodes");
 	        
@@ -186,6 +206,8 @@ public class FragmentCal extends Fragment {
 			return calendarEpisodes;
 		}
 		
+		// Notkun: onPostExecute(episodes)
+		// Eftir:  episodes hafa verið birtir á dagatali
 		protected void onPostExecute(List<Episode> calendarEpisodes) {
 			progressDialog.dismiss();  
 			for (Episode episode : calendarEpisodes){

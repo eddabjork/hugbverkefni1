@@ -11,6 +11,7 @@ import Dtos.Season;
 import Dtos.Show;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,6 +39,7 @@ public class FragmentList extends Fragment {
 	private List<String> open = new ArrayList<String>();
 	private MainScrollView mainScrollView;
 	private LinearLayout mainLayout;
+	private ProgressDialog progressDialog;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -75,19 +77,37 @@ public class FragmentList extends Fragment {
 		new GetAllShowsTask().execute();
 	}
 	
+	/**
+	 * Nafn: 		Kristín Fjóla Tómasdóttir
+	 * Dagsetning: 	23. október 2014
+	 * Markmið: 	GetAllShowsTask framkvæmir þráðavinnu sem nær í alla þætti frá gagnagrunni
+	 * 				sem á að birta í 'Mínir þættir' og birtir þá
+	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
+		// Notkun: shows = doInBackground(voids)
+		// Eftir:  shows er listi af þáttum sem á að birta í 'Mínir þættir'
 		protected List<Show> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 			List<Show> showList = dbHelper.getAllShows();
 			return showList;
 		}
 		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
+		// Notkun: onPreExecute()
+		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		protected void onPreExecute() {  
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle("Ná í þætti..");  
+            progressDialog.setMessage("Það er verið að ná í þættina þína.. chill out");  
+            progressDialog.setCancelable(false);  
+            progressDialog.setIndeterminate(false);  
+            progressDialog.show();  
+        }  
 		
+		// Notkun: onPostExecute(shows)
+		// Eftir:  shows hafa verið birtir á 'Þættirnir mínir'
 		protected void onPostExecute(List<Show> showList) {
-	    	mainLayout = new LinearLayout(getActivity());
+			progressDialog.dismiss();
+			mainLayout = new LinearLayout(getActivity());
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
 	    	for(Show show : showList){

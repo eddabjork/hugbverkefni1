@@ -1,3 +1,8 @@
+/**
+ * Nafn: 		Kristín Fjóla Tómasdóttir
+ * Dagsetning: 	30. október 2014
+ * Markmið: 	Pop-up sem býður notanda uppá að vista ákveðna þáttaröð á dagatalinu sínu. 
+ */
 package com.example.tivi_dagatal_fragment;
 
 import Data.DbUtils;
@@ -14,6 +19,9 @@ public class PutOnCalPopUp extends DialogFragment{
 	private static Show show;
 	private static int title;
 
+	// Notkun: putOnCalPopUp = newInstance(titleToDisplay, showToSave)
+	// Eftir:  putOnCalPopUp er pop-up með titlinu titleToDisplay sem býður uppá 
+	// 		   að vista þáttinn showToSave á dagatali
 	public static PutOnCalPopUp newInstance(int titleToDisplay, Show showToSave) {
 		PutOnCalPopUp frag = new PutOnCalPopUp();
 		show = showToSave;
@@ -21,7 +29,9 @@ public class PutOnCalPopUp extends DialogFragment{
         return frag;
     }
 
-    @Override
+	// Notkun: dialog = onCreateDialog(savedInstanceState)
+	// Eftir:  dialog er pop-up sem býður uppá að vista þátt á dagatali
+	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	return new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.temp_icon)
@@ -43,6 +53,8 @@ public class PutOnCalPopUp extends DialogFragment{
                 .create();
     }
     
+	// Notkun: addToCal(show)
+	// Eftir:  show hefur verið bætt á dagatalið
     public void addToCal(Show show){
     	DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);

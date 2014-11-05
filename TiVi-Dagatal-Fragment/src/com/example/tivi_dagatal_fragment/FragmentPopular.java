@@ -36,6 +36,8 @@ public class FragmentPopular extends Fragment {
         return rootView;
     }
 	
+	// Notkun: flushCash()
+	// Eftir:  vinsælum þáttum hafa verið eytt úr cache-minni
 	public void flushCash(){
 		long time = System.currentTimeMillis();
 		long twelveHours = (long) (60000*60*12);
@@ -113,6 +115,8 @@ public class FragmentPopular extends Fragment {
 		}
 	}
 	
+	// Notkun: showDialog(show)
+	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
 	void showDialog(Show show) {
 	    DialogFragment newFragment = PutOnCalPopUp.newInstance(R.string.popup_put_cal, show);
 	    newFragment.show(getFragmentManager(), "dialog");

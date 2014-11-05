@@ -43,7 +43,7 @@ public class TraktClient {
 	public TraktClient(){}
 	
 	//Notkun: 		 date = getLastSunday()
-	//Eftirskilyrði: date er síðasliðinn sunnudagur
+	//Eftirskilyrði: date er síðastliðinn sunnudagur
 	public static Date getLastSunday(){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -278,7 +278,10 @@ public class TraktClient {
 		 
 		 return calendarEpisodes;
 	 }
-
+	 
+	//Notkun: 		 getSeasonsForShow(dataTitle, forInfo)
+	//Eftirskilyrði: ef forInfo er false þá er náð í nýjustu 2 seríurnar fyrir þáttaröðina
+	//				 dataTitle, annars er náð í allar seríurnar fyrir þáttaröðina dataTitle
 	public void getSeasonsForShow(String dataTitle, boolean forInfo){
 		// get the newest 2 seasons for the show
 		URL url = null;
@@ -325,8 +328,8 @@ public class TraktClient {
 	    return seasons;
 	 }
 	 
-	 //Notkun: 		  
-	 //Eftirskilyrði: 
+	 //Notkun: 		  seasons = readSeasonsArrayForShowInfo(reader)
+	 //Eftirskilyrði: seasons er listi af seríum sem á að birta fyrir þáttaröð í upplýsingum
 	 public List<Season> readSeasonsArrayForShowInfo(JsonReader reader) throws IOException {
 	    List<Season> seasons = new ArrayList<Season>();
 	    reader.beginArray();
@@ -359,8 +362,8 @@ public class TraktClient {
 		return season;
 	  }
 	 
-	 //Notkun: 		  
-	 //Eftirskilyrði:
+	 //Notkun: 		  season = readSeasonForShowInfo(reader)
+	 //Eftirskilyrði: season er sería sem á að birta fyrir þáttaröð í upplýsingum
 	 public Season readSeasonForShowInfo(JsonReader reader) throws IOException {
 		reader.beginObject();
 		Season season = new Season();
@@ -503,6 +506,8 @@ public class TraktClient {
 		 reader.endObject();
 	 }
 	
+	//Notkun: 		 showInfo = getShowInfo(show)
+	//Eftirskilyrði: showInfo inniheldur nánari upplýsingar um show
 	public Show getShowInfo(Show show){
 		URL url = null;
         try {
@@ -529,6 +534,8 @@ public class TraktClient {
 		return showInfo;
 	}
 	
+	//Notkun: 		 showInfo = readShowInfo(reader)
+	//Eftirskilyrði: showInfo inniheldur nánari upplýsingar um show
 	public Show readShowInfo(JsonReader reader) throws IOException {
 		Show show = new Show();
 		reader.beginObject();
@@ -611,7 +618,7 @@ public class TraktClient {
 	  }
 	
 	 //Notkun: 		  readGenres(reader, show)
-	 //Eftirskilyrði: 
+	 //Eftirskilyrði: listi af 'genres' hefur verið stilltur á show
 	 public void readGenres(JsonReader reader, Show show) throws IOException{			
 		reader.beginArray();
 		List<String> genres = new ArrayList<String>();
@@ -622,8 +629,8 @@ public class TraktClient {
 		show.setGenres(genres);
 	 }
 	 
-	 //Notkun: 		  
-	 //Eftirskilyrði: 
+	 //Notkun: 		  season = getEpisodesForSeasonForShowInfo(show, season)
+	 //Eftirskilyrði: season inniheldur upplýsingar um alla þættina í þeirri seríu
 	 public Season getEpisodesForSeasonForShowInfo(Show show, Season season){
 		List<Episode> episodes = new ArrayList<Episode>();
         URL url = null;
@@ -650,8 +657,8 @@ public class TraktClient {
         return season;
 	 }
 	 
-	//Notkun: 		 
-	//Eftirskilyrði: 
+	//Notkun: 		 shows = popularShows()
+	//Eftirskilyrði: shows er listi af vinsælum þáttaröðum þessa stundina skv. trakt.tv
 	public List<Show> popularShows() {			
         URL url = null;
         try {
