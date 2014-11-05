@@ -1,3 +1,11 @@
+/**
+ * Nafn: 		Edda Björk Konráðsdóttir og Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	9. október 2014
+ * Markmið: 	Fragment sem sýnist Þættirnir-mínir lista sem inniheldur 
+ * 				alla þá þætti notandi hefur sett á tilsvarandi lista
+ * 				(td. í gegnum search)
+ */
+
 package com.example.tivi_dagatal_fragment;
 
 import java.io.InputStream;
@@ -41,11 +49,12 @@ public class FragmentList extends Fragment {
 	private LinearLayout mainLayout;
 	private ProgressDialog progressDialog;
 	
+	/** Sets the view */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
 		
-		/******TEST ï¿½ï¿½TTIR
+		/******TEST EPISODES
 		DbUtils dbHelper = new DbUtils(getActivity());
 		Show show1 = new Show();
         show1.setTitle("Flash");
@@ -66,15 +75,10 @@ public class FragmentList extends Fragment {
         dbHelper.saveShow(show3);
         END TEST****/
         
-        
 		mainScrollView = new MainScrollView(getActivity());
-		setLayout();
+		new GetAllShowsTask().execute();
 		view = mainScrollView;
         return view;
-	}
-	
-	public void setLayout(){
-		new GetAllShowsTask().execute();
 	}
 	
 	/**
@@ -118,6 +122,9 @@ public class FragmentList extends Fragment {
 		}
 	}
 	
+	//Notkun:		 calButton = getCalButton(show)
+  	//Eftirskilyrði: calButton er takki sem sér um að bæta/taka þáttinn show
+	//				 af dagatali
 	public Button getCalButton(final Show show){
 		final Button calendarButton = new Button(getActivity());
 		DbUtils dbHelper = new DbUtils(getActivity());
@@ -136,7 +143,7 @@ public class FragmentList extends Fragment {
             public void onClick(View view) {
 				final int status =(Integer) view.getTag();
 				if(status == 1) {
-					remFromCal(show);
+					removeFromCal(show);
 					view.setTag(0);
 					calendarButton.setText(getResources().getString(R.string.btn_put_cal));
 				}
@@ -150,20 +157,25 @@ public class FragmentList extends Fragment {
 		return calendarButton;
 	}
 	
+	//Notkun:		 addToCal(show);
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
 		MainActivity.cache.remove("calendarEpisodes");
 		Log.v("cache", "Calendar episodes removed from cache");
 	}
-	
-	public void remFromCal(Show show){
+	//Notkun:		 removeFromCal(show);
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=false fyrir show.
+	public void removeFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
 		MainActivity.cache.remove("calendarEpisodes");
 		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
+	//Notkun:		 removeFromMyEpisodes(show);
+  	//Eftirskilyrði: Búið er eyða út show úr gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
@@ -173,6 +185,8 @@ public class FragmentList extends Fragment {
                        .commit();
 	}
 	
+	//Notkun:		 line = makeLine();
+  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -180,6 +194,8 @@ public class FragmentList extends Fragment {
 		 return v;
 	}
 	
+	//Notkun:		 image = getImage(show);
+  	//Eftirskilyrði: image er poster mynd fyrir show og er í réttri stærð
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
 		image.setImageResource(R.drawable.temp_icon);
@@ -189,12 +205,19 @@ public class FragmentList extends Fragment {
 		return image;
 	}
 	
+	/*
+     * Nafn: Kristín Fjóla Tómasdóttir
+     * Dagsetning: 9. október 2014
+     * Markmið: Ná í myndir með samhliða þræðavinnslu
+     * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 		public DownloadImageTask(ImageView bmImage) {
 			this.bmImage = bmImage;
 		}
 		
+		//Notkun:		 bm = doInBackground(urls);
+	  	//Eftirskilyrði: bm er myndin sem er sótt frá urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -208,11 +231,18 @@ public class FragmentList extends Fragment {
 			return fixBitmapSize(mIcon11);
 		}
 		
+		//Notkun:		 onPostExecute(result);
+	  	//Eftirskilyrði: búið er að setja myndina result á rétt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
 	}
 	
+	/*
+     * Nafn: ????????????????????????????????
+     * Dagsetning: ??????????????????????????
+     * Markmið: ?????????????????????????????
+     * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 		protected Show doInBackground(Show... shows) {
 			TraktClient client = new TraktClient();
@@ -345,6 +375,11 @@ public class FragmentList extends Fragment {
 		}		
 	}
 	
+	/*
+     * Nafn: ????????????????????????????????
+     * Dagsetning: ??????????????????????????
+     * Markmið: ?????????????????????????????
+     * */
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
 		
@@ -375,12 +410,14 @@ public class FragmentList extends Fragment {
 			else return super.onInterceptTouchEvent(event);
 		}
 	}
-	
+	//?????????????????????????????????????????????????
 	private int getNextId() {
 		id = (id == null) ? 0 : id+1;
 		return id;
 	}
 	
+	//Notkun:		 bm = fixBitmapSize(orgBm);
+  	//Eftirskilyrði: bm er næstum sama bitmap og orgBm nema í réttri stærð
 	public Bitmap fixBitmapSize(Bitmap originalBmp){
 		int x = originalBmp.getWidth();
 		int y = originalBmp.getHeight();

@@ -1,3 +1,10 @@
+/**
+ * Nafn: 		Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	2. október 2014
+ * Markmið: 	Fragment sem sýnir viku-dagatal sem inniheldur alla 
+ * 				þá þætti sem eru að birtast á dagatalinu.
+ */
+
 package com.example.tivi_dagatal_fragment;
 
 import java.text.ParseException;
@@ -29,6 +36,7 @@ public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
 	
+	/** Sets the view */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
@@ -42,8 +50,8 @@ public class FragmentCal extends Fragment {
         return view;
 	}
 	
-	// Notkun: flushCash()
-	// Eftir:  þáttum á dagatali hefur verið eytt úr cache-minni
+	//Notkun:		 flushCash()
+	//Eftirskilyrði: þáttum á dagatali hefur verið eytt úr cache-minni
 	public void flushCash(){
 		long time = System.currentTimeMillis();
 		long twelveHours = (long) (60000*60*12);
@@ -53,6 +61,9 @@ public class FragmentCal extends Fragment {
 		}
 	}
 	
+	//Notkun:		 setLayout();
+  	//Eftirskilyrði: Búið er að setja upp grunnlag útlits, sem er LinearLayout,
+	//				 inn í scrollView
 	public void setLayout(){
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
@@ -63,6 +74,10 @@ public class FragmentCal extends Fragment {
     	scrollView.addView(mainLayout);
 	}
 	
+	//Notkun:		 fillInDates(mainLayout);
+  	//Eftirskilyrði: Búið er að búa til view fyrir sérhvern dag vikunnar (alls 7) þar
+    //				 sem fram kemur dagsetning og Layout-pláss fyrir dagatals-þætti
+    //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 
@@ -82,6 +97,13 @@ public class FragmentCal extends Fragment {
 		setDateLayout(getResources().getString(R.string.sat_label), cal, mainLayout);
 	}
 	
+	//Notkun:		 setDateLayout(dayName, calendar, mainLayout);
+  	//Eftirskilyrði: Búið er að búa til view fyrir einn dag þar sem fram kemur
+    //				 dagur vikunnar, dagur mánaðars og mánuðurinn sjálfur.
+    //				 Einnig er búið að búa til LinearLayout inni í þessu view sem er 
+    //				 með id (dagsetningin á forminu yyMMdd) svo hægt sé að bæta 
+    //				 við þættum á réttum stað. Þessu view er svo bætt við neðst í 
+	//				 mainLayout.
 	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {		
 		LinearLayout dayLayout = new LinearLayout(getActivity());
 		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -116,6 +138,9 @@ public class FragmentCal extends Fragment {
 		mainLayout.addView(makeLine());
 	}
 	
+	//Notkun:		 month = getMonthFromInt(number);
+  	//Eftirskilyrði: month er nafn mánuðs miðað við number þar sem 
+	//				 0=janúar,..,11=desember.
 	public String getMonthForInt(int num) {
         String month = "wrong";
         String[] months = {
@@ -138,6 +163,8 @@ public class FragmentCal extends Fragment {
         return month;
     }
 	
+	//Notkun:		 line = makeLine();
+  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -216,6 +243,10 @@ public class FragmentCal extends Fragment {
 		}
 	}
 	
+	//Notkun:		 fillInEpisode(episode);
+  	//Eftirskilyrði: Búið að setja inn alla þætti sem eru stilltir á "á dagatali"
+	//				 á réttan stað (þ.e. bæta við í view-ið sem hefur id-ið
+	//				 dagsetninguna þegar þátturinn var frumsýndur)
 	public void fillInEpisode(Episode episode) {		
 		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")";
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
@@ -231,6 +262,9 @@ public class FragmentCal extends Fragment {
 	    }
 	}
 	
+	//Notkun:		 number = firstAiredRightForm(strDate);
+  	//Eftirskilyrði: strDate er dagsetningu á forminu: yyyy-MM-dd'T'HH:mm:ss 
+	//				 number er talan yyMMdd.
 	public int getFirstAiredInRightForm(String strDate){
     	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyMMdd");
@@ -243,6 +277,4 @@ public class FragmentCal extends Fragment {
 		}
 		return Integer.parseInt(newStrDate);
     }
-	
-	
 }
