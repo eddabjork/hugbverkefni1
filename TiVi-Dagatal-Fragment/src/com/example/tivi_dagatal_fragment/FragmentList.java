@@ -179,6 +179,8 @@ public class FragmentList extends Fragment {
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
+		MainActivity.cache.remove("calendarEpisodes");
+		Log.v("cache", "Calendar episodes removed from cache");
 		FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, new FragmentList())
