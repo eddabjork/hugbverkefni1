@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -29,9 +30,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -84,6 +87,14 @@ public class MainActivity extends Activity {
                 super.onDrawerOpened(drawerView);
                 getActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                try {
+                // hide keyboard
+	        		EditText wordText = (EditText) ((FragmentSearch) fragment).getView().findViewById(R.id.leitarbox);
+	        		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	        		imm.hideSoftInputFromWindow(wordText.getWindowToken(), 0);
+                } catch(Exception e) {
+                	Log.v("", "Could not hide edit text box");
+                }
             }
         };
 

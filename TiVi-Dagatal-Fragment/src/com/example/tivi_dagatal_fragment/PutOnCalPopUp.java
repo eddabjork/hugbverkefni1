@@ -12,21 +12,18 @@ import android.util.Log;
 public class PutOnCalPopUp extends DialogFragment{
 	
 	private static Show show;
+	private static int title;
 
-	public static PutOnCalPopUp newInstance(int title, Show showToSave) {
+	public static PutOnCalPopUp newInstance(int titleToDisplay, Show showToSave) {
 		PutOnCalPopUp frag = new PutOnCalPopUp();
 		show = showToSave;
-        Bundle args = new Bundle();
-        args.putInt("title", title);
-        frag.setArguments(args);
+		title = titleToDisplay;
         return frag;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        int title = getArguments().getInt("title");
-
-        return new AlertDialog.Builder(getActivity())
+    	return new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.temp_icon)
                 .setTitle(title)
                 .setPositiveButton(R.string.neg_answer,
