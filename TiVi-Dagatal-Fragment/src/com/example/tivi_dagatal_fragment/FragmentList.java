@@ -2,7 +2,7 @@
  * Nafn: 		Edda Björk Konráðsdóttir og Jóhanna Agnes Magnúsdóttir
  * Dagsetning: 	9. október 2014
  * Markmið: 	Fragment sem sýnir Þættirnir-mínir lista sem inniheldur 
- * 				alla þá þætti notandi hefur sett í tilsvarandi lista
+ * 				alla þá þætti sem notandi hefur sett í tilsvarandi lista
  * 				(td. í gegnum search)
  */
 
