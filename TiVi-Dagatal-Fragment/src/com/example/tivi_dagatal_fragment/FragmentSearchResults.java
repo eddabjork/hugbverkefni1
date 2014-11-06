@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Steinunn Friðgeirsdóttir
+ * Dagsetning: 	30. október 2014
+ * Markmið: 	FragmentSearchResults er fragment sem birtir lista
+ * 				af þáttum sem notandi leitar eftir.
+ */
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;

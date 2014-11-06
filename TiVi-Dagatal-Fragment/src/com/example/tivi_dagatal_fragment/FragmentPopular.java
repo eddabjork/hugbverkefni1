@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Steinunn Friðgeirsdóttir
+ * Dagsetning: 	30. október 2014
+ * Markmið: 	FragmentPopular er fragment sem birtir lista
+ * 				af visælum þáttum
+ */
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
@@ -26,11 +32,12 @@ public class FragmentPopular extends Fragment {
 	private ScrollView scrollView;
 	
 	@Override
+	//Eftir: Birtir fragmentið sem sýnir vinsæla þætti
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
 		flushCash();
 		scrollView = new ScrollView(getActivity());
-		setLayout();
+		new PopularShowsTask().execute();
 		rootView = scrollView;
 		
         return rootView;
@@ -47,10 +54,8 @@ public class FragmentPopular extends Fragment {
 		}
 	}
 	
-	public void setLayout(){
-		new PopularShowsTask().execute();
-	}
-	
+	//Notkun: onAttach(activity)
+	//Eftir: Búið að tengja gagnagrunn við fragmentið
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
         dbHelper = new DbUtils(activity);
@@ -65,6 +70,10 @@ public class FragmentPopular extends Fragment {
      * 				það þurfi ekki að sækja alla þættina oft.
      */   
 	private class PopularShowsTask extends AsyncTask<String, Integer, List<Show>> {
+		//Notkun: doInBackground(queries)
+		//Eftir:  þáðavinnslu í bakgrunni er lokið
+		//        Í þráðavinnslu hér er kallað á vefþjónustuna
+		//		  og cache búið til eða sótt.
 		protected List<Show> doInBackground(String... queries) {         
 			TraktClient trackt = new TraktClient();	    	 
 			List<Show> popularShows = (List<Show>) MainActivity.cache.get("popularShows");
@@ -78,14 +87,18 @@ public class FragmentPopular extends Fragment {
 		    	Log.v("cahce", "Cached shows found");
 		    	Log.v("cache", "Cache shows size: " + popularShows.size());
 		    }
-			
 			return popularShows;
 		}
 		
+		//Engin virkni
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
 		
+		//Notkun: onPostExecute(searchShows)
+		//Eftir:  Búið er að taka serchShows listann og
+		//        birta þá ásamt takka til þess að bæta við 
+		//        þáttaröð á dagatal. Listinn er svo birtur.
 		protected void onPostExecute(List<Show> searchShows) {
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT);
