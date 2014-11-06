@@ -80,21 +80,33 @@ public class FragmentCal extends Fragment {
     //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
+		
+		String weekDayNames[] = {
+				getResources().getString(R.string.sun_label),
+				getResources().getString(R.string.mon_label),
+				getResources().getString(R.string.tue_label),
+				getResources().getString(R.string.wed_label),
+				getResources().getString(R.string.thu_label),
+				getResources().getString(R.string.fri_label),
+				getResources().getString(R.string.sat_label)	
+		};
+		
+		//Calendar.SUNDAY=1
+		//Calendar.MONDAY=2
+		
+		if(Calendar.SUNDAY != 1) {
+			String temp[] = new String[weekDayNames.length];
+			for(int i=0; i<weekDayNames.length-1; i++){
+				temp[i] = weekDayNames[i+1];
+			}
+			temp[weekDayNames.length-1] = weekDayNames[0];
+			weekDayNames = temp;
+		}
 
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		setDateLayout(getResources().getString(R.string.sun_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		setDateLayout(getResources().getString(R.string.mon_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-		setDateLayout(getResources().getString(R.string.tue_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-		setDateLayout(getResources().getString(R.string.wed_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-		setDateLayout(getResources().getString(R.string.thu_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-		setDateLayout(getResources().getString(R.string.fri_label), cal, mainLayout);
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-		setDateLayout(getResources().getString(R.string.sat_label), cal, mainLayout);
+		for(int i=0; i<weekDayNames.length; i++){
+			cal.set(Calendar.DAY_OF_WEEK, i+1);
+			setDateLayout(weekDayNames[i], cal, mainLayout);
+		}
 	}
 	
 	//Notkun:		 setDateLayout(dayName, calendar, mainLayout);
