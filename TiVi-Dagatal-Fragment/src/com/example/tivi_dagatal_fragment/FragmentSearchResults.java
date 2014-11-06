@@ -31,6 +31,7 @@ public class FragmentSearchResults extends Fragment{
 	private ScrollView scrollView;
 	
 	@Override
+	//Eftir: birtir fragmentið með leitarniðurstöðunum
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
 		
@@ -40,34 +41,45 @@ public class FragmentSearchResults extends Fragment{
 		char[] aWord = bundle.getCharArray("key");
 		String word =  new String(aWord);
 		Log.v("Strengurinn er", word);
-		
-		setLayout(word);
-		
+
+		new SearchShowsTask().execute(word);
 		rootView = scrollView;
 		
         return rootView;
     }
 	
-	public void setLayout(String word){
-		new SearchShowsTask().execute(word);
-	}
-	
+	//Notkun: onAttach(activity)
+	//Eftir:  búið er að tengja gagnagrunninn við fragmentið
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
         dbHelper = new DbUtils(activity);
     }
 
+	/**
+     * Nafn: 		Steinunn Friðgeirsdóttir
+     * Dagsetning: 	30. október 2014
+     * Markmið: 	Framkvæmir þráðavinnu til að birta leitarniðurstöður
+     * 				frá vefþjónustu í fargmenti. 
+     */   	
 	private class SearchShowsTask extends AsyncTask<String, Integer, List<Show>> {
+		//Notkun: 	doInBackground(queries)
+		//Eftir:	Búið er að búa til vefþjónustu og sækja þá þætti sem 
+		//			notandi leitaði eftir í bakgrunnsþærði og skila þeim.
 		protected List<Show> doInBackground(String... queries) {         
 			TraktClient search = new TraktClient();	    	 
 			List<Show> searchShows = search.searchShow(queries[0]);  
 			return searchShows;
 		}
 		
+		//Eftir: Ekki í notkun	
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
 		
+		//Notkun:	onPostExecute(searchShows)
+		//Eftir: 	Búið er að taka searchShows listann og birta hann.
+		//          Í listanum eru líka takkar sem hægt er að ýta á og 
+		// 	        þá bætist þáttur í gagnagrunn. 
 		protected void onPostExecute(List<Show> searchShows) {
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT);
