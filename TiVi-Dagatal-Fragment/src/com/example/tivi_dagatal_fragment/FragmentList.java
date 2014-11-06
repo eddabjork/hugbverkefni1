@@ -294,7 +294,8 @@ public class FragmentList extends Fragment {
 			
 			ImageButton infoButton = new ImageButton(getActivity());
 			infoButton.setId(3);
-			infoButton.setImageResource(R.drawable.down_arrow);
+			//infoButton.setImageResource(R.drawable.down_arrow);
+			infoButton.setImageResource(R.drawable.bla);
 			infoButton.setBackgroundColor(Color.TRANSPARENT);
 			
 			final ScrollView scrollView = new ScrollView(getActivity());

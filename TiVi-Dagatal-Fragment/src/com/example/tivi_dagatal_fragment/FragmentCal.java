@@ -138,6 +138,7 @@ public class FragmentCal extends Fragment {
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
+		addNameOfMonth(cal, mainLayout);
 		
 		String weekDayNames[] = {
 				getResources().getString(R.string.sun_label),
@@ -149,13 +150,28 @@ public class FragmentCal extends Fragment {
 				getResources().getString(R.string.sat_label)	
 		};
 		
-		//Calendar.SUNDAY=1
-		//Calendar.MONDAY=2
-
+		int lastDate = -100;
 		for(int i=0; i<weekDayNames.length; i++){
+			if(lastDate > cal.get(Calendar.DAY_OF_MONTH)){
+				addNameOfMonth(cal, mainLayout);
+				TextView bla = new TextView(getActivity());
+				bla.setText(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
+				mainLayout.addView(bla);
+			}
 			cal.set(Calendar.DAY_OF_WEEK, i+1);
 			setDateLayout(weekDayNames[i], cal, mainLayout);
+			lastDate = cal.get(Calendar.DAY_OF_MONTH);
 		}
+	}
+	
+	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
+		TextView month = new TextView(getActivity());
+		cal.set(Calendar.DAY_OF_WEEK, 1);
+		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
+		month.setPadding(10,10,10,10);
+		month.setTextSize(20);
+		mainLayout.addView(month);
+		mainLayout.addView(makeLine());
 	}
 	
 	//Notkun:		 setDateLayout(dayName, calendar, mainLayout);
@@ -179,13 +195,8 @@ public class FragmentCal extends Fragment {
 		dateDay.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 		dateDay.setGravity(Gravity.CENTER);
 		dateDay.setTextSize(20);
-		TextView dateMonth = new TextView(getActivity());
-		dateMonth.setText(getMonthForInt(cal.get(Calendar.MONTH)));
-		dateMonth.setGravity(Gravity.CENTER);
-		dateMonth.setTextSize(10);
 		dateLayout.addView(dateName);
 		dateLayout.addView(dateDay);
-		dateLayout.addView(dateMonth);
 		
 		LinearLayout episodesLayout = new LinearLayout(getActivity());
 		episodesLayout.setOrientation(LinearLayout.VERTICAL);

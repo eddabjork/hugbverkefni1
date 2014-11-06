@@ -34,18 +34,18 @@
     <string name="thu_label">FIM</string>
     <string name="fri_label">FÖS</string>
     <string name="sat_label">LAU</string>
-    <string name="jan_label">janúar</string>
-    <string name="feb_label">febrúar</string>
-    <string name="mar_label">mars</string>
-    <string name="apr_label">apríl</string>
-    <string name="may_label">maí</string>
-    <string name="jun_label">júní</string>
-    <string name="jul_label">júlí</string>
-    <string name="aug_label">ágúst</string>
-    <string name="sep_label">september</string>
-    <string name="oct_label">október</string>
-    <string name="nov_label">nóvember</string>
-    <string name="dec_label">desember</string>
+    <string name="jan_label">Janúar</string>
+    <string name="feb_label">Febrúar</string>
+    <string name="mar_label">Mars</string>
+    <string name="apr_label">Apríl</string>
+    <string name="may_label">Maí</string>
+    <string name="jun_label">Júní</string>
+    <string name="jul_label">Júlí</string>
+    <string name="aug_label">Ágúst</string>
+    <string name="sep_label">September</string>
+    <string name="oct_label">Október</string>
+    <string name="nov_label">Nóvember</string>
+    <string name="dec_label">Desember</string>
     
     <!-- Pop up -->
     <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
