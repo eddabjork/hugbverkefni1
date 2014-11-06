@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Steinunn Friðgeirsdóttir
+ * Dagsetning: 	30. október 2014
+ * Markmið: 	FragmentEpisopde er fragment sem birtir upplýsingar
+ * 				um einstaka þætti.
+ */
 package com.example.tivi_dagatal_fragment;
 
 import android.app.Fragment;
@@ -11,6 +17,7 @@ public class FragmentEpisode extends Fragment{
 	private ScrollView scrollView;
 	
 	@Override
+	//Eftir: Búið að birta upplýsingar um einstaka þátt
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
