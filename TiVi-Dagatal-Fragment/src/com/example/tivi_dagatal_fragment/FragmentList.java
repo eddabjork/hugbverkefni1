@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir og JÃ³hanna Agnes MagnÃºsdÃ³ttir
- * Dagsetning: 	9. oktÃ³ber 2014
- * MarkmiÃ°: 	Fragment sem sÃ½nir ÃžÃ¦ttirnir-mÃ­nir lista sem inniheldur 
- * 				alla Ã¾Ã¡ Ã¾Ã¦tti notandi hefur sett Ã­ tilsvarandi lista
- * 				(td. Ã­ gegnum search)
+ * Nafn: 		Edda Björk Konráðsdóttir og Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	9. október 2014
+ * Markmið: 	Fragment sem sýnir Þættirnir-mínir lista sem inniheldur 
+ * 				alla þá þætti sem notandi hefur sett í tilsvarandi lista
+ * 				(td. í gegnum search)
  */
 
 package com.example.tivi_dagatal_fragment;
