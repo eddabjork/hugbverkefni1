@@ -376,9 +376,7 @@ int string jun_label 0x7f0a0021
 int string leita 0x7f0a0011
 int string leitarbox 0x7f0a0012
 int string list_process_msg 0x7f0a002f
-int string list_process_msg_popular 0x7f0a002c
 int string list_process_title 0x7f0a002e
-int string list_process_title_popular 0x7f0a002b
 int string mar_label 0x7f0a001e
 int string may_label 0x7f0a0020
 int string mon_label 0x7f0a0016
@@ -387,6 +385,8 @@ int string nov_label 0x7f0a0026
 int string oct_label 0x7f0a0025
 int string popup_put_cal 0x7f0a0028
 int string pos_answer 0x7f0a0029
+int string process_msg_popular 0x7f0a002c
+int string process_title_popular 0x7f0a002b
 int string sat_label 0x7f0a001b
 int string search_add 0x7f0a0013
 int string sep_label 0x7f0a0024
