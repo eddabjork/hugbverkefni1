@@ -102,8 +102,8 @@ public class FragmentList extends Fragment {
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Næ í þætti..");  
-            progressDialog.setMessage("Það er verið að ná í þættina þína.. chill out");  
+            progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.list_process_msg));  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
@@ -307,8 +307,7 @@ public class FragmentList extends Fragment {
 			Collections.reverse(seasons);
 			for(Season season : seasons) {
 				TextView seasonbutton = new TextView(getActivity());
-				//setja seríu hér í string
-				seasonbutton.setText("Sería " + season.getSeasonNumber());
+				seasonbutton.setText(getResources().getString(R.string.serie) + season.getSeasonNumber());
 				seasonbutton.setGravity(Gravity.CENTER);
 				seasonbutton.setTextSize(20);
 				infoLayout.addView(seasonbutton);

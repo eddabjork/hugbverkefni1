@@ -11,6 +11,9 @@
         <item>Leit</item>
         <item>Vinsælir þættir</item>
     </string-array>
+    <string name="serie">Sería </string>
+    <string name="list_process_title">Næ í þætti..</string>
+    <string name="list_process_msg">Það er verið að ná í þættina þína.. chill out</string>
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
     <!-- <array name="nav_drawer_icons">
