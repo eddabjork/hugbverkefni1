@@ -1,8 +1,9 @@
 /**
  * Nafn: 		Steinunn Friðgeirsdóttir
  * Dagsetning: 	20. október 2014
- * Markmið: 	Móðurclasinn. Geymir navigation drawer og 
- * 				
+ * Markmið: 	Móðurclasinn. Geymir navigation drawer og þær
+ * 				aðgerðir sem þarf til að skipta á milli fragmenta
+ * 				í appinu.
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
     public static long startTime = System.currentTimeMillis();
     
     
-    //Sets the view
+    //Birtir tóman skjá og setur nawigationDrawer upp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,13 +160,18 @@ public class MainActivity extends Activity {
 	}
     
     @Override
+    //Notkun: onCreateOptionsMenu(menu)
+    //Eftir: Búið að að setja menuinn upp
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    
     @Override
+    //Notkun: 
+    //Eftir: 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -180,14 +186,24 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
+    /**
+	 * Nafn: 		Steinunn Friðgeirsdóttir
+	 * Dagsetning: 	20. október 2014
+	 * Markmið: 	DrawerItemClickListener erfir frá OnItemClickListener og
+	 * 				framkvæmir 
+	 */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    	//Fall sem velur fragment úr navigation drawer
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             selectItem(position);
         }
     }
 
-    /** Swaps fragments in the main content view */
+    //Notkun: selectItem(int)
+    //Eftir: Búið er að velja fragment (lita það) sem
+    //       er á staðsetningu int í listanum í navigation
+    //       drawer og birta það.
     private void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
         switch (position) {
