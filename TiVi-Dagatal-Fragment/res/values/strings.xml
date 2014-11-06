@@ -11,9 +11,6 @@
         <item>Leit</item>
         <item>Vinsælir þættir</item>
     </string-array>
-    <string name="serie">Sería </string>
-    <string name="list_process_title">Næ í þætti..</string>
-    <string name="list_process_msg">Það er verið að ná í þættina þína.. chill out</string>
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
     <!-- <array name="nav_drawer_icons">
@@ -22,22 +19,14 @@
         <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_launcher</item>
     </array>-->
-
     
-    <!-- Gamlir strengir -->
-    <string name="title_activity_search_results">Leitarniðurstöður</string>
-    <string name="title_activity_my_shows">Þættirnir mínir</string>
-    <string name="action_home">Heim</string>
-
-    <string name="search_title">Leit</string>
-    <string name="search_hint">Leitartest</string>
-    <string name="search_test">Leitin að skila engu!</string>
+    <!-- Leitarstrengir -->
     <string name="leita">Leita</string>
     <string name="leitarbox">Leitin hér</string>
     <string name="search_add">Bæta við Þættirnir mínir</string>
     <string name="take_off_list">Taka af Þættirnir mínir</string>
     
-    <string name="temp_btn_my_episodes">Þættirnir mínir</string>
+    <!-- Dagatalsstrengir -->
     <string name="sun_label">SUN</string>
     <string name="mon_label">MÁN</string>
     <string name="tue_label">ÞRI</string>
@@ -58,14 +47,23 @@
     <string name="nov_label">nóvember</string>
     <string name="dec_label">desember</string>
     
+    <!-- Pop up -->
+    <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
+    <string name="pos_answer">Já</string>
+    <string name="neg_answer">Nei</string>
+    
+    <!-- Vinsælir þættir -->
+    <string name="list_process_title_popular">Næ í þáttaraðir</string>
+    <string name="list_process_msg_popular">Þetta er allt að koma...</string>
+    
+    <!-- Þættirnir mínir -->
+    <string name="serie">Sería </string>
+    <string name="list_process_title">Næ í þætti..</string>
+    <string name="list_process_msg">Það er verið að ná í þættina þína.. chill out</string>
     <string name="btn_put_cal">Setja á dagatal</string>
     <string name="btn_rem_cal">Taka af dagatal</string>
     <string name="btn_cal">Setja á dagatal</string>
     <string name="btn_info">Upplýsingar</string>
     <string name="btn_delete">Eyða</string>
-    
-    <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
-    <string name="pos_answer">Já</string>
-    <string name="neg_answer">Nei</string>
     
 </resources>

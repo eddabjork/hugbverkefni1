@@ -208,8 +208,8 @@ public class FragmentCal extends Fragment {
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Ná í þætti..");  
-            progressDialog.setMessage("Það er verið að ná í þættina þína.. chill out");  
+            progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.list_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  

@@ -15,6 +15,7 @@ import Dtos.Show;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.app.ActionBar.LayoutParams;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 public class FragmentPopular extends Fragment {
 	private DbUtils dbHelper;
 	private ScrollView scrollView;
+	private ProgressDialog progressDialog;
 	
 	@Override
 	//Eftir: Birtir fragmentið sem sýnir vinsæla þætti
@@ -90,6 +92,17 @@ public class FragmentPopular extends Fragment {
 			return popularShows;
 		}
 		
+		// Notkun: onPreExecute()
+		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		protected void onPreExecute() {  
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle(getResources().getString(R.string.list_process_title_popular));  
+            progressDialog.setMessage(getResources().getString(R.string.list_process_msg_popular)); 
+            progressDialog.setCancelable(false);  
+            progressDialog.setIndeterminate(false);  
+            progressDialog.show();  
+        }  
+		
 		//Engin virkni
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
@@ -100,6 +113,7 @@ public class FragmentPopular extends Fragment {
 		//        birta þá ásamt takka til þess að bæta við 
 		//        þáttaröð á dagatal. Listinn er svo birtur.
 		protected void onPostExecute(List<Show> searchShows) {
+			progressDialog.dismiss();
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT);
 			LinearLayout llv = new LinearLayout(getActivity());
@@ -132,7 +146,7 @@ public class FragmentPopular extends Fragment {
 			//Bï¿½ta linearlayoutinu ï¿½ scrollview
 			scrollView.addView(llv);
 			//Birta nï¿½ja viewiï¿½
-			//setContentView(sv);	
+			//setContentView(sv);
 		}
 	}
 	
