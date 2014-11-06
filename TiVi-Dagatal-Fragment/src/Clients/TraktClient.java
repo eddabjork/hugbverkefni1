@@ -35,6 +35,7 @@ public class TraktClient {
 	private Show showInfo = new Show();
 	private List<Season> seasonsForShowInfo = new ArrayList<Season>();
 	private List<Show> popularShows = new ArrayList<Show>();
+	private List<Show> relatedShows = new ArrayList<Show>();
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	
 	public TraktClient(){}
@@ -639,6 +640,33 @@ public class TraktClient {
 			}
 		} catch (IOException e) {
 			Log.e("API error", "Could not find trending shows");
+			e.printStackTrace();
+		}
+		
+		return popularShows;	
+	}
+	
+	//Notkun: 		 shows = relatedShows(show)
+	//Eftirskilyrði: shows er listi af þáttum sem eru svipaðir show
+	public List<Show> relatedShows(Show show) {			
+        URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/show/related.json/" + APIkey + "/" + show.getDataTitle());
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for related shows");
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				popularShows = readShowsArrayForSearch(reader);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find related shows");
 			e.printStackTrace();
 		}
 		
