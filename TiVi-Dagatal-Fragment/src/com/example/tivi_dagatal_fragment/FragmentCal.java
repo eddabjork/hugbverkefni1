@@ -138,6 +138,10 @@ public class FragmentCal extends Fragment {
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
+		
+		// vonandi virkar þetta -> rétt dagsetn hjá Steinunni
+		cal.add( Calendar.DAY_OF_WEEK, -(cal.get(Calendar.DAY_OF_WEEK)-1));
+		
 		addNameOfMonth(cal, mainLayout, true);
 		
 		String weekDayNames[] = {
