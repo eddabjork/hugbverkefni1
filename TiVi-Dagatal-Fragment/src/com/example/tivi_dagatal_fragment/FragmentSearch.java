@@ -1,3 +1,10 @@
+/**
+ * Nafn: 		Steinunn Friðgeirsdóttir
+ * Dagsetning: 	30. október 2014
+ * Markmið: 	FragmentSearch er fragment sem birtir leitarglugga
+ * 				og takka til að leita.
+ * 
+ */
 package com.example.tivi_dagatal_fragment;
 
 import android.app.Fragment;
@@ -15,6 +22,7 @@ public class FragmentSearch extends Fragment {
 	Fragment results;
 	
 	@Override
+	//Eftir: Birtir fragment með leitarglugga og takka
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -22,6 +30,10 @@ public class FragmentSearch extends Fragment {
         return rootView;
 	}
 	
+	//Notkun: searchClick(view)
+	//Eftir: Tekur það sem er í leitarboxinu og leitar eftir því
+	//       í gegnum vefþjónustu og skilar niðurstöðum í nýju
+	//       fragmenti sem er birt þegar niðurstöður eru komnar.
 	public void searchClick(View view){
 		Fragment results = new FragmentSearchResults();
 		
