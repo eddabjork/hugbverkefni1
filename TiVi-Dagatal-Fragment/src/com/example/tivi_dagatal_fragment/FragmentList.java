@@ -55,27 +55,6 @@ public class FragmentList extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
-		
-		/******TEST EPISODES
-		DbUtils dbHelper = new DbUtils(getActivity());
-		Show show1 = new Show();
-        show1.setTitle("Flash");
-        show1.setDataTitle("the-flash-2014");
-        show1.setPoster("kallaposter1");
-        dbHelper.saveShow(show1);
-        //
-		Show show2 = new Show();
-        show2.setTitle("Big Bang Theory");
-        show2.setDataTitle("big-bang-theory");
-        show2.setPoster("kallaposter2");
-        dbHelper.saveShow(show2);
-        //
-        Show show3 = new Show();
-        show3.setTitle("Arrow");
-        show3.setDataTitle("arrow");
-        show3.setPoster("kallaposter3");
-        dbHelper.saveShow(show3);
-        END TEST****/
         
 		mainScrollView = new MainScrollView(getActivity());
 		new GetAllShowsTask().execute();
@@ -267,7 +246,7 @@ public class FragmentList extends Fragment {
 		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
 		//				 og sÃ½na Ã­ ÃžÃ¦ttirnir mÃ­nir lista. BÃºiÃ° er aÃ° setja
 		//				 upp ÃºtlitiÃ° fyrir ÃžÃ¦ttirnir mÃ­nir lista
-		protected void onPostExecute(Show show) {
+		protected void onPostExecute(final Show show) {
 			RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 			
 			TextView title = new TextView(getActivity());
@@ -284,6 +263,11 @@ public class FragmentList extends Fragment {
 			deleteButton.setImageResource(R.drawable.del_btn);
 			deleteButton.setPadding(3,6,3,6);
 			deleteButton.setBackgroundColor(Color.TRANSPARENT);
+			deleteButton.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View view) {
+	            	removeFromMyEpisodes(show);
+	            }
+	        });
 			
 			final ImageButton infoButton = new ImageButton(getActivity());
 			infoButton.setId(3);
