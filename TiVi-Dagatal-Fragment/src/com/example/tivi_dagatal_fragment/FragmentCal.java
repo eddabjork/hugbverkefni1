@@ -138,7 +138,7 @@ public class FragmentCal extends Fragment {
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
-		addNameOfMonth(cal, mainLayout);
+		addNameOfMonth(cal, mainLayout, true);
 		
 		String weekDayNames[] = {
 				getResources().getString(R.string.sun_label),
@@ -150,23 +150,21 @@ public class FragmentCal extends Fragment {
 				getResources().getString(R.string.sat_label)	
 		};
 		
-		int lastDate = -100;
+		int lastDayOfMonth = Integer.MIN_VALUE;
 		for(int i=0; i<weekDayNames.length; i++){
-			if(lastDate > cal.get(Calendar.DAY_OF_MONTH)){
-				addNameOfMonth(cal, mainLayout);
-				TextView bla = new TextView(getActivity());
-				bla.setText(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
-				mainLayout.addView(bla);
-			}
 			cal.set(Calendar.DAY_OF_WEEK, i+1);
+			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			if(lastDayOfMonth > thisDayOfMonth){
+				addNameOfMonth(cal, mainLayout, false);
+			}
 			setDateLayout(weekDayNames[i], cal, mainLayout);
-			lastDate = cal.get(Calendar.DAY_OF_MONTH);
+			lastDayOfMonth = thisDayOfMonth;
 		}
 	}
 	
-	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
+	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout, boolean first){
 		TextView month = new TextView(getActivity());
-		cal.set(Calendar.DAY_OF_WEEK, 1);
+		if(first) cal.set(Calendar.DAY_OF_WEEK, 1);
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		month.setPadding(10,10,10,10);
 		month.setTextSize(20);
