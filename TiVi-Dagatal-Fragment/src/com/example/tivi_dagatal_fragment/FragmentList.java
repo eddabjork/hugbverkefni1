@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Edda Bj�rk Konr��sd�ttir og J�hanna Agnes Magn�sd�ttir
- * Dagsetning: 	9. okt�ber 2014
- * Markmi�: 	Fragment sem s�nist ��ttirnir-m�nir lista sem inniheldur 
- * 				alla �� ��tti notandi hefur sett � tilsvarandi lista
- * 				(td. � gegnum search)
+ * Nafn: 		Edda Björk Konráðsdóttir og Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	9. október 2014
+ * Markmið: 	Fragment sem sýnir Þættirnir-mínir lista sem inniheldur 
+ * 				alla þá þætti notandi hefur sett í tilsvarandi lista
+ * 				(td. í gegnum search)
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -84,14 +84,14 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-	 * Nafn: 		Krist�n Fj�la T�masd�ttir
-	 * Dagsetning: 	23. okt�ber 2014
-	 * Markmi�: 	GetAllShowsTask framkv�mir �r��avinnu sem n�r � alla ��tti fr� gagnagrunni
-	 * 				sem � a� birta � 'M�nir ��ttir' og birtir ��
+	 * Nafn: 		Kristín Fjóla Tómasdóttir
+	 * Dagsetning: 	23. október 2014
+	 * Markmið: 	GetAllShowsTask framkvæmir þráðavinnu sem nær í alla þætti frá gagnagrunni
+	 * 				sem á að birta í 'Mínir þættir' og birtir þá
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
-		// Eftir:  shows er listi af ��ttum sem � a� birta � 'M�nir ��ttir'
+		// Eftir:  shows er listi af þáttum sem á að birta í 'Mínir þættir'
 		protected List<Show> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 			List<Show> showList = dbHelper.getAllShows();
@@ -99,18 +99,18 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veri� stillt sem � a� s�na � me�an notandi er a� b��a
+		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("N� � ��tti..");  
-            progressDialog.setMessage("�a� er veri� a� n� � ��ttina ��na.. chill out");  
+            progressDialog.setTitle("Næ í þætti..");  
+            progressDialog.setMessage("Það er verið að ná í þættina þína.. chill out");  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
         }  
 		
 		// Notkun: onPostExecute(shows)
-		// Eftir:  shows hafa veri� birtir � '��ttirnir m�nir'
+		// Eftir:  shows hafa verið birtir á 'Þættirnir mínir'
 		protected void onPostExecute(List<Show> showList) {
 			progressDialog.dismiss();
 			mainLayout = new LinearLayout(getActivity());
@@ -125,7 +125,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
-  	//Eftirskilyr�i: calButton er takki sem s�r um a� b�ta/taka ��ttinn show
+  	//Eftirskilyrði: calButton er takki sem sér um ð bæta/taka þáttinn show
 	//				 af dagatali
 	public Button getCalButton(final Show show){
 		final Button calendarButton = new Button(getActivity());
@@ -160,7 +160,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 addToCal(show);
-  	//Eftirskilyr�i: B�i� er a� uppf�ra gagnagrunn �.a. gildi� on_calendar=true fyrir show.
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
@@ -168,7 +168,7 @@ public class FragmentList extends Fragment {
 		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	//Notkun:		 removeFromCal(show);
-  	//Eftirskilyr�i: B�i� er a� uppf�ra gagnagrunn �.a. gildi� on_calendar=false fyrir show.
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
@@ -177,7 +177,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);
-  	//Eftirskilyr�i: B�i� er ey�a �t show �r gagnagrunni.
+  	//Eftirskilyrði: Búið er eyða út show úr gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
@@ -190,7 +190,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//Eftirskilyr�i: line er n�na view hlutur sem er einf�ld, �unn, gr� l�na.
+  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -199,7 +199,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 image = getImage(show);
-  	//Eftirskilyr�i: image er poster mynd fyrir show og er � r�ttri st�r�
+  	//Eftirskilyrði: image er poster mynd fyrir show og er í réttri stærð
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
 		image.setImageResource(R.drawable.temp_icon);
@@ -210,9 +210,9 @@ public class FragmentList extends Fragment {
 	}
 	
 	/*
-     * Nafn: Krist�n Fj�la T�masd�ttir
-     * Dagsetning: 9. okt�ber 2014
-     * Markmi�: N� � myndir me� samhli�a �r��avinnslu
+     * Nafn: Kristín Fjóla Tómasdóttir
+     * Dagsetning: 9. október 2014
+     * Markmið: Nær í myndir með samhliða þráðavinnslu
      * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
@@ -221,7 +221,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 bm = doInBackground(urls);
-	  	//Eftirskilyr�i: bm er myndin sem er s�tt fr� urls.
+	  	//Eftirskilyrði: bm er myndin sem er sótt frá urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -236,7 +236,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 onPostExecute(result);
-	  	//Eftirskilyr�i: b�i� er a� setja myndina result � r�tt ImageView.
+	  	//Eftirskilyrði: búið er að setja myndina result í rétt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
@@ -245,7 +245,7 @@ public class FragmentList extends Fragment {
 	/*
      * Nafn: 	   Edda Björk Konráðsdóttir
      * Dagsetning: 30. október 2014
-     * Markmi�:   Ná í upplýsingar um þáttaröð og sýna Þættirnir mínir lista
+     * Markmið:   Ná í upplýsingar um þáttaröð og sýna Þættirnir mínir lista
      * 			   með upplýsingum
      * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
@@ -261,7 +261,7 @@ public class FragmentList extends Fragment {
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
-		/**************�ARF A� SPLITTA �ESSU NI�UR**************************/
+		/**************ÞARF AÐ SPLITTA ÞESSU NIÐUR**************************/
 		//Notkun:		 onPostExecute(show)
 		//Eftirskilyrði: Búið er að sækja upplýsingar um þáttinn show
 		//				 og sýna í Þættirnir mínir lista. Búið er að setja
@@ -442,7 +442,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 bm = fixBitmapSize(orgBm);
-  	//Eftirskilyr�i: bm er n�stum sama bitmap og orgBm nema � r�ttri st�r�
+  	//Eftirskilyrði: bm er næstum sama bitmap og orgBm nema í réttri stærð
 	public Bitmap fixBitmapSize(Bitmap originalBmp){
 		int x = originalBmp.getWidth();
 		int y = originalBmp.getHeight();
