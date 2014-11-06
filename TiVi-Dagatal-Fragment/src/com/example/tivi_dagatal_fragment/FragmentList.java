@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Edda Bjï¿½rk Konrï¿½ï¿½sdï¿½ttir og Jï¿½hanna Agnes Magnï¿½sdï¿½ttir
- * Dagsetning: 	9. oktï¿½ber 2014
- * Markmiï¿½: 	Fragment sem sï¿½nist ï¿½ï¿½ttirnir-mï¿½nir lista sem inniheldur 
- * 				alla ï¿½ï¿½ ï¿½ï¿½tti notandi hefur sett ï¿½ tilsvarandi lista
- * 				(td. ï¿½ gegnum search)
+ * Nafn: 		Edda Björk Konráðsdóttir og Jóhanna Agnes Magnúsdóttir
+ * Dagsetning: 	9. október 2014
+ * Markmið: 	Fragment sem sýnist Þættirnir-mínir lista sem inniheldur 
+ * 				alla þá þætti notandi hefur sett á tilsvarandi lista
+ * 				(td. í gegnum search)
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -12,11 +12,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import Clients.TraktClient;
 import Data.DbUtils;
-import Dtos.Episode;
 import Dtos.Season;
 import Dtos.Show;
 import android.app.Fragment;
@@ -84,14 +82,14 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-	 * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
-	 * Dagsetning: 	23. oktï¿½ber 2014
-	 * Markmiï¿½: 	GetAllShowsTask framkvï¿½mir ï¿½rï¿½ï¿½avinnu sem nï¿½r ï¿½ alla ï¿½ï¿½tti frï¿½ gagnagrunni
-	 * 				sem ï¿½ aï¿½ birta ï¿½ 'Mï¿½nir ï¿½ï¿½ttir' og birtir ï¿½ï¿½
+	 * Nafn: 		Kristín Fjóla Tómasdóttir
+	 * Dagsetning: 	23. október 2014
+	 * Markmið: 	GetAllShowsTask framkvæmir þráðavinnu sem nær í alla þætti frá gagnagrunni
+	 * 				sem á að birta í 'Mínir þættir' og birtir þá
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
-		// Eftir:  shows er listi af ï¿½ï¿½ttum sem ï¿½ aï¿½ birta ï¿½ 'Mï¿½nir ï¿½ï¿½ttir'
+		// Eftir:  shows er listi af þáttum sem á að birta í 'Mínir þættir'
 		protected List<Show> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 			List<Show> showList = dbHelper.getAllShows();
@@ -99,18 +97,18 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
+		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle("Nï¿½ ï¿½ ï¿½ï¿½tti..");  
-            progressDialog.setMessage("ï¿½aï¿½ er veriï¿½ aï¿½ nï¿½ ï¿½ ï¿½ï¿½ttina ï¿½ï¿½na.. chill out");  
+            progressDialog.setTitle("Ná í þætti..");  
+            progressDialog.setMessage("Það er verið að ná í þættina þína.. chill out");  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
         }  
 		
 		// Notkun: onPostExecute(shows)
-		// Eftir:  shows hafa veriï¿½ birtir ï¿½ 'ï¿½ï¿½ttirnir mï¿½nir'
+		// Eftir:  shows hafa verið birtir á 'Þættirnir mínir'
 		protected void onPostExecute(List<Show> showList) {
 			progressDialog.dismiss();
 			mainLayout = new LinearLayout(getActivity());
@@ -125,42 +123,42 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
-  	//Eftirskilyrï¿½i: calButton er takki sem sï¿½r um aï¿½ bï¿½ta/taka ï¿½ï¿½ttinn show
+  	//Eftirskilyrði: calButton er takki sem sér um að bæta/taka þáttinn show
 	//				 af dagatali
-	public Button getCalButton(final Show show){
-		final Button calendarButton = new Button(getActivity());
+	public ImageButton getCalButton(final Show show){
+		final ImageButton calendarButton = new ImageButton(getActivity());
 		DbUtils dbHelper = new DbUtils(getActivity());
 		// 0 -> onCal=false; 1 -> onCal=true
 		boolean onCal = dbHelper.isOnCal(show);
 		if(onCal) {
-			calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
+			calendarButton.setImageResource(R.drawable.rem_cal_btn);
 			calendarButton.setTag(1);
 		}
 		else {
-			calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+			calendarButton.setImageResource(R.drawable.put_cal_btn);
 			calendarButton.setTag(0);
 		}
-		calendarButton.setTextSize(10);
 		calendarButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 				final int status =(Integer) view.getTag();
 				if(status == 1) {
 					removeFromCal(show);
 					view.setTag(0);
-					calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+					calendarButton.setImageResource(R.drawable.put_cal_btn);
 				}
 				else {
 					addToCal(show);
 					view.setTag(1);
-					calendarButton.setText(getResources().getString(R.string.btn_rem_cal));	
+					calendarButton.setImageResource(R.drawable.rem_cal_btn);	
 				}
             }
         });
+		calendarButton.setBackgroundColor(Color.TRANSPARENT);
 		return calendarButton;
 	}
 	
 	//Notkun:		 addToCal(show);
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ uppfï¿½ra gagnagrunn ï¿½.a. gildiï¿½ on_calendar=true fyrir show.
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
@@ -168,7 +166,7 @@ public class FragmentList extends Fragment {
 		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	//Notkun:		 removeFromCal(show);
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ uppfï¿½ra gagnagrunn ï¿½.a. gildiï¿½ on_calendar=false fyrir show.
+  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
@@ -177,7 +175,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er eyï¿½a ï¿½t show ï¿½r gagnagrunni.
+  	//Eftirskilyrði: Búið er eyða út show úr gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
@@ -190,7 +188,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//Eftirskilyrï¿½i: line er nï¿½na view hlutur sem er einfï¿½ld, ï¿½unn, grï¿½ lï¿½na.
+  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -199,7 +197,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 image = getImage(show);
-  	//Eftirskilyrï¿½i: image er poster mynd fyrir show og er ï¿½ rï¿½ttri stï¿½rï¿½
+  	//Eftirskilyrði: image er poster mynd fyrir show og er í réttri stærð
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
 		image.setImageResource(R.drawable.temp_icon);
@@ -210,9 +208,9 @@ public class FragmentList extends Fragment {
 	}
 	
 	/*
-     * Nafn: Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
-     * Dagsetning: 9. oktï¿½ber 2014
-     * Markmiï¿½: Nï¿½ ï¿½ myndir meï¿½ samhliï¿½a ï¿½rï¿½ï¿½avinnslu
+     * Nafn: Kristín Fjóla Tómasdóttir
+     * Dagsetning: 9. október 2014
+     * Markmið: Ná í myndir með samhliða þræðavinnslu
      * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
@@ -221,7 +219,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 bm = doInBackground(urls);
-	  	//Eftirskilyrï¿½i: bm er myndin sem er sï¿½tt frï¿½ urls.
+	  	//Eftirskilyrði: bm er myndin sem er sótt frá urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -236,22 +234,18 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 onPostExecute(result);
-	  	//Eftirskilyrï¿½i: bï¿½iï¿½ er aï¿½ setja myndina result ï¿½ rï¿½tt ImageView.
+	  	//Eftirskilyrði: búið er að setja myndina result á rétt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
 	}
 	
 	/*
-     * Nafn: 	   Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
-     * Dagsetning: 30. oktÃ³ber 2014
-     * Markmiï¿½:   NÃ¡ Ã­ upplÃ½singar um Ã¾Ã¡ttarÃ¶Ã° og sÃ½na ÃžÃ¦ttirnir mÃ­nir lista
-     * 			   meÃ° upplÃ½singum
+     * Nafn: ????????????????????????????????
+     * Dagsetning: ??????????????????????????
+     * Markmið: ?????????????????????????????
      * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
-		//Notkun:		 show = doInBackground(shows)
-		//EftirskilyrÃ°i: show er Ã¾Ã¡tturinn sem inniheldur upplÃ½singar
-		//				 sem nÃ¡Ã° er Ã­ ÃºtfrÃ¡ shows
 		protected Show doInBackground(Show... shows) {
 			TraktClient client = new TraktClient();
 			Show show = client.getShowInfo(shows[0]);
@@ -261,11 +255,7 @@ public class FragmentList extends Fragment {
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
-		/**************ï¿½ARF Aï¿½ SPLITTA ï¿½ESSU NIï¿½UR**************************/
-		//Notkun:		 onPostExecute(show)
-		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
-		//				 og sÃ½na Ã­ ÃžÃ¦ttirnir mÃ­nir lista. BÃºiÃ° er aÃ° setja
-		//				 upp ÃºtlitiÃ° fyrir ÃžÃ¦ttirnir mÃ­nir lista
+		/**************ÞARF AÐ SPLITTA ÞESSU NIÐUR**************************/
 		protected void onPostExecute(Show show) {
 			RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 			
@@ -275,22 +265,19 @@ public class FragmentList extends Fragment {
 			
 			final Show _show = show;
 			
-			Button calendarButton = getCalButton(show);
+			ImageButton calendarButton = getCalButton(show);
 			calendarButton.setId(1);
-			calendarButton.setBackgroundResource(R.drawable.pretty_button);
-			calendarButton.setPadding(5,0,5,0);
 			
-			Button deleteButton = new Button(getActivity());
+			ImageButton deleteButton = new ImageButton(getActivity());
 			deleteButton.setId(2);
-			deleteButton.setText(getResources().getString(R.string.btn_delete));
-			deleteButton.setTextSize(10);
+			deleteButton.setImageResource(R.drawable.del_btn);
+			deleteButton.setBackgroundColor(Color.TRANSPARENT);
 			deleteButton.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View view) {
+	            public void onClick(View view) {
 	            	removeFromMyEpisodes(_show);
 	            }
 	        });
-			deleteButton.setBackgroundResource(R.drawable.pretty_button);
-			deleteButton.setPadding(5,0,5,0);
+			
 			
 			ImageButton infoButton = new ImageButton(getActivity());
 			infoButton.setId(3);
@@ -306,8 +293,8 @@ public class FragmentList extends Fragment {
 			List<Season> seasons = show.getSeasons();
 			Collections.reverse(seasons);
 			for(Season season : seasons) {
+				Log.v("Ã¾Ã¡ttarÃ¶Ã°",""+season.getSeasonNumber());
 				TextView seasonbutton = new TextView(getActivity());
-				//setja serÃ­u hÃ©r Ã­ string
 				seasonbutton.setText("SerÃ­a " + season.getSeasonNumber());
 				seasonbutton.setGravity(Gravity.CENTER);
 				seasonbutton.setTextSize(20);
@@ -318,7 +305,7 @@ public class FragmentList extends Fragment {
 				episodes.setLayoutParams(layoutParams);
 				episodes.setGravity(Gravity.CENTER);
 				episodes.setId(getNextId());
-				episodes.setText("hÃ©r koma Ã¾Ã¦ttir");
+				episodes.setText("hér koma þættir");
 				infoLayout.addView(episodes);
 				Animator.setHeightForWrapContent(getActivity(), episodes);
 				seasonbutton.setOnClickListener(new View.OnClickListener() {
@@ -363,7 +350,6 @@ public class FragmentList extends Fragment {
 			RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			//RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(35, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			
 			titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -372,7 +358,7 @@ public class FragmentList extends Fragment {
 			calParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			delParams.addRule(RelativeLayout.LEFT_OF, 3);
 			delParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			delParams.setMargins(5,5,0,0);
+			//delParams.setMargins(5,5,0,0);
 			infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			
@@ -383,14 +369,14 @@ public class FragmentList extends Fragment {
 			mainLayout.addView(episodeLayout);
 			mainLayout.addView(infoMain);
 			mainLayout.addView(makeLine());
-		}
+
+		}		
 	}
 	
 	/*
-     * Nafn: 	   Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
-     * Dagsetning: 30. oktÃ³ber 2014
-     * Markmiï¿½:   Manual scroll view sem erfir frÃ¡ ScrollView svo hÃ¦gt sÃ©
-     * 			  aÃ° virkja Ã¾aÃ° og ,,slÃ¶kkva Ã¡ Ã¾vÃ­'' Ã­ appinu
+     * Nafn: ????????????????????????????????
+     * Dagsetning: ??????????????????????????
+     * Markmið: ?????????????????????????????
      * */
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
@@ -399,23 +385,14 @@ public class FragmentList extends Fragment {
 			super(context);
 		}
 		
-		//Notkun: 		 scrollview.setScrollingEnabled(enabled)
-		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° virkja scrollview ef enabled er true
-		//				 en ,,slÃ¶kkva Ã¡ Ã¾vÃ­'' annars
 		public void setScrollingEnabled(boolean enabled) {
 			scrollable = enabled;
 		}
 		
-		//Notkun:		 isScrollable = scrollview.isScrollable()
-		//EftirskilyrÃ°i: isScrollable er true ef scrollview er virkt,
-		//				 false annars
 		public boolean isScrollable() {
 			return scrollable;
 		}
 		
-		//Notkun: touch = scrollview.onTouchEvent(event)
-		//EftirskilyrÃ°i:  touch er true ef scrollview er virkt og event
-		//				  er ACTION_DOWN, false annars
 		public boolean onTouchEvent(MotionEvent event) {
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -426,23 +403,19 @@ public class FragmentList extends Fragment {
 			}
 		}
 		
-		// Notkun: 		 interupt = scrollview.onInterceptTouchEvent(event)
-		//EftirskilyrÃ°i: interupt er false ef scrollview er ekki virkt, skilar
-		//				 annars sama og samnefnt fall Ã­ ScrollView
 		public boolean onInterceptTouchEvent(MotionEvent event) {
 			if(!scrollable) return false;
 			else return super.onInterceptTouchEvent(event);
 		}
 	}
-	//Notkun:		 id = getNextId()
-	//EftirskilyrÃ°i: id er nÃ¦sta lausa auÃ°kenni
+	//?????????????????????????????????????????????????
 	private int getNextId() {
 		id = (id == null) ? 0 : id+1;
 		return id;
 	}
 	
 	//Notkun:		 bm = fixBitmapSize(orgBm);
-  	//Eftirskilyrï¿½i: bm er nï¿½stum sama bitmap og orgBm nema ï¿½ rï¿½ttri stï¿½rï¿½
+  	//Eftirskilyrði: bm er næstum sama bitmap og orgBm nema í réttri stærð
 	public Bitmap fixBitmapSize(Bitmap originalBmp){
 		int x = originalBmp.getWidth();
 		int y = originalBmp.getHeight();
