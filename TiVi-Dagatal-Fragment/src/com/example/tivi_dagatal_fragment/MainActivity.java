@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Steinunn Friðgeirsdóttir
+ * Dagsetning: 	20. október 2014
+ * Markmið: 	Móðurclasinn. Geymir navigation drawer og 
+ * 				
+ */
 package com.example.tivi_dagatal_fragment;
 
 import java.text.ParseException;
@@ -55,12 +61,24 @@ public class MainActivity extends Activity {
     public static LruCache cache;
     public static long startTime = System.currentTimeMillis();
     
+    
+    //Sets the view
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cache = createCache();
 
+        makeNavigationDrawer();
+        
+        //Það sem gerist fremst í appinu, á starti
+        //startCalendar();
+    }
+    
+    //Notkun: makeNavigationDrawer()
+    //Eftir: Búið er að gera navigation drawer og undirföll sem 
+    // 		 stjórna opnun og lokun á honum.
+    public void makeNavigationDrawer(){
         mDrawerTitles = getResources().getStringArray(R.array.drawer_title_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -75,14 +93,14 @@ public class MainActivity extends Activity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
-            /** Called when a drawer has settled in a completely closed state. */
+            // Called when a drawer has settled in a completely closed state. 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
-            /** Called when a drawer has settled in a completely open state. */
+            //Called when a drawer has settled in a completely open state. 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getActionBar().setTitle(mDrawerTitle);
@@ -100,20 +118,20 @@ public class MainActivity extends Activity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description */
-                R.string.drawer_close  /* "close drawer" description */
+                this,                  // host Activity 
+                mDrawerLayout,         // DrawerLayout object 
+                R.drawable.ic_drawer,  // nav drawer icon to replace 'Up' caret 
+                R.string.drawer_open,  // "open drawer" description 
+                R.string.drawer_close  // "close drawer" description 
                 ) {
 
-            /** Called when a drawer has settled in a completely closed state. */
+            // Called when a drawer has settled in a completely closed state. 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getActionBar().setTitle(mTitle);
             }
 
-            /** Called when a drawer has settled in a completely open state. */
+            // Called when a drawer has settled in a completely open state. 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getActionBar().setTitle(mDrawerTitle);
@@ -125,9 +143,7 @@ public class MainActivity extends Activity {
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-
-        //Það sem gerist fremst í appinu, á starti
-        //startCalendar();
+	
     }
     
     // Notkun: cache = createCache()
@@ -221,34 +237,6 @@ public class MainActivity extends Activity {
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
-    
-	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
-		protected Map<String, String> doInBackground(Void... voids) {
-			DbUtils dbHelper = new DbUtils(MainActivity.this);
-	        Map<String,String> dataTitles = dbHelper.getOnCalShows();
-			return dataTitles;
-		}
-		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
-		
-		protected void onPostExecute(Map<String, String> dataTitles) {
-			new CalendarEpisodesTask().execute(dataTitles);
-		}
-	}
-	
-	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
-		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {         
-			TraktClient trakt = new TraktClient();
-	        List<Episode> calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0]);
-			return calendarEpisodes;
-		}
-		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
-	}
 	
 	@Override
     protected void onPostCreate(Bundle savedInstanceState) {

@@ -56,6 +56,14 @@ public class FragmentPopular extends Fragment {
         dbHelper = new DbUtils(activity);
     }
 
+	/**
+     * Nafn: 		Steinunn Friðgeirsdóttir
+     * Dagsetning: 	30. október 2014
+     * Markmið: 	Framkvæmir þráðavinnu til að birta vinsæla þætti 
+     * 				frá vefþjónustu í fragmenti með loadi.
+     * 				Clasinn geymir einnig cache fyrir þættina svo
+     * 				það þurfi ekki að sækja alla þættina oft.
+     */   
 	private class PopularShowsTask extends AsyncTask<String, Integer, List<Show>> {
 		protected List<Show> doInBackground(String... queries) {         
 			TraktClient trackt = new TraktClient();	    	 
