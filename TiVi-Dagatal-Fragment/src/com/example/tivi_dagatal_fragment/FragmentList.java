@@ -125,35 +125,35 @@ public class FragmentList extends Fragment {
 	//Notkun:		 calButton = getCalButton(show)
   	//Eftirskilyrði: calButton er takki sem sér um að bæta/taka þáttinn show
 	//				 af dagatali
-	public Button getCalButton(final Show show){
-		final Button calendarButton = new Button(getActivity());
+	public ImageButton getCalButton(final Show show){
+		final ImageButton calendarButton = new ImageButton(getActivity());
 		DbUtils dbHelper = new DbUtils(getActivity());
 		// 0 -> onCal=false; 1 -> onCal=true
 		boolean onCal = dbHelper.isOnCal(show);
 		if(onCal) {
-			calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
+			calendarButton.setImageResource(R.drawable.rem_cal_btn);
 			calendarButton.setTag(1);
 		}
 		else {
-			calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+			calendarButton.setImageResource(R.drawable.put_cal_btn);
 			calendarButton.setTag(0);
 		}
-		calendarButton.setTextSize(10);
 		calendarButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 				final int status =(Integer) view.getTag();
 				if(status == 1) {
 					removeFromCal(show);
 					view.setTag(0);
-					calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+					calendarButton.setImageResource(R.drawable.put_cal_btn);
 				}
 				else {
 					addToCal(show);
 					view.setTag(1);
-					calendarButton.setText(getResources().getString(R.string.btn_rem_cal));	
+					calendarButton.setImageResource(R.drawable.rem_cal_btn);	
 				}
             }
         });
+		calendarButton.setBackgroundColor(Color.TRANSPARENT);
 		return calendarButton;
 	}
 	
@@ -265,22 +265,19 @@ public class FragmentList extends Fragment {
 			
 			final Show _show = show;
 			
-			Button calendarButton = getCalButton(show);
+			ImageButton calendarButton = getCalButton(show);
 			calendarButton.setId(1);
-			calendarButton.setBackgroundResource(R.drawable.pretty_button);
-			calendarButton.setPadding(5,0,5,0);
 			
-			Button deleteButton = new Button(getActivity());
+			ImageButton deleteButton = new ImageButton(getActivity());
 			deleteButton.setId(2);
-			deleteButton.setText(getResources().getString(R.string.btn_delete));
-			deleteButton.setTextSize(10);
+			deleteButton.setImageResource(R.drawable.del_btn);
+			deleteButton.setBackgroundColor(Color.TRANSPARENT);
 			deleteButton.setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View view) {
 	            	removeFromMyEpisodes(_show);
 	            }
 	        });
-			deleteButton.setBackgroundResource(R.drawable.pretty_button);
-			deleteButton.setPadding(5,0,5,0);
+			
 			
 			ImageButton infoButton = new ImageButton(getActivity());
 			infoButton.setId(3);
@@ -353,7 +350,6 @@ public class FragmentList extends Fragment {
 			RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			//RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(35, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 			
 			titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -362,7 +358,7 @@ public class FragmentList extends Fragment {
 			calParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			delParams.addRule(RelativeLayout.LEFT_OF, 3);
 			delParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			delParams.setMargins(5,5,0,0);
+			//delParams.setMargins(5,5,0,0);
 			infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			
