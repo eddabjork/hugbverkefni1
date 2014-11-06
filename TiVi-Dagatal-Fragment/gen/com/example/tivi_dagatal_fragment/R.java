@@ -1266,11 +1266,11 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int apr_label=0x7f0a001f;
         public static final int aug_label=0x7f0a0023;
-        public static final int btn_cal=0x7f0a002a;
-        public static final int btn_delete=0x7f0a002c;
-        public static final int btn_info=0x7f0a002b;
-        public static final int btn_put_cal=0x7f0a0028;
-        public static final int btn_rem_cal=0x7f0a0029;
+        public static final int btn_cal=0x7f0a0032;
+        public static final int btn_delete=0x7f0a0034;
+        public static final int btn_info=0x7f0a0033;
+        public static final int btn_put_cal=0x7f0a0030;
+        public static final int btn_rem_cal=0x7f0a0031;
         public static final int dec_label=0x7f0a0027;
         public static final int drawer_close=0x7f0a0010;
         public static final int drawer_open=0x7f0a000f;
@@ -1289,26 +1289,28 @@ containing a value of this type.
          */
         public static final int leita=0x7f0a0011;
         public static final int leitarbox=0x7f0a0012;
-        public static final int list_process_msg=0x7f0a0034;
-        public static final int list_process_msg_popular=0x7f0a0031;
-        public static final int list_process_title=0x7f0a0033;
-        /**  Vinsælir þættir 
-         */
-        public static final int list_process_title_popular=0x7f0a0030;
+        public static final int list_process_msg=0x7f0a002f;
+        public static final int list_process_title=0x7f0a002e;
         public static final int mar_label=0x7f0a001e;
         public static final int may_label=0x7f0a0020;
         public static final int mon_label=0x7f0a0016;
-        public static final int neg_answer=0x7f0a002f;
+        public static final int neg_answer=0x7f0a002a;
         public static final int nov_label=0x7f0a0026;
         public static final int oct_label=0x7f0a0025;
-        public static final int popup_put_cal=0x7f0a002d;
-        public static final int pos_answer=0x7f0a002e;
+        /**  Pop up 
+         */
+        public static final int popup_put_cal=0x7f0a0028;
+        public static final int pos_answer=0x7f0a0029;
+        public static final int process_msg_popular=0x7f0a002c;
+        /**  Vinsælir þættir 
+         */
+        public static final int process_title_popular=0x7f0a002b;
         public static final int sat_label=0x7f0a001b;
         public static final int search_add=0x7f0a0013;
         public static final int sep_label=0x7f0a0024;
         /**  Þættirnir mínir 
          */
-        public static final int serie=0x7f0a0032;
+        public static final int serie=0x7f0a002d;
         /**  Dagatalsstrengir 
          */
         public static final int sun_label=0x7f0a0015;

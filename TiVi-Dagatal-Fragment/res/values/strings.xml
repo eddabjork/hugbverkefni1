@@ -53,8 +53,8 @@
     <string name="neg_answer">Nei</string>
     
     <!-- Vinsælir þættir -->
-    <string name="list_process_title_popular">Næ í þáttaraðir</string>
-    <string name="list_process_msg_popular">Þetta er allt að koma...</string>
+    <string name="process_title_popular">Næ í þáttaraðir</string>
+    <string name="process_msg_popular">Þetta er allt að koma...</string>
     
     <!-- Þættirnir mínir -->
     <string name="serie">Sería </string>

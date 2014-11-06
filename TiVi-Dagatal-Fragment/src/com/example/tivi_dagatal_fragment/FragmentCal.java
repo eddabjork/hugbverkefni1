@@ -255,8 +255,13 @@ public class FragmentCal extends Fragment {
 		TextView textView = new TextView(getActivity());
 	    textView.setText(title);
 	    textView.setPadding(20,0,0,0);
+	    textView.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				//Missing
+			}
+		});
 	    try {
-	    	linearLayout.addView(textView);	
+	    	linearLayout.addView(textView);
 	    } catch(Exception e) {
 	    	
 	    }

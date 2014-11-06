@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Edda Björk Konráðsdóttir og Jóhanna Agnes Magnúsdóttir
- * Dagsetning: 	9. október 2014
- * Markmið: 	Fragment sem sýnir Þættirnir-mínir lista sem inniheldur 
- * 				alla þá þætti notandi hefur sett í tilsvarandi lista
- * 				(td. í gegnum search)
+ * Nafn: 		Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir og JÃ³hanna Agnes MagnÃºsdÃ³ttir
+ * Dagsetning: 	9. oktÃ³ber 2014
+ * MarkmiÃ°: 	Fragment sem sÃ½nir ÃžÃ¦ttirnir-mÃ­nir lista sem inniheldur 
+ * 				alla Ã¾Ã¡ Ã¾Ã¦tti notandi hefur sett Ã­ tilsvarandi lista
+ * 				(td. Ã­ gegnum search)
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -84,14 +84,14 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-	 * Nafn: 		Kristín Fjóla Tómasdóttir
-	 * Dagsetning: 	23. október 2014
-	 * Markmið: 	GetAllShowsTask framkvæmir þráðavinnu sem nær í alla þætti frá gagnagrunni
-	 * 				sem á að birta í 'Mínir þættir' og birtir þá
+	 * Nafn: 		KristÃ­n FjÃ³la TÃ³masdÃ³ttir
+	 * Dagsetning: 	23. oktÃ³ber 2014
+	 * MarkmiÃ°: 	GetAllShowsTask framkvÃ¦mir Ã¾rÃ¡Ã°avinnu sem nÃ¦r Ã­ alla Ã¾Ã¦tti frÃ¡ gagnagrunni
+	 * 				sem Ã¡ aÃ° birta Ã­ 'MÃ­nir Ã¾Ã¦ttir' og birtir Ã¾Ã¡
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
-		// Eftir:  shows er listi af þáttum sem á að birta í 'Mínir þættir'
+		// Eftir:  shows er listi af Ã¾Ã¡ttum sem Ã¡ aÃ° birta Ã­ 'MÃ­nir Ã¾Ã¦ttir'
 		protected List<Show> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 			List<Show> showList = dbHelper.getAllShows();
@@ -99,7 +99,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		// Eftir:  progressDialog hefur veriÃ° stillt sem Ã¡ aÃ° sÃ½na Ã¡ meÃ°an notandi er aÃ° bÃ­Ã°a
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
@@ -110,7 +110,7 @@ public class FragmentList extends Fragment {
         }  
 		
 		// Notkun: onPostExecute(shows)
-		// Eftir:  shows hafa verið birtir á 'Þættirnir mínir'
+		// Eftir:  shows hafa veriÃ° birtir Ã¡ 'ÃžÃ¦ttirnir mÃ­nir'
 		protected void onPostExecute(List<Show> showList) {
 			progressDialog.dismiss();
 			mainLayout = new LinearLayout(getActivity());
@@ -125,7 +125,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
-  	//Eftirskilyrði: calButton er takki sem sér um ð bæta/taka þáttinn show
+  	//EftirskilyrÃ°i: calButton er takki sem sÃ©r um Ã° bÃ¦ta/taka Ã¾Ã¡ttinn show
 	//				 af dagatali
 	public Button getCalButton(final Show show){
 		final Button calendarButton = new Button(getActivity());
@@ -160,7 +160,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 addToCal(show);
-  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=true fyrir show.
+  	//EftirskilyrÃ°i: BÃºiÃ° er aÃ° uppfÃ¦ra gagnagrunn Ã¾.a. gildiÃ° on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
@@ -168,7 +168,7 @@ public class FragmentList extends Fragment {
 		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	//Notkun:		 removeFromCal(show);
-  	//Eftirskilyrði: Búið er að uppfæra gagnagrunn þ.a. gildið on_calendar=false fyrir show.
+  	//EftirskilyrÃ°i: BÃºiÃ° er aÃ° uppfÃ¦ra gagnagrunn Ã¾.a. gildiÃ° on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
@@ -177,7 +177,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);
-  	//Eftirskilyrði: Búið er eyða út show úr gagnagrunni.
+  	//EftirskilyrÃ°i: BÃºiÃ° er eyÃ°a Ãºt show Ãºr gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
@@ -190,7 +190,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
+  	//EftirskilyrÃ°i: line er nÃºna view hlutur sem er einfÃ¶ld, Ã¾unn, grÃ¡ lÃ­na.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -199,7 +199,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 image = getImage(show);
-  	//Eftirskilyrði: image er poster mynd fyrir show og er í réttri stærð
+  	//EftirskilyrÃ°i: image er poster mynd fyrir show og er Ã­ rÃ©ttri stÃ¦rÃ°
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
 		image.setImageResource(R.drawable.temp_icon);
@@ -209,10 +209,10 @@ public class FragmentList extends Fragment {
 		return image;
 	}
 	
-	/*
-     * Nafn: Kristín Fjóla Tómasdóttir
-     * Dagsetning: 9. október 2014
-     * Markmið: Nær í myndir með samhliða þráðavinnslu
+	/**
+     * Nafn: KristÃ­n FjÃ³la TÃ³masdÃ³ttir
+     * Dagsetning: 9. oktÃ³ber 2014
+     * MarkmiÃ°: NÃ¦r Ã­ myndir meÃ° samhliÃ°a Ã¾rÃ¡Ã°avinnslu
      * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
@@ -221,7 +221,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 bm = doInBackground(urls);
-	  	//Eftirskilyrði: bm er myndin sem er sótt frá urls.
+	  	//EftirskilyrÃ°i: bm er myndin sem er sÃ³tt frÃ¡ urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -236,22 +236,22 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 onPostExecute(result);
-	  	//Eftirskilyrði: búið er að setja myndina result í rétt ImageView.
+	  	//EftirskilyrÃ°i: bÃºiÃ° er aÃ° setja myndina result Ã­ rÃ©tt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
 	}
 	
-	/*
-     * Nafn: 	   Edda Björk Konráðsdóttir
-     * Dagsetning: 30. október 2014
-     * Markmið:   Ná í upplýsingar um þáttaröð og sýna Þættirnir mínir lista
-     * 			   með upplýsingum
+	/**
+     * Nafn: 	   Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
+     * Dagsetning: 30. oktÃ³ber 2014
+     * MarkmiÃ°:   NÃ¡ Ã­ upplÃ½singar um Ã¾Ã¡ttarÃ¶Ã° og sÃ½na ÃžÃ¦ttirnir mÃ­nir lista
+     * 			   meÃ° upplÃ½singum
      * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 		//Notkun:		 show = doInBackground(shows)
-		//Eftirskilyrði: show er þátturinn sem inniheldur upplýsingar
-		//				 sem náð er í útfrá shows
+		//EftirskilyrÃ°i: show er Ã¾Ã¡tturinn sem inniheldur upplÃ½singar
+		//				 sem nÃ¡Ã° er Ã­ ÃºtfrÃ¡ shows
 		protected Show doInBackground(Show... shows) {
 			TraktClient client = new TraktClient();
 			Show show = client.getShowInfo(shows[0]);
@@ -261,11 +261,11 @@ public class FragmentList extends Fragment {
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
-		/**************ÞARF AÐ SPLITTA ÞESSU NIÐUR**************************/
+		/**************ÃžARF AÃ� SPLITTA ÃžESSU NIÃ�UR**************************/
 		//Notkun:		 onPostExecute(show)
-		//Eftirskilyrði: Búið er að sækja upplýsingar um þáttinn show
-		//				 og sýna í Þættirnir mínir lista. Búið er að setja
-		//				 upp útlitið fyrir Þættirnir mínir lista
+		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
+		//				 og sÃ½na Ã­ ÃžÃ¦ttirnir mÃ­nir lista. BÃºiÃ° er aÃ° setja
+		//				 upp ÃºtlitiÃ° fyrir ÃžÃ¦ttirnir mÃ­nir lista
 		protected void onPostExecute(Show show) {
 			RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 			
@@ -317,7 +317,7 @@ public class FragmentList extends Fragment {
 				episodes.setLayoutParams(layoutParams);
 				episodes.setGravity(Gravity.CENTER);
 				episodes.setId(getNextId());
-				episodes.setText("hér koma þættir");
+				episodes.setText("hÃ©r koma Ã¾Ã¦ttir");
 				infoLayout.addView(episodes);
 				Animator.setHeightForWrapContent(getActivity(), episodes);
 				seasonbutton.setOnClickListener(new View.OnClickListener() {
@@ -385,11 +385,11 @@ public class FragmentList extends Fragment {
 		}
 	}
 	
-	/*
-     * Nafn: 	   Edda Björk Konráðsdóttir
-     * Dagsetning: 30. október 2014
-     * Markmi�:   Manual scroll view sem erfir frá ScrollView svo hægt sé
-     * 			  að virkja það og ,,slökkva á því'' í appinu
+	/**
+     * Nafn: 	   Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
+     * Dagsetning: 30. oktÃ³ber 2014
+     * Markmiï¿½:   Manual scroll view sem erfir frÃ¡ ScrollView svo hÃ¦gt sÃ©
+     * 			  aÃ° virkja Ã¾aÃ° og ,,slÃ¶kkva Ã¡ Ã¾vÃ­'' Ã­ appinu
      * */
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
@@ -399,21 +399,21 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun: 		 scrollview.setScrollingEnabled(enabled)
-		//Eftirskilyrði: Búið er að virkja scrollview ef enabled er true
-		//				 en ,,slökkva á því'' annars
+		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° virkja scrollview ef enabled er true
+		//				 en ,,slÃ¶kkva Ã¡ Ã¾vÃ­'' annars
 		public void setScrollingEnabled(boolean enabled) {
 			scrollable = enabled;
 		}
 		
 		//Notkun:		 isScrollable = scrollview.isScrollable()
-		//Eftirskilyrði: isScrollable er true ef scrollview er virkt,
+		//EftirskilyrÃ°i: isScrollable er true ef scrollview er virkt,
 		//				 false annars
 		public boolean isScrollable() {
 			return scrollable;
 		}
 		
 		//Notkun: touch = scrollview.onTouchEvent(event)
-		//Eftirskilyrði:  touch er true ef scrollview er virkt og event
+		//EftirskilyrÃ°i:  touch er true ef scrollview er virkt og event
 		//				  er ACTION_DOWN, false annars
 		public boolean onTouchEvent(MotionEvent event) {
 			switch(event.getAction()) {
@@ -426,22 +426,22 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: 		 interupt = scrollview.onInterceptTouchEvent(event)
-		//Eftirskilyrði: interupt er false ef scrollview er ekki virkt, skilar
-		//				 annars sama og samnefnt fall í ScrollView
+		//EftirskilyrÃ°i: interupt er false ef scrollview er ekki virkt, skilar
+		//				 annars sama og samnefnt fall Ã­ ScrollView
 		public boolean onInterceptTouchEvent(MotionEvent event) {
 			if(!scrollable) return false;
 			else return super.onInterceptTouchEvent(event);
 		}
 	}
 	//Notkun:		 id = getNextId()
-	//Eftirskilyrði: id er næsta lausa auðkenni
+	//EftirskilyrÃ°i: id er nÃ¦sta lausa auÃ°kenni
 	private int getNextId() {
 		id = (id == null) ? 0 : id+1;
 		return id;
 	}
 	
 	//Notkun:		 bm = fixBitmapSize(orgBm);
-  	//Eftirskilyrði: bm er næstum sama bitmap og orgBm nema í réttri stærð
+  	//EftirskilyrÃ°i: bm er nÃ¦stum sama bitmap og orgBm nema Ã­ rÃ©ttri stÃ¦rÃ°
 	public Bitmap fixBitmapSize(Bitmap originalBmp){
 		int x = originalBmp.getWidth();
 		int y = originalBmp.getHeight();
