@@ -170,8 +170,9 @@ public class MainActivity extends Activity {
 
     
     @Override
-    //Notkun: 
-    //Eftir: 
+    //Notkun: onOptionsItemSelected(item)
+    //Eftir: item hefur verið valið og samsvarandi skjár 
+    //       birtur (enginn eins og er)
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -190,11 +191,12 @@ public class MainActivity extends Activity {
 	 * Nafn: 		Steinunn Friðgeirsdóttir
 	 * Dagsetning: 	20. október 2014
 	 * Markmið: 	DrawerItemClickListener erfir frá OnItemClickListener og
-	 * 				framkvæmir 
+	 * 				framkvæmir aðgerðir þegar notandi ýtir á hlut
+	 * 				úr navigation drawer
 	 */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    	@Override
     	//Fall sem velur fragment úr navigation drawer
-        @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             selectItem(position);
         }
@@ -235,18 +237,28 @@ public class MainActivity extends Activity {
         mDrawerLayout.closeDrawer(mDrawerList);
     }
     
+    //Notkun: searchClick(view)
+    //Eftir:  Hjálparfall fyrir leitina
+    //		  Birtir leitarniðurstöður fyrir þá leit
+    //        sem er í leitarboxinu.
     public void searchClick(View view){
     	((FragmentSearch) fragment).searchClick(view);
     }
 
     @Override
+    //Notkun: setTitle(title)
+    //Eftir: Búið er að setja titilinn í actionBar
+    //		sem titil fragmentsins
     public void setTitle(CharSequence title) {
         mTitle = title;
         getActionBar().setTitle(mTitle);
     }
     
-    /* Called whenever we call invalidateOptionsMenu() */
+    
     @Override
+    //Notkun: onPrepareOptionsMenu(menu)
+    //Eftir: Kallað á þegar við köllum á invalidateOptionsMenu()
+    //		 Felur þau föll sem tengjast núverandi content view (ekki notað í bili)
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
@@ -255,6 +267,8 @@ public class MainActivity extends Activity {
     }
 	
 	@Override
+	//Notkun: onPostCreate(savedInstanceState)
+    //Eftir:  Búið að búa til skúffuna, syncar stöður í togglinu
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
@@ -262,10 +276,10 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    //Notkun: onConfigurationChanged(newConfig)
+    //Eftir:  Búið að breyta configinu í togglinu
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-    
-    
+    } 
 }
