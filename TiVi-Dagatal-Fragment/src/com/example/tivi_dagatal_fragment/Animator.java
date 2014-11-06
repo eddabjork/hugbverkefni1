@@ -1,3 +1,9 @@
+/**
+ * Nafn:	   Edda Björk Konráðsdóttir
+ * Dagsetning: 30. október 2014
+ * Markmið:	   Birta View fallega
+ */
+
 package com.example.tivi_dagatal_fragment;
 
 import android.app.Activity;
@@ -23,6 +29,8 @@ public class Animator extends Animation {
         }
     }
 
+    //Notkun:		 view.applyTransformation(time, transformation)
+    //Eftirskilyrði: Búið er að birta view á tímanum time inní hlutnum t
     protected void applyTransformation(float interpolatedTime, Transformation t) {
         super.applyTransformation(interpolatedTime, t);
         if (interpolatedTime < 1.0f) {
@@ -45,6 +53,8 @@ public class Animator extends Animation {
         }
     }
    
+    //Notkun: 		 view.setHeightForWrapContent(act, view)
+    //Eftirskilyrði: Búið er að rétta hæð á view við aðgerðina activity
     public static void setHeightForWrapContent(Activity activity, View view) {
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);

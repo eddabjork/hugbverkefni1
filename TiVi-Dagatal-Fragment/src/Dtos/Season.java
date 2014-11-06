@@ -1,12 +1,16 @@
 /**
- * Nafn:		Jóhanna Agnes Magnúsdóttir
- * Dagsetning:	23. október 2014
- * Markmið:		Klasinn er hlutur sem geymir upplýsingar um þáttaseríu.
+ * Nafn:		Jï¿½hanna Agnes Magnï¿½sdï¿½ttir
+ * Dagsetning:	23. oktï¿½ber 2014
+ * Markmiï¿½:		Klasinn er hlutur sem geymir upplï¿½singar um ï¿½ï¿½ttaserï¿½u.
  **/
 
 package Dtos;
 
 import java.util.List;
+
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.ImageButton;
 
 public class Season {
 	private String title;
@@ -15,7 +19,6 @@ public class Season {
 	private String url;
 	private String poster;
 	private List<Episode> episodes;
-	
 	public Season(){}
 	
 	public Season(String title){
@@ -25,31 +28,31 @@ public class Season {
 	/*Getters*/
 	
 	//Notkun: seasonNumber = season.getSeasonNumber()
-	//Eftirskilyrði: seasonNumber er númer seríu season.
+	//Eftirskilyrï¿½i: seasonNumber er nï¿½mer serï¿½u season.
 	public int getSeasonNumber() {
 		return seasonNumber;
 	}
 	
 	//Notkun: episodes = season.getTotalEpisodes()
-	//Eftirskilyrði: episodes er fjöldi þátta í season.
+	//Eftirskilyrï¿½i: episodes er fjï¿½ldi ï¿½ï¿½tta ï¿½ season.
 	public int getTotalEpisodes() {
 		return totalEpisodes;
 	}
 		
 	//Notkun: url = show.getUrl()
-	//Eftirskilyrði: url er slóð á þáttaseríu á trakt síðunni.
+	//Eftirskilyrï¿½i: url er slï¿½ï¿½ ï¿½ ï¿½ï¿½ttaserï¿½u ï¿½ trakt sï¿½ï¿½unni.
 	public String getUrl() {
 		return url;
 	}
 	
 	//Notkun: poster = season.getPoster()
-	//Eftirskilyrði: poster er slóð á forsíðumynd þáttaseríu.
+	//Eftirskilyrï¿½i: poster er slï¿½ï¿½ ï¿½ forsï¿½ï¿½umynd ï¿½ï¿½ttaserï¿½u.
 	public String getPoster() {
 		return poster;
 	}
 	
 	//Notkun: episodes = season.getEpisodes()
-	//Eftirskilyrði: episodes eru allir þættirnir í season.
+	//Eftirskilyrï¿½i: episodes eru allir ï¿½ï¿½ttirnir ï¿½ season.
 	public List<Episode> getEpisodes() {
 		return episodes;
 	}
@@ -57,31 +60,31 @@ public class Season {
 	/*Setters*/
 	
 	//Notkun: season.setSeasonNumber(seasonNumber)
-	//Eftirskilyrði: season er sería númer seasonNumber.
+	//Eftirskilyrï¿½i: season er serï¿½a nï¿½mer seasonNumber.
 	public void setSeasonNumber(int seasonNumber) {
 		this.seasonNumber = seasonNumber;
 	}
 	
 	//Notkun: season.setTotalEpisodes(totalEpisodes)
-	//Eftirskilyrði: season hefur totalEpisodes marga þætti.
+	//Eftirskilyrï¿½i: season hefur totalEpisodes marga ï¿½ï¿½tti.
 	public void setTotalEpisodes(int totalEpisodes) {
 		this.totalEpisodes = totalEpisodes;
 	}
 	
 	//Notkun: season.setUrl(url)
-	//Eftirskilyrði: url er slóð á season í trakt client.
+	//Eftirskilyrï¿½i: url er slï¿½ï¿½ ï¿½ season ï¿½ trakt client.
 	public void setUrl(String url) {
 		this.url = url;
 	}
 	
 	//Notkun: season.setPoster(poster)
-	//Eftirskilyrði: poster er url á aðalmynd season.
+	//Eftirskilyrï¿½i: poster er url ï¿½ aï¿½almynd season.
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
 	
 	//Notkun: season.setEpisodes(episodes)
-	//Eftirskilyrði: episodes eru allir þættirnir í season.
+	//Eftirskilyrï¿½i: episodes eru allir ï¿½ï¿½ttirnir ï¿½ season.
 	public void setEpisodes(List<Episode> episodes) {
 		this.episodes = episodes;
 	}

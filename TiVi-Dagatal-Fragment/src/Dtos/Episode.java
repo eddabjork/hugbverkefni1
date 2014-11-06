@@ -1,9 +1,13 @@
 /**
- * Nafn:		Steinunn Friðgeirsdóttir
- * Dagsetning:	2. október 2014
- * Markmið:		Klasinn er hlutur sem geymir upplýsingar um stakan þátt.
+ * Nafn:		Steinunn Friï¿½geirsdï¿½ttir
+ * Dagsetning:	2. oktï¿½ber 2014
+ * Markmiï¿½:		Klasinn er hlutur sem geymir upplï¿½singar um stakan ï¿½ï¿½tt.
  **/
 package Dtos;
+
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Episode {
 	private String title;
@@ -28,73 +32,73 @@ public class Episode {
 	/*Getters*/
 	
 	//Notkun: first = episode.getFirstAired()
-	//Eftirskilyrði: first er frumsýningardagur episode.
+	//Eftirskilyrï¿½i: first er frumsï¿½ningardagur episode.
 	public String getFirstAired() {
 		return firstAired;
 	}
 	
 	//Notkun: imdbId = episode.getImdbId()
-	//Eftirskilyrði: imdbId er IMDb auðkenni episode.
+	//Eftirskilyrï¿½i: imdbId er IMDb auï¿½kenni episode.
 	public String getImdbId() {
 		return imdbId;
 	}
 		
 	//Notkun: number = episode.getNumber()
-	//Eftirskilyrði: number er þáttanúmer episode.
+	//Eftirskilyrï¿½i: number er ï¿½ï¿½ttanï¿½mer episode.
 	public String getNumber() {
 		return number;
 	}
 		
 	//Notkun: overview = episode.getOverview()
-	//Eftirskilyrði: overview er lýsing á episode.
+	//Eftirskilyrï¿½i: overview er lï¿½sing ï¿½ episode.
 	public String getOverview() {
 		return overview;
 	}
 		
 	//Notkun: ratingPer = episode.getRatingPercentage()
-	//Eftirskilyrði: ratingPer er hlutfall einkunna episode.
+	//Eftirskilyrï¿½i: ratingPer er hlutfall einkunna episode.
 	public String getRatingPercentage() {
 		return ratingPercentage;
 	}
 		
 	//Notkun: screen = episode.getScreen()
-	//Eftirskilyrði: screen er mynd úr episode.
+	//Eftirskilyrï¿½i: screen er mynd ï¿½r episode.
 	public String getScreen() {
 		return screen;
 	}
 		
 	//Notkun: season = episode.getSeason()
-	//Eftirskilyrði: season er númer seríu sem episode er í.
+	//Eftirskilyrï¿½i: season er nï¿½mer serï¿½u sem episode er ï¿½.
 	public String getSeason() {
 		return season;
 	}
 		
 	//Notkun: title = episode.getTitle()
-	//Eftirskilyrði: title er titill episode.
+	//Eftirskilyrï¿½i: title er titill episode.
 	public String getTitle() {
 		return title;
 	}
 		
 	//Notkun: id = episode.getTvdbId()
-	//Eftirskilyrði: id er Tvdb auðkenni episode.
+	//Eftirskilyrï¿½i: id er Tvdb auï¿½kenni episode.
 	public String getTvdbId() {
 		return tvdbId;
 	}
 		
 	//Notkun: ratingPer = episode.getRatingPercentage()
-	//Eftirskilyrði: ratingPer er hlutfall einkunna episode.
+	//Eftirskilyrï¿½i: ratingPer er hlutfall einkunna episode.
 	public String getUrl() {
 		return url;
 	}
 		
 	//Notkun: dataTitle = episode.getDataTitle()
-	//Eftirskilyrði: dataTitle er trakt auðkenni episode.
+	//Eftirskilyrï¿½i: dataTitle er trakt auï¿½kenni episode.
 	public String getDataTitle(){
 		return dataTitle;
 	}
 	
 	//Notkun: showTitle = episode.getShowTitle()
-	//Eftirskilyrði: showTitle er titill þáttaraðarinnar sem episode tilheyrir.
+	//Eftirskilyrï¿½i: showTitle er titill ï¿½ï¿½ttaraï¿½arinnar sem episode tilheyrir.
 	public String getShowTitle(){
 		return showTitle;
 	}
@@ -103,74 +107,74 @@ public class Episode {
 	/*Setters*/
 	
 	//Notkun: episode.setFirstAired(firstAired)
-	//Eftirskilyrði: firstAired er frumsýningardagur episode.
+	//Eftirskilyrï¿½i: firstAired er frumsï¿½ningardagur episode.
 	public void setFirstAired(String firstAired) {
 		this.firstAired = firstAired;
 	}
 	
 	//Notkun: episode.setImdbId(id)
-	//Eftirskilyrði: id er IMDb auðkenni episode.
+	//Eftirskilyrï¿½i: id er IMDb auï¿½kenni episode.
 	public void setImdbId(String imdbId) {
 		this.imdbId = imdbId;
 	}
 	
 	//Notkun: episode.setNumber(number)
-	//Eftirskilyrði: number er númer episode í seríu.
+	//Eftirskilyrï¿½i: number er nï¿½mer episode ï¿½ serï¿½u.
 	public void setNumber(String number) {
 		this.number = number;
 	}
 	
 	//Notkun: episode.setOverview(overview)
-	//Eftirskilyrði: overview er lýsing á episode.
+	//Eftirskilyrï¿½i: overview er lï¿½sing ï¿½ episode.
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
 	
 	//Notkun: episode.setRatingPercentage(rat)
-	//Eftirskilyrði: rat er hlutfall einkunna á episode.
+	//Eftirskilyrï¿½i: rat er hlutfall einkunna ï¿½ episode.
 	public void setRatingPercentage(String ratingPercentage) {
 		this.ratingPercentage = ratingPercentage;
 	}
 	
 	//Notkun: episode.setScreen(screen)
-	//Eftirskilyrði: screen er mynd úr episode.
+	//Eftirskilyrï¿½i: screen er mynd ï¿½r episode.
 	public void setScreen(String screen) {
 		this.screen = screen;
 	}
 	
 	//Notkun: episode.setSeason(season)
-	//Eftirskilyrði: season er númer seríu sem episode er í.
+	//Eftirskilyrï¿½i: season er nï¿½mer serï¿½u sem episode er ï¿½.
 	public void setSeason(String season) {
 		this.season = season;
 	}
 	
 	//Notkun: episode.setTitle(title)
-	//Eftirskilyrði: title er titill episode.
+	//Eftirskilyrï¿½i: title er titill episode.
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
 	//Notkun: episode.setTvdbId(id)
-	//Eftirskilyrði: id er Tvdb auðkenni episode.
+	//Eftirskilyrï¿½i: id er Tvdb auï¿½kenni episode.
 	public void setTvdbId(String tvdbId) {
 		this.tvdbId = tvdbId;
 	}
 	
 	//Notkun: episode.setUrl(url)
-	//Eftirskilyrði: url er slóð á episode í trakt client.
+	//Eftirskilyrï¿½i: url er slï¿½ï¿½ ï¿½ episode ï¿½ trakt client.
 	public void setUrl(String url) {
 		this.url = url;
 	}
 	
 	//Notkun: episode.setDataTitle(dataTitle)
-	//Eftirskilyrði: dataTitle er trakt auðkenni episode.
+	//Eftirskilyrï¿½i: dataTitle er trakt auï¿½kenni episode.
 	public void setDataTitle(String dataTitle){
 		this.dataTitle = dataTitle;
 	}
 	
 	
 	//Notkun: episode.setShowTitle(showTitle)
-	//Eftirskilyrði: showTitle er titill þáttaraðarinnar sem episode tilheyrir.
+	//Eftirskilyrï¿½i: showTitle er titill ï¿½ï¿½ttaraï¿½arinnar sem episode tilheyrir.
 	public void setShowTitle(String showTitle){
 		this.showTitle = showTitle;
 	}
