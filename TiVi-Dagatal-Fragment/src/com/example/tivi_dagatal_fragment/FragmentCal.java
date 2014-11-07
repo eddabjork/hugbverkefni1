@@ -17,6 +17,7 @@ import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
+	private Fragment frag;
 	
 	/** Sets the view */
 	@Override
@@ -105,7 +107,7 @@ public class FragmentCal extends Fragment {
 
 		for(int i=0; i<weekDayNames.length; i++){
 			cal.set(Calendar.DAY_OF_WEEK, i+1);
-			setDateLayout(weekDayNames[i], cal, mainLayout);
+			setDateLayout(Integer.toString(Calendar.SUNDAY), cal, mainLayout);
 		}
 	}
 	
@@ -259,8 +261,10 @@ public class FragmentCal extends Fragment {
   	//Eftirskilyrði: Búið að setja inn alla þætti sem eru stilltir á "á dagatali"
 	//				 á réttan stað (þ.e. bæta við í view-ið sem hefur id-ið
 	//				 dagsetninguna þegar þátturinn var frumsýndur)
-	public void fillInEpisode(Episode episode) {		
-		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")";
+	public void fillInEpisode(final Episode episode) {
+		frag = new FragmentEpisode();
+		
+		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")"; //TODO: færa í string.xml!
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);
@@ -269,7 +273,13 @@ public class FragmentCal extends Fragment {
 	    textView.setPadding(20,0,0,0);
 	    textView.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				//Missing
+				((FragmentEpisode) frag).setEpisode(episode);
+				FragmentManager fragmentManager = getFragmentManager();
+		        fragmentManager.beginTransaction()
+		                       .replace(R.id.content_frame, frag)
+		                       .commit();
+		        getActivity().getActionBar().setTitle("Nýr titill");
+		        
 			}
 		});
 	    try {
