@@ -28,9 +28,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -157,20 +157,20 @@ public class FragmentCal extends Fragment {
 		
 		int lastDayOfMonth = Integer.MIN_VALUE;
 		for(int i=0; i<weekDayNames.length; i++){
-			cal.set(Calendar.DAY_OF_WEEK, i+1);
-			setDateLayout(Integer.toString(Calendar.SUNDAY), cal, mainLayout);
+			//cal.set(Calendar.DAY_OF_WEEK, i+1);
 			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 			if(lastDayOfMonth > thisDayOfMonth){
 				addNameOfMonth(cal, mainLayout, false);
 			}
 			setDateLayout(weekDayNames[i], cal, mainLayout);
 			lastDayOfMonth = thisDayOfMonth;
+			cal.add(Calendar.DATE, 1);
 		}
 	}
 	
 	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout, boolean first){
 		TextView month = new TextView(getActivity());
-		if(first) cal.set(Calendar.DAY_OF_WEEK, 1);
+		//if(first) cal.set(Calendar.DAY_OF_WEEK, 1);
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		month.setPadding(10,10,10,10);
 		month.setTextSize(20);
@@ -315,9 +315,9 @@ public class FragmentCal extends Fragment {
 		// Notkun: onPostExecute(episodes)
 		// Eftir:  episodes hafa verið birtir á dagatali
 		protected void onPostExecute(List<Episode> calendarEpisodes) {
-			progressDialog.dismiss();  
+			progressDialog.dismiss();
 			for (Episode episode : calendarEpisodes){
-	        	fillInEpisode(episode);
+				fillInEpisode(episode);
 	        }
 		}
 	}
@@ -332,6 +332,7 @@ public class FragmentCal extends Fragment {
 		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")"; //TODO: færa í string.xml!
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
+		Log.v("episode id ", ""+episodeId);
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);
 		TextView textView = new TextView(getActivity());
 	    textView.setText(title);
@@ -343,14 +344,14 @@ public class FragmentCal extends Fragment {
 		        fragmentManager.beginTransaction()
 		                       .replace(R.id.content_frame, frag)
 		                       .commit();
-		        getActivity().getActionBar().setTitle("Nýr titill");
+		        getActivity().getActionBar().setTitle(episode.getShowTitle());
 		        
 			}
 		});
 	    try {
 	    	linearLayout.addView(textView);
 	    } catch(Exception e) {
-	    	
+	    	Log.v("Náði ekki að setja í linear", "layout");
 	    }
 	}
 	

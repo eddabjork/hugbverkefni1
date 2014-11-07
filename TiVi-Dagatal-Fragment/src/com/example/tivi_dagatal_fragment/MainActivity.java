@@ -168,6 +168,15 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    
+    @Override
+	public void onBackPressed() {
+		FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                       .replace(R.id.content_frame, new FragmentCal())
+                       .commit();
+        setTitle("Dagatal"); //TODO: Breyta í streng úr strings.xml
+	}
 
     
     @Override

@@ -6,8 +6,6 @@
  */
 package com.example.tivi_dagatal_fragment;
 
-import java.util.List;
-
 import Clients.IMDbClient;
 import Dtos.Episode;
 import Dtos.Show;
@@ -21,7 +19,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -37,10 +34,12 @@ public class FragmentEpisode extends Fragment{
 		
 		View view = inflater.inflate(R.layout.fragment_episode, container, false);
 		scrollView = new ScrollView(getActivity());
+		new ShowEpisodeTask().execute(episode);
 		view = scrollView;
 		Log.v("er að búa til ", "episode");
         return view;
 	}
+	
 	
 	public void setEpisode(Episode episode){
 		this.episode = episode;
@@ -52,14 +51,15 @@ public class FragmentEpisode extends Fragment{
      * Dagsetning: 	6. november 2014
      * Markmið: 	?????????????????????????????????????????????????????????????????????????????????????
      */   
-	private class ShowEpisodeTask extends AsyncTask<String, Integer, Episode> {
+	private class ShowEpisodeTask extends AsyncTask<Object, Integer, Episode> {
 		//Notkun: doInBackground(queries)
 		//Eftir:  þáðavinnslu í bakgrunni er lokið
 		//        Í þráðavinnslu hér er kallað á vefþjónustuna
 		//		  og cache búið til eða sótt.
-		protected Episode doInBackground(String... queries) {         
+		protected Episode doInBackground(Object... objects) {         
 			IMDbClient imdb = new IMDbClient();
-			return new Episode();
+			Episode episode = (Episode)objects[0];
+			return episode;
 		}
 		
 		// Notkun: onPreExecute()
@@ -82,23 +82,15 @@ public class FragmentEpisode extends Fragment{
 		//Eftir:  Búið er að taka serchShows listann og
 		//        birta þá ásamt takka til þess að bæta við 
 		//        þáttaröð á dagatal. Listinn er svo birtur.
-		protected void onPostExecute(List<Show> searchShows) {
+		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT);
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
-			for (final Show show : searchShows){
-				TextView textView = new TextView(getActivity());
-				textView.setText(show.getTitle());
-				textView.setLayoutParams(lparams);
-				Button button = new Button(getActivity());
-				button.setText(getResources().getString(R.string.search_add));
-				button.setLayoutParams(lparams);
-				//Bï¿½ta titli og takka ï¿½ linearlayout
-				llv.addView(textView);
-				llv.addView(button);
-			}
+			TextView textView = new TextView(getActivity());
+			textView.setText("Titill þáttarins er " + episode.getTitle());
+			llv.addView(textView);
 			//Bï¿½ta linearlayoutinu ï¿½ scrollview
 			scrollView.addView(llv);
 			//Birta nï¿½ja viewiï¿½
