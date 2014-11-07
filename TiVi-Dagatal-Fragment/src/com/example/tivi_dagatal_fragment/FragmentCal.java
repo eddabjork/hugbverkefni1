@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -90,8 +91,7 @@ public class FragmentCal extends Fragment {
     	scrollLayout.addView(mainLayout);
     	
     	// layout for week navigation buttons
-    	LinearLayout btnLayout = new LinearLayout(getActivity());
-    	btnLayout.setOrientation(LinearLayout.HORIZONTAL);
+    	RelativeLayout btnLayout = new RelativeLayout(getActivity());
     	addWeekNavButtons(btnLayout);
     	scrollLayout.addView(btnLayout);
     	
@@ -100,10 +100,10 @@ public class FragmentCal extends Fragment {
 	
 	// Notkun: addWeekNavButtons(btnLayout)
 	// Eftir:  takkar til að flakka á milli vikna hafa verið settir í btnLayout
-	public void addWeekNavButtons(LinearLayout btnLayout){		
+	public void addWeekNavButtons(RelativeLayout btnLayout){		
 		// go one week back
 		Button leftBtn = new Button(getActivity());
-		leftBtn.setText("left");
+		leftBtn.setText(getResources().getString(R.string.prev_week));
 		leftBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.subtractWeek();
@@ -113,12 +113,14 @@ public class FragmentCal extends Fragment {
                                .replace(R.id.content_frame, new FragmentCal())
                                .commit();
             }
-        });   	
-    	btnLayout.addView(leftBtn);
+        });  
+		RelativeLayout.LayoutParams leftParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+    	leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+    	btnLayout.addView(leftBtn, leftParams);
     	
     	// go one week ahead
 		Button rightBtn = new Button(getActivity());
-    	rightBtn.setText("right");
+    	rightBtn.setText(getResources().getString(R.string.next_week));
     	rightBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.addWeek();
@@ -128,8 +130,10 @@ public class FragmentCal extends Fragment {
                                .replace(R.id.content_frame, new FragmentCal())
                                .commit();
             }
-        });   	
-    	btnLayout.addView(rightBtn);
+        });  	
+    	RelativeLayout.LayoutParams rightParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+    	rightParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+    	btnLayout.addView(rightBtn, rightParams);
 	}
 	
 	//Notkun:		 fillInDates(mainLayout);
@@ -139,11 +143,9 @@ public class FragmentCal extends Fragment {
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
-		
-		// vonandi virkar þetta -> rétt dagsetn hjá Steinunni
+
 		cal.add( Calendar.DAY_OF_WEEK, -(cal.get(Calendar.DAY_OF_WEEK)-1));
-		
-		addNameOfMonth(cal, mainLayout, true);
+		addNameOfMonth(cal, mainLayout);
 		
 		String weekDayNames[] = {
 				getResources().getString(R.string.sun_label),
@@ -160,7 +162,7 @@ public class FragmentCal extends Fragment {
 			//cal.set(Calendar.DAY_OF_WEEK, i+1);
 			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 			if(lastDayOfMonth > thisDayOfMonth){
-				addNameOfMonth(cal, mainLayout, false);
+				addNameOfMonth(cal, mainLayout);
 			}
 			setDateLayout(weekDayNames[i], cal, mainLayout);
 			lastDayOfMonth = thisDayOfMonth;
@@ -168,7 +170,7 @@ public class FragmentCal extends Fragment {
 		}
 	}
 	
-	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout, boolean first){
+	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
 		TextView month = new TextView(getActivity());
 		//if(first) cal.set(Calendar.DAY_OF_WEEK, 1);
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));

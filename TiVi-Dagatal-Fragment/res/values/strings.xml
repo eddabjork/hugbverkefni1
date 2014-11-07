@@ -23,7 +23,7 @@
     <!-- Leitarstrengir -->
     <string name="leita">Leita</string>
     <string name="leitarbox">Leitin hér</string>
-    <string name="search_add">Bæta við Þættirnir mínir</string>
+    <string name="search_add">+</string>
     <string name="take_off_list">Taka af Þættirnir mínir</string>
     
     <!-- Dagatalsstrengir -->
@@ -65,5 +65,8 @@
     <string name="btn_cal">Setja á dagatal</string>
     <string name="btn_info">Upplýsingar</string>
     <string name="btn_delete">Eyða</string>
+    
+    <string name="prev_week">Fyrri vika</string>
+    <string name="next_week">Næsta vika</string>
     
 </resources>

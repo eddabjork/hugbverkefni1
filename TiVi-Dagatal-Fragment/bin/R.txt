@@ -384,10 +384,12 @@ int string mar_label 0x7f0a001e
 int string may_label 0x7f0a0020
 int string mon_label 0x7f0a0016
 int string neg_answer 0x7f0a002a
+int string next_week 0x7f0a0036
 int string nov_label 0x7f0a0026
 int string oct_label 0x7f0a0025
 int string popup_put_cal 0x7f0a0028
 int string pos_answer 0x7f0a0029
+int string prev_week 0x7f0a0035
 int string process_msg_popular 0x7f0a002c
 int string process_title_popular 0x7f0a002b
 int string sat_label 0x7f0a001b
