@@ -10,6 +10,7 @@ package com.example.tivi_dagatal_fragment;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,6 +39,9 @@ public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
 	private Fragment frag;
+	private Date lastSunday = getLastSundayForNumber(MainActivity.getWeek());
+	private Date nextSunday = getNextSundayForNumber(MainActivity.getWeek());
+	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	
 	/** Sets the view */
 	@Override
@@ -45,22 +50,28 @@ public class FragmentCal extends Fragment {
 		
 		scrollView = new ScrollView(getActivity());
 		setLayout();
-		flushCash();
+		flushCache();
 		new CalendarShowsTask().execute();
 
 		view = scrollView;
         return view;
 	}
 	
-	//Notkun:		 flushCash()
+	//Notkun:		 flushCache()
 	//Eftirskilyrði: þáttum á dagatali hefur verið eytt úr cache-minni
-	public void flushCash(){
+	public static void flushCache(){
 		long time = System.currentTimeMillis();
 		long twelveHours = (long) (60000*60*12);
 		if((time - MainActivity.startTime) > twelveHours){
-			MainActivity.cache.remove("calendarEpisodes");
-			Log.v("cache", "Calendar episodes removed from cache");
+			flushCacheNow();
 		}
+	}
+	
+	//Notkun:		 flushCacheNow()
+	//Eftirskilyrði: þáttum á dagatali hefur verið eytt úr cache-minni
+	public static void flushCacheNow(){
+		MainActivity.cache.remove("calendarEpisodes");
+		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
 	//Notkun:		 setLayout();
@@ -69,11 +80,56 @@ public class FragmentCal extends Fragment {
 	public void setLayout(){
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
+		LinearLayout scrollLayout = new LinearLayout(getActivity());
+		scrollLayout.setOrientation(LinearLayout.VERTICAL);
+		
+		// layout for weekdays
     	LinearLayout mainLayout = new LinearLayout(getActivity());
     	mainLayout.setOrientation(LinearLayout.VERTICAL);    	
     	fillInDates(mainLayout);
-
-    	scrollView.addView(mainLayout);
+    	scrollLayout.addView(mainLayout);
+    	
+    	// layout for week navigation buttons
+    	LinearLayout btnLayout = new LinearLayout(getActivity());
+    	btnLayout.setOrientation(LinearLayout.HORIZONTAL);
+    	addWeekNavButtons(btnLayout);
+    	scrollLayout.addView(btnLayout);
+    	
+    	scrollView.addView(scrollLayout);
+	}
+	
+	// Notkun: addWeekNavButtons(btnLayout)
+	// Eftir:  takkar til að flakka á milli vikna hafa verið settir í btnLayout
+	public void addWeekNavButtons(LinearLayout btnLayout){		
+		// go one week back
+		Button leftBtn = new Button(getActivity());
+		leftBtn.setText("left");
+		leftBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	MainActivity.subtractWeek();
+            	flushCacheNow();
+            	FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                               .replace(R.id.content_frame, new FragmentCal())
+                               .commit();
+            }
+        });   	
+    	btnLayout.addView(leftBtn);
+    	
+    	// go one week ahead
+		Button rightBtn = new Button(getActivity());
+    	rightBtn.setText("right");
+    	rightBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	MainActivity.addWeek();
+            	flushCacheNow();
+            	FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                               .replace(R.id.content_frame, new FragmentCal())
+                               .commit();
+            }
+        });   	
+    	btnLayout.addView(rightBtn);
 	}
 	
 	//Notkun:		 fillInDates(mainLayout);
@@ -82,6 +138,12 @@ public class FragmentCal extends Fragment {
     //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
+		
+		// vonandi virkar þetta -> rétt dagsetn hjá Steinunni
+		cal.add( Calendar.DAY_OF_WEEK, -(cal.get(Calendar.DAY_OF_WEEK)-1));
+		
+		addNameOfMonth(cal, mainLayout, true);
 		
 		String weekDayNames[] = {
 				getResources().getString(R.string.sun_label),
@@ -93,22 +155,27 @@ public class FragmentCal extends Fragment {
 				getResources().getString(R.string.sat_label)	
 		};
 		
-		//Calendar.SUNDAY=1
-		//Calendar.MONDAY=2
-		
-		if(Calendar.SUNDAY != 1) {
-			String temp[] = new String[weekDayNames.length];
-			for(int i=0; i<weekDayNames.length-1; i++){
-				temp[i] = weekDayNames[i+1];
-			}
-			temp[weekDayNames.length-1] = weekDayNames[0];
-			weekDayNames = temp;
-		}
-
+		int lastDayOfMonth = Integer.MIN_VALUE;
 		for(int i=0; i<weekDayNames.length; i++){
 			cal.set(Calendar.DAY_OF_WEEK, i+1);
 			setDateLayout(Integer.toString(Calendar.SUNDAY), cal, mainLayout);
+			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			if(lastDayOfMonth > thisDayOfMonth){
+				addNameOfMonth(cal, mainLayout, false);
+			}
+			setDateLayout(weekDayNames[i], cal, mainLayout);
+			lastDayOfMonth = thisDayOfMonth;
 		}
+	}
+	
+	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout, boolean first){
+		TextView month = new TextView(getActivity());
+		if(first) cal.set(Calendar.DAY_OF_WEEK, 1);
+		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
+		month.setPadding(10,10,10,10);
+		month.setTextSize(20);
+		mainLayout.addView(month);
+		mainLayout.addView(makeLine());
 	}
 	
 	//Notkun:		 setDateLayout(dayName, calendar, mainLayout);
@@ -132,13 +199,8 @@ public class FragmentCal extends Fragment {
 		dateDay.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 		dateDay.setGravity(Gravity.CENTER);
 		dateDay.setTextSize(20);
-		TextView dateMonth = new TextView(getActivity());
-		dateMonth.setText(getMonthForInt(cal.get(Calendar.MONTH)));
-		dateMonth.setGravity(Gravity.CENTER);
-		dateMonth.setTextSize(10);
 		dateLayout.addView(dateName);
 		dateLayout.addView(dateDay);
-		dateLayout.addView(dateMonth);
 		
 		LinearLayout episodesLayout = new LinearLayout(getActivity());
 		episodesLayout.setOrientation(LinearLayout.VERTICAL);
@@ -237,7 +299,10 @@ public class FragmentCal extends Fragment {
 	        if(calendarEpisodes == null || calendarEpisodes.size() == 0) {
 		    	Log.v("cache", "Calendar episodes not cached, retrieving new list");
 		    	TraktClient trakt = new TraktClient();
-		        calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0]);
+		        calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0], lastSunday, nextSunday);
+		        for(Episode episode : calendarEpisodes){
+		        	Log.v("episode", episode.getDataTitle());
+		        }
 		    	MainActivity.cache.put("calendarEpisodes", calendarEpisodes);
 		    } else {
 		    	Log.v("cahce", "Cached episodes found");
@@ -304,4 +369,42 @@ public class FragmentCal extends Fragment {
 		}
 		return Integer.parseInt(newStrDate);
     }
+	
+	//Notkun: 		 calendar = nullifyTime(c)
+	//Eftirskilyrði: Tíminn á deginum calendar hefur verið settur á 00:00:00
+	public static Calendar nullifyTime(Calendar c){
+		c.set(Calendar.HOUR_OF_DAY,0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND,0);
+		return c;
+	}
+	
+	//Notkun: 		 date = getLastSundayForNumber(num)
+	//Eftirskilyrði: date er sunnudagur eftir num-1 vikur
+	public static Date getLastSundayForNumber(int num){
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		c.add(Calendar.WEEK_OF_YEAR, num);
+		c = nullifyTime(c);
+		Date lastSunday = c.getTime();
+		format.format(lastSunday);
+		
+		return lastSunday;
+	}
+	
+	//Notkun: 		 date = getNextSundayForNumber(num)
+	//Eftirskilyrði: date er sunnudagur eftir num vikur
+	public static Date getNextSundayForNumber(int num){
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		c.add(Calendar.DATE, 7);
+		c.add(Calendar.WEEK_OF_YEAR, num);
+		c = nullifyTime(c);
+		Date nextSunday = c.getTime();
+		format.format(nextSunday);
+		
+		return nextSunday;
+	}
 }

@@ -55,27 +55,6 @@ public class FragmentList extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_cal, container, false);
-		
-		/******TEST EPISODES
-		DbUtils dbHelper = new DbUtils(getActivity());
-		Show show1 = new Show();
-        show1.setTitle("Flash");
-        show1.setDataTitle("the-flash-2014");
-        show1.setPoster("kallaposter1");
-        dbHelper.saveShow(show1);
-        //
-		Show show2 = new Show();
-        show2.setTitle("Big Bang Theory");
-        show2.setDataTitle("big-bang-theory");
-        show2.setPoster("kallaposter2");
-        dbHelper.saveShow(show2);
-        //
-        Show show3 = new Show();
-        show3.setTitle("Arrow");
-        show3.setDataTitle("arrow");
-        show3.setPoster("kallaposter3");
-        dbHelper.saveShow(show3);
-        END TEST****/
         
 		mainScrollView = new MainScrollView(getActivity());
 		new GetAllShowsTask().execute();
@@ -127,35 +106,36 @@ public class FragmentList extends Fragment {
 	//Notkun:		 calButton = getCalButton(show)
   	//EftirskilyrÃ°i: calButton er takki sem sÃ©r um Ã° bÃ¦ta/taka Ã¾Ã¡ttinn show
 	//				 af dagatali
-	public Button getCalButton(final Show show){
-		final Button calendarButton = new Button(getActivity());
+	public ImageButton getCalButton(final Show show){
+		final ImageButton calendarButton = new ImageButton(getActivity());
 		DbUtils dbHelper = new DbUtils(getActivity());
 		// 0 -> onCal=false; 1 -> onCal=true
 		boolean onCal = dbHelper.isOnCal(show);
 		if(onCal) {
-			calendarButton.setText(getResources().getString(R.string.btn_rem_cal));
+			calendarButton.setImageResource(R.drawable.rem_cal_btn);
 			calendarButton.setTag(1);
 		}
 		else {
-			calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+			calendarButton.setImageResource(R.drawable.put_cal_btn);
 			calendarButton.setTag(0);
 		}
-		calendarButton.setTextSize(10);
 		calendarButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 				final int status =(Integer) view.getTag();
 				if(status == 1) {
 					removeFromCal(show);
 					view.setTag(0);
-					calendarButton.setText(getResources().getString(R.string.btn_put_cal));
+					calendarButton.setImageResource(R.drawable.put_cal_btn);
 				}
 				else {
 					addToCal(show);
 					view.setTag(1);
-					calendarButton.setText(getResources().getString(R.string.btn_rem_cal));	
+					calendarButton.setImageResource(R.drawable.rem_cal_btn);
 				}
             }
         });
+		calendarButton.setPadding(3,6,3,6);
+		calendarButton.setBackgroundColor(Color.TRANSPARENT);
 		return calendarButton;
 	}
 	
@@ -266,7 +246,7 @@ public class FragmentList extends Fragment {
 		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
 		//				 og sÃ½na Ã­ ÃžÃ¦ttirnir mÃ­nir lista. BÃºiÃ° er aÃ° setja
 		//				 upp ÃºtlitiÃ° fyrir ÃžÃ¦ttirnir mÃ­nir lista
-		protected void onPostExecute(Show show) {
+		protected void onPostExecute(final Show show) {
 			RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 			
 			TextView title = new TextView(getActivity());
@@ -275,26 +255,24 @@ public class FragmentList extends Fragment {
 			
 			final Show _show = show;
 			
-			Button calendarButton = getCalButton(show);
+			ImageButton calendarButton = getCalButton(show);
 			calendarButton.setId(1);
-			calendarButton.setBackgroundResource(R.drawable.pretty_button);
-			calendarButton.setPadding(5,0,5,0);
 			
-			Button deleteButton = new Button(getActivity());
+			ImageButton deleteButton = new ImageButton(getActivity());
 			deleteButton.setId(2);
-			deleteButton.setText(getResources().getString(R.string.btn_delete));
-			deleteButton.setTextSize(10);
+			deleteButton.setImageResource(R.drawable.del_btn);
+			deleteButton.setPadding(3,6,3,6);
+			deleteButton.setBackgroundColor(Color.TRANSPARENT);
 			deleteButton.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View view) {
-	            	removeFromMyEpisodes(_show);
+	            public void onClick(View view) {
+	            	removeFromMyEpisodes(show);
 	            }
 	        });
-			deleteButton.setBackgroundResource(R.drawable.pretty_button);
-			deleteButton.setPadding(5,0,5,0);
 			
-			ImageButton infoButton = new ImageButton(getActivity());
+			final ImageButton infoButton = new ImageButton(getActivity());
 			infoButton.setId(3);
 			infoButton.setImageResource(R.drawable.down_arrow);
+			infoButton.setPadding(3,6,3,6);
 			infoButton.setBackgroundColor(Color.TRANSPARENT);
 			
 			final ScrollView scrollView = new ScrollView(getActivity());
@@ -351,9 +329,11 @@ public class FragmentList extends Fragment {
 	                if(open.contains(""+infoMain.getId())) {
 	                    animation = new Animator(infoMain, 500, 1);
 	                    open.remove(""+infoMain.getId());
+	                    infoButton.setImageResource(R.drawable.down_arrow);
 	                } else {
 	                    animation = new Animator(infoMain, 500, 0);
 	                    open.add(""+infoMain.getId());
+	                    infoButton.setImageResource(R.drawable.up_arrow);
 	                }
 	                infoMain.startAnimation(animation);
 				}
@@ -371,7 +351,6 @@ public class FragmentList extends Fragment {
 			calParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			delParams.addRule(RelativeLayout.LEFT_OF, 3);
 			delParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			delParams.setMargins(5,5,0,0);
 			infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
 			

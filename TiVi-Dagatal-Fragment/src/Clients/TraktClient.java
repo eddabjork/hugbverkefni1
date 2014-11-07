@@ -29,54 +29,16 @@ import android.util.Log;
 public class TraktClient {
 	
 	private String APIkey = "1b7308cb59d642b6548e8c8da531695b";
-	private Date lastSunday = getLastSunday();
-	private Date nextSunday = getNextSunday();
-	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
 	private List<Show> searchShows = new ArrayList<Show>();
 	private List<Episode> calendarEpisodes = new ArrayList<Episode>();
 	private List<String> calendarSeasonsForShow = new ArrayList<String>();
 	private Show showInfo = new Show();
 	private List<Season> seasonsForShowInfo = new ArrayList<Season>();
 	private List<Show> popularShows = new ArrayList<Show>();
+	private List<Show> relatedShows = new ArrayList<Show>();
+	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	
 	public TraktClient(){}
-	
-	//Notkun: 		 date = getLastSunday()
-	//Eftirskilyrði: date er síðastliðinn sunnudagur
-	public static Date getLastSunday(){
-		Calendar c = Calendar.getInstance();
-		c.setTime(new Date());
-		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		c = nullifyTime(c);
-		Date lastSunday = c.getTime();
-		format.format(lastSunday);
-		
-		return lastSunday;
-	}
-	
-	//Notkun: 		 date = getNextSunday()
-	//Eftirskilyrði: date er næstkomandi sunnudagur
-	public static Date getNextSunday(){
-		Calendar c = Calendar.getInstance();
-		c.setTime(new Date());
-		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		c.add(Calendar.DATE, 7);
-		c = nullifyTime(c);
-		Date nextSunday = c.getTime();
-		format.format(nextSunday);
-		
-		return nextSunday;
-	}
-	
-	//Notkun: 		 calendar = nullifyTime(c)
-	//Eftirskilyrði: Tíminn á deginum calendar hefur verið settur á 00:00:00
-	public static Calendar nullifyTime(Calendar c){
-		c.set(Calendar.HOUR_OF_DAY,0);
-		c.set(Calendar.MINUTE, 0);
-		c.set(Calendar.SECOND,0);
-		return c;
-	}
 	
 	//Notkun: 		 shows = searchShow(title)
 	//Eftirskilyrði: shows er listi af þáttum sem eru niðurstöður þegar 
@@ -244,7 +206,7 @@ public class TraktClient {
 	 //Notkun: 		  episodes = getCalendarEpisodes(dataTitles)
 	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
 	 //				  birtir á dagatali
-	 public List<Episode> getCalendarEpisodes(Map<String, String> dataTitles){
+	 public List<Episode> getCalendarEpisodes(Map<String, String> dataTitles, Date fromDate, Date toDate){
 		 for(final String dataTitle : dataTitles.keySet()){
 			 
 			 getSeasonsForShow(dataTitle, false);
@@ -264,7 +226,7 @@ public class TraktClient {
 					final InputStream is = url2.openStream();
 					JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 					try {
-						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle, showTitle, false));
+						calendarEpisodes.addAll(readEpisodesArrayForCalendar(reader, dataTitle, showTitle, false, fromDate, toDate));
 					} finally {
 						reader.close();
 					}
@@ -399,12 +361,12 @@ public class TraktClient {
 	 //Notkun: 		  episodes = readEpisodesArrayForCalendar(reader, showDataTitle)
 	 //Eftirskilyrði: episodes er listi af þáttum sem eiga að vera
 	 //				  birtir á dagatali
-	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo) throws IOException {
+	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo, Date fromDate, Date toDate) throws IOException {
 		List<Episode> episodes = new ArrayList<Episode>();
 		
 		reader.beginArray();
 		while (reader.hasNext()) {
-			Episode episode = readEpisodeForCalendar(reader, showDataTitle, showTitle, forInfo);
+			Episode episode = readEpisodeForCalendar(reader, showDataTitle, showTitle, forInfo, fromDate, toDate);
 			if(episode != null) {
 				episodes.add(episode);
 			}
@@ -415,7 +377,7 @@ public class TraktClient {
 	
 	//Notkun: 		 episode = readEpisodeForCalendar(reader, showDataTitle)
 	//Eftirskilyrði: episode er þáttur sem á að vera birtur á dagatali
-	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo) throws IOException {
+	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo, Date fromDate, Date toDate) throws IOException {
 		Episode episode = new Episode();
 		reader.beginObject();
 		
@@ -464,7 +426,7 @@ public class TraktClient {
 						e.printStackTrace();
 					}
 					
-					if(showDate.after(lastSunday) && showDate.before(nextSunday)) {
+					if((showDate.after(fromDate) && showDate.before(toDate)) || (toDate == null && fromDate == null)) {
 						inTimePeriod = true;
 					}
 				} catch(Exception e){
@@ -645,7 +607,7 @@ public class TraktClient {
 			final InputStream is = url.openStream();
 			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 			try {
-				episodes.addAll(readEpisodesArrayForCalendar(reader, show.getDataTitle(), show.getTitle(), true));
+				episodes.addAll(readEpisodesArrayForCalendar(reader, show.getDataTitle(), show.getTitle(), true, null, null));
 				season.setEpisodes(episodes);
 			} finally {
 				reader.close();
@@ -678,6 +640,33 @@ public class TraktClient {
 			}
 		} catch (IOException e) {
 			Log.e("API error", "Could not find trending shows");
+			e.printStackTrace();
+		}
+		
+		return popularShows;	
+	}
+	
+	//Notkun: 		 shows = relatedShows(show)
+	//Eftirskilyrði: shows er listi af þáttum sem eru svipaðir show
+	public List<Show> relatedShows(Show show) {			
+        URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/show/related.json/" + APIkey + "/" + show.getDataTitle());
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for related shows");
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				popularShows = readShowsArrayForSearch(reader);
+			} finally {
+				reader.close();
+			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find related shows");
 			e.printStackTrace();
 		}
 		

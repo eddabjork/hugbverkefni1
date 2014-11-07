@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
     private Fragment fragment;
     public static LruCache cache;
     public static long startTime = System.currentTimeMillis();
+    private static int week = 0;
     
     
     //Birtir tóman skjá og setur nawigationDrawer upp
@@ -282,4 +283,22 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     } 
+    
+    // Notkun: week = getWeek()
+    // Eftir:  week er vikan sem er verið að skoða á dagatali
+    public static int getWeek(){
+    	return week;
+    }
+    
+    // Notkun: addWeek()
+    // Eftir:  einni viku hefur verið bætt við week
+    public static void addWeek(){
+    	week += 1;
+    }
+    	
+    // Notkun: subtractWeek()
+    // Eftir:  ein vika hefur verið dregin frá week
+    public static void subtractWeek(){
+    	week -= 1;
+    }
 }
