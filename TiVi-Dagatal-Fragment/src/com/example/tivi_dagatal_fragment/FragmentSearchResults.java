@@ -15,6 +15,7 @@ import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +23,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -81,21 +84,21 @@ public class FragmentSearchResults extends Fragment{
 		//          Í listanum eru líka takkar sem hægt er að ýta á og 
 		// 	        þá bætist þáttur í gagnagrunn. 
 		protected void onPostExecute(List<Show> searchShows) {
-			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
-			LayoutParams.MATCH_PARENT);
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
+			
 			for (final Show show : searchShows){
-				TextView textView = new TextView(getActivity());
-				textView.setText(show.getTitle());
-				Log.v("ï¿½ï¿½ttur heitir ", show.getTitle());
-				textView.setLayoutParams(lparams);
-				Button button = new Button(getActivity());
-				button.setText(getResources().getString(R.string.search_add));
-				button.setLayoutParams(lparams);
-				button.setOnClickListener(new View.OnClickListener() {
-					//Notkun: dbHelper.saveShow(show)
-					//Eftirskilyrï¿½i: show hefur veriï¿½ bï¿½tt ï¿½ gagnasafn eÃ°a tekiÃ° Ãºr Ã¾vÃ­
+				RelativeLayout episodeLayout = new RelativeLayout(getActivity());
+				
+				TextView title = new TextView(getActivity());
+				title.setText(show.getTitle());
+				title.setId(1);
+				Log.v("Thattur heitir ", show.getTitle());
+				
+				Button addButton = new Button(getActivity());
+				addButton.setId(2);
+				addButton.setText(getResources().getString(R.string.search_add));
+				addButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View view) {
 		            	if(((Button)view).getText().toString() == getResources().getString(R.string.search_add)) {
 		            		dbHelper.saveShow(show);
@@ -107,9 +110,28 @@ public class FragmentSearchResults extends Fragment{
 		            	}
 		            }
 		        });
-				//Bï¿½ta titli og takka ï¿½ linearlayout
-				llv.addView(textView);
-				llv.addView(button);
+				
+				ImageButton infoButton = new ImageButton(getActivity());
+				infoButton.setId(3);
+				infoButton.setImageResource(R.drawable.down_arrow);
+				infoButton.setBackgroundColor(Color.TRANSPARENT);
+				
+				//setja layout params á alla
+				RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				RelativeLayout.LayoutParams addParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+				titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+				titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+				infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+				infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+				addParams.addRule(RelativeLayout.LEFT_OF, 3);
+				addParams.addRule(RelativeLayout.CENTER_VERTICAL);
+				
+				episodeLayout.addView(title, titleParams);
+				episodeLayout.addView(addButton, addParams);
+				episodeLayout.addView(infoButton, infoParams);
+				llv.addView(episodeLayout);
 			}
 			//Bï¿½ta linearlayoutinu ï¿½ scrollview
 			scrollView.addView(llv);
