@@ -12,11 +12,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import Clients.TraktClient;
 import Data.DbUtils;
-import Dtos.Episode;
 import Dtos.Season;
 import Dtos.Show;
 import android.app.Fragment;
@@ -33,8 +31,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -112,30 +110,42 @@ public class FragmentList extends Fragment {
 		// 0 -> onCal=false; 1 -> onCal=true
 		boolean onCal = dbHelper.isOnCal(show);
 		if(onCal) {
-			calendarButton.setImageResource(R.drawable.rem_cal_btn);
+			calendarButton.setImageResource(R.drawable.on_cal);
 			calendarButton.setTag(1);
 		}
 		else {
-			calendarButton.setImageResource(R.drawable.put_cal_btn);
+			calendarButton.setImageResource(R.drawable.off_cal);
 			calendarButton.setTag(0);
 		}
-		calendarButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-				final int status =(Integer) view.getTag();
-				if(status == 1) {
-					removeFromCal(show);
-					view.setTag(0);
-					calendarButton.setImageResource(R.drawable.put_cal_btn);
-				}
-				else {
-					addToCal(show);
-					view.setTag(1);
-					calendarButton.setImageResource(R.drawable.rem_cal_btn);
-				}
-            }
-        });
+		
 		calendarButton.setPadding(3,6,3,6);
 		calendarButton.setBackgroundColor(Color.TRANSPARENT);
+		
+		calendarButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent me) {
+				if (me.getAction() == MotionEvent.ACTION_DOWN) {
+					calendarButton.setColorFilter(Color.argb(150, 155, 155, 155));
+					return true;
+				} else if (me.getAction() == MotionEvent.ACTION_UP) {
+					calendarButton.setColorFilter(Color.argb(0, 155, 155, 155));
+					final int status =(Integer) view.getTag();
+					if(status == 1) {
+						removeFromCal(show);
+						view.setTag(0);
+						calendarButton.setImageResource(R.drawable.off_cal);
+					}
+					else {
+						addToCal(show);
+						view.setTag(1);
+						calendarButton.setImageResource(R.drawable.on_cal);
+					}
+					return true;
+				}
+				return false;
+			}
+			
+		});
 		return calendarButton;
 	}
 	
@@ -182,7 +192,7 @@ public class FragmentList extends Fragment {
   	//EftirskilyrÃ°i: image er poster mynd fyrir show og er Ã­ rÃ©ttri stÃ¦rÃ°
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
-		image.setImageResource(R.drawable.temp_icon);
+		image.setImageResource(R.drawable.app_icon);
 		//String imgUrl = show.getPoster();
 		//new DownloadImageTask(image).execute(imgUrl);
 		//image.buildDrawingCache();
@@ -260,7 +270,7 @@ public class FragmentList extends Fragment {
 			
 			ImageButton deleteButton = new ImageButton(getActivity());
 			deleteButton.setId(2);
-			deleteButton.setImageResource(R.drawable.del_btn);
+			deleteButton.setImageResource(R.drawable.delete);
 			deleteButton.setPadding(3,6,3,6);
 			deleteButton.setBackgroundColor(Color.TRANSPARENT);
 			deleteButton.setOnClickListener(new View.OnClickListener() {

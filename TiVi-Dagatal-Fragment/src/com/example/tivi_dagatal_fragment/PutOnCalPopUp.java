@@ -34,7 +34,7 @@ public class PutOnCalPopUp extends DialogFragment{
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	return new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.temp_icon)
+                .setIcon(R.drawable.app_icon)
                 .setTitle(title)
                 .setPositiveButton(R.string.neg_answer,
                     new DialogInterface.OnClickListener() {

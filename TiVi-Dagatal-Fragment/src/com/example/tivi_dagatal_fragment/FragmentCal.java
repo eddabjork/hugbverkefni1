@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
@@ -102,8 +103,8 @@ public class FragmentCal extends Fragment {
 	// Eftir:  takkar til að flakka á milli vikna hafa verið settir í btnLayout
 	public void addWeekNavButtons(RelativeLayout btnLayout){		
 		// go one week back
-		Button leftBtn = new Button(getActivity());
-		leftBtn.setText(getResources().getString(R.string.prev_week));
+		ImageButton leftBtn = new ImageButton(getActivity());
+		leftBtn.setImageResource(R.drawable.previous_week);
 		leftBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.subtractWeek();
@@ -113,14 +114,15 @@ public class FragmentCal extends Fragment {
                                .replace(R.id.content_frame, new FragmentCal())
                                .commit();
             }
-        });  
+        }); 
+		leftBtn.setBackgroundColor(Color.TRANSPARENT);
 		RelativeLayout.LayoutParams leftParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
     	leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
     	btnLayout.addView(leftBtn, leftParams);
     	
     	// go one week ahead
-		Button rightBtn = new Button(getActivity());
-    	rightBtn.setText(getResources().getString(R.string.next_week));
+		ImageButton rightBtn = new ImageButton(getActivity());
+    	rightBtn.setImageResource(R.drawable.next_week);
     	rightBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.addWeek();
@@ -130,7 +132,8 @@ public class FragmentCal extends Fragment {
                                .replace(R.id.content_frame, new FragmentCal())
                                .commit();
             }
-        });  	
+        });
+    	rightBtn.setBackgroundColor(Color.TRANSPARENT);
     	RelativeLayout.LayoutParams rightParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
     	rightParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
     	btnLayout.addView(rightBtn, rightParams);
