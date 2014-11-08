@@ -131,6 +131,7 @@ public class FragmentPopular extends Fragment {
 				llv.addView(episodeLayout);
 			}
 			scrollView.addView(llv);
+			progressDialog.dismiss();
 		}
 	}
 	
