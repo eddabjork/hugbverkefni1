@@ -35,7 +35,7 @@ public class FragmentEpisode extends Fragment{
 		View view = inflater.inflate(R.layout.fragment_episode, container, false);
 		scrollView = new ScrollView(getActivity());
 		new ShowEpisodeTask().execute(episode);
-		view = scrollView;
+		//view = scrollView;
 		Log.v("er að búa til ", "episode");
         return view;
 	}
@@ -54,8 +54,7 @@ public class FragmentEpisode extends Fragment{
 	private class ShowEpisodeTask extends AsyncTask<Object, Integer, Episode> {
 		//Notkun: doInBackground(queries)
 		//Eftir:  þáðavinnslu í bakgrunni er lokið
-		//        Í þráðavinnslu hér er kallað á vefþjónustuna
-		//		  og cache búið til eða sótt.
+		//        ????????????????????????????????????????????????????????????????????????????????????????
 		protected Episode doInBackground(Object... objects) {         
 			IMDbClient imdb = new IMDbClient();
 			Episode episode = (Episode)objects[0];
@@ -79,12 +78,10 @@ public class FragmentEpisode extends Fragment{
 		}
 		
 		//Notkun: onPostExecute(searchShows)
-		//Eftir:  Búið er að taka serchShows listann og
-		//        birta þá ásamt takka til þess að bæta við 
-		//        þáttaröð á dagatal. Listinn er svo birtur.
+		//Eftir:  ????????????????????????????????????????????????????????????????
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
-			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+			/*LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT);
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
@@ -92,9 +89,36 @@ public class FragmentEpisode extends Fragment{
 			textView.setText("Titill þáttarins er " + episode.getTitle());
 			llv.addView(textView);
 			//Bï¿½ta linearlayoutinu ï¿½ scrollview
-			scrollView.addView(llv);
+			scrollView.addView(llv);*/
 			//Birta nï¿½ja viewiï¿½
 			//setContentView(sv);
+			
+			//TODO: Bretya öllu í xml strengi
+			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT);
+			TextView title = (TextView) getView().findViewById(R.id.title);
+			title.setText("Titill þáttar: " + episode.getTitle());
+			
+			TextView rating = (TextView) getView().findViewById(R.id.rating);
+			rating.setText("Einkunn: " + episode.getImdbId()); //TODO: TEMP
+			
+			TextView season = (TextView) getView().findViewById(R.id.season);
+			season.setText("Sería: " + episode.getSeason()); 
+			
+			TextView number = (TextView) getView().findViewById(R.id.number);
+			number.setText("Þáttur: " + episode.getNumber());
+			
+			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
+			firstAired.setText("Fyrst sýndur: " + episode.getFirstAired()); //TODO: setja upp á eðlilegt form
+			
+			TextView overview = (TextView) getView().findViewById(R.id.overview);
+			overview.setText("Um söguþráð þáttar: " + episode.getOverview()); 
+		}
+		
+		public TextView addTextView(String text){
+			TextView textView = new TextView(getActivity());
+			textView.setText(text);
+			return textView;
 		}
 	}
 	

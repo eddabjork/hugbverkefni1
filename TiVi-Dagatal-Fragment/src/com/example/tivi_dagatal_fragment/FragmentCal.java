@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import Clients.TraktClient;
 import Data.DbUtils;
@@ -145,6 +146,11 @@ public class FragmentCal extends Fragment {
     //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
+		if(cal.getFirstDayOfWeek() == 2)
+		{
+			Log.v("-1 stuffið = ", cal.get(Calendar.DAY_OF_WEEK)-1+"");
+			//TODO: Do stuff
+		}
 		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
 
 		cal.add( Calendar.DAY_OF_WEEK, -(cal.get(Calendar.DAY_OF_WEEK)-1));
@@ -404,12 +410,25 @@ public class FragmentCal extends Fragment {
 	public static Date getNextSundayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
+		Log.v("Prenta next sunday", c+"");
+		int firstDayOfWeek = c.getFirstDayOfWeek();
+		Log.v("Prenta first day of week", firstDayOfWeek+"");
+		//TimeZone timeZone = c.getTimeZone();
+		//TimeZone.setDefault(timeZone);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		Log.v("Prenta Calendar sunday", Integer.toString(Calendar.SUNDAY));
+		Log.v("Prenta Day of week", Integer.toString(Calendar.DAY_OF_WEEK));
 		c.add(Calendar.DATE, 7);
+		Log.v("Prenta Calendar date", Integer.toString(Calendar.DATE));
 		c.add(Calendar.WEEK_OF_YEAR, num);
+		Log.v("Prenta Calendar week of year", Integer.toString(Calendar.WEEK_OF_YEAR));
+		Log.v("Prenta út num sem við tökum inn", Integer.toString(num));
 		c = nullifyTime(c);
+		Log.v("Prenta next sunday", c+"");
 		Date nextSunday = c.getTime();
+		Log.v("Prenta nextSunday breytuna", nextSunday+"");
 		format.format(nextSunday);
+		Log.v("Prenta nextSunday breytuna formattaða", nextSunday+"");
 		
 		return nextSunday;
 	}
