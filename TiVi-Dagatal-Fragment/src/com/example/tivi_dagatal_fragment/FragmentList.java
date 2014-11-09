@@ -94,11 +94,122 @@ public class FragmentList extends Fragment {
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
 	    	for(Show show : showList){
-	    		new ShowInfoTask().execute(show);
+	    		//new ShowInfoTask().execute(show);
+	    		addShow(show);
 	    	}
 	    	
 	    	mainScrollView.addView(mainLayout);
 		}
+	}
+	
+	public void addShow(Show show) {
+		RelativeLayout episodeLayout = new RelativeLayout(getActivity());
+		
+		TextView title = new TextView(getActivity());
+		title.setText(show.getTitle());
+		title.setPadding(10,0,0,0);
+		
+		final Show _show = show;
+		
+		ImageButton calendarButton = getCalButton(show);
+		calendarButton.setId(1);
+		
+		ImageButton deleteButton = new ImageButton(getActivity());
+		deleteButton.setId(2);
+		deleteButton.setImageResource(R.drawable.delete);
+		deleteButton.setPadding(3,6,3,6);
+		deleteButton.setBackgroundColor(Color.TRANSPARENT);
+		deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	removeFromMyEpisodes(_show);
+            }
+        });
+		
+		final ImageButton infoButton = new ImageButton(getActivity());
+		infoButton.setId(3);
+		infoButton.setImageResource(R.drawable.down_arrow);
+		infoButton.setPadding(3,6,3,6);
+		infoButton.setBackgroundColor(Color.TRANSPARENT);
+		
+		final ScrollView scrollView = new ScrollView(getActivity());
+		final LinearLayout infoLayout = new LinearLayout(getActivity());
+		infoLayout.setOrientation(LinearLayout.VERTICAL);
+		final LinearLayout infoMain = new LinearLayout(getActivity());
+		infoMain.setOrientation(LinearLayout.VERTICAL);
+		
+		
+		//Þættir:
+		/*List<Season> seasons = show.getSeasons();
+		Collections.reverse(seasons);
+		for(Season season : seasons) {
+			TextView seasonbutton = new TextView(getActivity());
+			seasonbutton.setText(getResources().getString(R.string.serie) + season.getSeasonNumber());
+			seasonbutton.setGravity(Gravity.CENTER);
+			seasonbutton.setTextSize(20);
+			infoLayout.addView(seasonbutton);
+			final TextView episodes = new TextView(getActivity());
+			episodes.setVisibility(View.GONE);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+			episodes.setLayoutParams(layoutParams);
+			episodes.setGravity(Gravity.CENTER);
+			episodes.setId(getNextId());
+			episodes.setText("hér koma þættir");
+			infoLayout.addView(episodes);
+			Animator.setHeightForWrapContent(getActivity(), episodes);
+			seasonbutton.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View view) {
+					mainScrollView.setScrollingEnabled(false);
+					Animator animation = null;
+	                if(open.contains(""+episodes.getId())) {
+	                    animation = new Animator(episodes, 500, 1);
+	                    open.remove(""+episodes.getId());
+	                } else {
+	                    animation = new Animator(episodes, 500, 0);
+	                    open.add(""+episodes.getId());
+	                }
+	                episodes.startAnimation(animation);
+				}
+			});
+		}*/
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		infoLayout.setLayoutParams(layoutParams);
+		infoLayout.setGravity(Gravity.CENTER);
+		infoMain.setLayoutParams(layoutParams);
+		infoMain.setVisibility(View.GONE);
+		infoMain.setId(getNextId());
+		infoButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				mainScrollView.setScrollingEnabled(true);
+				_show.setInfoLayout(infoLayout);
+				_show.setInfoMain(infoMain);
+				_show.setScrollView(scrollView);
+				new ShowInfoTask().execute(_show);
+			}
+		});
+		
+		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		//RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(35, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		
+		titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		calParams.addRule(RelativeLayout.LEFT_OF, 2);
+		calParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		delParams.addRule(RelativeLayout.LEFT_OF, 3);
+		delParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		delParams.setMargins(5,5,0,0);
+		infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		
+		episodeLayout.addView(title, titleParams);
+		episodeLayout.addView(calendarButton, calParams);
+		episodeLayout.addView(deleteButton, delParams);
+		episodeLayout.addView(infoButton, infoParams);
+		mainLayout.addView(episodeLayout);
+		mainLayout.addView(infoMain);
+		mainLayout.addView(makeLine());
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
@@ -232,65 +343,39 @@ public class FragmentList extends Fragment {
 		}
 	}
 	
-	/**
-     * Nafn: 	   Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
-     * Dagsetning: 30. oktÃ³ber 2014
-     * MarkmiÃ°:   NÃ¡ Ã­ upplÃ½singar um Ã¾Ã¡ttarÃ¶Ã° og sÃ½na ÃžÃ¦ttirnir mÃ­nir lista
-     * 			   meÃ° upplÃ½singum
+	/*
+     * Nafn: 	   Edda Björk Konráðsdóttir
+     * Dagsetning: 30. október 2014
+     * Markmið:   Ná í upplýsingar um þáttaröð og sýna Þættirnir mínir lista
+     * 			   með upplýsingum
      * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 		//Notkun:		 show = doInBackground(shows)
-		//EftirskilyrÃ°i: show er Ã¾Ã¡tturinn sem inniheldur upplÃ½singar
-		//				 sem nÃ¡Ã° er Ã­ ÃºtfrÃ¡ shows
+		//Eftirskilyrði: show er þátturinn sem inniheldur upplýsingar
+		//				 sem náð er í útfrá shows
 		protected Show doInBackground(Show... shows) {
 			TraktClient client = new TraktClient();
 			Show show = client.getShowInfo(shows[0]);
+			show.setInfoLayout(shows[0].getInfoLayout());
+			show.setInfoMain(shows[0].getInfoMain());
+			show.setScrollView(shows[0].getScrollView());
 			return show;
 		}
 		
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
-		/**************ÃžARF AÃ� SPLITTA ÃžESSU NIÃ�UR**************************/
+		/**************ÞARF AÐ SPLITTA ÞESSU NIÐUR**************************/
 		//Notkun:		 onPostExecute(show)
-		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
-		//				 og sÃ½na Ã­ ÃžÃ¦ttirnir mÃ­nir lista. BÃºiÃ° er aÃ° setja
-		//				 upp ÃºtlitiÃ° fyrir ÃžÃ¦ttirnir mÃ­nir lista
-		protected void onPostExecute(final Show show) {
-			RelativeLayout episodeLayout = new RelativeLayout(getActivity());
-			
-			TextView title = new TextView(getActivity());
-			title.setText(show.getTitle());
-			title.setPadding(10,0,0,0);
-			
-			final Show _show = show;
-			
-			ImageButton calendarButton = getCalButton(show);
-			calendarButton.setId(1);
-			
-			ImageButton deleteButton = new ImageButton(getActivity());
-			deleteButton.setId(2);
-			deleteButton.setImageResource(R.drawable.delete);
-			deleteButton.setPadding(3,6,3,6);
-			deleteButton.setBackgroundColor(Color.TRANSPARENT);
-			deleteButton.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View view) {
-	            	removeFromMyEpisodes(show);
-	            }
-	        });
-			
-			final ImageButton infoButton = new ImageButton(getActivity());
-			infoButton.setId(3);
-			infoButton.setImageResource(R.drawable.down_arrow);
-			infoButton.setPadding(3,6,3,6);
-			infoButton.setBackgroundColor(Color.TRANSPARENT);
-			
-			final ScrollView scrollView = new ScrollView(getActivity());
-			LinearLayout infoLayout = new LinearLayout(getActivity());
-			infoLayout.setOrientation(LinearLayout.VERTICAL);
-			final LinearLayout infoMain = new LinearLayout(getActivity());
-			infoMain.setOrientation(LinearLayout.VERTICAL);
-			
+		//Eftirskilyrði: Búið er að sækja upplýsingar um þáttinn show
+		//				 og sýna í Þættirnir mínir lista.
+		protected void onPostExecute(Show show) {
+			LinearLayout infoLayout = show.getInfoLayout();
+			LinearLayout infoMain = show.getInfoMain();
+			ScrollView scrollView = show.getScrollView();
+			infoLayout.removeAllViews();
+			infoMain.removeAllViews();
+			scrollView.removeAllViews();
 			List<Season> seasons = show.getSeasons();
 			Collections.reverse(seasons);
 			for(Season season : seasons) {
@@ -299,19 +384,15 @@ public class FragmentList extends Fragment {
 				seasonbutton.setGravity(Gravity.CENTER);
 				seasonbutton.setTextSize(20);
 				infoLayout.addView(seasonbutton);
-				final TextView episodes = new TextView(getActivity());
-				episodes.setVisibility(View.GONE);
-				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-				episodes.setLayoutParams(layoutParams);
-				episodes.setGravity(Gravity.CENTER);
-				episodes.setId(getNextId());
-				episodes.setText("hÃ©r koma Ã¾Ã¦ttir");
-				infoLayout.addView(episodes);
-				Animator.setHeightForWrapContent(getActivity(), episodes);
 				seasonbutton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View view) {
 						mainScrollView.setScrollingEnabled(false);
-						Animator animation = null;
+						//kalla á episode þráðinn hér
+						
+						
+						
+						//þetta kemur í episode þræði:
+						/*Animator animation = null;
 		                if(open.contains(""+episodes.getId())) {
 		                    animation = new Animator(episodes, 500, 1);
 		                    open.remove(""+episodes.getId());
@@ -319,58 +400,22 @@ public class FragmentList extends Fragment {
 		                    animation = new Animator(episodes, 500, 0);
 		                    open.add(""+episodes.getId());
 		                }
-		                episodes.startAnimation(animation);
+		                episodes.startAnimation(animation);*/
 					}
 				});
 			}
-			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-			infoLayout.setLayoutParams(layoutParams);
-			infoLayout.setGravity(Gravity.CENTER);
 			scrollView.addView(infoLayout);
-			infoMain.setLayoutParams(layoutParams);
-			infoMain.setVisibility(View.GONE);
-			infoMain.setId(getNextId());
 			infoMain.addView(scrollView);
 			Animator.setHeightForWrapContent(getActivity(), infoMain);
-			infoButton.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View view) {
-					mainScrollView.setScrollingEnabled(true);
-					Animator animation = null;
-	                if(open.contains(""+infoMain.getId())) {
-	                    animation = new Animator(infoMain, 500, 1);
-	                    open.remove(""+infoMain.getId());
-	                    infoButton.setImageResource(R.drawable.down_arrow);
-	                } else {
-	                    animation = new Animator(infoMain, 500, 0);
-	                    open.add(""+infoMain.getId());
-	                    infoButton.setImageResource(R.drawable.up_arrow);
-	                }
-	                infoMain.startAnimation(animation);
-				}
-			});
-			
-			RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			//RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(35, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-			
-			titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-			titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			calParams.addRule(RelativeLayout.LEFT_OF, 2);
-			calParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			delParams.addRule(RelativeLayout.LEFT_OF, 3);
-			delParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-			infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
-			
-			episodeLayout.addView(title, titleParams);
-			episodeLayout.addView(calendarButton, calParams);
-			episodeLayout.addView(deleteButton, delParams);
-			episodeLayout.addView(infoButton, infoParams);
-			mainLayout.addView(episodeLayout);
-			mainLayout.addView(infoMain);
-			mainLayout.addView(makeLine());
+			Animator animation = null;
+            if(open.contains(""+infoMain.getId())) {
+                animation = new Animator(infoMain, 500, 1);
+                open.remove(""+infoMain.getId());
+            } else {
+                animation = new Animator(infoMain, 500, 0);
+                open.add(""+infoMain.getId());
+            }
+            infoMain.startAnimation(animation);
 		}
 	}
 	
