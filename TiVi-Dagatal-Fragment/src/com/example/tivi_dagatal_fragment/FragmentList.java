@@ -9,10 +9,8 @@
 package com.example.tivi_dagatal_fragment;
 
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,18 +28,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -58,7 +54,6 @@ public class FragmentList extends Fragment {
 	private MainScrollView mainScrollView;
 	private LinearLayout mainLayout;
 	private ProgressDialog progressDialog;
-	private FragmentRelated fragmentRelated;
 	private Fragment frag = new FragmentEpisode();
 	
 	/** Sets the view */
@@ -114,25 +109,17 @@ public class FragmentList extends Fragment {
 	}
 	
 	public void addShow(Show show) {
-		Context myContext = getActivity();
-		WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int width = size.x;
-		int pd = (int) width/32;
-		
 		RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 		
 		TextView title = new TextView(getActivity());
 		title.setText(show.getTitle());
-		title.setPadding(pd,0,0,0);
+		title.setPadding(10,0,0,0);
 		
 		final Show _show = show;
 		
 		ImageButton calendarButton = getCalButton(show);
 		calendarButton.setId(1);
-		calendarButton.setPadding(pd,pd,pd,pd);
+		calendarButton.setPadding(10,10,10,10);
 		
 		ImageButton deleteButton = new ImageButton(getActivity());
 		deleteButton.setId(2);
@@ -144,13 +131,13 @@ public class FragmentList extends Fragment {
             	showDialog(_show);
             }
         });
-		deleteButton.setPadding(pd,pd,pd,pd);
+		deleteButton.setPadding(10,10,10,10);
 		
 		final ImageButton infoButton = new ImageButton(getActivity());
 		infoButton.setId(3);
 		infoButton.setImageResource(R.drawable.down_arrow);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
-		infoButton.setPadding(pd,pd,pd,pd);
+		infoButton.setPadding(10,10,10,10);
 		
 		final ScrollView scrollView = new ScrollView(getActivity());
 		final LinearLayout infoLayout = new LinearLayout(getActivity());
@@ -390,10 +377,19 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(banner);
 				
-				//einkunn á imdb
-				TextView grade = new TextView(getActivity());
 				LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				gradeLayout.setMargins(30, 20, 0, 0); //left, top, right, bottom
+				
+				//genres
+				TextView genres = new TextView(getActivity());
+				genres.setLayoutParams(gradeLayout);
+				String genre = TextUtils.join(", ",show.getGenres().toArray());
+				genres.setText(getResources().getString(R.string.genres)+" "+genre);
+				
+				infoLayout.addView(genres);
+				
+				//einkunn á imdb
+				TextView grade = new TextView(getActivity());
 				grade.setLayoutParams(gradeLayout);
 				grade.setText(getResources().getString(R.string.imdb_grade) + " 10");
 				
@@ -406,19 +402,17 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(network);
 				
-				//a hvada degi thatturinn er syndur
-				String airDay = Utils.translateWeekday(show.getAirDay(), getActivity());
+				//á hvaða degi sýndur
 				TextView airday = new TextView(getActivity());
 				airday.setLayoutParams(gradeLayout);
-				airday.setText((getResources().getString(R.string.airday))+" "+airDay);
+				airday.setText((getResources().getString(R.string.airday))+" "+show.getAirDay());
 				
 				infoLayout.addView(airday);
 				
-				//klukkan hvad thatturinn er syndur
-				String airTime = Utils.parseAirTime(show.getAirTime());
+				//klukkan hvað sýndur
 				TextView airtime = new TextView(getActivity());
 				airtime.setLayoutParams(gradeLayout);
-				airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
+				airtime.setText((getResources().getString(R.string.airtime))+" "+ show.getAirTime());
 				
 				infoLayout.addView(airtime);
 				
@@ -433,17 +427,6 @@ public class FragmentList extends Fragment {
 				
 				//svipaðir þættir takki
 				Button relatedShows = new Button(getActivity());
-				relatedShows.setOnClickListener(new View.OnClickListener() {
-					public void onClick(View view) {
-						fragmentRelated = new FragmentRelated();
-						fragmentRelated.setShow(_show);
-						getActivity().setTitle(getResources().getString(R.string.related_shows));
-				        FragmentManager fragmentManager = getFragmentManager();
-				        fragmentManager.beginTransaction()
-				                       .replace(R.id.content_frame, fragmentRelated)
-				                       .commit();
-					}
-				});
 				relatedShows.setText(getResources().getString(R.string.related_shows));
 				
 				infoLayout.addView(relatedShows);

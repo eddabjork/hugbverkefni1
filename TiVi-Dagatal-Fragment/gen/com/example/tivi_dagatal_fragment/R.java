@@ -1111,19 +1111,15 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050048;
+        public static final int action_settings=0x7f050044;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
-        public static final int app_info=0x7f050045;
-        public static final int app_info_title=0x7f050044;
         public static final int beginning=0x7f050011;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int content_frame=0x7f05003d;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
-        public static final int directions=0x7f050043;
-        public static final int directions_title=0x7f050042;
         public static final int disableHome=0x7f050008;
         public static final int drawer_layout=0x7f05003c;
         public static final int dropdown=0x7f05000f;
@@ -1139,8 +1135,8 @@ containing a value of this type.
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
         public static final int left_drawer=0x7f05003e;
-        public static final int leita=0x7f050047;
-        public static final int leitarbox=0x7f050046;
+        public static final int leita=0x7f050043;
+        public static final int leitarbox=0x7f050042;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
@@ -1284,67 +1280,95 @@ containing a value of this type.
         public static final int action_settings=0x7f0a000e;
         public static final int airday=0x7f0a0016;
         public static final int airtime=0x7f0a0017;
-        public static final int app_info=0x7f0a003e;
-        public static final int app_info_title=0x7f0a003d;
+        public static final int app_info_text=0x7f0a0058;
+        public static final int app_info_title=0x7f0a0057;
         public static final int app_name=0x7f0a000d;
-        public static final int apr_label=0x7f0a0023;
-        public static final int aug_label=0x7f0a0027;
+        public static final int apr_label=0x7f0a0024;
+        public static final int aug_label=0x7f0a0028;
         public static final int calendar=0x7f0a0011;
-        public static final int dec_label=0x7f0a002b;
-        public static final int desc_list_item_icon=0x7f0a0018;
-        public static final int directions=0x7f0a003c;
+        public static final int calendar_icon=0x7f0a0050;
+        public static final int calendar_text=0x7f0a004b;
         /**  Upplýsingar 
          */
-        public static final int directions_title=0x7f0a003b;
+        public static final int calendar_title=0x7f0a004a;
+        public static final int dec_label=0x7f0a002c;
+        public static final int desc_list_item_icon=0x7f0a0019;
         public static final int drawer_close=0x7f0a0010;
         public static final int drawer_open=0x7f0a000f;
-        public static final int ep_process_msg=0x7f0a0039;
-        public static final int ep_process_title=0x7f0a0038;
-        public static final int feb_label=0x7f0a0021;
-        public static final int fri_label=0x7f0a001e;
+        public static final int ep_process_msg=0x7f0a0048;
+        public static final int ep_process_title=0x7f0a0047;
+        public static final int feb_label=0x7f0a0022;
+        public static final int fri_en=0x7f0a0039;
+        public static final int fri_is=0x7f0a0032;
+        public static final int fri_label=0x7f0a001f;
+        public static final int genres=0x7f0a0018;
+        public static final int heart_icon=0x7f0a0056;
         public static final int imdb_grade=0x7f0a0012;
-        public static final int jan_label=0x7f0a0020;
-        public static final int jul_label=0x7f0a0026;
-        public static final int jun_label=0x7f0a0025;
-        public static final int list_process_msg=0x7f0a0035;
-        public static final int list_process_title=0x7f0a0034;
-        public static final int mar_label=0x7f0a0022;
-        public static final int may_label=0x7f0a0024;
-        public static final int mon_label=0x7f0a001a;
-        public static final int neg_answer=0x7f0a002e;
+        public static final int info_icon=0x7f0a0052;
+        public static final int jan_label=0x7f0a0021;
+        public static final int jul_label=0x7f0a0027;
+        public static final int jun_label=0x7f0a0026;
+        public static final int list_process_msg=0x7f0a0044;
+        public static final int list_process_title=0x7f0a0043;
+        public static final int list_text1=0x7f0a004d;
+        public static final int list_text2=0x7f0a004e;
+        public static final int list_text3=0x7f0a004f;
+        public static final int list_title=0x7f0a004c;
+        public static final int mar_label=0x7f0a0023;
+        public static final int may_label=0x7f0a0025;
+        public static final int mon_en=0x7f0a0035;
+        public static final int mon_is=0x7f0a002e;
+        public static final int mon_label=0x7f0a001b;
+        public static final int neg_answer=0x7f0a003d;
         public static final int network=0x7f0a0013;
         /**  Leita 
          */
-        public static final int nothing_found=0x7f0a003a;
-        public static final int nov_label=0x7f0a002a;
-        public static final int oct_label=0x7f0a0029;
+        public static final int nothing_found=0x7f0a0049;
+        public static final int nov_label=0x7f0a002b;
+        public static final int oct_label=0x7f0a002a;
         public static final int overview=0x7f0a0014;
-        public static final int popup_del=0x7f0a002f;
+        public static final int popup_del=0x7f0a003e;
         /**  Pop up 
          */
-        public static final int popup_put_cal=0x7f0a002c;
-        public static final int pos_answer=0x7f0a002d;
-        public static final int process_msg_popular=0x7f0a0031;
+        public static final int popup_put_cal=0x7f0a003b;
+        public static final int pos_answer=0x7f0a003c;
+        public static final int process_msg_popular=0x7f0a0040;
         /**  Vinsælir þættir 
          */
-        public static final int process_title_popular=0x7f0a0030;
+        public static final int process_title_popular=0x7f0a003f;
         public static final int related_shows=0x7f0a0015;
-        public static final int sat_label=0x7f0a001f;
+        public static final int sat_en=0x7f0a003a;
+        public static final int sat_is=0x7f0a0033;
+        public static final int sat_label=0x7f0a0020;
         /**  Leit 
          */
-        public static final int search_process_msg=0x7f0a0032;
-        public static final int sep_label=0x7f0a0028;
+        public static final int search_process_msg=0x7f0a0041;
+        public static final int search_text1=0x7f0a0054;
+        public static final int search_text2=0x7f0a0055;
+        public static final int search_title=0x7f0a0053;
+        public static final int sep_label=0x7f0a0029;
         /**  Þættirnir mínir 
          */
-        public static final int serie=0x7f0a0033;
-        public static final int show_process_msg=0x7f0a0037;
-        public static final int show_process_title=0x7f0a0036;
+        public static final int serie=0x7f0a0042;
+        public static final int show_process_msg=0x7f0a0046;
+        public static final int show_process_title=0x7f0a0045;
+        public static final int sun_en=0x7f0a0034;
+        /**   Vikudagar 
+         */
+        public static final int sun_is=0x7f0a002d;
         /**  Dagatalsstrengir 
          */
-        public static final int sun_label=0x7f0a0019;
-        public static final int thu_label=0x7f0a001d;
-        public static final int tue_label=0x7f0a001b;
-        public static final int wed_label=0x7f0a001c;
+        public static final int sun_label=0x7f0a001a;
+        public static final int thu_en=0x7f0a0038;
+        public static final int thu_is=0x7f0a0031;
+        public static final int thu_label=0x7f0a001e;
+        public static final int trash_icon=0x7f0a0051;
+        public static final int tue_en=0x7f0a0036;
+        public static final int tue_is=0x7f0a002f;
+        public static final int tue_label=0x7f0a001c;
+        public static final int wed_en=0x7f0a0037;
+        public static final int wed_is=0x7f0a0030;
+        public static final int wed_label=0x7f0a001d;
     }
     public static final class style {
         /** 

@@ -15,6 +15,13 @@
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
     <string name="calendar">Dagatal</string>
+    <string name="imdb_grade">Einkunn á IMDb:</string>
+    <string name="network">Sýndir á:</string>
+    <string name="overview">Söguþráður:</string>
+    <string name="related_shows">Svipaðir þættir</string>
+    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
+    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
+    <string name="genres">Tegund:</string>
     <array name="nav_drawer_icons">
         <item>@drawable/on_cal</item>
         <item>@drawable/on_list</item>
@@ -72,7 +79,6 @@
     
     <!-- Leit -->
     <string name="search_process_msg">Er að leita..</string>
-    <string name="nothing_found">Engar niðurstöður fundust</string>
     
     <!-- Þættirnir mínir -->
     <string name="serie">Sería </string>
@@ -82,16 +88,12 @@
     <string name="show_process_msg">Upplýsingarnar eru á leiðinni.. bara rólegur Kiefer</string>
     <string name="ep_process_title">Næ í þætti..</string>
     <string name="ep_process_msg">Það er örugglega stutt í þetta</string>
-    <string name="imdb_grade">Einkunn á IMDb:</string>
-    <string name="network">Sýndir á:</string>
-    <string name="overview">Söguþráður:</string>
-    <string name="related_shows">Svipaðir þættir</string>
-    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
-    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
     
+    <!-- Leita -->
+    <string name="nothing_found">Engar niðurstöður fundust</string>
     
     <!-- Upplýsingar -->
-    <string name="calendar_title">Dagatal:</string>
+     <string name="calendar_title">Dagatal:</string>
     <string name="calendar_text">
         \tÁ dagatalinu má sjá viku-dagatal með þeim þáttum sem þú ert að fylgjast með.\n
         \tTil að skoða upplýsingar um einstaka þátt er hægt að ýta á nafn þáttarins í dagatalinu.\n
@@ -121,9 +123,9 @@
     <string name="app_info_text">
         \tAppið er verkefni í áfanganum Hugbúnaðarverkefni 1 í Háskóla 
         Íslands. Kennari áfangans er Ebba Þóra Hvannberg.\n
-        \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir, 
+       \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir,  
         Jóhanna Agnes Magnúsdóttir, Kristín Fjóla Tómasdóttir og Steinunn Friðgeirsdóttir.
-    </string>
+        </string>
     	
     
 </resources>
