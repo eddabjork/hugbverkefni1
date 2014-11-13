@@ -425,7 +425,7 @@ public class FragmentList extends Fragment {
 				Collections.reverse(seasons);
 				for(final Season season : seasons) {
 					TextView seasonbutton = new TextView(getActivity());
-					seasonbutton.setText(getResources().getString(R.string.serie) + season.getSeasonNumber());
+					seasonbutton.setText(getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
 					seasonbutton.setGravity(Gravity.CENTER);
 					seasonbutton.setTextSize(20);
 					infoLayout.addView(seasonbutton);
