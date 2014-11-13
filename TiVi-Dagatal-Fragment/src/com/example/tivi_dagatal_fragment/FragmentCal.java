@@ -57,28 +57,11 @@ public class FragmentCal extends Fragment {
 		
 		scrollView = new ScrollView(getActivity());
 		setLayout();
-		flushCache();
+		VariousUtils.flushCacheAfter12Hours("calendarEpisodes");
 		new CalendarShowsTask().execute();
 
 		view = scrollView;
         return view;
-	}
-	
-	//Notkun:		 flushCache()
-	//Eftirskilyrði: þáttum á dagatali hefur verið eytt úr cache-minni
-	public static void flushCache(){
-		long time = System.currentTimeMillis();
-		long twelveHours = (long) (60000*60*12);
-		if((time - MainActivity.startTime) > twelveHours){
-			flushCacheNow();
-		}
-	}
-	
-	//Notkun:		 flushCacheNow()
-	//Eftirskilyrði: þáttum á dagatali hefur verið eytt úr cache-minni
-	public static void flushCacheNow(){
-		MainActivity.cache.remove("calendarEpisodes");
-		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	
 	//Notkun:		 setLayout();
@@ -113,7 +96,7 @@ public class FragmentCal extends Fragment {
 		leftBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.subtractWeek();
-            	flushCacheNow();
+            	VariousUtils.flushCache("calendarEpisodes");
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                                .replace(R.id.content_frame, new FragmentCal())
@@ -131,7 +114,7 @@ public class FragmentCal extends Fragment {
     	midBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.setCurrentWeek();
-            	flushCacheNow();
+            	VariousUtils.flushCache("calendarEpisodes");
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                                .replace(R.id.content_frame, new FragmentCal())
@@ -149,7 +132,7 @@ public class FragmentCal extends Fragment {
     	rightBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.addWeek();
-            	flushCacheNow();
+            	VariousUtils.flushCache("calendarEpisodes");
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                                .replace(R.id.content_frame, new FragmentCal())
@@ -340,7 +323,7 @@ public class FragmentCal extends Fragment {
 		// Notkun: episodes = doInBackground(dataTitles)
 		// Eftir:  episodes er listi af þáttum sem á að birta á dagatali
 		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
-			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.cache.get("calendarEpisodes");
+			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.getCache().get("calendarEpisodes");
 	        
 	        if(calendarEpisodes == null || calendarEpisodes.size() == 0) {
 		    	Log.v("cache", "Calendar episodes not cached, retrieving new list");
@@ -349,7 +332,7 @@ public class FragmentCal extends Fragment {
 		        for(Episode episode : calendarEpisodes){
 		        	Log.v("episode", episode.getDataTitle());
 		        }
-		    	MainActivity.cache.put("calendarEpisodes", calendarEpisodes);
+		    	MainActivity.getCache().put("calendarEpisodes", calendarEpisodes);
 		    } else {
 		    	Log.v("cahce", "Cached episodes found");
 		    	Log.v("cache", "Cache response size: " + calendarEpisodes.size());

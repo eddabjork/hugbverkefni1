@@ -241,16 +241,14 @@ public class FragmentList extends Fragment {
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
-		MainActivity.cache.remove("calendarEpisodes");
-		Log.v("cache", "Calendar episodes removed from cache");
+		VariousUtils.flushCache("calendarEpisodes");
 	}
 	//Notkun:		 removeFromCal(show);
   	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
-		MainActivity.cache.remove("calendarEpisodes");
-		Log.v("cache", "Calendar episodes removed from cache");
+		VariousUtils.flushCache("calendarEpisodes");
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);
@@ -258,8 +256,7 @@ public class FragmentList extends Fragment {
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
-		MainActivity.cache.remove("calendarEpisodes");
-		Log.v("cache", "Calendar episodes removed from cache");
+		VariousUtils.flushCache("calendarEpisodes");
 		FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, new FragmentList())

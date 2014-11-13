@@ -11,6 +11,7 @@ import java.util.List;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
+import Utils.VariousUtils;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -45,24 +46,13 @@ public class FragmentPopular extends Fragment {
 	//Eftir: Birtir fragmentið sem sýnir vinsæla þætti
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
-		flushCash();
+		VariousUtils.flushCacheAfter12Hours("popularShows");
 		scrollView = new ScrollView(getActivity());
 		new PopularShowsTask().execute();
 		rootView = scrollView;
 		
         return rootView;
     }
-	
-	// Notkun: flushCash()
-	// Eftir:  vinsælum þáttum hafa verið eytt úr cache-minni
-	public void flushCash(){
-		long time = System.currentTimeMillis();
-		long twelveHours = (long) (60000*60*12);
-		if((time - MainActivity.startTime) > twelveHours){
-			MainActivity.cache.remove("popularShows");
-			Log.v("cache", "Popular shows removed from cache");
-		}
-	}
 	
 	//Notkun: onAttach(activity)
 	//Eftir: Búið að tengja gagnagrunn við fragmentið
@@ -86,13 +76,13 @@ public class FragmentPopular extends Fragment {
 		//		  og cache búið til eða sótt.
 		protected List<Show> doInBackground(String... queries) {         
 			TraktClient trackt = new TraktClient();	    	 
-			List<Show> popularShows = (List<Show>) MainActivity.cache.get("popularShows");
+			List<Show> popularShows = (List<Show>) MainActivity.getCache().get("popularShows");
 	        
 	        if(popularShows == null || popularShows.size() == 0) {
 		    	Log.v("cache", "Popular shows not cached, retrieving new list");
 		    	TraktClient trakt = new TraktClient();
 		    	popularShows = trakt.popularShows();
-		    	MainActivity.cache.put("popularShows", popularShows);
+		    	MainActivity.getCache().put("popularShows", popularShows);
 		    } else {
 		    	Log.v("cahce", "Cached shows found");
 		    	Log.v("cache", "Cache shows size: " + popularShows.size());
