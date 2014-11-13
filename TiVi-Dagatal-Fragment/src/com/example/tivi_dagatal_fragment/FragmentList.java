@@ -20,6 +20,7 @@ import Data.DbUtils;
 import Dtos.Episode;
 import Dtos.Season;
 import Dtos.Show;
+import Utils.VariousUtils;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -435,7 +436,7 @@ public class FragmentList extends Fragment {
 						fragmentRelated.setShow(_show);
 						getActivity().setTitle(getResources().getString(R.string.related_shows));
 				        FragmentManager fragmentManager = getFragmentManager();
-				        Utils.addFragmentToStack(fragmentManager, fragmentRelated);
+				        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
 					}
 				});
 
@@ -533,7 +534,7 @@ public class FragmentList extends Fragment {
 						public void onClick(View view) {
 							((FragmentEpisode) frag).setEpisode(episode);
 							FragmentManager fragmentManager = getFragmentManager();
-							Utils.addFragmentToStack(fragmentManager, frag);
+							VariousUtils.addFragmentToStack(fragmentManager, frag);
 					        getActivity().getActionBar().setTitle(episode.getShowTitle());
 					        
 						}

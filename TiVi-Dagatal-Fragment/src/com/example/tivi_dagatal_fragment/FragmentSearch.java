@@ -7,6 +7,7 @@
  */
 package com.example.tivi_dagatal_fragment;
 
+import Utils.VariousUtils;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -53,7 +54,7 @@ public class FragmentSearch extends Fragment {
 		
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
-		Utils.addFragmentToStack(fragmentManager, results);
+		VariousUtils.addFragmentToStack(fragmentManager, results);
 		/*FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.replace(R.id.content_frame, results);
 		fragmentTransaction.addToBackStack(null);

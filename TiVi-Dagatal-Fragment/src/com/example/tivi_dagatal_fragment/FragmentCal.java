@@ -18,6 +18,7 @@ import java.util.Map;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
+import Utils.VariousUtils;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
@@ -375,7 +376,7 @@ public class FragmentCal extends Fragment {
 			public void onClick(View view) {
 				((FragmentEpisode) frag).setEpisode(episode);
 				FragmentManager fragmentManager = getFragmentManager();
-				Utils.addFragmentToStack(fragmentManager, frag);
+				VariousUtils.addFragmentToStack(fragmentManager, frag);
 		        getActivity().getActionBar().setTitle(episode.getShowTitle());
 		        
 			}
