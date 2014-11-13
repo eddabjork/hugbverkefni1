@@ -375,9 +375,7 @@ public class FragmentCal extends Fragment {
 			public void onClick(View view) {
 				((FragmentEpisode) frag).setEpisode(episode);
 				FragmentManager fragmentManager = getFragmentManager();
-		        fragmentManager.beginTransaction()
-		                       .replace(R.id.content_frame, frag)
-		                       .commit();
+				Utils.addFragmentToStack(fragmentManager, frag);
 		        getActivity().getActionBar().setTitle(episode.getShowTitle());
 		        
 			}

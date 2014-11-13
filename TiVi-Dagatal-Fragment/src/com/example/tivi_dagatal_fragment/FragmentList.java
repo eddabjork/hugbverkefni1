@@ -435,9 +435,7 @@ public class FragmentList extends Fragment {
 						fragmentRelated.setShow(_show);
 						getActivity().setTitle(getResources().getString(R.string.related_shows));
 				        FragmentManager fragmentManager = getFragmentManager();
-				        fragmentManager.beginTransaction()
-				                       .add(R.id.content_frame, fragmentRelated)
-				                       .commit();
+				        Utils.addFragmentToStack(fragmentManager, fragmentRelated);
 					}
 				});
 
@@ -535,9 +533,7 @@ public class FragmentList extends Fragment {
 						public void onClick(View view) {
 							((FragmentEpisode) frag).setEpisode(episode);
 							FragmentManager fragmentManager = getFragmentManager();
-					        fragmentManager.beginTransaction()
-					                       .replace(R.id.content_frame, frag)
-					                       .commit();
+							Utils.addFragmentToStack(fragmentManager, frag);
 					        getActivity().getActionBar().setTitle(episode.getShowTitle());
 					        
 						}

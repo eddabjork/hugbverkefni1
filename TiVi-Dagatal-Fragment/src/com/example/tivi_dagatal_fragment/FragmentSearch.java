@@ -52,12 +52,12 @@ public class FragmentSearch extends Fragment {
 		imm.hideSoftInputFromWindow(wordText.getWindowToken(), 0);
 		
 		// Insert the fragment by replacing any existing fragment
-
 		FragmentManager fragmentManager = getFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		Utils.addFragmentToStack(fragmentManager, results);
+		/*FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.replace(R.id.content_frame, results);
 		fragmentTransaction.addToBackStack(null);
-		fragmentTransaction.commit();
+		fragmentTransaction.commit();*/
 	}
 	
 }

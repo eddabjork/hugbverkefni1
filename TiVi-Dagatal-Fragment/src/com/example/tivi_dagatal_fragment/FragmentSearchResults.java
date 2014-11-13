@@ -60,13 +60,6 @@ public class FragmentSearchResults extends Fragment{
         return rootView;
     }
 	
-	/*public void onBack(){
-		FragmentTransaction mFragmentTransaction = getFragmentManager()
-	            .beginTransaction();
-	
-		mFragmentTransaction.addToBackStack(null);
-	}*/
-	
 	//Notkun: onAttach(activity)
 	//Eftir:  búið er að tengja gagnagrunninn við fragmentið
 	public void onAttach(Activity activity) {

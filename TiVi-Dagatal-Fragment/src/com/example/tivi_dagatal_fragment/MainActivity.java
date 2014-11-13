@@ -167,15 +167,6 @@ public class MainActivity extends Activity {
             getFragmentManager().popBackStack();
         }
     }
-    
-    //@Override
-	/*public void onBackPressed() {
-		FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                       .replace(R.id.content_frame, new FragmentCal())
-                       .commit();
-        setTitle(R.string.calendar);
-	}*/
 
     
     @Override

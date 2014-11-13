@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.util.Log;
 
 public class Utils {
@@ -42,5 +44,12 @@ public class Utils {
 		else if (weekday.equals(context.getResources().getString(R.string.sun_en))) 
 			return context.getResources().getString(R.string.sun_is);
 		else return weekday;
+	}
+	
+	public static void addFragmentToStack(FragmentManager manager,Fragment fragment){
+		FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		fragmentTransaction.replace(R.id.content_frame, fragment);
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
 	}
 }
