@@ -17,8 +17,60 @@
 	    
 	    <TextView android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/calendar_text" 
+	        android:text="@string/calendar_text1" 
 	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/next_week" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/right_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/previous_week" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/left_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/calendar_text2" 
+	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/ic_launcher" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/middle_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
 	    
 	    
 	    <TextView android:layout_width="fill_parent"

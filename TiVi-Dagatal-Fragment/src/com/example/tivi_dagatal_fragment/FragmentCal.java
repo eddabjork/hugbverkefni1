@@ -22,14 +22,18 @@ import Utils.VariousUtils;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -222,7 +226,17 @@ public class FragmentCal extends Fragment {
 		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
 		dayLayout.setPadding(16,8,16,8);
 		
+		Context myContext = getActivity();
+		WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int wd = (int) width/9;
+		LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(wd, LinearLayout.LayoutParams.WRAP_CONTENT);
+		
 		LinearLayout dateLayout = new LinearLayout(getActivity());
+		dateLayout.setLayoutParams(layoutParams);
 		dateLayout.setOrientation(LinearLayout.VERTICAL);
 		TextView dateName = new TextView(getActivity());
 		dateName.setText(dayName);
@@ -365,7 +379,12 @@ public class FragmentCal extends Fragment {
 		String season = formatter.format(Integer.parseInt(episode.getSeason()));
 		String number = formatter.format(Integer.parseInt(episode.getNumber()));
 		String episodeNumber = "s"+season+"e"+number;
-		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (" + episodeNumber + ")"; //TODO: færa í string.xml!
+		
+		String text = null;
+		if(!episode.getTitle().equals("TBA")) text = episode.getTitle();
+		else text = "Vantar titil";
+		
+		String title = episode.getShowTitle() + ": " + text + " (" + episodeNumber + ")";
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);

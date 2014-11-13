@@ -96,28 +96,51 @@ public class FragmentEpisode extends Fragment{
 			new DownloadImageTask(image).execute(imgUrl);
 			image.buildDrawingCache();
 			
+			boolean bool = false;
+			boolean bool2 = false;
+			String text = null;
+			
 			TextView title = (TextView) getView().findViewById(R.id.title);
-			title.setText(episode.getTitle());
+			bool = checkText(episode.getTitle());
+			if(bool) text = episode.getTitle();
+			else text = "Vantar titil.";
+			title.setText(text);
 
 			DecimalFormat formatter = new DecimalFormat("00");
 			String season = formatter.format(Integer.parseInt(episode.getSeason()));
 			String number = formatter.format(Integer.parseInt(episode.getNumber()));
 			TextView episodeNumber = (TextView) getView().findViewById(R.id.episodeNumber);
-			episodeNumber.setText("Númer þáttar: s"+season+"e"+number); 
+			bool = checkText(season);
+			bool2 = checkText(number);
+			if (bool && bool2) text = "Númer þáttar: s"+season+"e"+number;
+			else text = "Vantar númer þáttar.";
+			episodeNumber.setText(text); 
 			
 			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
 			Date date = null;
 			try {
 				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
 				String newDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
-				firstAired.setText("Fyrst sýndur: " + newDate);
+				bool = checkText(newDate);
+				if(bool) text = "Fyrst sýndur: " + newDate;
+				else text = "Vantar dagsetningu.";
+				firstAired.setText(text);
 			} catch (ParseException e) {
 				e.printStackTrace();
 				firstAired.setText("Vantar dagsetningu");
 			}
 			
 			TextView overview = (TextView) getView().findViewById(R.id.overview);
-			overview.setText("Lýsing þáttar: " + episode.getOverview()); 
+			bool = checkText(episode.getOverview());
+			if(bool) text = "Lýsing þáttar: " + episode.getOverview();
+			else text = "Vantar lýsingu.";
+			overview.setText(text);  
+		}
+		
+		protected boolean checkText (String string) {
+			if(string == null || string.toString().isEmpty() || string.equals("TBA"))
+				return false;
+			return true;
 		}
 	}
 	

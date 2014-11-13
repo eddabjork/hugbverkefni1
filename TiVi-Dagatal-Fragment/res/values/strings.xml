@@ -93,12 +93,16 @@
     <string name="nothing_found">Engar niðurstöður fundust</string>
     
     <!-- Upplýsingar -->
-     <string name="calendar_title">Dagatal:</string>
-    <string name="calendar_text">
+    <string name="calendar_title">Dagatal:</string>
+    <string name="calendar_text1">
         \tÁ dagatalinu má sjá viku-dagatal með þeim þáttum sem þú ert að fylgjast með.\n
         \tTil að skoða upplýsingar um einstaka þátt er hægt að ýta á nafn þáttarins í dagatalinu.\n
-        \tHægt er að fletta á milli vikna í dagatalinu með örvunum til vinstri og hægri. Til að sjá núverandi viku er hægt að ýta á takkann sem er á milli þessa örva.\n
+        \tHægt er að fletta á milli vikna í dagatalinu með eftirfarandi tökkum.
     </string>
+    <string name="calendar_text2">Til að sjá núverandi viku er hægt að ýta á eftirfarandi takka sem er á milli þessa örva.</string>
+    <string name="right_icon">Sjá næstu viku</string>
+    <string name="left_icon">Sjá fyrri viku</string>
+    <string name="middle_icon">Sjá núverandi viku</string>
     
     <string name="list_title">Þættirnir mínir:</string>
     <string name="list_text1">
@@ -123,9 +127,9 @@
     <string name="app_info_text">
         \tAppið er verkefni í áfanganum Hugbúnaðarverkefni 1 í Háskóla 
         Íslands. Kennari áfangans er Ebba Þóra Hvannberg.\n
-       \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir,  
+        \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir, 
         Jóhanna Agnes Magnúsdóttir, Kristín Fjóla Tómasdóttir og Steinunn Friðgeirsdóttir.
-        </string>
+    </string>
     	
     
 </resources>
