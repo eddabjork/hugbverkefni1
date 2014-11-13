@@ -229,6 +229,9 @@ public class MainActivity extends Activity {
         case 3:
             fragment = new FragmentPopular();
             break; 
+        case 4:
+        	fragment = new FragmentInfo();
+        	break;
         default:
             break;
         }

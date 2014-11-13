@@ -10,6 +10,7 @@
         <item>Þættirnir mínir</item>
         <item>Leit</item>
         <item>Vinsælir þættir</item>
+        <item>Upplýsingar</item>
     </string-array>
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
@@ -55,5 +56,8 @@
     <string name="serie">Sería </string>
     <string name="list_process_title">Næ í þætti..</string>
     <string name="list_process_msg">Það er verið að ná í þættina þína.. chill out</string>
+    
+    <!-- Upplýsingar -->
+    <string name="app_info">uppl um appið</string>
     
 </resources>
