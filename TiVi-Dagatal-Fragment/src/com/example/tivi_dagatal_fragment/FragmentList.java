@@ -30,6 +30,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -53,8 +54,9 @@ public class FragmentList extends Fragment {
 	private MainScrollView mainScrollView;
 	private LinearLayout mainLayout;
 	private ProgressDialog progressDialog;
-	private FragmentRelated fragmentRelated;
 	private Fragment frag = new FragmentEpisode();
+	private FragmentRelated fragmentRelated;
+	
 	
 	/** Sets the view */
 	@Override
@@ -377,10 +379,19 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(banner);
 				
-				//einkunn á imdb
-				TextView grade = new TextView(getActivity());
 				LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				gradeLayout.setMargins(30, 20, 0, 0); //left, top, right, bottom
+				
+				//genres
+				TextView genres = new TextView(getActivity());
+				genres.setLayoutParams(gradeLayout);
+				String genre = TextUtils.join(", ",show.getGenres().toArray());
+				genres.setText(getResources().getString(R.string.genres)+" "+genre);
+				
+				infoLayout.addView(genres);
+				
+				//einkunn á imdb
+				TextView grade = new TextView(getActivity());
 				grade.setLayoutParams(gradeLayout);
 				grade.setText(getResources().getString(R.string.imdb_grade) + " 10");
 				
@@ -429,6 +440,7 @@ public class FragmentList extends Fragment {
 				                       .commit();
 					}
 				});
+
 				relatedShows.setText(getResources().getString(R.string.related_shows));
 				
 				infoLayout.addView(relatedShows);

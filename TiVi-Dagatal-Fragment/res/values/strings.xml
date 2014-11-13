@@ -15,6 +15,13 @@
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
     <string name="calendar">Dagatal</string>
+    <string name="imdb_grade">Einkunn á IMDb:</string>
+    <string name="network">Sýndir á:</string>
+    <string name="overview">Söguþráður:</string>
+    <string name="related_shows">Svipaðir þættir</string>
+    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
+    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
+    <string name="genres">Tegund:</string>
     <array name="nav_drawer_icons">
         <item>@drawable/on_cal</item>
         <item>@drawable/on_list</item>
@@ -44,6 +51,22 @@
     <string name="nov_label">Nóvember</string>
     <string name="dec_label">Desember</string>
     
+    <!--  Vikudagar -->
+    <string name="sun_is">Sunnudagur</string>
+    <string name="mon_is">Mánudagur</string>
+    <string name="tue_is">Þriðjudagur</string>
+    <string name="wed_is">Miðvikudagur</string>
+    <string name="thu_is">Fimmtudagur</string>
+    <string name="fri_is">Föstudagur</string>
+    <string name="sat_is">Laugardagur</string>
+    <string name="sun_en">Sunday</string>
+    <string name="mon_en">Monday</string>
+    <string name="tue_en">Tuesday</string>
+    <string name="wed_en">Wednesday</string>
+    <string name="thu_en">Thursday</string>
+    <string name="fri_en">Friday</string>
+    <string name="sat_en">Saturday</string>
+    
     <!-- Pop up -->
     <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
     <string name="pos_answer">Já</string>
@@ -56,7 +79,6 @@
     
     <!-- Leit -->
     <string name="search_process_msg">Er að leita..</string>
-    <string name="nothing_found">Engar niðurstöður fundust</string>
     
     <!-- Þættirnir mínir -->
     <string name="serie">Sería </string>
@@ -66,33 +88,42 @@
     <string name="show_process_msg">Upplýsingarnar eru á leiðinni.. bara rólegur Kiefer</string>
     <string name="ep_process_title">Næ í þætti..</string>
     <string name="ep_process_msg">Það er örugglega stutt í þetta</string>
-    <string name="imdb_grade">Einkunn á IMDb:</string>
-    <string name="network">Sýndir á:</string>
-    <string name="overview">Söguþráður:</string>
-    <string name="related_shows">Svipaðir þættir</string>
-    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
-    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
     
+    <!-- Leita -->
+    <string name="nothing_found">Engar niðurstöður fundust</string>
     
     <!-- Upplýsingar -->
-    <string name="directions_title">Leiðbeiningar(gera stærra/bold)\n</string>
-    <string name="directions">Til að bæta þáttum á listann \'Þættirnir mínir\' þarf
-        að leita að þætti eða skoða vinsæla þætti og ýta á myndina af hjarta sem birtist þar.
-        Þegar það er gert er boðið uppá að fylgjast með þættinum á dagatalinu. 
-        Einnig er hægt að velja um að fylgjast með þætti með því að ýta á myndina af dagatali 
-        sem er við hliðina á hverjum þætti í \'Þættirnir mínir\'.\n
-        Til að skoða upplýsingar um þáttaröð er hægt að ýta á örina sem vísar niður sem 
-        er við hliðina á hverjum þætti í \'Þættirnir mínir\'.\n
-        Til að skoða upplýsingar um einstaka þátt er hægt að ýta á nafn þáttarins í dagatalinu.
-        Einnig er hægt að skoða alla þætti fyrir allar seríur í upplýsingunum um hverja þáttaröð 
-        í \'Þættirnir mínir\'.\n
-        Hægt er að fletta á milli vikna í dagatalinu með örvunum til vinstri og hægri. Til að 
-        sjá núverandi viku er hægt að ýta á takkann sem er á milli þessa örva.
-        </string>
-    <string name="app_info_title">\n\nUm appið(gera stærra/bold)\n</string>
-    <string name="app_info">Appið er verkefni í áfanganum Hugbúnaðarverkefni 1 í Háskóla 
+     <string name="calendar_title">Dagatal:</string>
+    <string name="calendar_text">
+        \tÁ dagatalinu má sjá viku-dagatal með þeim þáttum sem þú ert að fylgjast með.\n
+        \tTil að skoða upplýsingar um einstaka þátt er hægt að ýta á nafn þáttarins í dagatalinu.\n
+        \tHægt er að fletta á milli vikna í dagatalinu með örvunum til vinstri og hægri. Til að sjá núverandi viku er hægt að ýta á takkann sem er á milli þessa örva.\n
+    </string>
+    
+    <string name="list_title">Þættirnir mínir:</string>
+    <string name="list_text1">
+        \tÁ listanum \'Þættirnir mínir\' má sjá þá þætti sem þú ert með á lista..\n
+        \tHægt að velja um að fylgjast með þætti með því að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.
+    </string>
+    <string name="list_text2">\tHægt er að eyða þætti af listanum \'Þættirnir mínir\' með því að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.</string>
+    <string name="list_text3">\tTil að skoða upplýsingar um þáttaröð (og einstaka þætti) er hægt að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.</string>
+    <string name="calendar_icon">Taka/setja þáttaröð á dagatal</string>
+    <string name="trash_icon">Eyða þáttaröð úr \'Þættirnir mínir\' lista</string>
+    <string name="info_icon">Sjá upplýsingar um þáttaröð</string>
+
+    <string name="search_title">Vinsælir þættir / Leita:</string>
+    <string name="search_text1">\tTil að bæta við þáttum á listann \'Þættirnir mínir\' þarf að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.</string>
+    <string name="search_text2">
+        Þegar það er gert er boðið uppá að fylgjast með þættinum á dagatalinu.\n
+        \tTil að skoða upplýsingar um þáttaröð (og einstaka þætti) er hægt að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.
+    </string>
+    <string name="heart_icon">Bæta við þáttaröð á \'Þættirnir mínir\' lista</string>
+    
+    <string name="app_info_title">Um appið:</string>
+    <string name="app_info_text">
+        \tAppið er verkefni í áfanganum Hugbúnaðarverkefni 1 í Háskóla 
         Íslands. Kennari áfangans er Ebba Þóra Hvannberg.\n
-        Höfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir, 
+       \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir,  
         Jóhanna Agnes Magnúsdóttir, Kristín Fjóla Tómasdóttir og Steinunn Friðgeirsdóttir.
         </string>
     	
