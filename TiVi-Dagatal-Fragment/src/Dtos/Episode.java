@@ -22,6 +22,7 @@ public class Episode {
 	private String screen;
 	private String ratingPercentage;
 	private String showTitle;
+	private LinearLayout episodesView;
 	
 	public Episode(){}
 	
@@ -177,5 +178,13 @@ public class Episode {
 	//Eftirskilyr�i: showTitle er titill ��ttara�arinnar sem episode tilheyrir.
 	public void setShowTitle(String showTitle){
 		this.showTitle = showTitle;
+	}
+	
+	public void setEpisodesView(LinearLayout episodesview) {
+		this.episodesView = episodesview;
+	}
+	
+	public LinearLayout getEpisodesView() {
+		return this.episodesView;
 	}
 }

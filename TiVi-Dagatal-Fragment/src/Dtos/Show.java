@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class Show {
 	private String title;

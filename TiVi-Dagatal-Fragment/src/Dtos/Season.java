@@ -19,6 +19,7 @@ public class Season {
 	private String url;
 	private String poster;
 	private List<Episode> episodes;
+	private LinearLayout episodesView;
 	public Season(){}
 	
 	public Season(String title){
@@ -87,5 +88,13 @@ public class Season {
 	//Eftirskilyr�i: episodes eru allir ��ttirnir � season.
 	public void setEpisodes(List<Episode> episodes) {
 		this.episodes = episodes;
+	}
+	
+	public void setEpisodesView(LinearLayout episodesview) {
+		this.episodesView = episodesview;
+	}
+	
+	public LinearLayout getEpisodesView() {
+		return this.episodesView;
 	}
 }
