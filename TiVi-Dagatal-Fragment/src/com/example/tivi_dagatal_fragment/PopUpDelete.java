@@ -7,6 +7,7 @@ package com.example.tivi_dagatal_fragment;
 
 import Data.DbUtils;
 import Dtos.Show;
+import Utils.VariousUtils;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -58,8 +59,7 @@ public class PopUpDelete extends DialogFragment{
 	public void removeFromMyShows(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
-		MainActivity.cache.remove("calendarEpisodes");
-		Log.v("cache", "Calendar episodes removed from cache");
+		VariousUtils.flushCache("calendarEpisodes");
 		FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, new FragmentList())

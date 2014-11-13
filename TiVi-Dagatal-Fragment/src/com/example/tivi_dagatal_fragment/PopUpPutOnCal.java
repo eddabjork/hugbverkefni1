@@ -7,6 +7,7 @@ package com.example.tivi_dagatal_fragment;
 
 import Data.DbUtils;
 import Dtos.Show;
+import Utils.VariousUtils;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -56,7 +57,6 @@ public class PopUpPutOnCal extends DialogFragment{
     public void addToCal(Show show){
     	DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
-		MainActivity.cache.remove("calendarEpisodes");
-		Log.v("cache", "Calendar episodes removed from cache");
+		VariousUtils.flushCache("calendarEpisodes");
     }
 }

@@ -3,6 +3,7 @@ package Utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.example.tivi_dagatal_fragment.MainActivity;
 import com.example.tivi_dagatal_fragment.R;
 import com.example.tivi_dagatal_fragment.R.string;
 
@@ -52,5 +53,22 @@ public class VariousUtils {
 		fragmentTransaction.replace(R.id.content_frame, fragment);
 		fragmentTransaction.addToBackStack(null);
 		fragmentTransaction.commit();
+	}
+	
+	//Notkun:		 flushCaches(key)
+	//Eftirskilyrði: það sem var með key sem lykil hefur verið eytt úr cache-minni
+	public static void flushCache(String key){
+		MainActivity.getCache().remove(key);
+		Log.v("cache", key + " removed from cache");
+	}
+	
+	//Notkun:		 flushCacheAfter12Hours(key)
+	//Eftirskilyrði: það sem var með key sem lykil hefur verið eytt úr cache-minni
+	public static void flushCacheAfter12Hours(String key){
+		long time = System.currentTimeMillis();
+		long twelveHours = (long) (60000*60*12);
+		if((time - MainActivity.getAppStartTime()) > twelveHours){
+			flushCache(key);
+		}
 	}
 }

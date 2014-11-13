@@ -59,8 +59,8 @@ public class MainActivity extends Activity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private Fragment fragment;
-    public static LruCache cache;
-    public static long startTime = System.currentTimeMillis();
+    private static LruCache cache;
+    private static long startTime = System.currentTimeMillis();
     private static int week = 0;
     
     
@@ -74,6 +74,18 @@ public class MainActivity extends Activity {
         makeNavigationDrawer();        
         
         selectItem(0);
+    }
+    
+    // Notkun: cache = getCache()
+    // Eftir:  cache er frátekið minnissvæði fyrir appið
+    public static LruCache getCache(){
+    	return cache;
+    }
+    
+    // Notkun: startTime = getAppStartTime()
+    // Eftir:  startTime er tíminn í ms sem appið byrjaði á
+    public static long getAppStartTime() {
+    	return startTime;
     }
     
     //Notkun: makeNavigationDrawer()
