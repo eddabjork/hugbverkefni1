@@ -9,8 +9,10 @@
 package com.example.tivi_dagatal_fragment;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -404,17 +406,19 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(network);
 				
-				//á hvaða degi sýndur
+				//a hvada degi thatturinn er syndur
+				String airDay = Utils.translateWeekday(show.getAirDay(), getActivity());
 				TextView airday = new TextView(getActivity());
 				airday.setLayoutParams(gradeLayout);
-				airday.setText((getResources().getString(R.string.airday))+" "+show.getAirDay());
+				airday.setText((getResources().getString(R.string.airday))+" "+airDay);
 				
 				infoLayout.addView(airday);
 				
-				//klukkan hvað sýndur
+				//klukkan hvad thatturinn er syndur
+				String airTime = Utils.parseAirTime(show.getAirTime());
 				TextView airtime = new TextView(getActivity());
 				airtime.setLayoutParams(gradeLayout);
-				airtime.setText((getResources().getString(R.string.airtime))+" "+ show.getAirTime());
+				airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
 				
 				infoLayout.addView(airtime);
 				

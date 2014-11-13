@@ -44,6 +44,22 @@
     <string name="nov_label">Nóvember</string>
     <string name="dec_label">Desember</string>
     
+    <!--  Vikudagar -->
+    <string name="sun_is">Sunnudagur</string>
+    <string name="mon_is">Mánudagur</string>
+    <string name="tue_is">Þriðjudagur</string>
+    <string name="wed_is">Miðvikudagur</string>
+    <string name="thu_is">Fimmtudagur</string>
+    <string name="fri_is">Föstudagur</string>
+    <string name="sat_is">Laugardagur</string>
+    <string name="sun_en">Sunday</string>
+    <string name="mon_en">Monday</string>
+    <string name="tue_en">Tuesday</string>
+    <string name="wed_en">Wednesday</string>
+    <string name="thu_en">Thursday</string>
+    <string name="fri_en">Friday</string>
+    <string name="sat_en">Saturday</string>
+    
     <!-- Pop up -->
     <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
     <string name="pos_answer">Já</string>
