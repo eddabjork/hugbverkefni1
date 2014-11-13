@@ -109,8 +109,11 @@ public class MainActivity extends Activity {
                 try {
                 // hide keyboard
 	        		EditText wordText = (EditText) ((FragmentSearch) fragment).getView().findViewById(R.id.leitarbox);
+	        		//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	        		//imm.hideSoftInputFromWindow(wordText.getWindowToken(), 0);
+	        		
 	        		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-	        		imm.hideSoftInputFromWindow(wordText.getWindowToken(), 0);
+	        		imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 } catch(Exception e) {
                 	Log.v("", "Could not hide edit text box");
                 }
@@ -173,7 +176,7 @@ public class MainActivity extends Activity {
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, new FragmentCal())
                        .commit();
-        setTitle("Dagatal"); //TODO: Breyta í streng úr strings.xml
+        setTitle(R.string.calendar);
 	}
 
     

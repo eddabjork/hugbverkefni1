@@ -14,6 +14,7 @@
     </string-array>
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
+    <string name="calendar">Dagatal</string>
     <array name="nav_drawer_icons">
         <item>@drawable/on_cal</item>
         <item>@drawable/on_list</item>
@@ -53,6 +54,9 @@
     <!-- Vinsælir þættir -->
     <string name="process_title_popular">Næ í þáttaraðir..</string>
     <string name="process_msg_popular">Þetta er allt að koma...</string>
+    
+    <!-- Leit -->
+    <string name="search_process_msg">Er að leita..</string>
     
     <!-- Þættirnir mínir -->
     <string name="serie">Sería </string>

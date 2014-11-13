@@ -81,7 +81,7 @@ public class FragmentSearchResults extends Fragment{
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
-            progressDialog.setMessage(getResources().getString(R.string.list_process_msg)); 
+            progressDialog.setMessage(getResources().getString(R.string.search_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
