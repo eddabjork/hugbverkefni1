@@ -1,27 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
     
-    <TextView android:layout_width="fill_parent"
-        android:id="@+id/directions_title"
-        android:layout_height="wrap_content"
-        android:text="@string/directions_title" />
-    
-    <TextView android:layout_width="fill_parent"
-        android:id="@+id/directions"
-        android:layout_height="wrap_content"
-        android:text="@string/directions" />
-    
-    <TextView android:layout_width="fill_parent"
-        android:id="@+id/app_info_title"
-        android:layout_height="wrap_content"
-        android:text="@string/app_info_title" />
-    
-    <TextView android:layout_width="fill_parent"
-        android:id="@+id/app_info"
-        android:layout_height="wrap_content"
-        android:text="@string/app_info" />
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical" 
+	    android:padding="10sp">
+	    
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/calendar_title"
+	        android:textStyle="bold"
+	        android:textSize="24sp" />
+	    
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/calendar_text" 
+	        android:lineSpacingExtra="5sp"/>
+	    
+	    
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/list_title"
+	        android:textStyle="bold"
+	        android:textSize="24sp"  />
 
-</LinearLayout>
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/list_text1" 
+	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/on_cal" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/calendar_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/list_text2" 
+	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/delete" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/trash_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/list_text3" 
+	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/down_arrow" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/info_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    
+
+		<TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/search_title"
+	        android:textStyle="bold"
+	        android:textSize="24sp"  />
+
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/search_text1" 
+	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/on_list" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/heart_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/search_text2" 
+	        android:lineSpacingExtra="5sp"/>
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:orientation="horizontal" 
+	    	android:padding="10sp">
+	        <ImageView
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:src="@drawable/down_arrow" />
+	        <TextView 
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="wrap_content"
+	        	android:text="@string/info_icon" 
+	        	android:textStyle="italic"
+	        	android:paddingLeft="20sp"/>
+	    </LinearLayout>
+	    
+	    
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/app_info_title"
+	        android:textStyle="bold"
+	        android:textSize="24sp" />
+	    
+	    <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/app_info_text" 
+	        android:lineSpacingExtra="5sp" />
+	
+	</LinearLayout>
+</ScrollView>

@@ -28,15 +28,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -109,17 +112,25 @@ public class FragmentList extends Fragment {
 	}
 	
 	public void addShow(Show show) {
+		Context myContext = getActivity();
+		WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int pd = (int) width/32;
+		
 		RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 		
 		TextView title = new TextView(getActivity());
 		title.setText(show.getTitle());
-		title.setPadding(10,0,0,0);
+		title.setPadding(pd,0,0,0);
 		
 		final Show _show = show;
 		
 		ImageButton calendarButton = getCalButton(show);
 		calendarButton.setId(1);
-		calendarButton.setPadding(10,10,10,10);
+		calendarButton.setPadding(pd,pd,pd,pd);
 		
 		ImageButton deleteButton = new ImageButton(getActivity());
 		deleteButton.setId(2);
@@ -131,13 +142,13 @@ public class FragmentList extends Fragment {
             	showDialog(_show);
             }
         });
-		deleteButton.setPadding(10,10,10,10);
+		deleteButton.setPadding(pd,pd,pd,pd);
 		
 		final ImageButton infoButton = new ImageButton(getActivity());
 		infoButton.setId(3);
 		infoButton.setImageResource(R.drawable.down_arrow);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
-		infoButton.setPadding(10,10,10,10);
+		infoButton.setPadding(pd,pd,pd,pd);
 		
 		final ScrollView scrollView = new ScrollView(getActivity());
 		final LinearLayout infoLayout = new LinearLayout(getActivity());
