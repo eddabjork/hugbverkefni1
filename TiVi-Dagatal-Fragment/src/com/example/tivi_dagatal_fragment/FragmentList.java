@@ -319,6 +319,17 @@ public class FragmentList extends Fragment {
      * 			   meÃ° upplÃ½singum
      * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
+		// Notkun: onPreExecute()
+		// Eftir:  progressDialog hefur veri� stillt sem birtist � me�an notandi b��ur
+		protected void onPreExecute() {  
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle(getResources().getString(R.string.show_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.show_process_msg));  
+            progressDialog.setCancelable(false);  
+            progressDialog.setIndeterminate(false);  
+            progressDialog.show();  
+        }  
+		
 		//Notkun:		 show = doInBackground(shows)
 		//EftirskilyrÃ°i: show er Ã¾Ã¡tturinn sem inniheldur upplÃ½singar
 		//				 sem nÃ¡Ã° er Ã­ ÃºtfrÃ¡ shows
@@ -332,9 +343,6 @@ public class FragmentList extends Fragment {
 			return show;
 		}
 		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
 		/**************ÃžARF AÃ� SPLITTA ÃžESSU NIÃ�UR**************************/
 		//Notkun:		 onPostExecute(show)
 		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
@@ -388,11 +396,23 @@ public class FragmentList extends Fragment {
                 animation = new Animator(infoMain, 500, 0);
                 open.add(""+infoMain.getId());
             }
+            progressDialog.dismiss();
             infoMain.startAnimation(animation);
 		}
 	}
 	
 	private class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
+		// Notkun: onPreExecute()
+		// Eftir:  progressDialog hefur veri� stillt sem birtist � me�an notandi b��ur
+		protected void onPreExecute() {  
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle(getResources().getString(R.string.ep_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.ep_process_msg));  
+            progressDialog.setCancelable(false);  
+            progressDialog.setIndeterminate(false);  
+            progressDialog.show();  
+        }  
+		
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {
 			TraktClient client = new TraktClient();
 			Season season = new Season();
@@ -410,10 +430,6 @@ public class FragmentList extends Fragment {
 			}
 			episodeList.get(0).setEpisodesView(episodes);
 			return episodeList;
-		}
-		
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
 		}
 		
 		protected void onPostExecute(List<Episode> episodeList) {
@@ -438,6 +454,7 @@ public class FragmentList extends Fragment {
                 animation = new Animator(episodes, 500, 0);
                 open.add(""+episodes.getId());
             }
+            progressDialog.dismiss();
             episodes.startAnimation(animation);
 		}
 	}
