@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import Clients.IMDbClient;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
@@ -390,10 +390,13 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(genres);
 				
-				//einkunn Ã¡ imdb
+				//einkunn a imdb
 				TextView grade = new TextView(getActivity());
+				Map<Show, TextView> map = new HashMap<Show, TextView>();
+				map.put(show, grade);
+				new IMDbRatingTask().execute(map);
 				grade.setLayoutParams(gradeLayout);
-				grade.setText(getResources().getString(R.string.imdb_grade) + " 10");
+				grade.setText(getResources().getString(R.string.imdb_grade));
 				
 				infoLayout.addView(grade);
 				
@@ -651,5 +654,30 @@ public class FragmentList extends Fragment {
 	void showDialog(Show show) {
 	    DialogFragment newFragment = PopUpDelete.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");
+	}
+	/**
+	 * Nafn: 		Kristín Fjóla Tómasdóttir
+	 * Dagsetning: 	11. nóvember 2014
+	 * Markmið: 	IMDbRatingTask framkvæmir þráðavinnu sem nær í IMDb einkunn fyrir þáttaröð
+	 */
+	private class IMDbRatingTask extends AsyncTask<Map<Show, TextView>, Integer, Map<Show, TextView>> {
+		// Notkun: map = doInBackground(maps)
+		// Eftir:  map inniheldur þátt með einkunn og textasvæði sem á að birta einkunn í
+		protected Map<Show, TextView> doInBackground(Map<Show, TextView>... maps) {
+			Map<Show, TextView> map = new HashMap<Show, TextView>();
+			for(Show show : maps[0].keySet()){
+				IMDbClient.getIMDbRating(show);
+				map.put(show, maps[0].get(show));
+			}
+			return map;
+		}
+		
+		// Notkun: onPostExecute(map)
+		// Eftir:  einkunn á þætti hefur verið birt
+		protected void onPostExecute(Map<Show, TextView> map) {
+			for(Show show : map.keySet()){
+				map.get(show).setText(getResources().getString(R.string.imdb_grade) + " " + show.getImdbRating());
+			}
+		}
 	}
 }
