@@ -14,18 +14,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 
-public class PutOnCalPopUp extends DialogFragment{
+public class PopUpPutOnCal extends DialogFragment{
 	
 	private static Show show;
-	private static int title;
 
-	// Notkun: putOnCalPopUp = newInstance(titleToDisplay, showToSave)
-	// Eftir:  putOnCalPopUp er pop-up með titlinu titleToDisplay sem býður uppá 
+	// Notkun: putOnCalPopUp = newInstance(showToSave)
+	// Eftir:  putOnCalPopUp er pop-up sem býður uppá 
 	// 		   að vista þáttinn showToSave á dagatali
-	public static PutOnCalPopUp newInstance(int titleToDisplay, Show showToSave) {
-		PutOnCalPopUp frag = new PutOnCalPopUp();
+	public static PopUpPutOnCal newInstance(Show showToSave) {
+		PopUpPutOnCal frag = new PopUpPutOnCal();
 		show = showToSave;
-		title = titleToDisplay;
         return frag;
     }
 
@@ -35,11 +33,11 @@ public class PutOnCalPopUp extends DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	return new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.app_icon)
-                .setTitle(title)
+                .setTitle(R.string.popup_put_cal)
                 .setPositiveButton(R.string.neg_answer,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            
+                            // do nothing
                         }
                     }
                 )

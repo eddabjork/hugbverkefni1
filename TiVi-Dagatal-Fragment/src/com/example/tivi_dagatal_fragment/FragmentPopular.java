@@ -202,7 +202,7 @@ public class FragmentPopular extends Fragment {
 	// Notkun: showDialog(show)
 	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
 	void showDialog(Show show) {
-	    DialogFragment newFragment = PutOnCalPopUp.newInstance(R.string.popup_put_cal, show);
+	    DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");
 	}
 }

@@ -45,6 +45,7 @@
     <string name="popup_put_cal">Viltu setja þennan á dagatalið þitt?</string>
     <string name="pos_answer">Já</string>
     <string name="neg_answer">Nei</string>
+    <string name="popup_del">Viltu eyða þessum þætti?</string>
     
     <!-- Vinsælir þættir -->
     <string name="process_title_popular">Næ í þáttaraðir</string>
