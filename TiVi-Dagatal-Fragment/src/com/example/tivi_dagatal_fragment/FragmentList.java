@@ -155,7 +155,6 @@ public class FragmentList extends Fragment {
 		infoMain.setId(getNextId());
 		infoButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				mainScrollView.setScrollingEnabled(true);
 				_show.setInfoLayout(infoLayout);
 				_show.setInfoMain(infoMain);
 				_show.setScrollView(scrollView);
@@ -366,8 +365,6 @@ public class FragmentList extends Fragment {
 				infoMain.removeAllViews();
 				scrollView.removeAllViews();
 				
-				//setja allar uppl hér og setja í infoLayout
-				
 				//banner
 				ImageView banner = new ImageView(getActivity());
 				banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -448,6 +445,7 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(relatedShows);
 				
+				//Seríur
 				List<Season> seasons = show.getSeasons();
 				Collections.reverse(seasons);
 				for(final Season season : seasons) {

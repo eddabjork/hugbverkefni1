@@ -5,9 +5,7 @@
  **/
 package Dtos;
 
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class Episode {
 	private String title;
