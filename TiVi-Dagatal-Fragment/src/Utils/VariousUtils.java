@@ -1,7 +1,10 @@
-package com.example.tivi_dagatal_fragment;
+package Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.example.tivi_dagatal_fragment.R;
+import com.example.tivi_dagatal_fragment.R.string;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,7 +12,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.util.Log;
 
-public class Utils {
+public class VariousUtils {
 
 	public static String parseAirTime(String airTime){
 		SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
@@ -27,8 +30,6 @@ public class Utils {
 	}
 	
 	public static String translateWeekday(String weekday, Activity context){
-		Log.v("weekday", weekday);
-		//Log.v("monday", R.string.mon_en+"");
 		if (weekday.equals(context.getResources().getString(R.string.mon_en))) 
 			return context.getResources().getString(R.string.mon_is);
 		else if (weekday.equals(context.getResources().getString(R.string.tue_en))) 
