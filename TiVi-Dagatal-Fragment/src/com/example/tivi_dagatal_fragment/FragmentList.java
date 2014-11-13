@@ -53,6 +53,7 @@ public class FragmentList extends Fragment {
 	private MainScrollView mainScrollView;
 	private LinearLayout mainLayout;
 	private ProgressDialog progressDialog;
+	private Fragment frag = new FragmentEpisode();
 	
 	/** Sets the view */
 	@Override
@@ -485,12 +486,24 @@ public class FragmentList extends Fragment {
 			
 			if(!open.contains(""+episodes.getId())) {
 				episodes.removeAllViews();
-				for(Episode episode : episodeList) {
-					TextView eps = new TextView(getActivity());
-					eps.setText(""+episode.getNumber()+". "+episode.getTitle());
-					eps.setGravity(Gravity.CENTER);
-					eps.setTextSize(15);
-					episodes.addView(eps);
+				for(final Episode episode : episodeList) {
+					TextView textView = new TextView(getActivity());
+				    textView.setText(episode.getNumber()+". "+episode.getTitle());
+				    textView.setPadding(20,0,0,0);
+				    textView.setGravity(Gravity.CENTER);
+				    textView.setTextSize(15);
+				    textView.setOnClickListener(new View.OnClickListener() {
+						public void onClick(View view) {
+							((FragmentEpisode) frag).setEpisode(episode);
+							FragmentManager fragmentManager = getFragmentManager();
+					        fragmentManager.beginTransaction()
+					                       .replace(R.id.content_frame, frag)
+					                       .commit();
+					        getActivity().getActionBar().setTitle(episode.getShowTitle());
+					        
+						}
+					});
+					episodes.addView(textView);
 				}
 			}
 			Animator.setHeightForWrapContent(getActivity(), episodes);
