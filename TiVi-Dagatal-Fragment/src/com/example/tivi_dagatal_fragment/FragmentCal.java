@@ -121,6 +121,24 @@ public class FragmentCal extends Fragment {
     	leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
     	btnLayout.addView(leftBtn, leftParams);
     	
+    	// go to current week
+    	ImageButton midBtn = new ImageButton(getActivity());
+    	midBtn.setImageResource(R.drawable.ic_launcher);
+    	midBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	MainActivity.setCurrentWeek();
+            	flushCacheNow();
+            	FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                               .replace(R.id.content_frame, new FragmentCal())
+                               .commit();
+            }
+        }); 
+		midBtn.setBackgroundColor(Color.TRANSPARENT);
+		RelativeLayout.LayoutParams midParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		midParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+    	btnLayout.addView(midBtn, midParams);
+    	
     	// go one week ahead
 		ImageButton rightBtn = new ImageButton(getActivity());
     	rightBtn.setImageResource(R.drawable.next_week);

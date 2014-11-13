@@ -308,4 +308,10 @@ public class MainActivity extends Activity {
     public static void subtractWeek(){
     	week -= 1;
     }
+    
+    // Notkun: setCurrentWeek()
+    // Eftir:  week hefur verið stillt á núverandi viku
+    public static void setCurrentWeek(){
+    	week = 0;
+    }
 }
