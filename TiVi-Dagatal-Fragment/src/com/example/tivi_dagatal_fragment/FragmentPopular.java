@@ -28,7 +28,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
 public class FragmentPopular extends Fragment {
 	private DbUtils dbHelper;
@@ -121,14 +123,18 @@ public class FragmentPopular extends Fragment {
 			for (final Show show : searchShows){
 				TextView title = new TextView(getActivity());
 				title.setText(show.getTitle());
+				title.setPadding(10,0,0,0);
 				Log.v("Thattur heitir ", show.getTitle());
 				
-				ImageButton addButton = getAddButton(show);				
+				ImageButton addButton = getAddButton(show);	
+				addButton.setPadding(10,10,10,10);
 				ImageButton infoButton = getInfoButton(show);
+				infoButton.setPadding(10,10,10,10);
 				
 				RelativeLayout episodeLayout = getEpisodeLayout(title, addButton, infoButton);
 				
 				llv.addView(episodeLayout);
+				llv.addView(makeLine());
 			}
 			scrollView.addView(llv);
 			progressDialog.dismiss();
@@ -199,10 +205,17 @@ public class FragmentPopular extends Fragment {
 		return episodeLayout;
 	}
 	
+	public View makeLine(){
+		 View v = new View(getActivity());
+		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
+		 v.setBackgroundColor(Color.rgb(203,203,203));
+		 return v;
+	}
+	
 	// Notkun: showDialog(show)
 	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
 	void showDialog(Show show) {
-	    DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
+		DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");
 	}
 }

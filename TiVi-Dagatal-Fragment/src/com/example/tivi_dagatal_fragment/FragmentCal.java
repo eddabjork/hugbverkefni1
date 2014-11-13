@@ -7,13 +7,13 @@
 
 package com.example.tivi_dagatal_fragment;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import Clients.TraktClient;
 import Data.DbUtils;
@@ -29,7 +29,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -388,7 +387,11 @@ public class FragmentCal extends Fragment {
 	public void fillInEpisode(final Episode episode) {
 		frag = new FragmentEpisode();
 		
-		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")"; //TODO: færa í string.xml!
+		DecimalFormat formatter = new DecimalFormat("00");
+		String season = formatter.format(Integer.parseInt(episode.getSeason()));
+		String number = formatter.format(Integer.parseInt(episode.getNumber()));
+		String episodeNumber = "s"+season+"e"+number;
+		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (" + episodeNumber + ")"; //TODO: færa í string.xml!
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
 		Log.v("episode id ", ""+episodeId);
