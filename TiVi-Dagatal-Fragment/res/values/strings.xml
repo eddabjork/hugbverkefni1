@@ -21,7 +21,6 @@
         <item>@drawable/search</item>
         <item>@drawable/popular</item>
     </array>
-    <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     
     <!-- Dagatalsstrengir -->
@@ -53,7 +52,7 @@
     
     <!-- Vinsælir þættir -->
     <string name="process_title_popular">Næ í þáttaraðir..</string>
-    <string name="process_msg_popular">Þetta er allt að koma...</string>
+    <string name="process_msg_popular">Þetta er allt að koma..</string>
     
     <!-- Leit -->
     <string name="search_process_msg">Er að leita..</string>
@@ -66,6 +65,9 @@
     <string name="show_process_msg">Upplýsingarnar eru á leiðinni.. bara rólegur Kiefer</string>
     <string name="ep_process_title">Næ í þætti..</string>
     <string name="ep_process_msg">Það er örugglega stutt í þetta</string>
+    
+    <!-- Leita -->
+    <string name="nothing_found">Engar niðurstöður fundust</string>
     
     <!-- Upplýsingar -->
     <string name="directions_title">Leiðbeiningar(gera stærra/bold)\n</string>

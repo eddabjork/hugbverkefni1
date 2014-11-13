@@ -45,7 +45,7 @@ public class FragmentSearchResults extends Fragment{
 		scrollView = new ScrollView(getActivity());
 		
 		Bundle bundle = this.getArguments();
-		char[] aWord = bundle.getCharArray("key");
+		char[] aWord = bundle.getCharArray("search");
 		String word =  new String(aWord);
 		Log.v("Strengurinn er", word);
 
@@ -101,27 +101,34 @@ public class FragmentSearchResults extends Fragment{
 		protected void onPostExecute(List<Show> searchShows) {
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
-			
-			for (final Show show : searchShows){
-				TextView title = new TextView(getActivity());
-				title.setText(show.getTitle());
-				title.setPadding(10,0,0,0);
-				Log.v("Thattur heitir ", show.getTitle());
-				
-				ImageButton addButton = getAddButton(show);
-				addButton.setPadding(10,10,10,10);
-				ImageButton infoButton = getInfoButton(show);
-				infoButton.setPadding(10,10,10,10);
-				
-				RelativeLayout episodeLayout = getEpisodeLayout(title, addButton, infoButton);
-				
-				llv.addView(episodeLayout);
-				llv.addView(makeLine());
+			if(searchShows.isEmpty()){
+				TextView nothing = new TextView(getActivity());
+				nothing.setTextSize(20);
+				nothing.setText(getResources().getString(R.string.nothing_found));
+				llv.addView(nothing);
+			}
+			else{
+				for (final Show show : searchShows){
+					TextView title = new TextView(getActivity());
+					title.setText(show.getTitle());
+					title.setPadding(10,0,0,0);
+					Log.v("Thattur heitir ", show.getTitle());
+					
+					ImageButton addButton = getAddButton(show);
+					addButton.setPadding(10,10,10,10);
+					ImageButton infoButton = getInfoButton(show);
+					infoButton.setPadding(10,10,10,10);
+					
+					RelativeLayout episodeLayout = getEpisodeLayout(title, addButton, infoButton);
+					
+					llv.addView(episodeLayout);
+					llv.addView(makeLine());
+				}
 			}
 			scrollView.addView(llv);
 			progressDialog.dismiss();
 		}
-	}
+	
 	
 	ImageButton getAddButton(final Show show){
 		final ImageButton addButton = new ImageButton(getActivity());
@@ -201,5 +208,6 @@ public class FragmentSearchResults extends Fragment{
 	    newFragment.show(getFragmentManager(), "dialog");
 	}
 	
+	}
 }
 

@@ -42,7 +42,7 @@ public class FragmentSearch extends Fragment {
 		EditText wordText = (EditText) getView().findViewById(R.id.leitarbox);
 		String word = wordText.getText().toString();
 		char[] aWord = word.toCharArray();
-		String key = "key";
+		String key = "search";
 		Bundle bundle = new Bundle();
 		bundle.putCharArray(key, aWord);
 		results.setArguments(bundle);
