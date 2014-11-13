@@ -96,7 +96,8 @@ public class FragmentEpisode extends Fragment{
 			String imgUrl = episode.getScreen();
 			new DownloadImageTask(image).execute(imgUrl);
 			image.buildDrawingCache();
-			image.setScaleType(ScaleType.FIT_XY);
+			image.setScaleType(ScaleType.FIT_START);
+			image.setAdjustViewBounds(true);
 			
 			boolean bool = false;
 			boolean bool2 = false;
@@ -134,7 +135,7 @@ public class FragmentEpisode extends Fragment{
 			
 			TextView overview = (TextView) getView().findViewById(R.id.overview);
 			bool = checkText(episode.getOverview());
-			if(bool) text = "Lýsing þáttar: " + episode.getOverview();
+			if(bool) text = "Söguþráður: \n" + episode.getOverview();
 			else text = "Vantar lýsingu.";
 			overview.setText(text);  
 		}
