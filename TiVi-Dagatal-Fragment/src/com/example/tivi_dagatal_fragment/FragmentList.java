@@ -392,6 +392,20 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(network);
 				
+				//á hvaða degi sýndur
+				TextView airday = new TextView(getActivity());
+				airday.setLayoutParams(gradeLayout);
+				airday.setText((getResources().getString(R.string.airday))+" "+show.getAirDay());
+				
+				infoLayout.addView(airday);
+				
+				//klukkan hvað sýndur
+				TextView airtime = new TextView(getActivity());
+				airtime.setLayoutParams(gradeLayout);
+				airtime.setText((getResources().getString(R.string.airtime))+" "+ show.getAirTime());
+				
+				infoLayout.addView(airtime);
+				
 				//söguþráður
 				TextView overview = new TextView(getActivity());
 				LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
