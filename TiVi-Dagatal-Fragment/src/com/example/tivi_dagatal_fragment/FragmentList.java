@@ -402,17 +402,19 @@ public class FragmentList extends Fragment {
 				
 				infoLayout.addView(network);
 				
-				//á hvaða degi sýndur
+				//a hvada degi thatturinn er syndur
+				String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
 				TextView airday = new TextView(getActivity());
 				airday.setLayoutParams(gradeLayout);
-				airday.setText((getResources().getString(R.string.airday))+" "+show.getAirDay());
+				airday.setText((getResources().getString(R.string.airday))+" "+airDay);
 				
 				infoLayout.addView(airday);
 				
-				//klukkan hvað sýndur
+				//klukkan hvad syndur
+				String airTime = VariousUtils.parseAirTime(show.getAirTime());
 				TextView airtime = new TextView(getActivity());
 				airtime.setLayoutParams(gradeLayout);
-				airtime.setText((getResources().getString(R.string.airtime))+" "+ show.getAirTime());
+				airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
 				
 				infoLayout.addView(airtime);
 				
@@ -445,11 +447,31 @@ public class FragmentList extends Fragment {
 				List<Season> seasons = show.getSeasons();
 				Collections.reverse(seasons);
 				for(final Season season : seasons) {
+					
 					TextView seasonbutton = new TextView(getActivity());
 					seasonbutton.setText(getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
 					seasonbutton.setGravity(Gravity.CENTER);
 					seasonbutton.setTextSize(20);
-					infoLayout.addView(seasonbutton);
+					
+					final ImageButton infoButton = new ImageButton(getActivity());
+					infoButton.setId(3);
+					infoButton.setImageResource(R.drawable.down_arrow);
+					infoButton.setBackgroundColor(Color.TRANSPARENT);
+					infoButton.setPadding(10,10,10,10);
+					
+					RelativeLayout seasonLayout = new RelativeLayout(getActivity());
+					RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+					RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+					titleParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+					titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+					infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+					infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+					
+					seasonLayout.addView(seasonbutton, titleParams);
+					seasonLayout.addView(infoButton, infoParams);
+					infoLayout.addView(seasonLayout);
+					
+					
 					LinearLayout episodes = new LinearLayout(getActivity());
 					episodes.setOrientation(LinearLayout.VERTICAL);
 					episodes.setVisibility(View.GONE);
@@ -459,7 +481,8 @@ public class FragmentList extends Fragment {
 					episodes.setId(getNextId());
 					infoLayout.addView(episodes);
 					season.setEpisodesView(episodes);
-					seasonbutton.setOnClickListener(new View.OnClickListener() {
+					
+					infoButton.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
 							//mainScrollView.setScrollingEnabled(false);
 							Map<Show, Season> map = new HashMap<Show, Season>();

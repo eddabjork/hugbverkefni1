@@ -55,7 +55,7 @@ public class VariousUtils {
 		fragmentTransaction.commit();
 	}
 	
-	//Notkun:		 flushCaches(key)
+	//Notkun:		 flushCache(key)
 	//Eftirskilyrði: það sem var með key sem lykil hefur verið eytt úr cache-minni
 	public static void flushCache(String key){
 		MainActivity.getCache().remove(key);
