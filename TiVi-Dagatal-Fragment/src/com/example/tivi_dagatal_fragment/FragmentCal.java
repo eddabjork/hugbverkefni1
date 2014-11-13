@@ -147,7 +147,7 @@ public class FragmentCal extends Fragment {
             	flushCacheNow();
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
-                               .replace(R.id.content_frame, new FragmentCal())
+                               .replace(R.id.content_frame, new FragmentRelated())
                                .commit();
             }
         });
