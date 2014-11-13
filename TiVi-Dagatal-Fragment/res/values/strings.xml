@@ -15,6 +15,10 @@
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
     <string name="calendar">Dagatal</string>
+    <string name="imdb_grade">Einkunn á IMDb:</string>
+    <string name="network">Sýndir á:</string>
+    <string name="overview">Söguþráður:</string>
+    <string name="related_shows">Svipaðir þættir</string>
     <array name="nav_drawer_icons">
         <item>@drawable/on_cal</item>
         <item>@drawable/on_list</item>

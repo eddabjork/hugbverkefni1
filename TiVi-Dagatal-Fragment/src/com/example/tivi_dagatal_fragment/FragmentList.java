@@ -37,6 +37,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -142,7 +143,7 @@ public class FragmentList extends Fragment {
 		final LinearLayout infoMain = new LinearLayout(getActivity());
 		infoMain.setOrientation(LinearLayout.VERTICAL);
 		
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		infoLayout.setLayoutParams(layoutParams);
 		infoLayout.setGravity(Gravity.CENTER);
 		infoMain.setLayoutParams(layoutParams);
@@ -304,7 +305,7 @@ public class FragmentList extends Fragment {
 				Log.e("Error", e.getMessage());
 				e.printStackTrace();
 			}
-			return fixBitmapSize(mIcon11);
+			return mIcon11;
 		}
 		
 		//Notkun:		 onPostExecute(result);
@@ -360,6 +361,51 @@ public class FragmentList extends Fragment {
 				infoLayout.removeAllViews();
 				infoMain.removeAllViews();
 				scrollView.removeAllViews();
+				
+				//setja allar uppl hér og setja í infoLayout
+				
+				//banner
+				ImageView banner = new ImageView(getActivity());
+				banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				banner.setLayoutParams(layoutParams);
+				String url = show.getBanner();
+				new DownloadImageTask(banner).execute(url);
+				banner.buildDrawingCache();
+				
+				infoLayout.addView(banner);
+				
+				//einkunn á imdb
+				TextView grade = new TextView(getActivity());
+				LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				gradeLayout.setMargins(30, 20, 0, 0); //left, top, right, bottom
+				grade.setLayoutParams(gradeLayout);
+				grade.setText(getResources().getString(R.string.imdb_grade) + " 10");
+				
+				infoLayout.addView(grade);
+				
+				//sjónvarpsstöðvar
+				TextView network = new TextView(getActivity());
+				network.setLayoutParams(gradeLayout);
+				network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
+				
+				infoLayout.addView(network);
+				
+				//söguþráður
+				TextView overview = new TextView(getActivity());
+				LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				overviewLayout.setMargins(30, 20, 0, 20); //left, top, right, bottom
+				overview.setLayoutParams(overviewLayout);
+				overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());
+				
+				infoLayout.addView(overview);
+				
+				//svipaðir þættir takki
+				Button relatedShows = new Button(getActivity());
+				relatedShows.setText(getResources().getString(R.string.related_shows));
+				
+				infoLayout.addView(relatedShows);
+				
 				List<Season> seasons = show.getSeasons();
 				Collections.reverse(seasons);
 				for(final Season season : seasons) {
@@ -371,7 +417,6 @@ public class FragmentList extends Fragment {
 					LinearLayout episodes = new LinearLayout(getActivity());
 					episodes.setOrientation(LinearLayout.VERTICAL);
 					episodes.setVisibility(View.GONE);
-					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 					episodes.setLayoutParams(layoutParams);
 					episodes.setGravity(Gravity.CENTER);
 					episodes.setId(getNextId());
