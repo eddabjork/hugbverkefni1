@@ -12,25 +12,25 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
 
 public class FragmentRelated extends Fragment{
 	
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
 	private DbUtils dbHelper;
+	private Show show;
 
 	@Override
 	//Eftir: birtir fragmentið með svipuðum þáttaröðum
@@ -39,13 +39,15 @@ public class FragmentRelated extends Fragment{
 		
 		scrollView = new ScrollView(getActivity());
 
-		Show show = new Show();
-		show.setDataTitle("the-walking-dead");
 		new RelatedShowsTask().execute(show);
 		rootView = scrollView;
 		
         return rootView;
     }
+	
+	public void setShow(Show show){
+		this.show = show;
+	}	
 	
 	//Notkun: onAttach(activity)
 	//Eftir:  búið er að tengja gagnagrunninn við fragmentið

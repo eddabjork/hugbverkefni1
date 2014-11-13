@@ -89,18 +89,6 @@ public class FragmentEpisode extends Fragment{
 		//Eftir:  ????????????????????????????????????????????????????????????????
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
-			/*LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT,
-			LayoutParams.MATCH_PARENT);
-			LinearLayout llv = new LinearLayout(getActivity());
-			llv.setOrientation(LinearLayout.VERTICAL);
-			TextView textView = new TextView(getActivity());
-			textView.setText("Titill þáttarins er " + episode.getTitle());
-			llv.addView(textView);
-			//Bï¿½ta linearlayoutinu ï¿½ scrollview
-			scrollView.addView(llv);*/
-			//Birta nï¿½ja viewiï¿½
-			//setContentView(sv);
-			
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			
 			ImageView image = (ImageView) getView().findViewById(R.id.image);
@@ -130,12 +118,6 @@ public class FragmentEpisode extends Fragment{
 			
 			TextView overview = (TextView) getView().findViewById(R.id.overview);
 			overview.setText("Lýsing þáttar: " + episode.getOverview()); 
-		}
-		
-		public TextView addTextView(String text){
-			TextView textView = new TextView(getActivity());
-			textView.setText(text);
-			return textView;
 		}
 	}
 	

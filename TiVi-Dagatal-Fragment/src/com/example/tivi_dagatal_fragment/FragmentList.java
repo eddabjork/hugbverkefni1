@@ -53,6 +53,7 @@ public class FragmentList extends Fragment {
 	private MainScrollView mainScrollView;
 	private LinearLayout mainLayout;
 	private ProgressDialog progressDialog;
+	private FragmentRelated fragmentRelated;
 	
 	/** Sets the view */
 	@Override
@@ -402,6 +403,17 @@ public class FragmentList extends Fragment {
 				
 				//svipaðir þættir takki
 				Button relatedShows = new Button(getActivity());
+				relatedShows.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View view) {
+						fragmentRelated = new FragmentRelated();
+						fragmentRelated.setShow(_show);
+						getActivity().setTitle(getResources().getString(R.string.related_shows));
+				        FragmentManager fragmentManager = getFragmentManager();
+				        fragmentManager.beginTransaction()
+				                       .replace(R.id.content_frame, fragmentRelated)
+				                       .commit();
+					}
+				});
 				relatedShows.setText(getResources().getString(R.string.related_shows));
 				
 				infoLayout.addView(relatedShows);
