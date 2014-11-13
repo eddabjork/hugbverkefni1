@@ -71,10 +71,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         cache = createCache();
 
-        makeNavigationDrawer();
+        makeNavigationDrawer();        
         
-        //Það sem gerist fremst í appinu, á starti
-        //startCalendar();
+        selectItem(0);
     }
     
     //Notkun: makeNavigationDrawer()
@@ -145,9 +144,6 @@ public class MainActivity extends Activity {
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        
-        selectItem(0);
-	
     }
     
     // Notkun: cache = createCache()

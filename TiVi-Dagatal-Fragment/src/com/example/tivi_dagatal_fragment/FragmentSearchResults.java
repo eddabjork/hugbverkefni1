@@ -14,6 +14,7 @@ import Dtos.Show;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.widget.TextView;
 public class FragmentSearchResults extends Fragment{
 	private DbUtils dbHelper;
 	private ScrollView scrollView;
+	private ProgressDialog progressDialog;
 	
 	@Override
 	//Eftir: birtir fragmentið með leitarniðurstöðunum
@@ -74,6 +76,17 @@ public class FragmentSearchResults extends Fragment{
 			return searchShows;
 		}
 		
+		// Notkun: onPreExecute()
+		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		protected void onPreExecute() {  
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.list_process_msg)); 
+            progressDialog.setCancelable(false);  
+            progressDialog.setIndeterminate(false);  
+            progressDialog.show();  
+        } 
+		
 		//Eftir: Ekki í notkun	
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
@@ -100,6 +113,7 @@ public class FragmentSearchResults extends Fragment{
 				llv.addView(episodeLayout);
 			}
 			scrollView.addView(llv);
+			progressDialog.dismiss();
 		}
 	}
 	
