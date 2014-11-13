@@ -42,8 +42,8 @@ public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
 	private Fragment frag;
-	private Date lastSunday = getLastSundayForNumber(MainActivity.getWeek());
-	private Date nextSunday = getNextSundayForNumber(MainActivity.getWeek());
+	private Date lastSunday = getLastFirstDayForNumber(MainActivity.getWeek());
+	private Date nextSunday = getNextFirstDayForNumber(MainActivity.getWeek());
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 	
 	/** Sets the view */
@@ -162,6 +162,32 @@ public class FragmentCal extends Fragment {
   	//Eftirskilyrði: Búið er að búa til view fyrir sérhvern dag vikunnar (alls 7) þar
     //				 sem fram kemur dagsetning og Layout-pláss fyrir dagatals-þætti
     //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
+	/*public void fillInDates(LinearLayout mainLayout){
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
+		addNameOfMonth(cal, mainLayout);
+		
+		String weekDayNames[] = {
+				getResources().getString(R.string.sun_label),
+				getResources().getString(R.string.mon_label),
+				getResources().getString(R.string.tue_label),
+				getResources().getString(R.string.wed_label),
+				getResources().getString(R.string.thu_label),
+				getResources().getString(R.string.fri_label),
+				getResources().getString(R.string.sat_label)	
+		};
+		
+		int lastDayOfMonth = Integer.MIN_VALUE;
+		for(int i=0; i<weekDayNames.length; i++){
+			cal.set(Calendar.DAY_OF_WEEK, i+1);
+			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			if(lastDayOfMonth > thisDayOfMonth){
+				addNameOfMonth(cal, mainLayout);
+			}
+			setDateLayout(weekDayNames[i], cal, mainLayout);
+			lastDayOfMonth = thisDayOfMonth;
+		}
+	}*/
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 		if(cal.getFirstDayOfWeek() == 2)
@@ -411,10 +437,12 @@ public class FragmentCal extends Fragment {
 	
 	//Notkun: 		 date = getLastSundayForNumber(num)
 	//Eftirskilyrði: date er sunnudagur eftir num-1 vikur
-	public static Date getLastSundayForNumber(int num){
+	public static Date getLastFirstDayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
-		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		int day = Calendar.SUNDAY;
+		if(c.getFirstDayOfWeek() == 2){ day = Calendar.MONDAY;}
+		c.set(Calendar.DAY_OF_WEEK, day);
 		c.add(Calendar.WEEK_OF_YEAR, num);
 		c = nullifyTime(c);
 		Date lastSunday = c.getTime();
@@ -425,28 +453,16 @@ public class FragmentCal extends Fragment {
 	
 	//Notkun: 		 date = getNextSundayForNumber(num)
 	//Eftirskilyrði: date er sunnudagur eftir num vikur
-	public static Date getNextSundayForNumber(int num){
+	public static Date getNextFirstDayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
-		Log.v("Prenta next sunday", c+"");
 		int firstDayOfWeek = c.getFirstDayOfWeek();
-		Log.v("Prenta first day of week", firstDayOfWeek+"");
-		//TimeZone timeZone = c.getTimeZone();
-		//TimeZone.setDefault(timeZone);
-		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		Log.v("Prenta Calendar sunday", Integer.toString(Calendar.SUNDAY));
-		Log.v("Prenta Day of week", Integer.toString(Calendar.DAY_OF_WEEK));
+		c.set(Calendar.DAY_OF_WEEK, firstDayOfWeek);
 		c.add(Calendar.DATE, 7);
-		Log.v("Prenta Calendar date", Integer.toString(Calendar.DATE));
 		c.add(Calendar.WEEK_OF_YEAR, num);
-		Log.v("Prenta Calendar week of year", Integer.toString(Calendar.WEEK_OF_YEAR));
-		Log.v("Prenta út num sem við tökum inn", Integer.toString(num));
 		c = nullifyTime(c);
-		Log.v("Prenta next sunday", c+"");
 		Date nextSunday = c.getTime();
-		Log.v("Prenta nextSunday breytuna", nextSunday+"");
 		format.format(nextSunday);
-		Log.v("Prenta nextSunday breytuna formattaða", nextSunday+"");
 		
 		return nextSunday;
 	}
