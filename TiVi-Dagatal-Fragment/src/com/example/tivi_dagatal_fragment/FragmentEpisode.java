@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -95,6 +96,7 @@ public class FragmentEpisode extends Fragment{
 			String imgUrl = episode.getScreen();
 			new DownloadImageTask(image).execute(imgUrl);
 			image.buildDrawingCache();
+			image.setScaleType(ScaleType.FIT_XY);
 			
 			boolean bool = false;
 			boolean bool2 = false;
