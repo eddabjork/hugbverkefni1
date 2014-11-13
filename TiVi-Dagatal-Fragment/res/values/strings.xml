@@ -14,12 +14,14 @@
     </string-array>
     <string name="drawer_open">Opinn</string>
     <string name="drawer_close">Lokaður</string>
-    <!-- <array name="nav_drawer_icons">
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-    </array>-->
+    <array name="nav_drawer_icons">
+        <item>@drawable/on_cal</item>
+        <item>@drawable/on_list</item>
+        <item>@drawable/search</item>
+        <item>@drawable/popular</item>
+    </array>
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
     
     <!-- Dagatalsstrengir -->
     <string name="sun_label">SUN</string>
