@@ -5,6 +5,21 @@
     android:orientation="vertical" >
     
     <TextView android:layout_width="fill_parent"
+        android:id="@+id/directions_title"
+        android:layout_height="wrap_content"
+        android:text="@string/directions_title" />
+    
+    <TextView android:layout_width="fill_parent"
+        android:id="@+id/directions"
+        android:layout_height="wrap_content"
+        android:text="@string/directions" />
+    
+    <TextView android:layout_width="fill_parent"
+        android:id="@+id/app_info_title"
+        android:layout_height="wrap_content"
+        android:text="@string/app_info_title" />
+    
+    <TextView android:layout_width="fill_parent"
         android:id="@+id/app_info"
         android:layout_height="wrap_content"
         android:text="@string/app_info" />
