@@ -106,17 +106,6 @@ public class MainActivity extends Activity {
                 super.onDrawerOpened(drawerView);
                 getActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                try {
-                // hide keyboard
-	        		EditText wordText = (EditText) ((FragmentSearch) fragment).getView().findViewById(R.id.leitarbox);
-	        		//InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-	        		//imm.hideSoftInputFromWindow(wordText.getWindowToken(), 0);
-	        		
-	        		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-	        		imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                } catch(Exception e) {
-                	Log.v("", "Could not hide edit text box");
-                }
             }
         };
 
@@ -277,7 +266,10 @@ public class MainActivity extends Activity {
         // If the nav drawer is open, hide action items related to the content view
         //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
+    	// hide the 'three dots' menu
+    	MenuItem item = menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+    	return super.onPrepareOptionsMenu(menu);
     }
 	
 	@Override
