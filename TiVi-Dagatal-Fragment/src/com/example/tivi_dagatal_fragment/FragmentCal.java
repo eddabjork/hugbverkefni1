@@ -7,6 +7,7 @@
 
 package com.example.tivi_dagatal_fragment;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -359,7 +360,11 @@ public class FragmentCal extends Fragment {
 	public void fillInEpisode(final Episode episode) {
 		frag = new FragmentEpisode();
 		
-		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")"; //TODO: færa í string.xml!
+		DecimalFormat formatter = new DecimalFormat("00");
+		String season = formatter.format(Integer.parseInt(episode.getSeason()));
+		String number = formatter.format(Integer.parseInt(episode.getNumber()));
+		String episodeNumber = "s"+season+"e"+number;
+		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (" + episodeNumber + ")"; //TODO: færa í string.xml!
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);

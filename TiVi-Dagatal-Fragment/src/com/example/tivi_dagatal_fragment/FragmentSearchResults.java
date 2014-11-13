@@ -26,8 +26,10 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class FragmentSearchResults extends Fragment{
@@ -81,7 +83,7 @@ public class FragmentSearchResults extends Fragment{
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
-            progressDialog.setMessage(getResources().getString(R.string.list_process_msg)); 
+            progressDialog.setMessage(getResources().getString(R.string.search_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
@@ -109,20 +111,24 @@ public class FragmentSearchResults extends Fragment{
 				for (final Show show : searchShows){
 					TextView title = new TextView(getActivity());
 					title.setText(show.getTitle());
+					title.setPadding(10,0,0,0);
 					Log.v("Thattur heitir ", show.getTitle());
 					
-					ImageButton addButton = getAddButton(show);				
+					ImageButton addButton = getAddButton(show);
+					addButton.setPadding(10,10,10,10);
 					ImageButton infoButton = getInfoButton(show);
+					infoButton.setPadding(10,10,10,10);
 					
 					RelativeLayout episodeLayout = getEpisodeLayout(title, addButton, infoButton);
 					
 					llv.addView(episodeLayout);
+					llv.addView(makeLine());
 				}
 			}
 			scrollView.addView(llv);
 			progressDialog.dismiss();
 		}
-	}
+	
 	
 	ImageButton getAddButton(final Show show){
 		final ImageButton addButton = new ImageButton(getActivity());
@@ -188,6 +194,13 @@ public class FragmentSearchResults extends Fragment{
 		return episodeLayout;
 	}
 	
+	public View makeLine(){
+		 View v = new View(getActivity());
+		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
+		 v.setBackgroundColor(Color.rgb(203,203,203));
+		 return v;
+	}
+	
 	// Notkun: showDialog(show)
 	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
 	void showDialog(Show show) {
@@ -195,5 +208,6 @@ public class FragmentSearchResults extends Fragment{
 	    newFragment.show(getFragmentManager(), "dialog");
 	}
 	
+	}
 }
 

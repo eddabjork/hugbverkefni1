@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir og JÃ³hanna Agnes MagnÃºsdÃ³ttir
- * Dagsetning: 	9. oktÃ³ber 2014
- * MarkmiÃ°: 	Fragment sem sÃ½nir ÃžÃ¦ttirnir-mÃ­nir lista sem inniheldur 
- * 				alla Ã¾Ã¡ Ã¾Ã¦tti sem notandi hefur sett Ã­ tilsvarandi lista
- * 				(td. Ã­ gegnum search)
+ * Nafn: 		Edda BjÃƒÂ¶rk KonrÃƒÂ¡ÃƒÂ°sdÃƒÂ³ttir og JÃƒÂ³hanna Agnes MagnÃƒÂºsdÃƒÂ³ttir
+ * Dagsetning: 	9. oktÃƒÂ³ber 2014
+ * MarkmiÃƒÂ°: 	Fragment sem sÃƒÂ½nir ÃƒÅ¾ÃƒÂ¦ttirnir-mÃƒÂ­nir lista sem inniheldur 
+ * 				alla ÃƒÂ¾ÃƒÂ¡ ÃƒÂ¾ÃƒÂ¦tti sem notandi hefur sett ÃƒÂ­ tilsvarandi lista
+ * 				(td. ÃƒÂ­ gegnum search)
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -65,14 +65,14 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-	 * Nafn: 		KristÃƒÂ­n FjÃƒÂ³la TÃƒÂ³masdÃƒÂ³ttir
-	 * Dagsetning: 	23. oktÃƒÂ³ber 2014
-	 * MarkmiÃƒÂ°: 	GetAllShowsTask framkvÃƒÂ¦mir ÃƒÂ¾rÃƒÂ¡ÃƒÂ°avinnu sem nÃƒÂ¦r ÃƒÂ­ alla ÃƒÂ¾ÃƒÂ¦tti frÃƒÂ¡ gagnagrunni
-	 * 				sem ÃƒÂ¡ aÃƒÂ° birta ÃƒÂ­ 'MÃƒÂ­nir ÃƒÂ¾ÃƒÂ¦ttir' og birtir ÃƒÂ¾ÃƒÂ¡
+	 * Nafn: 		KristÃƒÆ’Ã‚Â­n FjÃƒÆ’Ã‚Â³la TÃƒÆ’Ã‚Â³masdÃƒÆ’Ã‚Â³ttir
+	 * Dagsetning: 	23. oktÃƒÆ’Ã‚Â³ber 2014
+	 * MarkmiÃƒÆ’Ã‚Â°: 	GetAllShowsTask framkvÃƒÆ’Ã‚Â¦mir ÃƒÆ’Ã‚Â¾rÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°avinnu sem nÃƒÆ’Ã‚Â¦r ÃƒÆ’Ã‚Â­ alla ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦tti frÃƒÆ’Ã‚Â¡ gagnagrunni
+	 * 				sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° birta ÃƒÆ’Ã‚Â­ 'MÃƒÆ’Ã‚Â­nir ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦ttir' og birtir ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
-		// Eftir:  shows er listi af ÃƒÂ¾ÃƒÂ¡ttum sem ÃƒÂ¡ aÃƒÂ° birta ÃƒÂ­ 'MÃƒÂ­nir ÃƒÂ¾ÃƒÂ¦ttir'
+		// Eftir:  shows er listi af ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡ttum sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° birta ÃƒÆ’Ã‚Â­ 'MÃƒÆ’Ã‚Â­nir ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦ttir'
 		protected List<Show> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 			List<Show> showList = dbHelper.getAllShows();
@@ -80,7 +80,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veriÃƒÂ° stillt sem ÃƒÂ¡ aÃƒÂ° sÃƒÂ½na ÃƒÂ¡ meÃƒÂ°an notandi er aÃƒÂ° bÃƒÂ­ÃƒÂ°a
+		// Eftir:  progressDialog hefur veriÃƒÆ’Ã‚Â° stillt sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° sÃƒÆ’Ã‚Â½na ÃƒÆ’Ã‚Â¡ meÃƒÆ’Ã‚Â°an notandi er aÃƒÆ’Ã‚Â° bÃƒÆ’Ã‚Â­ÃƒÆ’Ã‚Â°a
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
@@ -91,7 +91,7 @@ public class FragmentList extends Fragment {
         }  
 		
 		// Notkun: onPostExecute(shows)
-		// Eftir:  shows hafa veriÃƒÂ° birtir ÃƒÂ¡ 'ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir'
+		// Eftir:  shows hafa veriÃƒÆ’Ã‚Â° birtir ÃƒÆ’Ã‚Â¡ 'ÃƒÆ’Ã…Â¾ÃƒÆ’Ã‚Â¦ttirnir mÃƒÆ’Ã‚Â­nir'
 		protected void onPostExecute(List<Show> showList) {
 			progressDialog.dismiss();
 			mainLayout = new LinearLayout(getActivity());
@@ -116,6 +116,7 @@ public class FragmentList extends Fragment {
 		
 		ImageButton calendarButton = getCalButton(show);
 		calendarButton.setId(1);
+		calendarButton.setPadding(10,10,10,10);
 		
 		ImageButton deleteButton = new ImageButton(getActivity());
 		deleteButton.setId(2);
@@ -127,12 +128,13 @@ public class FragmentList extends Fragment {
             	showDialog(_show);
             }
         });
+		deleteButton.setPadding(10,10,10,10);
 		
 		final ImageButton infoButton = new ImageButton(getActivity());
 		infoButton.setId(3);
 		infoButton.setImageResource(R.drawable.down_arrow);
-		infoButton.setPadding(3,6,3,6);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
+		infoButton.setPadding(10,10,10,10);
 		
 		final ScrollView scrollView = new ScrollView(getActivity());
 		final LinearLayout infoLayout = new LinearLayout(getActivity());
@@ -182,7 +184,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 calButton = getCalButton(show)
-  	//EftirskilyrÃƒÂ°i: calButton er takki sem sÃƒÂ©r um ÃƒÂ° bÃƒÂ¦ta/taka ÃƒÂ¾ÃƒÂ¡ttinn show
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: calButton er takki sem sÃƒÆ’Ã‚Â©r um ÃƒÆ’Ã‚Â° bÃƒÆ’Ã‚Â¦ta/taka ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡ttinn show
 	//				 af dagatali
 	public ImageButton getCalButton(final Show show){
 		final ImageButton calendarButton = new ImageButton(getActivity());
@@ -230,7 +232,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 addToCal(show);
-  	//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° uppfÃƒÂ¦ra gagnagrunn ÃƒÂ¾.a. gildiÃƒÂ° on_calendar=true fyrir show.
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=true fyrir show.
 	public void addToCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);
@@ -238,7 +240,7 @@ public class FragmentList extends Fragment {
 		Log.v("cache", "Calendar episodes removed from cache");
 	}
 	//Notkun:		 removeFromCal(show);
-  	//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° uppfÃƒÂ¦ra gagnagrunn ÃƒÂ¾.a. gildiÃƒÂ° on_calendar=false fyrir show.
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.takeShowOffCal(show);
@@ -247,7 +249,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 removeFromMyEpisodes(show);
-  	//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er eyÃƒÂ°a ÃƒÂºt show ÃƒÂºr gagnagrunni.
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er eyÃƒÆ’Ã‚Â°a ÃƒÆ’Ã‚Âºt show ÃƒÆ’Ã‚Âºr gagnagrunni.
 	public void removeFromMyEpisodes(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
@@ -260,7 +262,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//EftirskilyrÃƒÂ°i: line er nÃƒÂºna view hlutur sem er einfÃƒÂ¶ld, ÃƒÂ¾unn, grÃƒÂ¡ lÃƒÂ­na.
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: line er nÃƒÆ’Ã‚Âºna view hlutur sem er einfÃƒÆ’Ã‚Â¶ld, ÃƒÆ’Ã‚Â¾unn, grÃƒÆ’Ã‚Â¡ lÃƒÆ’Ã‚Â­na.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -269,7 +271,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	//Notkun:		 image = getImage(show);
-  	//EftirskilyrÃƒÂ°i: image er poster mynd fyrir show og er ÃƒÂ­ rÃƒÂ©ttri stÃƒÂ¦rÃƒÂ°
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: image er poster mynd fyrir show og er ÃƒÆ’Ã‚Â­ rÃƒÆ’Ã‚Â©ttri stÃƒÆ’Ã‚Â¦rÃƒÆ’Ã‚Â°
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
 		image.setImageResource(R.drawable.app_icon);
@@ -280,9 +282,9 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-     * Nafn: KristÃƒÂ­n FjÃƒÂ³la TÃƒÂ³masdÃƒÂ³ttir
-     * Dagsetning: 9. oktÃƒÂ³ber 2014
-     * MarkmiÃƒÂ°: NÃƒÂ¦r ÃƒÂ­ myndir meÃƒÂ° samhliÃƒÂ°a ÃƒÂ¾rÃƒÂ¡ÃƒÂ°avinnslu
+     * Nafn: KristÃƒÆ’Ã‚Â­n FjÃƒÆ’Ã‚Â³la TÃƒÆ’Ã‚Â³masdÃƒÆ’Ã‚Â³ttir
+     * Dagsetning: 9. oktÃƒÆ’Ã‚Â³ber 2014
+     * MarkmiÃƒÆ’Ã‚Â°: NÃƒÆ’Ã‚Â¦r ÃƒÆ’Ã‚Â­ myndir meÃƒÆ’Ã‚Â° samhliÃƒÆ’Ã‚Â°a ÃƒÆ’Ã‚Â¾rÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°avinnslu
      * */
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
@@ -291,7 +293,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 bm = doInBackground(urls);
-	  	//EftirskilyrÃƒÂ°i: bm er myndin sem er sÃƒÂ³tt frÃƒÂ¡ urls.
+	  	//EftirskilyrÃƒÆ’Ã‚Â°i: bm er myndin sem er sÃƒÆ’Ã‚Â³tt frÃƒÆ’Ã‚Â¡ urls.
 		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
@@ -306,21 +308,21 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun:		 onPostExecute(result);
-	  	//EftirskilyrÃƒÂ°i: bÃƒÂºiÃƒÂ° er aÃƒÂ° setja myndina result ÃƒÂ­ rÃƒÂ©tt ImageView.
+	  	//EftirskilyrÃƒÆ’Ã‚Â°i: bÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° setja myndina result ÃƒÆ’Ã‚Â­ rÃƒÆ’Ã‚Â©tt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
 	}
 	
 	/*
-     * Nafn: 	   Edda BjÃ¶rk KonrÃ¡Ã°sdÃ³ttir
-     * Dagsetning: 30. oktÃ³ber 2014
-     * MarkmiÃ°:   NÃ¡ Ã­ upplÃ½singar um Ã¾Ã¡ttarÃ¶Ã° og sÃ½na ÃžÃ¦ttirnir mÃ­nir lista
-     * 			   meÃ° upplÃ½singum
+     * Nafn: 	   Edda BjÃƒÂ¶rk KonrÃƒÂ¡ÃƒÂ°sdÃƒÂ³ttir
+     * Dagsetning: 30. oktÃƒÂ³ber 2014
+     * MarkmiÃƒÂ°:   NÃƒÂ¡ ÃƒÂ­ upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttarÃƒÂ¶ÃƒÂ° og sÃƒÂ½na ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista
+     * 			   meÃƒÂ° upplÃƒÂ½singum
      * */
 	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veri� stillt sem birtist � me�an notandi b��ur
+		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.show_process_title));  
@@ -331,8 +333,8 @@ public class FragmentList extends Fragment {
         }  
 		
 		//Notkun:		 show = doInBackground(shows)
-		//EftirskilyrÃ°i: show er Ã¾Ã¡tturinn sem inniheldur upplÃ½singar
-		//				 sem nÃ¡Ã° er Ã­ ÃºtfrÃ¡ shows
+		//EftirskilyrÃƒÂ°i: show er ÃƒÂ¾ÃƒÂ¡tturinn sem inniheldur upplÃƒÂ½singar
+		//				 sem nÃƒÂ¡ÃƒÂ° er ÃƒÂ­ ÃƒÂºtfrÃƒÂ¡ shows
 		protected Show doInBackground(Show... shows) {
 			TraktClient client = new TraktClient();
 			Show show = new Show();
@@ -343,10 +345,10 @@ public class FragmentList extends Fragment {
 			return show;
 		}
 		
-		/**************ÃžARF AÃ� SPLITTA ÃžESSU NIÃ�UR**************************/
+		/**************ÃƒÅ¾ARF AÃƒï¿½ SPLITTA ÃƒÅ¾ESSU NIÃƒï¿½UR**************************/
 		//Notkun:		 onPostExecute(show)
-		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja upplÃ½singar um Ã¾Ã¡ttinn show
-		//				 og sÃ½na Ã­ ÃžÃ¦ttirnir mÃ­nir lista.
+		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
+		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
 		protected void onPostExecute(Show show) {
 			final Show _show = show;
 			
@@ -403,7 +405,7 @@ public class FragmentList extends Fragment {
 	
 	private class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veri� stillt sem birtist � me�an notandi b��ur
+		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle(getResources().getString(R.string.ep_process_title));  
@@ -460,10 +462,10 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-     * Nafn: 	   Edda BjÃƒÂ¶rk KonrÃƒÂ¡ÃƒÂ°sdÃƒÂ³ttir
-     * Dagsetning: 30. oktÃƒÂ³ber 2014
-     * MarkmiÃ¯Â¿Â½:   Manual scroll view sem erfir frÃƒÂ¡ ScrollView svo hÃƒÂ¦gt sÃƒÂ©
-     * 			  aÃƒÂ° virkja ÃƒÂ¾aÃƒÂ° og ,,slÃƒÂ¶kkva ÃƒÂ¡ ÃƒÂ¾vÃƒÂ­'' ÃƒÂ­ appinu
+     * Nafn: 	   Edda BjÃƒÆ’Ã‚Â¶rk KonrÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°sdÃƒÆ’Ã‚Â³ttir
+     * Dagsetning: 30. oktÃƒÆ’Ã‚Â³ber 2014
+     * MarkmiÃƒÂ¯Ã‚Â¿Ã‚Â½:   Manual scroll view sem erfir frÃƒÆ’Ã‚Â¡ ScrollView svo hÃƒÆ’Ã‚Â¦gt sÃƒÆ’Ã‚Â©
+     * 			  aÃƒÆ’Ã‚Â° virkja ÃƒÆ’Ã‚Â¾aÃƒÆ’Ã‚Â° og ,,slÃƒÆ’Ã‚Â¶kkva ÃƒÆ’Ã‚Â¡ ÃƒÆ’Ã‚Â¾vÃƒÆ’Ã‚Â­'' ÃƒÆ’Ã‚Â­ appinu
      * */
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
@@ -473,21 +475,21 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun: 		 scrollview.setScrollingEnabled(enabled)
-		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° virkja scrollview ef enabled er true
-		//				 en ,,slÃƒÂ¶kkva ÃƒÂ¡ ÃƒÂ¾vÃƒÂ­'' annars
+		//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° virkja scrollview ef enabled er true
+		//				 en ,,slÃƒÆ’Ã‚Â¶kkva ÃƒÆ’Ã‚Â¡ ÃƒÆ’Ã‚Â¾vÃƒÆ’Ã‚Â­'' annars
 		public void setScrollingEnabled(boolean enabled) {
 			scrollable = enabled;
 		}
 		
 		//Notkun:		 isScrollable = scrollview.isScrollable()
-		//EftirskilyrÃƒÂ°i: isScrollable er true ef scrollview er virkt,
+		//EftirskilyrÃƒÆ’Ã‚Â°i: isScrollable er true ef scrollview er virkt,
 		//				 false annars
 		public boolean isScrollable() {
 			return scrollable;
 		}
 		
 		//Notkun: touch = scrollview.onTouchEvent(event)
-		//EftirskilyrÃƒÂ°i:  touch er true ef scrollview er virkt og event
+		//EftirskilyrÃƒÆ’Ã‚Â°i:  touch er true ef scrollview er virkt og event
 		//				  er ACTION_DOWN, false annars
 		public boolean onTouchEvent(MotionEvent event) {
 			switch(event.getAction()) {
@@ -500,22 +502,22 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: 		 interupt = scrollview.onInterceptTouchEvent(event)
-		//EftirskilyrÃƒÂ°i: interupt er false ef scrollview er ekki virkt, skilar
-		//				 annars sama og samnefnt fall ÃƒÂ­ ScrollView
+		//EftirskilyrÃƒÆ’Ã‚Â°i: interupt er false ef scrollview er ekki virkt, skilar
+		//				 annars sama og samnefnt fall ÃƒÆ’Ã‚Â­ ScrollView
 		public boolean onInterceptTouchEvent(MotionEvent event) {
 			if(!scrollable) return false;
 			else return super.onInterceptTouchEvent(event);
 		}
 	}
 	//Notkun:		 id = getNextId()
-	//EftirskilyrÃƒÂ°i: id er nÃƒÂ¦sta lausa auÃƒÂ°kenni
+	//EftirskilyrÃƒÆ’Ã‚Â°i: id er nÃƒÆ’Ã‚Â¦sta lausa auÃƒÆ’Ã‚Â°kenni
 	private int getNextId() {
 		id = (id == null) ? 0 : id+1;
 		return id;
 	}
 	
 	//Notkun:		 bm = fixBitmapSize(orgBm);
-  	//EftirskilyrÃƒÂ°i: bm er nÃƒÂ¦stum sama bitmap og orgBm nema ÃƒÂ­ rÃƒÂ©ttri stÃƒÂ¦rÃƒÂ°
+  	//EftirskilyrÃƒÆ’Ã‚Â°i: bm er nÃƒÆ’Ã‚Â¦stum sama bitmap og orgBm nema ÃƒÆ’Ã‚Â­ rÃƒÆ’Ã‚Â©ttri stÃƒÆ’Ã‚Â¦rÃƒÆ’Ã‚Â°
 	public Bitmap fixBitmapSize(Bitmap originalBmp){
 		int x = originalBmp.getWidth();
 		int y = originalBmp.getHeight();

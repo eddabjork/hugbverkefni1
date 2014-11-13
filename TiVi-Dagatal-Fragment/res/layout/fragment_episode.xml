@@ -5,39 +5,35 @@
 	<LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >    
-		
-		  <TextView 
+	    android:orientation="vertical"
+	    android:padding="10dp" >    
+	    
+	    <ImageView
+		      android:id="@+id/image"
+		      android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:padding="0dp" />
+	    
+	    <TextView 
 		      android:id="@+id/title"
 		      android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"/>
-		  
-		  <TextView 
-		      android:id="@+id/rating"
-		      android:layout_width="wrap_content"
-		      android:layout_height="wrap_content"/>
-		  
-		  <TextView 
-		      android:id="@+id/season"
+			  android:layout_height="wrap_content"
+			  android:textStyle="bold"/>
+	    
+	    <TextView 
+		      android:id="@+id/episodeNumber"
 		      android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"/>
-		  
-		  <TextView 
-		      android:id="@+id/number"
-		      android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"/>
-		  
-		  <TextView 
+	    
+	    <TextView 
 		      android:id="@+id/firstAired"
 		      android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"/>
-		  
-		  <TextView 
+	    
+	    <TextView 
 		      android:id="@+id/overview"
 		      android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"/>
-		
-	
-	    
+
 	</LinearLayout>
 </ScrollView>
