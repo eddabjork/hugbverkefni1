@@ -70,6 +70,8 @@
     <string name="network">Sýndir á:</string>
     <string name="overview">Söguþráður:</string>
     <string name="related_shows">Svipaðir þættir</string>
+    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
+    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
     
     
     <!-- Upplýsingar -->

@@ -54,6 +54,7 @@ public class FragmentList extends Fragment {
 	private LinearLayout mainLayout;
 	private ProgressDialog progressDialog;
 	private FragmentRelated fragmentRelated;
+	private Fragment frag = new FragmentEpisode();
 	
 	/** Sets the view */
 	@Override
@@ -368,8 +369,8 @@ public class FragmentList extends Fragment {
 				//banner
 				ImageView banner = new ImageView(getActivity());
 				banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
-				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				banner.setLayoutParams(layoutParams);
+				LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				banner.setLayoutParams(bannerParams);
 				String url = show.getBanner();
 				new DownloadImageTask(banner).execute(url);
 				banner.buildDrawingCache();
@@ -391,6 +392,20 @@ public class FragmentList extends Fragment {
 				network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
 				
 				infoLayout.addView(network);
+				
+				//á hvaða degi sýndur
+				TextView airday = new TextView(getActivity());
+				airday.setLayoutParams(gradeLayout);
+				airday.setText((getResources().getString(R.string.airday))+" "+show.getAirDay());
+				
+				infoLayout.addView(airday);
+				
+				//klukkan hvað sýndur
+				TextView airtime = new TextView(getActivity());
+				airtime.setLayoutParams(gradeLayout);
+				airtime.setText((getResources().getString(R.string.airtime))+" "+ show.getAirTime());
+				
+				infoLayout.addView(airtime);
 				
 				//söguþráður
 				TextView overview = new TextView(getActivity());
@@ -422,13 +437,14 @@ public class FragmentList extends Fragment {
 				Collections.reverse(seasons);
 				for(final Season season : seasons) {
 					TextView seasonbutton = new TextView(getActivity());
-					seasonbutton.setText(getResources().getString(R.string.serie) + season.getSeasonNumber());
+					seasonbutton.setText(getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
 					seasonbutton.setGravity(Gravity.CENTER);
 					seasonbutton.setTextSize(20);
 					infoLayout.addView(seasonbutton);
 					LinearLayout episodes = new LinearLayout(getActivity());
 					episodes.setOrientation(LinearLayout.VERTICAL);
 					episodes.setVisibility(View.GONE);
+					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 					episodes.setLayoutParams(layoutParams);
 					episodes.setGravity(Gravity.CENTER);
 					episodes.setId(getNextId());
@@ -436,7 +452,7 @@ public class FragmentList extends Fragment {
 					season.setEpisodesView(episodes);
 					seasonbutton.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
-							mainScrollView.setScrollingEnabled(false);
+							//mainScrollView.setScrollingEnabled(false);
 							Map<Show, Season> map = new HashMap<Show, Season>();
 							map.put(_show, season);
 							new SeasonEpisodesTask().execute(map);
@@ -446,7 +462,7 @@ public class FragmentList extends Fragment {
 				scrollView.addView(infoLayout);
 				infoMain.addView(scrollView);
 			}
-			Animator.setHeightForWrapContent(getActivity(), infoMain);
+			Animator.setHeightForWrapContent(getActivity(), infoLayout);
 			Animator animation = null;
             if(open.contains(""+infoMain.getId())) {
                 animation = new Animator(infoMain, 500, 1);
@@ -496,12 +512,24 @@ public class FragmentList extends Fragment {
 			
 			if(!open.contains(""+episodes.getId())) {
 				episodes.removeAllViews();
-				for(Episode episode : episodeList) {
-					TextView eps = new TextView(getActivity());
-					eps.setText(""+episode.getNumber()+". "+episode.getTitle());
-					eps.setGravity(Gravity.CENTER);
-					eps.setTextSize(15);
-					episodes.addView(eps);
+				for(final Episode episode : episodeList) {
+					TextView textView = new TextView(getActivity());
+				    textView.setText(episode.getNumber()+". "+episode.getTitle());
+				    textView.setPadding(20,0,0,0);
+				    textView.setGravity(Gravity.CENTER);
+				    textView.setTextSize(15);
+				    textView.setOnClickListener(new View.OnClickListener() {
+						public void onClick(View view) {
+							((FragmentEpisode) frag).setEpisode(episode);
+							FragmentManager fragmentManager = getFragmentManager();
+					        fragmentManager.beginTransaction()
+					                       .replace(R.id.content_frame, frag)
+					                       .commit();
+					        getActivity().getActionBar().setTitle(episode.getShowTitle());
+					        
+						}
+					});
+					episodes.addView(textView);
 				}
 			}
 			Animator.setHeightForWrapContent(getActivity(), episodes);
