@@ -14,6 +14,7 @@ import Dtos.Show;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -54,6 +55,13 @@ public class FragmentSearchResults extends Fragment{
 		
         return rootView;
     }
+	
+	/*public void onBack(){
+		FragmentTransaction mFragmentTransaction = getFragmentManager()
+	            .beginTransaction();
+	
+		mFragmentTransaction.addToBackStack(null);
+	}*/
 	
 	//Notkun: onAttach(activity)
 	//Eftir:  búið er að tengja gagnagrunninn við fragmentið

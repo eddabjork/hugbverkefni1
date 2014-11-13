@@ -425,7 +425,7 @@ public class FragmentList extends Fragment {
 						getActivity().setTitle(getResources().getString(R.string.related_shows));
 				        FragmentManager fragmentManager = getFragmentManager();
 				        fragmentManager.beginTransaction()
-				                       .replace(R.id.content_frame, fragmentRelated)
+				                       .add(R.id.content_frame, fragmentRelated)
 				                       .commit();
 					}
 				});

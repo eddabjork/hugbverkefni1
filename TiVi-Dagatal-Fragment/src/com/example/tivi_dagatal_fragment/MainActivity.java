@@ -160,13 +160,22 @@ public class MainActivity extends Activity {
     }
     
     @Override
-	public void onBackPressed() {
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+    }
+    
+    //@Override
+	/*public void onBackPressed() {
 		FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, new FragmentCal())
                        .commit();
         setTitle(R.string.calendar);
-	}
+	}*/
 
     
     @Override
