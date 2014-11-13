@@ -190,14 +190,10 @@ public class FragmentCal extends Fragment {
 	}*/
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
-		if(cal.getFirstDayOfWeek() == 2)
-		{
-			Log.v("-1 stuffið = ", cal.get(Calendar.DAY_OF_WEEK)-1+"");
-			//TODO: Do stuff
-		}
-		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
 
-		cal.add( Calendar.DAY_OF_WEEK, -(cal.get(Calendar.DAY_OF_WEEK)-1));
+		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
+		int firstDay = cal.getFirstDayOfWeek();
+		cal.add( Calendar.DAY_OF_WEEK, -(cal.get(Calendar.DAY_OF_WEEK)-firstDay));
 		addNameOfMonth(cal, mainLayout);
 		
 		String weekDayNames[] = {
@@ -210,9 +206,17 @@ public class FragmentCal extends Fragment {
 				getResources().getString(R.string.sat_label)	
 		};
 		
+		String temp[] = new String[weekDayNames.length];
+		if(cal.getFirstDayOfWeek() == 2){
+			for(int i=0; i<temp.length-1;i++){
+				temp[i]=weekDayNames[i+1];
+			}
+			temp[temp.length-1]=weekDayNames[0];
+			weekDayNames=temp;
+		}
+		
 		int lastDayOfMonth = Integer.MIN_VALUE;
-		for(int i=0; i<weekDayNames.length; i++){
-			//cal.set(Calendar.DAY_OF_WEEK, i+1);
+		for(int i=0; i < weekDayNames.length; i++){
 			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 			if(lastDayOfMonth > thisDayOfMonth){
 				addNameOfMonth(cal, mainLayout);
