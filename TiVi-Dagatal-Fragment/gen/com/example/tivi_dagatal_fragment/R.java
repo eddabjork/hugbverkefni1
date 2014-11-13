@@ -1231,10 +1231,11 @@ containing a value of this type.
         public static final int fragment_info=0x7f03001c;
         public static final int fragment_list=0x7f03001d;
         public static final int fragment_popular=0x7f03001e;
-        public static final int fragment_search=0x7f03001f;
-        public static final int fragment_search_results=0x7f030020;
-        public static final int fragment_test=0x7f030021;
-        public static final int support_simple_spinner_dropdown_item=0x7f030022;
+        public static final int fragment_related=0x7f03001f;
+        public static final int fragment_search=0x7f030020;
+        public static final int fragment_search_results=0x7f030021;
+        public static final int fragment_test=0x7f030022;
+        public static final int support_simple_spinner_dropdown_item=0x7f030023;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1281,20 +1282,18 @@ containing a value of this type.
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a000e;
-        public static final int app_info=0x7f0a003b;
-        public static final int app_info_title=0x7f0a003a;
+        public static final int app_info=0x7f0a003c;
+        public static final int app_info_title=0x7f0a003b;
         public static final int app_name=0x7f0a000d;
         public static final int apr_label=0x7f0a0021;
         public static final int aug_label=0x7f0a0025;
         public static final int calendar=0x7f0a0011;
         public static final int dec_label=0x7f0a0029;
-        /**  Content Description 
-         */
         public static final int desc_list_item_icon=0x7f0a0016;
-        public static final int directions=0x7f0a0039;
+        public static final int directions=0x7f0a003a;
         /**  Upplýsingar 
          */
-        public static final int directions_title=0x7f0a0038;
+        public static final int directions_title=0x7f0a0039;
         public static final int drawer_close=0x7f0a0010;
         public static final int drawer_open=0x7f0a000f;
         public static final int ep_process_msg=0x7f0a0037;
@@ -1312,6 +1311,9 @@ containing a value of this type.
         public static final int mon_label=0x7f0a0018;
         public static final int neg_answer=0x7f0a002c;
         public static final int network=0x7f0a0013;
+        /**  Leita 
+         */
+        public static final int nothing_found=0x7f0a0038;
         public static final int nov_label=0x7f0a0028;
         public static final int oct_label=0x7f0a0027;
         public static final int overview=0x7f0a0014;

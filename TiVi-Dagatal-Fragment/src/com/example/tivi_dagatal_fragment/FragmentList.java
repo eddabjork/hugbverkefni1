@@ -367,8 +367,8 @@ public class FragmentList extends Fragment {
 				//banner
 				ImageView banner = new ImageView(getActivity());
 				banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
-				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				banner.setLayoutParams(layoutParams);
+				LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				banner.setLayoutParams(bannerParams);
 				String url = show.getBanner();
 				new DownloadImageTask(banner).execute(url);
 				banner.buildDrawingCache();
@@ -417,6 +417,7 @@ public class FragmentList extends Fragment {
 					LinearLayout episodes = new LinearLayout(getActivity());
 					episodes.setOrientation(LinearLayout.VERTICAL);
 					episodes.setVisibility(View.GONE);
+					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 					episodes.setLayoutParams(layoutParams);
 					episodes.setGravity(Gravity.CENTER);
 					episodes.setId(getNextId());
@@ -424,7 +425,7 @@ public class FragmentList extends Fragment {
 					season.setEpisodesView(episodes);
 					seasonbutton.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
-							mainScrollView.setScrollingEnabled(false);
+							//mainScrollView.setScrollingEnabled(false);
 							Map<Show, Season> map = new HashMap<Show, Season>();
 							map.put(_show, season);
 							new SeasonEpisodesTask().execute(map);
@@ -434,7 +435,7 @@ public class FragmentList extends Fragment {
 				scrollView.addView(infoLayout);
 				infoMain.addView(scrollView);
 			}
-			Animator.setHeightForWrapContent(getActivity(), infoMain);
+			Animator.setHeightForWrapContent(getActivity(), infoLayout);
 			Animator animation = null;
             if(open.contains(""+infoMain.getId())) {
                 animation = new Animator(infoMain, 500, 1);
