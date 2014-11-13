@@ -13,7 +13,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import Clients.TraktClient;
 import Data.DbUtils;
@@ -29,7 +28,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -162,32 +160,6 @@ public class FragmentCal extends Fragment {
   	//Eftirskilyrði: Búið er að búa til view fyrir sérhvern dag vikunnar (alls 7) þar
     //				 sem fram kemur dagsetning og Layout-pláss fyrir dagatals-þætti
     //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
-	/*public void fillInDates(LinearLayout mainLayout){
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.WEEK_OF_YEAR, MainActivity.getWeek());
-		addNameOfMonth(cal, mainLayout);
-		
-		String weekDayNames[] = {
-				getResources().getString(R.string.sun_label),
-				getResources().getString(R.string.mon_label),
-				getResources().getString(R.string.tue_label),
-				getResources().getString(R.string.wed_label),
-				getResources().getString(R.string.thu_label),
-				getResources().getString(R.string.fri_label),
-				getResources().getString(R.string.sat_label)	
-		};
-		
-		int lastDayOfMonth = Integer.MIN_VALUE;
-		for(int i=0; i<weekDayNames.length; i++){
-			cal.set(Calendar.DAY_OF_WEEK, i+1);
-			int thisDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-			if(lastDayOfMonth > thisDayOfMonth){
-				addNameOfMonth(cal, mainLayout);
-			}
-			setDateLayout(weekDayNames[i], cal, mainLayout);
-			lastDayOfMonth = thisDayOfMonth;
-		}
-	}*/
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 
@@ -229,7 +201,6 @@ public class FragmentCal extends Fragment {
 	
 	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
 		TextView month = new TextView(getActivity());
-		//if(first) cal.set(Calendar.DAY_OF_WEEK, 1);
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		month.setPadding(10,10,10,10);
 		month.setTextSize(20);
@@ -391,7 +362,6 @@ public class FragmentCal extends Fragment {
 		String title = episode.getShowTitle() + ": " + episode.getTitle() + " (þáttur " + episode.getNumber() + ")"; //TODO: færa í string.xml!
 		int episodeId = getFirstAiredInRightForm(episode.getFirstAired());
 	
-		Log.v("episode id ", ""+episodeId);
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);
 		TextView textView = new TextView(getActivity());
 	    textView.setText(title);
