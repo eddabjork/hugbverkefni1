@@ -55,10 +55,6 @@ public class FragmentSearch extends Fragment {
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
 		VariousUtils.addFragmentToStack(fragmentManager, results);
-		/*FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.content_frame, results);
-		fragmentTransaction.addToBackStack(null);
-		fragmentTransaction.commit();*/
 	}
 	
 }

@@ -365,7 +365,7 @@ public class FragmentList extends Fragment {
 				
 				//banner
 				ImageView banner = new ImageView(getActivity());
-				banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 				LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				banner.setLayoutParams(bannerParams);
 				String url = show.getBanner();
@@ -375,7 +375,7 @@ public class FragmentList extends Fragment {
 				infoLayout.addView(banner);
 				
 				LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				gradeLayout.setMargins(30, 20, 0, 0); //left, top, right, bottom
+				gradeLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
 				
 				//genres
 				TextView genres = new TextView(getActivity());
@@ -421,7 +421,7 @@ public class FragmentList extends Fragment {
 				//söguþráður
 				TextView overview = new TextView(getActivity());
 				LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				overviewLayout.setMargins(30, 20, 0, 20); //left, top, right, bottom
+				overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
 				overview.setLayoutParams(overviewLayout);
 				overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());
 				
