@@ -12,22 +12,14 @@
         <item>Vinsælir þættir</item>
         <item>Upplýsingar</item>
     </string-array>
-    <string name="drawer_open">Opinn</string>
-    <string name="drawer_close">Lokaður</string>
-    <string name="calendar">Dagatal</string>
-    <string name="imdb_grade">Einkunn á IMDb:</string>
-    <string name="network">Sýndir á:</string>
-    <string name="overview">Söguþráður:</string>
-    <string name="related_shows">Svipaðir þættir</string>
-    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
-    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
-    <string name="genres">Tegund:</string>
     <array name="nav_drawer_icons">
         <item>@drawable/on_cal</item>
         <item>@drawable/on_list</item>
         <item>@drawable/search</item>
         <item>@drawable/popular</item>
     </array>
+    <string name="drawer_open">Opinn</string>
+    <string name="drawer_close">Lokaður</string>
     <string name="desc_list_item_icon">Item Icon</string>
     
     <!-- Dagatalsstrengir -->
@@ -74,8 +66,8 @@
     <string name="popup_del">Viltu eyða þessum þætti?</string>
     
     <!-- Vinsælir þættir -->
-    <string name="process_title_popular">Næ í þáttaraðir..</string>
-    <string name="process_msg_popular">Þetta er allt að koma..</string>
+    <string name="popular_process_title">Næ í þáttaraðir..</string>
+    <string name="popular_process_msg">Þetta er allt að koma..</string>
     
     <!-- Leit -->
     <string name="search_process_msg">Er að leita..</string>
@@ -88,6 +80,13 @@
     <string name="show_process_msg">Upplýsingarnar eru á leiðinni.. bara rólegur Kiefer</string>
     <string name="ep_process_title">Næ í þætti..</string>
     <string name="ep_process_msg">Það er örugglega stutt í þetta</string>
+    <string name="imdb_grade">Einkunn á IMDb:</string>
+    <string name="network">Sýndir á:</string>
+    <string name="overview">Söguþráður:</string>
+    <string name="related_shows">Svipaðir þættir</string>
+    <string name="airday">Sýningardagur (á sjónvarpsstöð):</string>
+    <string name="airtime">Sýndur á sjónvarpsstöð kl.:</string>
+    <string name="genres">Tegund:</string>
     
     <!-- Leita -->
     <string name="nothing_found">Engar niðurstöður fundust</string>

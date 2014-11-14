@@ -10,14 +10,18 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -80,8 +84,8 @@ public class FragmentRelated extends Fragment{
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle(getResources().getString(R.string.process_title_popular));  
-            progressDialog.setMessage(getResources().getString(R.string.process_msg_popular)); 
+            progressDialog.setTitle(getResources().getString(R.string.popular_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.popular_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
@@ -92,16 +96,21 @@ public class FragmentRelated extends Fragment{
 		protected void onPostExecute(List<Show> relatedShows) {
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
-			
+			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			int width = size.x;
+			int pd = (int) width/32;
 			for (final Show show : relatedShows){
 				TextView title = new TextView(getActivity());
 				title.setText(show.getTitle());
-				title.setPadding(10,0,0,0);
+				title.setPadding(pd,0,pd,0);
 				
 				ImageButton addButton = getAddButton(show);	
-				addButton.setPadding(10,10,10,10);
+				addButton.setPadding(pd,pd,pd,pd);
 				ImageButton infoButton = getInfoButton(show);
-				infoButton.setPadding(10,10,10,10);
+				infoButton.setPadding(pd,pd,pd,pd);
 				
 				RelativeLayout episodeLayout = getEpisodeLayout(title, addButton, infoButton);
 				

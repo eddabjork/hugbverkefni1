@@ -147,6 +147,9 @@ public class MainActivity extends Activity {
     }
     
     @Override
+    //Notkun: onBackPressed()
+    //Eftir: Búið að birta viðeigandi skjámynd eða fara útúr appi, 
+    //       eftir því í hvaða skjámynd notandi var
     public void onBackPressed() {
     	boolean iDagatali = getActionBar().getTitle().toString().equals("Dagatal");
         boolean tomurStack = getFragmentManager().getBackStackEntryCount() == 0;
