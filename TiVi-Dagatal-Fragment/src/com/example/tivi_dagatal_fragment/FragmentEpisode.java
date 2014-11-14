@@ -49,7 +49,8 @@ public class FragmentEpisode extends Fragment{
         return view;
 	}
 	
-	
+	//Notkun: setEpisode(episode)  
+	//Eftir: búið er að setja episode sem gildi tilviksbreytinnar episode
 	public void setEpisode(Episode episode){
 		this.episode = episode;
 		Log.v("Var að sækja episode", episode.getTitle());
@@ -58,12 +59,13 @@ public class FragmentEpisode extends Fragment{
 	/**
      * Nafn: 		Steinunn Friðgeirsdóttir
      * Dagsetning: 	6. november 2014
-     * Markmið: 	?????????????????????????????????????????????????????????????????????????????????????
+     * Markmið: 	ShowEpisodeTask er klasi sem sér um þráðavinnslu fyrir FragmentEpisode.
+     * 				Upplýsingum um þátt er hlaðið inn asyncronus með loading skjá.
      */   
 	private class ShowEpisodeTask extends AsyncTask<Object, Integer, Episode> {
 		//Notkun: doInBackground(queries)
 		//Eftir:  þáðavinnslu í bakgrunni er lokið
-		//        ????????????????????????????????????????????????????????????????????????????????????????
+		//        og slilað hefur verið réttum episode.
 		protected Episode doInBackground(Object... objects) {         
 			IMDbClient imdb = new IMDbClient();
 			Episode episode = (Episode)objects[0];
@@ -74,8 +76,8 @@ public class FragmentEpisode extends Fragment{
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle(getResources().getString(R.string.process_title_popular));  
-            progressDialog.setMessage(getResources().getString(R.string.process_msg_popular)); 
+            progressDialog.setTitle(getResources().getString(R.string.popular_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.popular_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
@@ -87,7 +89,8 @@ public class FragmentEpisode extends Fragment{
 		}
 		
 		//Notkun: onPostExecute(searchShows)
-		//Eftir:  ????????????????????????????????????????????????????????????????
+		//Eftir:  búið að er hlaða inn öllum upplýsingum um episode og birta 
+		//		  ásamt því að stoppa progressDialog
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
 			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -148,7 +151,7 @@ public class FragmentEpisode extends Fragment{
 	}
 	
 	/**
-     * Nafn: KristÃƒÂ­n FjÃƒÂ³la TÃƒÂ³masdÃƒÂ³ttir
+     * Nafn: Kristín Fjóla Tómasdóttir
      * Dagsetning: 9. oktÃƒÂ³ber 2014
      * MarkmiÃƒÂ°: NÃƒÂ¦r ÃƒÂ­ myndir meÃƒÂ° samhliÃƒÂ°a ÃƒÂ¾rÃƒÂ¡ÃƒÂ°avinnslu
      * */

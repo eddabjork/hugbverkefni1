@@ -75,8 +75,8 @@ public class FragmentRelated extends Fragment{
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setTitle(getResources().getString(R.string.process_title_popular));  
-            progressDialog.setMessage(getResources().getString(R.string.process_msg_popular)); 
+            progressDialog.setTitle(getResources().getString(R.string.popular_process_title));  
+            progressDialog.setMessage(getResources().getString(R.string.popular_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
