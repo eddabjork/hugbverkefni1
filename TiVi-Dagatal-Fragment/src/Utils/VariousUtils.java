@@ -80,11 +80,7 @@ public class VariousUtils {
 		ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);		 
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 		boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();	
-		if(isConnected){
-			return true;
-		} else {
-			return false;
-		}	
+		return isConnected;	
 	}
 	
 	public static void showNotConnectedMsg(Context context){

@@ -7,10 +7,10 @@
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
-
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
+import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -48,7 +48,12 @@ public class FragmentPopular extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
 		VariousUtils.flushCacheAfter12Hours("popularShows");
 		scrollView = new ScrollView(getActivity());
-		new PopularShowsTask().execute();
+		if(VariousUtils.isConnectedToInternet(getActivity())){
+			new PopularShowsTask().execute();
+		} else {
+			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNoResult(scrollView, getActivity());
+		}
 		rootView = scrollView;
 		
         return rootView;

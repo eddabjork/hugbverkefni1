@@ -1,10 +1,11 @@
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
-
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
+import Utils.LayoutUtils;
+import Utils.VariousUtils;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -38,8 +39,12 @@ public class FragmentRelated extends Fragment{
 		View rootView = inflater.inflate(R.layout.fragment_related, container, false);
 		
 		scrollView = new ScrollView(getActivity());
-
-		new RelatedShowsTask().execute(show);
+		if(VariousUtils.isConnectedToInternet(getActivity())){
+			new RelatedShowsTask().execute(show);
+		} else {
+			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNoResult(scrollView, getActivity());
+		}
 		rootView = scrollView;
 		
         return rootView;

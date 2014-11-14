@@ -7,10 +7,11 @@
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
-
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
+import Utils.LayoutUtils;
+import Utils.VariousUtils;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -53,8 +54,12 @@ public class FragmentSearchResults extends Fragment{
 		char[] aWord = bundle.getCharArray("search");
 		String word =  new String(aWord);
 		Log.v("Strengurinn er", word);
-
-		new SearchShowsTask().execute(word);
+		if(VariousUtils.isConnectedToInternet(getActivity())){
+			new SearchShowsTask().execute(word);
+		} else {
+			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNoResult(scrollView, getActivity());
+		}
 		rootView = scrollView;
 		
         return rootView;
@@ -114,10 +119,7 @@ public class FragmentSearchResults extends Fragment{
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
 			if(searchShows.isEmpty()){
-				TextView nothing = new TextView(getActivity());
-				nothing.setTextSize(20);
-				nothing.setText(getResources().getString(R.string.nothing_found));
-				llv.addView(nothing);
+				LayoutUtils.showNoResult(llv, getActivity());
 			}
 			else{
 				for (final Show show : searchShows){
