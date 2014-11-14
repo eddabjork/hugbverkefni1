@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
         makeNavigationDrawer();        
         
-        //selectItem(0);
+        startWelcomeScreen();
     }
     
     // Notkun: cache = getCache()
@@ -61,6 +61,13 @@ public class MainActivity extends Activity {
     // Eftir:  startTime er tíminn í ms sem appið byrjaði á
     public static long getAppStartTime() {
     	return startTime;
+    }
+    
+    public void startWelcomeScreen(){
+    	FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                       .replace(R.id.content_frame, new FragmentStart())
+                       .commit();
     }
     
     //Notkun: makeNavigationDrawer()

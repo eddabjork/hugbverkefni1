@@ -12,7 +12,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,12 +56,18 @@ public class FragmentCal extends Fragment {
 	/** Sets the view */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_cal, container, false);	
+		View view = inflater.inflate(R.layout.fragment_cal, container, false);
+		
 		scrollView = new ScrollView(getActivity());
 		setLayout();
 		VariousUtils.flushCacheAfter12Hours("calendarEpisodes");
-		new CalendarShowsTask().execute();
+		if(VariousUtils.isConnectedToInternet(getActivity())){
+			new CalendarShowsTask().execute();
+		} else {
+			VariousUtils.showNotConnectedMsg(getActivity());
+		}
 		
+
 		view = scrollView;
         return view;
 	}
@@ -192,6 +197,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
+		
 		TextView month = new TextView(getActivity());
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		month.setPadding(10,10,10,10);
@@ -246,7 +252,6 @@ public class FragmentCal extends Fragment {
 		mainLayout.addView(makeLine());
 	}
 	
-	// TODO: setja í VariousUtils
 	//Notkun:		 month = getMonthFromInt(number);
   	//Eftirskilyrði: month er nafn mánuðs miðað við number þar sem 
 	//				 0=janúar,..,11=desember.
@@ -301,12 +306,7 @@ public class FragmentCal extends Fragment {
 		// Eftir:  nýr þráður byrjar sem nær í upplýsingar um þætti sem eiga 
 		//		   að vera birtir á dagatali
 		protected void onPostExecute(Map<String, String> dataTitles) {
-			if(VariousUtils.isConnectedToInternet(getActivity())){
-				new CalendarEpisodesTask().execute(dataTitles);
-			} else {
-				new CalendarEpisodesTask().execute(new HashMap<String, String>());
-				VariousUtils.showNotConnectedMsg(getActivity());
-			}
+			new CalendarEpisodesTask().execute(dataTitles);
 		}
 	}
 	
@@ -335,15 +335,13 @@ public class FragmentCal extends Fragment {
 			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.getCache().get("calendarEpisodes");
 	        
 	        if(calendarEpisodes == null || calendarEpisodes.size() == 0) {
-	        	if(dataTitles.length != 0) {
-			    	Log.v("cache", "Calendar episodes not cached, retrieving new list");
-			    	TraktClient trakt = new TraktClient();
-			        calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0], lastSunday, nextSunday);
-			        for(Episode episode : calendarEpisodes){
-			        	Log.v("episode", episode.getDataTitle());
-			        }
-			    	MainActivity.getCache().put("calendarEpisodes", calendarEpisodes);
-	        	}
+		    	Log.v("cache", "Calendar episodes not cached, retrieving new list");
+		    	TraktClient trakt = new TraktClient();
+		        calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0], lastSunday, nextSunday);
+		        for(Episode episode : calendarEpisodes){
+		        	Log.v("episode", episode.getDataTitle());
+		        }
+		    	MainActivity.getCache().put("calendarEpisodes", calendarEpisodes);
 		    } else {
 		    	Log.v("cahce", "Cached episodes found");
 		    	Log.v("cache", "Cache response size: " + calendarEpisodes.size());
