@@ -119,7 +119,7 @@ public class FragmentSearchResults extends Fragment{
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
 			if(searchShows.isEmpty()){
-				LayoutUtils.showNoResult(llv, getActivity());
+				LayoutUtils.showNoResult(llv, getActivity(), true);
 			}
 			else{
 				for (final Show show : searchShows){

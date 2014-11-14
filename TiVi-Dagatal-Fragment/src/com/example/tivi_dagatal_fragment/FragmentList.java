@@ -368,146 +368,151 @@ public class FragmentList extends Fragment {
 			LinearLayout infoLayout = show.getInfoLayout();
 			LinearLayout infoMain = show.getInfoMain();
 			ScrollView scrollView = show.getScrollView();
-			infoLayout.removeAllViews();
-			infoMain.removeAllViews();
-			scrollView.removeAllViews();
 			
-			// if show.getDataTitle == null then there is no internet connection
-			if(show.getDataTitle() != null && !open.contains(""+show.getInfoMain().getId())) {
-				//banner
-				ImageView banner = new ImageView(getActivity());
-				banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-				LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				banner.setLayoutParams(bannerParams);
-				String url = show.getBanner();
-				new DownloadImageTask(banner).execute(url);
-				banner.buildDrawingCache();
-				
-				infoLayout.addView(banner);
-				
-				LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				gradeLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-				
-				//genres
-				TextView genres = new TextView(getActivity());
-				genres.setLayoutParams(gradeLayout);
-				String genre = TextUtils.join(", ",show.getGenres().toArray());
-				genres.setText(getResources().getString(R.string.genres)+" "+genre);
-				
-				infoLayout.addView(genres);
-				
-				//einkunn a imdb
-				TextView grade = new TextView(getActivity());
-				Map<Show, TextView> map = new HashMap<Show, TextView>();
-				map.put(show, grade);
-				new IMDbRatingTask().execute(map);
-				grade.setLayoutParams(gradeLayout);
-				grade.setText(getResources().getString(R.string.imdb_grade));
-				
-				infoLayout.addView(grade);
-				
-				//sjónvarpsstöðvar
-				TextView network = new TextView(getActivity());
-				network.setLayoutParams(gradeLayout);
-				network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
-				
-				infoLayout.addView(network);
-				
-				//a hvada degi thatturinn er syndur
-				String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
-				TextView airday = new TextView(getActivity());
-				airday.setLayoutParams(gradeLayout);
-				airday.setText((getResources().getString(R.string.airday))+" "+airDay);
-				
-				infoLayout.addView(airday);
-				
-				//klukkan hvad syndur
-				String airTime = VariousUtils.parseAirTime(show.getAirTime());
-				TextView airtime = new TextView(getActivity());
-				airtime.setLayoutParams(gradeLayout);
-				airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
-				
-				infoLayout.addView(airtime);
-				
-				//söguþráður
-				TextView overview = new TextView(getActivity());
-				LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
-				overview.setLayoutParams(overviewLayout);
-				overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());
-				
-				infoLayout.addView(overview);
-				
-				//svipaðir þættir takki
-				Button relatedShows = new Button(getActivity());
-				relatedShows.setOnClickListener(new View.OnClickListener() {
-					public void onClick(View view) {
-						fragmentRelated = new FragmentRelated();
-						fragmentRelated.setShow(_show);
-						getActivity().setTitle(getResources().getString(R.string.related_shows));
-				        FragmentManager fragmentManager = getFragmentManager();
-				        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
-					}
-				});
-
-				relatedShows.setText(getResources().getString(R.string.related_shows));
-				
-				infoLayout.addView(relatedShows);
-				
-				//Seríur
-				List<Season> seasons = show.getSeasons();
-				Collections.reverse(seasons);
-				for(final Season season : seasons) {
+			if(!open.contains(""+show.getInfoMain().getId())){
+				infoLayout.removeAllViews();
+				infoMain.removeAllViews();
+				scrollView.removeAllViews();
+				// if show.getDataTitle == null then there is no internet connection
+				if(show.getDataTitle() != null) {
+					//banner
+					ImageView banner = new ImageView(getActivity());
+					banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+					LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+					banner.setLayoutParams(bannerParams);
+					String url = show.getBanner();
+					new DownloadImageTask(banner).execute(url);
+					banner.buildDrawingCache();
 					
-					TextView seasonbutton = new TextView(getActivity());
-					seasonbutton.setText(getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
-					seasonbutton.setGravity(Gravity.CENTER);
-					seasonbutton.setTextSize(20);
+					infoLayout.addView(banner);
 					
-					final ImageButton infoButton = new ImageButton(getActivity());
-					infoButton.setId(3);
-					infoButton.setImageResource(R.drawable.down_arrow);
-					infoButton.setBackgroundColor(Color.TRANSPARENT);
-					infoButton.setPadding(10,10,10,10);
+					LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+					gradeLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
 					
-					RelativeLayout seasonLayout = new RelativeLayout(getActivity());
-					RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-					RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-					titleParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-					titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
-					infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-					infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+					//genres
+					TextView genres = new TextView(getActivity());
+					genres.setLayoutParams(gradeLayout);
+					String genre = TextUtils.join(", ",show.getGenres().toArray());
+					genres.setText(getResources().getString(R.string.genres)+" "+genre);
 					
-					seasonLayout.addView(seasonbutton, titleParams);
-					seasonLayout.addView(infoButton, infoParams);
-					infoLayout.addView(seasonLayout);
+					infoLayout.addView(genres);
 					
+					//einkunn a imdb
+					TextView grade = new TextView(getActivity());
+					Map<Show, TextView> map = new HashMap<Show, TextView>();
+					map.put(show, grade);
+					new IMDbRatingTask().execute(map);
+					grade.setLayoutParams(gradeLayout);
+					grade.setText(getResources().getString(R.string.imdb_grade));
 					
-					LinearLayout episodes = new LinearLayout(getActivity());
-					episodes.setOrientation(LinearLayout.VERTICAL);
-					episodes.setVisibility(View.GONE);
-					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-					episodes.setLayoutParams(layoutParams);
-					episodes.setGravity(Gravity.CENTER);
-					episodes.setId(getNextId());
-					infoLayout.addView(episodes);
-					season.setEpisodesView(episodes);
+					infoLayout.addView(grade);
 					
-					infoButton.setOnClickListener(new View.OnClickListener() {
+					//sjónvarpsstöðvar
+					TextView network = new TextView(getActivity());
+					network.setLayoutParams(gradeLayout);
+					network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
+					
+					infoLayout.addView(network);
+					
+					//a hvada degi thatturinn er syndur
+					String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
+					TextView airday = new TextView(getActivity());
+					airday.setLayoutParams(gradeLayout);
+					airday.setText((getResources().getString(R.string.airday))+" "+airDay);
+					
+					infoLayout.addView(airday);
+					
+					//klukkan hvad syndur
+					String airTime = VariousUtils.parseAirTime(show.getAirTime());
+					TextView airtime = new TextView(getActivity());
+					airtime.setLayoutParams(gradeLayout);
+					airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
+					
+					infoLayout.addView(airtime);
+					
+					//söguþráður
+					TextView overview = new TextView(getActivity());
+					LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+					overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
+					overview.setLayoutParams(overviewLayout);
+					overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());
+					
+					infoLayout.addView(overview);
+					
+					//svipaðir þættir takki
+					Button relatedShows = new Button(getActivity());
+					relatedShows.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
-							//mainScrollView.setScrollingEnabled(false);
-							Map<Show, Season> map = new HashMap<Show, Season>();
-							map.put(_show, season);
-							new SeasonEpisodesTask().execute(map);
+							fragmentRelated = new FragmentRelated();
+							fragmentRelated.setShow(_show);
+							getActivity().setTitle(getResources().getString(R.string.related_shows));
+					        FragmentManager fragmentManager = getFragmentManager();
+					        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
 						}
 					});
+
+					relatedShows.setText(getResources().getString(R.string.related_shows));
+					
+					infoLayout.addView(relatedShows);
+					
+					//Seríur
+					List<Season> seasons = show.getSeasons();
+					Collections.reverse(seasons);
+					for(final Season season : seasons) {
+						
+						TextView seasonbutton = new TextView(getActivity());
+						seasonbutton.setText(getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
+						seasonbutton.setGravity(Gravity.CENTER);
+						seasonbutton.setTextSize(20);
+						
+						final ImageButton infoButton = new ImageButton(getActivity());
+						infoButton.setId(3);
+						infoButton.setImageResource(R.drawable.down_arrow);
+						infoButton.setBackgroundColor(Color.TRANSPARENT);
+						infoButton.setPadding(10,10,10,10);
+						
+						RelativeLayout seasonLayout = new RelativeLayout(getActivity());
+						RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+						RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+						titleParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+						titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+						infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+						infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+						
+						seasonLayout.addView(seasonbutton, titleParams);
+						seasonLayout.addView(infoButton, infoParams);
+						infoLayout.addView(seasonLayout);
+						
+						
+						LinearLayout episodes = new LinearLayout(getActivity());
+						episodes.setOrientation(LinearLayout.VERTICAL);
+						episodes.setVisibility(View.GONE);
+						LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+						episodes.setLayoutParams(layoutParams);
+						episodes.setGravity(Gravity.CENTER);
+						episodes.setId(getNextId());
+						infoLayout.addView(episodes);
+						season.setEpisodesView(episodes);
+						
+						infoButton.setOnClickListener(new View.OnClickListener() {
+							public void onClick(View view) {
+								//mainScrollView.setScrollingEnabled(false);
+								Map<Show, Season> map = new HashMap<Show, Season>();
+								map.put(_show, season);
+								new SeasonEpisodesTask().execute(map);
+							}
+						});
+					}
+				} else {
+					VariousUtils.showNotConnectedMsg(getActivity());
+					LayoutUtils.showNoResult(infoLayout, getActivity(), false);
 				}
+				scrollView.addView(infoLayout);
+				infoMain.addView(scrollView);
 			} else {
-				VariousUtils.showNotConnectedMsg(getActivity());
-				LayoutUtils.showNoResult(infoLayout, getActivity());
+				// TODO: J�HANNA SN�A TAKKA
 			}
-			scrollView.addView(infoLayout);
-			infoMain.addView(scrollView);
+			
 			Animator.setHeightForWrapContent(getActivity(), infoLayout);
 			Animator animation = null;
             if(open.contains(""+infoMain.getId())) {

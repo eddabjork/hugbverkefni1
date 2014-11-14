@@ -20,9 +20,10 @@ public class LayoutUtils {
 	
 	// Notkun: showNoResult(layout, context)
 	// Eftir:  búið er að birta texta í layout sem segir notanda að engar niðurstöður fundust  
-	public static void showNoResult(LinearLayout layout, Activity context){
+	public static void showNoResult(LinearLayout layout, Activity context, boolean big){
 		TextView nothing = new TextView(context);
-		nothing.setTextSize(20);
+		if(big) nothing.setTextSize(20);
+		else nothing.setTextSize(15);
 		nothing.setText(context.getResources().getString(R.string.nothing_found));
 		layout.addView(nothing);
 	}
