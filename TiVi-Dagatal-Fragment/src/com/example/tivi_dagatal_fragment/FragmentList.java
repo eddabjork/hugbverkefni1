@@ -62,6 +62,7 @@ public class FragmentList extends Fragment {
 	private ProgressDialog progressDialog;
 	private Fragment frag = new FragmentEpisode();
 	private FragmentRelated fragmentRelated;
+	private String noBannerUrl = "http://slurm.trakt.us/images/banner.jpg";
 	
 	
 	/** Sets the view */
@@ -376,26 +377,28 @@ public class FragmentList extends Fragment {
 				// if show.getDataTitle == null then there is no internet connection
 				if(show.getDataTitle() != null) {
 					//banner
-					ImageView banner = new ImageView(getActivity());
-					banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-					LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-					banner.setLayoutParams(bannerParams);
-					String url = show.getBanner();
-					new DownloadImageTask(banner).execute(url);
-					banner.buildDrawingCache();
-					
-					infoLayout.addView(banner);
+					if(!show.getBanner().equals(noBannerUrl)) {
+						ImageView banner = new ImageView(getActivity());
+						banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+						LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+						banner.setLayoutParams(bannerParams);
+						String url = show.getBanner();
+						new DownloadImageTask(banner).execute(url);
+						banner.buildDrawingCache();
+						infoLayout.addView(banner);
+					}
 					
 					LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 					gradeLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
 					
 					//genres
-					TextView genres = new TextView(getActivity());
-					genres.setLayoutParams(gradeLayout);
-					String genre = TextUtils.join(", ",show.getGenres().toArray());
-					genres.setText(getResources().getString(R.string.genres)+" "+genre);
-					
-					infoLayout.addView(genres);
+					if(show.getGenres().size() != 0) {
+						TextView genres = new TextView(getActivity());
+						genres.setLayoutParams(gradeLayout);
+						String genre = TextUtils.join(", ",show.getGenres().toArray());
+						genres.setText(getResources().getString(R.string.genres)+" "+genre);
+						infoLayout.addView(genres);
+					}
 					
 					//einkunn a imdb
 					TextView grade = new TextView(getActivity());
@@ -407,39 +410,44 @@ public class FragmentList extends Fragment {
 					
 					infoLayout.addView(grade);
 					
-					//sjónvarpsstöðvar
-					TextView network = new TextView(getActivity());
-					network.setLayoutParams(gradeLayout);
-					network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
-					
-					infoLayout.addView(network);
+					//sjonvarpsstodvar
+					if(show.getNetwork() != null) {
+						TextView network = new TextView(getActivity());
+						network.setLayoutParams(gradeLayout);
+						network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
+						infoLayout.addView(network);
+					}					
 					
 					//a hvada degi thatturinn er syndur
-					String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
-					TextView airday = new TextView(getActivity());
-					airday.setLayoutParams(gradeLayout);
-					airday.setText((getResources().getString(R.string.airday))+" "+airDay);
-					
-					infoLayout.addView(airday);
+					if(show.getAirDay() != null) {
+						String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
+						TextView airday = new TextView(getActivity());
+						airday.setLayoutParams(gradeLayout);
+						airday.setText((getResources().getString(R.string.airday))+" "+airDay);
+						infoLayout.addView(airday);
+					}
 					
 					//klukkan hvad syndur
-					String airTime = VariousUtils.parseAirTime(show.getAirTime());
-					TextView airtime = new TextView(getActivity());
-					airtime.setLayoutParams(gradeLayout);
-					airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
+					if(show.getAirTime() != null) {
+						String airTime = VariousUtils.parseAirTime(show.getAirTime());
+						TextView airtime = new TextView(getActivity());
+						airtime.setLayoutParams(gradeLayout);
+						airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
+						
+						infoLayout.addView(airtime);
+					}
 					
-					infoLayout.addView(airtime);
+					//soguthradur
+					if(show.getOverview() != null) {
+						TextView overview = new TextView(getActivity());
+						LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+						overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
+						overview.setLayoutParams(overviewLayout);
+						overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());					
+						infoLayout.addView(overview);
+					}
 					
-					//söguþráður
-					TextView overview = new TextView(getActivity());
-					LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-					overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
-					overview.setLayoutParams(overviewLayout);
-					overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());
-					
-					infoLayout.addView(overview);
-					
-					//svipaðir þættir takki
+					//svipadir thaettir takki
 					Button relatedShows = new Button(getActivity());
 					relatedShows.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
@@ -455,7 +463,7 @@ public class FragmentList extends Fragment {
 					
 					infoLayout.addView(relatedShows);
 					
-					//Seríur
+					//seriur
 					List<Season> seasons = show.getSeasons();
 					Collections.reverse(seasons);
 					for(final Season season : seasons) {
@@ -710,7 +718,11 @@ public class FragmentList extends Fragment {
 		// Eftir:  einkunn � ��tti hefur veri� birt
 		protected void onPostExecute(Map<Show, TextView> map) {
 			for(Show show : map.keySet()){
-				map.get(show).setText(getResources().getString(R.string.imdb_grade) + " " + show.getImdbRating());
+				if(show.getImdbRating() != null) {
+					map.get(show).setText(getResources().getString(R.string.imdb_grade) + " " + show.getImdbRating());
+				} else {
+					map.get(show).setText(getResources().getString(R.string.imdb_grade_not_found));
+				}
 			}
 		}
 	}
