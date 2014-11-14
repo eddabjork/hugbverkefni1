@@ -17,7 +17,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -151,6 +150,7 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
     	boolean iDagatali = getActionBar().getTitle().toString().equals("Dagatal");
         boolean tomurStack = getFragmentManager().getBackStackEntryCount() == 0;
+        String title = getActionBar().getTitle().toString();
     	if (!iDagatali && tomurStack){
         	FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -163,6 +163,12 @@ public class MainActivity extends Activity {
         } 
     	else {
             getFragmentManager().popBackStack();
+            if(title.equals(getResources().getString(R.string.related_shows))){
+            	setTitle(mDrawerTitles[1]);
+            }
+            else{
+            	setTitle(mDrawerTitles[0]);
+            }
         }
     }
 
