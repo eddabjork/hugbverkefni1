@@ -31,8 +31,6 @@ public class FragmentSearch extends Fragment {
         return rootView;
 	}
 	
-	//TODO: Setja inn onBackPressed stuff??
-	
 	//Notkun: searchClick(view)
 	//Eftir: Tekur það sem er í leitarboxinu og leitar eftir því
 	//       í gegnum vefþjónustu og skilar niðurstöðum í nýju

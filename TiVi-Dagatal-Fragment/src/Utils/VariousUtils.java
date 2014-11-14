@@ -52,6 +52,9 @@ public class VariousUtils {
 		else return weekday;
 	}
 	
+	//Notkun: addFragmentToStack(manager, fragment)
+	//Fyrir:  búið er að birta fragment ofaná stack með síðasta
+	//		  fragment undir.
 	public static void addFragmentToStack(FragmentManager manager,Fragment fragment){
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		fragmentTransaction.replace(R.id.content_frame, fragment);

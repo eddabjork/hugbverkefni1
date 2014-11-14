@@ -93,6 +93,7 @@
     
     <!--  Annað -->
     <string name="not_online">Þú ert ekki tengdur netinu vinur</string>
+    <string name="app_start_info">Texti sem kemur þegar þú startar appinu. Fullt fullt af texta.</string>
     
     <!-- Upplýsingar -->
     <string name="calendar_title">Dagatal:</string>
