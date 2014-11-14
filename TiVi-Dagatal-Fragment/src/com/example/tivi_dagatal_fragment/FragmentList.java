@@ -21,6 +21,7 @@ import Data.DbUtils;
 import Dtos.Episode;
 import Dtos.Season;
 import Dtos.Show;
+import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -346,9 +347,11 @@ public class FragmentList extends Fragment {
 		//EftirskilyrÃƒÂ°i: show er ÃƒÂ¾ÃƒÂ¡tturinn sem inniheldur upplÃƒÂ½singar
 		//				 sem nÃƒÂ¡ÃƒÂ° er ÃƒÂ­ ÃƒÂºtfrÃƒÂ¡ shows
 		protected Show doInBackground(Show... shows) {
-			TraktClient client = new TraktClient();
 			Show show = new Show();
-			if(!open.contains(""+shows[0].getInfoMain().getId())) show = client.getShowInfo(shows[0]);
+			if(VariousUtils.isConnectedToInternet(getActivity())){
+				TraktClient client = new TraktClient();
+				if(!open.contains(""+shows[0].getInfoMain().getId())) show = client.getShowInfo(shows[0]);
+			}
 			show.setInfoLayout(shows[0].getInfoLayout());
 			show.setInfoMain(shows[0].getInfoMain());
 			show.setScrollView(shows[0].getScrollView());
@@ -365,12 +368,12 @@ public class FragmentList extends Fragment {
 			LinearLayout infoLayout = show.getInfoLayout();
 			LinearLayout infoMain = show.getInfoMain();
 			ScrollView scrollView = show.getScrollView();
+			infoLayout.removeAllViews();
+			infoMain.removeAllViews();
+			scrollView.removeAllViews();
 			
-			if(!open.contains(""+show.getInfoMain().getId())) {
-				infoLayout.removeAllViews();
-				infoMain.removeAllViews();
-				scrollView.removeAllViews();
-				
+			// if show.getDataTitle == null then there is no internet connection
+			if(show.getDataTitle() != null && !open.contains(""+show.getInfoMain().getId())) {
 				//banner
 				ImageView banner = new ImageView(getActivity());
 				banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -499,9 +502,12 @@ public class FragmentList extends Fragment {
 						}
 					});
 				}
-				scrollView.addView(infoLayout);
-				infoMain.addView(scrollView);
+			} else {
+				VariousUtils.showNotConnectedMsg(getActivity());
+				LayoutUtils.showNoResult(infoLayout, getActivity());
 			}
+			scrollView.addView(infoLayout);
+			infoMain.addView(scrollView);
 			Animator.setHeightForWrapContent(getActivity(), infoLayout);
 			Animator animation = null;
             if(open.contains(""+infoMain.getId())) {
