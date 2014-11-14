@@ -11,7 +11,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.Toast;
 
 public class VariousUtils {
 
@@ -70,5 +74,23 @@ public class VariousUtils {
 		if((time - MainActivity.getAppStartTime()) > twelveHours){
 			flushCache(key);
 		}
+	}
+	
+	public static boolean isConnectedToInternet(Activity context){
+		ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);		 
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();	
+		if(isConnected){
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	
+	public static void showNotConnectedMsg(Context context){
+		CharSequence text = context.getResources().getString(R.string.not_online);
+		int duration = Toast.LENGTH_LONG;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
 	}
 }

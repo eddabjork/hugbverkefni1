@@ -91,6 +91,9 @@
     <!-- Leita -->
     <string name="nothing_found">Engar niðurstöður fundust</string>
     
+    <!--  Annað -->
+    <string name="not_online">Þú ert ekki tengdur netinu vinur</string>
+    
     <!-- Upplýsingar -->
     <string name="calendar_title">Dagatal:</string>
     <string name="calendar_text1">
