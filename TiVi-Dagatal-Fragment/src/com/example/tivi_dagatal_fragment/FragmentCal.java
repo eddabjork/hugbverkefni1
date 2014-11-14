@@ -25,6 +25,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +43,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
@@ -58,7 +61,12 @@ public class FragmentCal extends Fragment {
 		scrollView = new ScrollView(getActivity());
 		setLayout();
 		VariousUtils.flushCacheAfter12Hours("calendarEpisodes");
-		new CalendarShowsTask().execute();
+		if(VariousUtils.isConnectedToInternet(getActivity())){
+			new CalendarShowsTask().execute();
+		} else {
+			VariousUtils.showNotConnectedMsg(getActivity());
+		}
+		
 
 		view = scrollView;
         return view;
