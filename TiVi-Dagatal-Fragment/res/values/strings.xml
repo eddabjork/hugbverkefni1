@@ -81,6 +81,7 @@
     <string name="ep_process_title">Næ í þætti..</string>
     <string name="ep_process_msg">Það er örugglega stutt í þetta</string>
     <string name="imdb_grade">Einkunn á IMDb:</string>
+    <string name="imdb_grade_not_found">Einkunn á IMDb: Ekki vitað</string>
     <string name="network">Sýndir á:</string>
     <string name="overview">Söguþráður:</string>
     <string name="related_shows">Svipaðir þættir</string>
