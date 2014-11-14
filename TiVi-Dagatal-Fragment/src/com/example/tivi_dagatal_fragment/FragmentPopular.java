@@ -111,8 +111,7 @@ public class FragmentPopular extends Fragment {
 		//        birta þá ásamt takka til þess að bæta við 
 		//        þáttaröð á dagatal. Listinn er svo birtur.
 		protected void onPostExecute(List<Show> searchShows) {
-			Context myContext = getActivity();
-			WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
+			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);

@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import Clients.IMDbClient;
 import Clients.TraktClient;
 import Data.DbUtils;
@@ -29,16 +30,19 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -112,35 +116,41 @@ public class FragmentList extends Fragment {
 	}
 	
 	public void addShow(Show show) {
+		WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int pd = (int) width/32;
+		
 		RelativeLayout episodeLayout = new RelativeLayout(getActivity());
 		
 		TextView title = new TextView(getActivity());
 		title.setText(show.getTitle());
-		title.setPadding(10,0,0,0);
+		title.setPadding(pd,0,0,0);
 		
 		final Show _show = show;
 		
 		ImageButton calendarButton = getCalButton(show);
 		calendarButton.setId(1);
-		calendarButton.setPadding(10,10,10,10);
+		calendarButton.setPadding(pd,pd,pd,pd);
 		
 		ImageButton deleteButton = new ImageButton(getActivity());
 		deleteButton.setId(2);
 		deleteButton.setImageResource(R.drawable.delete);
-		deleteButton.setPadding(3,6,3,6);
 		deleteButton.setBackgroundColor(Color.TRANSPARENT);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	showDialog(_show);
             }
         });
-		deleteButton.setPadding(10,10,10,10);
+		deleteButton.setPadding(pd,pd,pd,pd);
 		
 		final ImageButton infoButton = new ImageButton(getActivity());
 		infoButton.setId(3);
 		infoButton.setImageResource(R.drawable.down_arrow);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
-		infoButton.setPadding(10,10,10,10);
+		infoButton.setPadding(pd,pd,pd,pd);
 		
 		final ScrollView scrollView = new ScrollView(getActivity());
 		final LinearLayout infoLayout = new LinearLayout(getActivity());
@@ -166,7 +176,6 @@ public class FragmentList extends Fragment {
 		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-		//RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(35, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		
 		titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -175,7 +184,6 @@ public class FragmentList extends Fragment {
 		calParams.addRule(RelativeLayout.CENTER_VERTICAL);
 		delParams.addRule(RelativeLayout.LEFT_OF, 3);
 		delParams.addRule(RelativeLayout.CENTER_VERTICAL);
-		delParams.setMargins(5,5,0,0);
 		infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
 		

@@ -104,8 +104,7 @@ public class FragmentSearchResults extends Fragment{
 		//          Í listanum eru líka takkar sem hægt er að ýta á og 
 		// 	        þá bætist þáttur í gagnagrunn. 
 		protected void onPostExecute(List<Show> searchShows) {
-			Context myContext = getActivity();
-			WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
+			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
