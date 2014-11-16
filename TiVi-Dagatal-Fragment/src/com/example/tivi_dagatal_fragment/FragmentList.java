@@ -94,12 +94,16 @@ public class FragmentList extends Fragment {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur veriÃƒÆ’Ã‚Â° stillt sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° sÃƒÆ’Ã‚Â½na ÃƒÆ’Ã‚Â¡ meÃƒÆ’Ã‚Â°an notandi er aÃƒÆ’Ã‚Â° bÃƒÆ’Ã‚Â­ÃƒÆ’Ã‚Â°a
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity());
+            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
             progressDialog.setMessage(getResources().getString(R.string.list_process_msg));  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
-            progressDialog.show();  
+            progressDialog.show(); 
+            // change color of divider
+            int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+    		View divider = progressDialog.findViewById(dividerId);
+    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));  
         }  
 		
 		// Notkun: onPostExecute(shows)
@@ -336,12 +340,16 @@ public class FragmentList extends Fragment {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity());
+            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
             progressDialog.setTitle(getResources().getString(R.string.show_process_title));  
             progressDialog.setMessage(getResources().getString(R.string.show_process_msg));  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
-            progressDialog.show();  
+            progressDialog.show();   
+            // change color of divider
+            int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+    		View divider = progressDialog.findViewById(dividerId);
+    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
         }  
 		
 		//Notkun:		 show = doInBackground(shows)
@@ -539,12 +547,16 @@ public class FragmentList extends Fragment {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity());
+            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
             progressDialog.setTitle(getResources().getString(R.string.ep_process_title));  
             progressDialog.setMessage(getResources().getString(R.string.ep_process_msg));  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
+            // change color of divider
+            int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+    		View divider = progressDialog.findViewById(dividerId);
+    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
         }  
 		
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {

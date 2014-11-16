@@ -15,6 +15,8 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class PopUpDelete extends DialogFragment{
@@ -34,24 +36,39 @@ public class PopUpDelete extends DialogFragment{
 	// Eftir:  dialog er pop-up sem spyr notanda hvort hann vilji eyða þætti
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-    	return new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.app_icon)
-                .setTitle(R.string.popup_del)
-                .setPositiveButton(R.string.neg_answer,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            // do nothing
-                        }
-                    }
-                )
-                .setNegativeButton(R.string.pos_answer,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                        	removeFromMyShows(show);
-                        }
-                    }
-                )
-                .create();
+    	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder
+			.setIcon(R.drawable.app_icon)
+	        .setTitle(R.string.app_name)
+	        .setMessage(R.string.popup_del)
+	        .setPositiveButton(R.string.neg_answer,
+	            new DialogInterface.OnClickListener() {
+	        		//Notkun: onClick(dialog, whichButton)
+	        		//Eftir: ekkert
+	                public void onClick(DialogInterface dialog, int whichButton) {
+	                    // do nothing
+	                }
+	            }
+	        )
+	        .setNegativeButton(R.string.pos_answer,
+	            new DialogInterface.OnClickListener() {
+	        	//Notkun: onClick(dialog, whichButton)
+        		//Eftir: þaetti hefur verid eytt ur 'Thaettirnir minir' lista
+	        	public void onClick(DialogInterface dialog, int whichButton) {
+	        			removeFromMyShows(show);
+	                }
+	            }
+	        );
+		Dialog d = builder.show();
+		// change title color
+		int textViewId = d.getContext().getResources().getIdentifier("android:id/alertTitle", null, null);
+		TextView tv = (TextView) d.findViewById(textViewId);
+		tv.setTextColor(getResources().getColor(R.color.app_red));
+		// change divider color
+		int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+		View divider = d.findViewById(dividerId);
+		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
+		return d;
     }
     
 	//Notkun:	removeFromMyEpisodes(show);

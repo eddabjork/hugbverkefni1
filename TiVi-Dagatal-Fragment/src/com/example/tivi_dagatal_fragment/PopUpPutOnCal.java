@@ -14,6 +14,9 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 
 public class PopUpPutOnCal extends DialogFragment{
 	
@@ -32,24 +35,39 @@ public class PopUpPutOnCal extends DialogFragment{
 	// Eftir:  dialog er pop-up sem býður uppá að vista þátt á dagatali
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-    	return new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.app_icon)
-                .setTitle(R.string.popup_put_cal)
-                .setPositiveButton(R.string.neg_answer,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            // do nothing
-                        }
-                    }
-                )
-                .setNegativeButton(R.string.pos_answer,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                        	addToCal(show);
-                        }
-                    }
-                )
-                .create();
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder
+			.setIcon(R.drawable.app_icon)
+	        .setTitle(R.string.app_name)
+	        .setMessage(R.string.popup_put_cal)
+	        .setPositiveButton(R.string.neg_answer,
+	            new DialogInterface.OnClickListener() {
+	        		//Notkun: onClick(dialog, whichButton)
+	        		//Eftir: ekkert
+	                public void onClick(DialogInterface dialog, int whichButton) {
+	                    // do nothing
+	                }
+	            }
+	        )
+	        .setNegativeButton(R.string.pos_answer,
+	            new DialogInterface.OnClickListener() {
+	        	//Notkun: onClick(dialog, whichButton)
+        		//Eftir: þaetti er baett a dagatalslista
+	        	public void onClick(DialogInterface dialog, int whichButton) {
+	                	addToCal(show);
+	                }
+	            }
+	        );
+		Dialog d = builder.show();
+		// change title color
+		int textViewId = d.getContext().getResources().getIdentifier("android:id/alertTitle", null, null);
+		TextView tv = (TextView) d.findViewById(textViewId);
+		tv.setTextColor(getResources().getColor(R.color.app_red));
+		// change divider color
+		int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+		View divider = d.findViewById(dividerId);
+		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
+		return d;
     }
     
 	// Notkun: addToCal(show)

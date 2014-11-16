@@ -321,12 +321,18 @@ public class FragmentCal extends Fragment {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity());
+            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
             progressDialog.setMessage(getResources().getString(R.string.list_process_msg)); 
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
+            // change color of divider
+            int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+    		View divider = progressDialog.findViewById(dividerId);
+    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
+            
+            
         }  
 		
 		// Notkun: episodes = doInBackground(dataTitles)

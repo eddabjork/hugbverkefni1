@@ -16,5 +16,29 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="ProgressDialog" parent="@style/android:Theme.Holo.Light">
+		<item name="android:textColor">#000000</item>
+		<item name="android:textColorSecondary">@android:color/holo_red_dark</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+		<item name="android:backgroundDimEnabled">true</item>
+		<item name="android:windowTitleStyle">@style/ProgressDialogTitle</item>
+	</style>
+	
+    <style name="ProgressDialogTitle">
+	    <item name="android:maxLines">1</item>
+	    <item name="android:textAppearance">@style/ProgressDialogTitleText</item>
+	</style>
+	
+    <style name="ProgressDialogTitleText">
+	    <item name="android:textSize">20sp</item>
+	    <item name="android:textColor">#000000</item>
+	</style>
 
 </resources>
