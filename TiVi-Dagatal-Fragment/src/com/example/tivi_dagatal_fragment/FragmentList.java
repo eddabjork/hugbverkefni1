@@ -419,7 +419,7 @@ public class FragmentList extends Fragment {
 					infoLayout.addView(grade);
 					
 					//sjonvarpsstodvar
-					if(show.getNetwork() != null) {
+					if(show.getNetwork() != null && !show.getNetwork().equals("")) {
 						TextView network = new TextView(getActivity());
 						network.setLayoutParams(gradeLayout);
 						network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
@@ -427,16 +427,14 @@ public class FragmentList extends Fragment {
 					}					
 					
 					//a hvada degi thatturinn er syndur
-					if(show.getAirDay() != null) {
+					if(show.getAirDay() != null && !show.getAirDay().equals("")) {
 						String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
 						TextView airday = new TextView(getActivity());
 						airday.setLayoutParams(gradeLayout);
 						airday.setText((getResources().getString(R.string.airday))+" "+airDay);
 						infoLayout.addView(airday);
-					}
 					
-					//klukkan hvad syndur
-					if(show.getAirTime() != null) {
+						//klukkan hvad syndur
 						String airTime = VariousUtils.parseAirTime(show.getAirTime());
 						TextView airtime = new TextView(getActivity());
 						airtime.setLayoutParams(gradeLayout);
@@ -446,7 +444,7 @@ public class FragmentList extends Fragment {
 					}
 					
 					//soguthradur
-					if(show.getOverview() != null) {
+					if(show.getOverview() != null && !show.getOverview().equals("")) {
 						TextView overview = new TextView(getActivity());
 						LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 						overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
