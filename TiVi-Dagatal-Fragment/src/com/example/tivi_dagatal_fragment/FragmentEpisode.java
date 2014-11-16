@@ -15,6 +15,7 @@ import java.util.Date;
 import Clients.IMDbClient;
 import Dtos.Episode;
 import Dtos.Show;
+import Utils.VariousUtils;
 import android.app.ActionBar.LayoutParams;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -124,13 +125,15 @@ public class FragmentEpisode extends Fragment{
 			bool2 = checkText(number);
 			if (bool && bool2) text = "Númer þáttar: s"+season+"e"+number;
 			else text = "Vantar númer þáttar.";
-			episodeNumber.setText(text); 
+			episodeNumber.setText(text);
 			
 			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
 			Date date = null;
 			try {
 				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
 				String newDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
+				String time = new SimpleDateFormat("HH:mm").format(date);
+				Log.v("time", time);
 				bool = checkText(newDate);
 				if(bool) text = "Fyrst sýndur: " + newDate;
 				else text = "Vantar dagsetningu.";
@@ -138,6 +141,19 @@ public class FragmentEpisode extends Fragment{
 			} catch (ParseException e) {
 				e.printStackTrace();
 				firstAired.setText("Vantar dagsetningu");
+			}
+			
+			TextView airTime = (TextView) getView().findViewById(R.id.airTime);
+			try {
+				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
+				String newDate = new SimpleDateFormat("HH:mm").format(date);
+				bool = checkText(newDate);
+				if(bool) text = "Sýndur kl.: " + newDate;
+				else text = "Vantar sýningartíma.";
+				airTime.setText(text);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				airTime.setText("Vantar sýningartíma");
 			}
 			
 			TextView overview = (TextView) getView().findViewById(R.id.overview);
