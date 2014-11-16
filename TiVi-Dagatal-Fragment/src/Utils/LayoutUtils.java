@@ -1,9 +1,17 @@
+/**
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	13.oktober 2014
+ * Markmid: 	Klasinn geymir hjalparfoll tengd utliti sem haegt er ad nota
+ * 				i odrum klosum i forritinu.
+ */
 package Utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tivi_dagatal_fragment.R;
 
@@ -28,4 +36,12 @@ public class LayoutUtils {
 		layout.addView(nothing);
 	}
 
+	//Notkun: showNotConnectedMsg(context)
+	//Eftir:  skilabod um ad notandi se ekki tengdur netinu hefur verid synt
+	public static void showNotConnectedMsg(Context context){
+		CharSequence text = context.getResources().getString(R.string.not_online);
+		int duration = Toast.LENGTH_LONG;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+	}
 }

@@ -57,7 +57,7 @@ public class FragmentSearchResults extends Fragment{
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new SearchShowsTask().execute(word);
 		} else {
-			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNotConnectedMsg(getActivity());
 			LayoutUtils.showNoResult(scrollView, getActivity());
 		}
 		rootView = scrollView;

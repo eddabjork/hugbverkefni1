@@ -1,3 +1,10 @@
+/**
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	13. november 2014
+ * Markmið: 	FragmentRelated er fragment sem birtir lista
+ * 				af thattum sem eru svipadir tilviksbreytunni show
+ */
+
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
@@ -46,7 +53,7 @@ public class FragmentRelated extends Fragment{
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new RelatedShowsTask().execute(show);
 		} else {
-			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNotConnectedMsg(getActivity());
 			LayoutUtils.showNoResult(scrollView, getActivity());
 		}
 		rootView = scrollView;

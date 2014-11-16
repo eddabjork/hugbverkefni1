@@ -1,7 +1,7 @@
 /**
  * Nafn: 		Kristín Fjóla Tómasdóttir
  * Dagsetning: 	13. nóvember 2014
- * Markmið: 	Pop-up sem spyr notanda hvort hann vilji eyða þætti. 
+ * Markmið: 	Pop-up sem spyr notanda hvort hann vilji eyda thaetti. 
  */
 package com.example.tivi_dagatal_fragment;
 

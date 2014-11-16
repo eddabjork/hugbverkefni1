@@ -18,6 +18,7 @@ import java.util.Map;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
+import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -64,7 +65,7 @@ public class FragmentCal extends Fragment {
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new CalendarShowsTask().execute();
 		} else {
-			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNotConnectedMsg(getActivity());
 		}
 		
 

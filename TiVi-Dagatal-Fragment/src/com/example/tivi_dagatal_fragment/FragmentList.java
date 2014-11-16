@@ -170,14 +170,17 @@ public class FragmentList extends Fragment {
 		infoMain.setLayoutParams(layoutParams);
 		infoMain.setVisibility(View.GONE);
 		infoMain.setId(getNextId());
-		infoButton.setOnClickListener(new View.OnClickListener() {
+		
+		View.OnClickListener infoButtonListener = new View.OnClickListener() {
+			@Override 
 			public void onClick(View view) {
 				_show.setInfoLayout(infoLayout);
 				_show.setInfoMain(infoMain);
 				_show.setScrollView(scrollView);
 				new ShowInfoTask().execute(_show);
 			}
-		});
+		};
+		infoButton.setOnClickListener(infoButtonListener);
 		
 		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -497,7 +500,6 @@ public class FragmentList extends Fragment {
 						seasonLayout.addView(infoButton, infoParams);
 						infoLayout.addView(seasonLayout);
 						
-						
 						LinearLayout episodes = new LinearLayout(getActivity());
 						episodes.setOrientation(LinearLayout.VERTICAL);
 						episodes.setVisibility(View.GONE);
@@ -506,19 +508,21 @@ public class FragmentList extends Fragment {
 						episodes.setGravity(Gravity.CENTER);
 						episodes.setId(getNextId());
 						infoLayout.addView(episodes);
-						season.setEpisodesView(episodes);
+						season.setEpisodesView(episodes);				
 						
-						infoButton.setOnClickListener(new View.OnClickListener() {
+						View.OnClickListener serieButtonListener = new View.OnClickListener() {
 							public void onClick(View view) {
 								//mainScrollView.setScrollingEnabled(false);
 								Map<Show, Season> map = new HashMap<Show, Season>();
 								map.put(_show, season);
 								new SeasonEpisodesTask().execute(map);
 							}
-						});
+						};
+						infoButton.setOnClickListener(serieButtonListener);
+						seasonbutton.setOnClickListener(serieButtonListener);
 					}
 				} else {
-					VariousUtils.showNotConnectedMsg(getActivity());
+					LayoutUtils.showNotConnectedMsg(getActivity());
 					LayoutUtils.showNoResult(infoLayout, getActivity(), false);
 				}
 				scrollView.addView(infoLayout);

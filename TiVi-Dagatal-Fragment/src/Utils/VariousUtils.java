@@ -1,3 +1,9 @@
+/**
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	13.oktober 2014
+ * Markmid: 	Klasinn geymir allskonar hjalparfoll sem haegt er ad nota
+ * 				i odrum klosum i forritinu.
+ */
 package Utils;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +25,8 @@ import android.widget.Toast;
 
 public class VariousUtils {
 
+	//Notkun: parsedAirTime = parseAirTime(airTime)
+	//Eftir:  parsedAirTime er hh:MM:ss format af airTime
 	public static String parseAirTime(String airTime){
 		SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
 	    SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
@@ -34,6 +42,8 @@ public class VariousUtils {
 	    return displayFormat.format(date);
 	}
 	
+	//Notkun: translatedWeekday = translateWeekday(weekday, context)
+	//Eftir:  translatedWeekday er islensk thyding af weekday
 	public static String translateWeekday(String weekday, Activity context){
 		if (weekday.equals(context.getResources().getString(R.string.mon_en))) 
 			return context.getResources().getString(R.string.mon_is);
@@ -79,17 +89,12 @@ public class VariousUtils {
 		}
 	}
 	
+	//Notkun: ans = isConnectedToInternet(context)
+	//Eftir:  ans er true ef notandi er tengdur netinu, annars false
 	public static boolean isConnectedToInternet(Activity context){
 		ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);		 
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 		boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();	
 		return isConnected;	
-	}
-	
-	public static void showNotConnectedMsg(Context context){
-		CharSequence text = context.getResources().getString(R.string.not_online);
-		int duration = Toast.LENGTH_LONG;
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
 	}
 }

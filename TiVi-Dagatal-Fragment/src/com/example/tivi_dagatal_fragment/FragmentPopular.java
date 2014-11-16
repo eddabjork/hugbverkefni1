@@ -51,7 +51,7 @@ public class FragmentPopular extends Fragment {
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new PopularShowsTask().execute();
 		} else {
-			VariousUtils.showNotConnectedMsg(getActivity());
+			LayoutUtils.showNotConnectedMsg(getActivity());
 			LayoutUtils.showNoResult(scrollView, getActivity());
 		}
 		rootView = scrollView;
