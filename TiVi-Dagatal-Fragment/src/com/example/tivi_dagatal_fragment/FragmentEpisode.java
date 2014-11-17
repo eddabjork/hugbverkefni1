@@ -15,19 +15,22 @@ import java.util.Date;
 import Clients.IMDbClient;
 import Dtos.Episode;
 import Dtos.Show;
-import Utils.VariousUtils;
 import android.app.ActionBar.LayoutParams;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ScrollView;
@@ -98,14 +101,19 @@ public class FragmentEpisode extends Fragment{
 		//		  ásamt því að stoppa progressDialog
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
-			LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			
+			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			int width = size.x;
+								
 			ImageView image = (ImageView) getView().findViewById(R.id.image);
 			String imgUrl = episode.getScreen();
 			new DownloadImageTask(image).execute(imgUrl);
 			image.buildDrawingCache();
-			image.setScaleType(ScaleType.FIT_START);
 			image.setAdjustViewBounds(true);
+			image.getLayoutParams().width = width;
 			
 			boolean bool = false;
 			boolean bool2 = false;
