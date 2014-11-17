@@ -63,6 +63,8 @@ public class MainActivity extends Activity {
     	return startTime;
     }
     
+    //Notkun: startWelcomeScreen()
+    //Eftir:  buid er ad birta Start skjáinn
     public void startWelcomeScreen(){
     	FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

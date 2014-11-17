@@ -1,3 +1,8 @@
+/**
+ * Nafn: 		Steinunn Friðgeirsdóttir
+ * Dagsetning: 	13. nóvember 2014
+ * Markmið: 	FragmentStart er fragment sem er startskjárinn
+ */
 package com.example.tivi_dagatal_fragment;
 
 import android.app.Fragment;
@@ -13,5 +18,4 @@ public class FragmentStart extends Fragment{
 		View rootView = inflater.inflate(R.layout.fragment_start, container, false);
         return rootView;
     }
-
 }

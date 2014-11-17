@@ -5,12 +5,17 @@
     <string name="action_settings">Stillingar</string>
     
     <!-- Navigation strengir -->
+    <string name="dagatal">Dagatal</string>
+    <string name="thaettirnir_minir">Þættirnir mínir</string>
+	<string name="leit">Leit</string>
+	<string name="vinsaelir_thaettir">Vinsælir þættir</string>
+	<string name="upplysingar">Upplýsingar</string>
     <string-array name="drawer_title_array">
-        <item>Dagatal</item>
-        <item>Þættirnir mínir</item>
-        <item>Leit</item>
-        <item>Vinsælir þættir</item>
-        <item>Upplýsingar</item>
+        <item>@string/dagatal</item>
+        <item>@string/thaettirnir_minir</item>
+        <item>@string/leit</item>
+        <item>@string/vinsaelir_thaettir</item>
+        <item>@string/upplysingar</item>
     </string-array>
     <array name="nav_drawer_icons">
         <item>@drawable/on_cal</item>
