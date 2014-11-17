@@ -121,7 +121,7 @@ public class FragmentList extends Fragment {
 		}
 	}
 	
-	public void addShow(Show show) {
+	public void addShow(final Show show) {
 		WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
 		Point size = new Point();
@@ -170,7 +170,7 @@ public class FragmentList extends Fragment {
 		infoMain.setLayoutParams(layoutParams);
 		infoMain.setVisibility(View.GONE);
 		infoMain.setId(getNextId());
-		
+	
 		View.OnClickListener infoButtonListener = new View.OnClickListener() {
 			@Override 
 			public void onClick(View view) {
@@ -178,6 +178,12 @@ public class FragmentList extends Fragment {
 				_show.setInfoMain(infoMain);
 				_show.setScrollView(scrollView);
 				new ShowInfoTask().execute(_show);
+				if(open.contains(""+show.getInfoMain().getId())) {
+					infoButton.setImageResource(R.drawable.down_arrow);
+				}
+				else {
+					infoButton.setImageResource(R.drawable.up_arrow);
+				}
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);
@@ -374,7 +380,7 @@ public class FragmentList extends Fragment {
 		//Notkun:		 onPostExecute(show)
 		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
 		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
-		protected void onPostExecute(Show show) {
+		protected void onPostExecute(final Show show) {
 			final Show _show = show;
 			
 			LinearLayout infoLayout = show.getInfoLayout();
@@ -500,7 +506,7 @@ public class FragmentList extends Fragment {
 						seasonLayout.addView(infoButton, infoParams);
 						infoLayout.addView(seasonLayout);
 						
-						LinearLayout episodes = new LinearLayout(getActivity());
+						final LinearLayout episodes = new LinearLayout(getActivity());
 						episodes.setOrientation(LinearLayout.VERTICAL);
 						episodes.setVisibility(View.GONE);
 						LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
@@ -516,6 +522,12 @@ public class FragmentList extends Fragment {
 								Map<Show, Season> map = new HashMap<Show, Season>();
 								map.put(_show, season);
 								new SeasonEpisodesTask().execute(map);
+								if(open.contains(""+episodes.getId())) {
+									infoButton.setImageResource(R.drawable.down_arrow);
+								}
+								else {
+									infoButton.setImageResource(R.drawable.up_arrow);
+								}
 							}
 						};
 						infoButton.setOnClickListener(serieButtonListener);
@@ -527,8 +539,6 @@ public class FragmentList extends Fragment {
 				}
 				scrollView.addView(infoLayout);
 				infoMain.addView(scrollView);
-			} else {
-				// TODO: J�HANNA SN�A TAKKA
 			}
 			
 			Animator.setHeightForWrapContent(getActivity(), infoLayout);
