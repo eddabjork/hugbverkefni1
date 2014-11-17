@@ -139,6 +139,12 @@
         \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir, 
         Jóhanna Agnes Magnúsdóttir, Kristín Fjóla Tómasdóttir og Steinunn Friðgeirsdóttir.
     </string>
+    
+    <!-- Stakur þáttur -->
+    <string name="episode_number_title">"Númer þáttar:  </string>
+    <string name="air_time_title">"Sýndur kl.: "</string>
+    <string name="first_aired_title">"Fyrst sýndur: "</string>
+    <string name="plot_title">Söguþráður:</string>
     	
     
 </resources>

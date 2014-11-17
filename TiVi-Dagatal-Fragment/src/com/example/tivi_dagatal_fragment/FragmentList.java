@@ -32,9 +32,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -44,7 +47,6 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -456,14 +458,14 @@ public class FragmentList extends Fragment {
 					if(show.getOverview() != null && !show.getOverview().equals("")) {
 						TextView overview = new TextView(getActivity());
 						LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-						overviewLayout.setMargins(15, 15, 15, 15); //left, top, right, bottom
+						overviewLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
 						overview.setLayoutParams(overviewLayout);
 						overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());					
 						infoLayout.addView(overview);
 					}
 					
 					//svipadir thaettir takki
-					Button relatedShows = new Button(getActivity());
+					TextView relatedShows = new TextView(getActivity());
 					relatedShows.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
 							fragmentRelated = new FragmentRelated();
@@ -473,8 +475,13 @@ public class FragmentList extends Fragment {
 					        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
 						}
 					});
-
-					relatedShows.setText(getResources().getString(R.string.related_shows));
+					String udata = getResources().getString(R.string.related_shows);
+					SpannableString content = new SpannableString(udata);
+					content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
+					relatedShows.setText(content);
+					relatedShows.setTextColor(getResources().getColor(R.color.app_red));
+					relatedShows.setTypeface(null, Typeface.BOLD);
+					relatedShows.setLayoutParams(gradeLayout);
 					
 					infoLayout.addView(relatedShows);
 					

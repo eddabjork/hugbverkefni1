@@ -18,27 +18,75 @@
 		      android:id="@+id/title"
 		      android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
-			  android:textStyle="bold"/>
+			  android:textStyle="bold"
+			  android:textSize="20sp"/>
 	    
-	    <TextView 
-		      android:id="@+id/episodeNumber"
-		      android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"/>
+	    <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_marginBottom="5sp" >
+		    <TextView 
+		          android:id="@+id/episode_number_title"
+		          android:text="@string/episode_number_title"
+		          android:textStyle="bold"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		    <TextView 
+			      android:id="@+id/episodeNumber"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		</LinearLayout>
 	    
-	    <TextView 
-		      android:id="@+id/airTime"
-		      android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"/>
+	    <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_marginBottom="5sp" >
+		    <TextView 
+		          android:id="@+id/air_time_title"
+		          android:text="@string/air_time_title"
+		          android:textStyle="bold"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		    <TextView 
+			      android:id="@+id/airTime"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		</LinearLayout>
 	    
-	    <TextView 
-		      android:id="@+id/firstAired"
-		      android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"/>
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_marginBottom="5sp" >
+		    <TextView 
+		          android:id="@+id/first_aired_title"
+		          android:text="@string/first_aired_title"
+		          android:textStyle="bold"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		    <TextView 
+			      android:id="@+id/firstAired"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		</LinearLayout>
 	    
-	    <TextView 
-		      android:id="@+id/overview"
-		      android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"/>
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+		    <TextView 
+		          android:id="@+id/plot_title"
+		          android:text="@string/plot_title"
+		          android:textStyle="bold"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		    <TextView 
+			      android:id="@+id/plot"
+			      android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+		</LinearLayout>
 
 	</LinearLayout>
 </ScrollView>

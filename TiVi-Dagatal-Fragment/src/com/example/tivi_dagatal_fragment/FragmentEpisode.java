@@ -118,7 +118,7 @@ public class FragmentEpisode extends Fragment{
 			boolean bool = false;
 			boolean bool2 = false;
 			String text = null;
-			
+
 			TextView title = (TextView) getView().findViewById(R.id.title);
 			bool = checkText(episode.getTitle());
 			if(bool) text = episode.getTitle();
@@ -131,44 +131,44 @@ public class FragmentEpisode extends Fragment{
 			TextView episodeNumber = (TextView) getView().findViewById(R.id.episodeNumber);
 			bool = checkText(season);
 			bool2 = checkText(number);
-			if (bool && bool2) text = "Númer þáttar: s"+season+"e"+number;
+			if (bool && bool2) text = "s"+season+"e"+number;
 			else text = "Vantar númer þáttar.";
 			episodeNumber.setText(text);
 			
-			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
 			Date date = null;
+			TextView airTime = (TextView) getView().findViewById(R.id.airTime);
+			try {
+				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
+				String newDate = new SimpleDateFormat("HH:mm").format(date);
+				bool = checkText(newDate);
+				if(bool) text = newDate;
+				else text = "Vantar sýningartíma.";
+				airTime.setText(text);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				airTime.setText("Sýndur kl.: Vantar sýningartíma");
+			}
+			
+			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
 			try {
 				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
 				String newDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
 				String time = new SimpleDateFormat("HH:mm").format(date);
 				Log.v("time", time);
 				bool = checkText(newDate);
-				if(bool) text = "Fyrst sýndur: " + newDate;
+				if(bool) text = newDate;
 				else text = "Vantar dagsetningu.";
 				firstAired.setText(text);
 			} catch (ParseException e) {
 				e.printStackTrace();
-				firstAired.setText("Vantar dagsetningu");
+				firstAired.setText("Fyrst sýndur: Vantar dagsetningu");
 			}
 			
-			TextView airTime = (TextView) getView().findViewById(R.id.airTime);
-			try {
-				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
-				String newDate = new SimpleDateFormat("HH:mm").format(date);
-				bool = checkText(newDate);
-				if(bool) text = "Sýndur kl.: " + newDate;
-				else text = "Vantar sýningartíma.";
-				airTime.setText(text);
-			} catch (ParseException e) {
-				e.printStackTrace();
-				airTime.setText("Vantar sýningartíma");
-			}
-			
-			TextView overview = (TextView) getView().findViewById(R.id.overview);
+			TextView plot = (TextView) getView().findViewById(R.id.plot);
 			bool = checkText(episode.getOverview());
-			if(bool) text = "Söguþráður: \n" + episode.getOverview();
-			else text = "Vantar lýsingu.";
-			overview.setText(text);  
+			if(bool) text = episode.getOverview();
+			else text = "Söguþráður:\n Vantar lýsingu.";
+			plot.setText(text);  
 		}
 		
 		protected boolean checkText (String string) {
