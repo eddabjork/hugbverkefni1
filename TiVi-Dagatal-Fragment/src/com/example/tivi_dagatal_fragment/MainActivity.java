@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,23 +73,32 @@ public class MainActivity extends Activity {
                        .replace(R.id.content_frame, new FragmentStart())
                        .commit();
     }
-    
+    //Notkun: startCal(view)
+    //Eftir:  Búið er að starta dagatalinu
     public void startCal(View view){
     	selectItem(0);
     }
     
+    //Notkun: startList(view)
+    //Eftir:  Búið er að starta Þættirnir mínir fragmentinu
     public void startList(View view){
     	selectItem(1);
     }
     
+    //Notkun: startSearch(view)
+    //Eftir:  Búið er að starta leitar fragmentinu.
     public void startSearch(View view){
     	selectItem(2);
     }
     
+    //Notkun: startPop(view)
+    //Eftir:  Búið er að starta vinsælir þættir fragmentninu.
     public void startPop(View view){
     	selectItem(3);
     }
     
+    //Notkun: startInfo(view)
+    //Eftir:  Búið er að starta upplýsingafragmenginu.
     public void startInfo(View view){
     	selectItem(4);
     }
@@ -207,13 +217,13 @@ public class MainActivity extends Activity {
             	setTitle(mDrawerTitles[1]);
             	mDrawerList.setItemChecked(1, true);
             }
-            if(((FragmentCal)fragment) != null){
-            	setTitle(mDrawerTitles[0]);
-            	mDrawerList.setItemChecked(0, true);
+            else if(title.equals(getResources().getString(R.string.leit))){
+            	setTitle(mDrawerTitles[2]);
+            	mDrawerList.setItemChecked(2, true);
             }
             else{
-            	setTitle(mDrawerTitles[1]);
-            	mDrawerList.setItemChecked(1, true);
+            	setTitle(name+"!");
+            	mDrawerList.setItemChecked(5, true);
             }
         }
     }

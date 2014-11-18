@@ -13,7 +13,7 @@
 		          android:text="@string/dagatal"
 		          android:drawableLeft="@drawable/ic_cal_icon_start"
 		          android:padding="10dp"
-		          android:drawablePadding="2dp"
+		          android:drawablePadding="15dp"
 		          android:textSize="20sp"
    				  android:shadowRadius="10" 
    				  android:onClick="startCal"                
@@ -26,7 +26,7 @@
 		          android:text="@string/thaettirnir_minir"
 		          android:drawableLeft="@drawable/ic_list_start"
 		          android:padding="10dp"
-		          android:drawablePadding="2dp"
+		          android:drawablePadding="15dp"
 		          android:textSize="20sp" 
    				  android:onClick="startList"                
                   android:clickable="true"/>
@@ -38,7 +38,7 @@
 		          android:text="@string/leit"
 		          android:drawableLeft="@drawable/ic_search_start"
 		          android:padding="20dp"
-		          android:drawablePadding="2dp"
+		          android:drawablePadding="15dp"
 		          android:textSize="20sp" 
    				  android:onClick="startSearch"                
                   android:clickable="true"/>
@@ -51,7 +51,7 @@
 		          android:text="@string/vinsaelir_thaettir"
 		          android:drawableLeft="@drawable/ic_popular_start"
 		          android:padding="10dp"
-		          android:drawablePadding="2dp"
+		          android:drawablePadding="15dp"
 		          android:textSize="20sp" 
    				  android:onClick="startPop"                
                   android:clickable="true"/>
@@ -63,7 +63,7 @@
 		          android:text="@string/upplysingar"
 		          android:drawableLeft="@drawable/ic_info_logo_start"
 		          android:padding="10dp"
-		          android:drawablePadding="2dp"
+		          android:drawablePadding="15dp"
 		          android:textSize="20sp" 
    				  android:onClick="startInfo"                
                   android:clickable="true"/>
