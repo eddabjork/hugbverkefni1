@@ -292,6 +292,7 @@ public class FragmentList extends Fragment {
   	//EftirskilyrÃƒÆ’Ã‚Â°i: line er nÃƒÆ’Ã‚Âºna view hlutur sem er einfÃƒÆ’Ã‚Â¶ld, ÃƒÆ’Ã‚Â¾unn, grÃƒÆ’Ã‚Â¡ lÃƒÆ’Ã‚Â­na.
 	public View makeLine(){
 		 View v = new View(getActivity());
+		 
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
@@ -545,6 +546,7 @@ public class FragmentList extends Fragment {
 					LayoutUtils.showNoResult(infoLayout, getActivity(), false);
 				}
 				scrollView.addView(infoLayout);
+				infoMain.addView(makeLine()); //Kommenta ut ef tid viljid ekki aukalinu
 				infoMain.addView(scrollView);
 			}
 			
