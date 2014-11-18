@@ -29,12 +29,19 @@ public class TestMain extends ActivityInstrumentationTestCase2<MainActivity> {
 	}
 	
 	public void testTranslateWeekday(){
-		String expected = mTestMain.getResources().getString(R.string.thu_is);
 		String test = mTestMain.getResources().getString(R.string.thu_en);
+		String expected = mTestMain.getResources().getString(R.string.thu_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
 	}
 	
 	public void testParseAirTime(){
-		
+		String test = "8:00pm";
+		String expected = "20:00";
+		assertEquals(expected, VariousUtils.parseAirTime(test));
+	}
+	
+	public void testFlushCache(){
+		VariousUtils.flushCache("popularShows");
+		assertNull(MainActivity.getCache().get("popularShows"));
 	}
 }
