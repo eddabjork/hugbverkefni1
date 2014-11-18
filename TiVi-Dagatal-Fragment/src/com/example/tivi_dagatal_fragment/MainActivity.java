@@ -16,6 +16,7 @@ import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.LruCache;
 import android.view.Menu;
@@ -70,6 +71,26 @@ public class MainActivity extends Activity {
         fragmentManager.beginTransaction()
                        .replace(R.id.content_frame, new FragmentStart())
                        .commit();
+    }
+    
+    public void startCal(View view){
+    	selectItem(0);
+    }
+    
+    public void startList(View view){
+    	selectItem(1);
+    }
+    
+    public void startSearch(View view){
+    	selectItem(2);
+    }
+    
+    public void startPop(View view){
+    	selectItem(3);
+    }
+    
+    public void startInfo(View view){
+    	selectItem(4);
     }
     
     //Notkun: makeNavigationDrawer()
@@ -160,15 +181,22 @@ public class MainActivity extends Activity {
     //Eftir: Búið að birta viðeigandi skjámynd eða fara útúr appi, 
     //       eftir því í hvaða skjámynd notandi var
     public void onBackPressed() {
-    	boolean iDagatali = getActionBar().getTitle().toString().equals("Dagatal");
+    	
+    	if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){ 
+            mDrawerLayout.closeDrawer(mDrawerList);
+            return;}
+    	String name = getResources().getString(R.string.app_name);
+    	boolean onStartPage = getActionBar().getTitle().toString().equals(name);
         boolean tomurStack = getFragmentManager().getBackStackEntryCount() == 0;
         String title = getActionBar().getTitle().toString();
-    	if (!iDagatali && tomurStack){
+    	
+        if (!onStartPage && tomurStack){
         	FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
-                           .replace(R.id.content_frame, new FragmentCal())
+                           .replace(R.id.content_frame, new FragmentStart())
                            .commit();
-            setTitle(mDrawerTitles[0]);
+            setTitle(name);
+            mDrawerList.setItemChecked(5, true);
         }
     	else if (tomurStack) {
             this.finish();
@@ -177,9 +205,15 @@ public class MainActivity extends Activity {
             getFragmentManager().popBackStack();
             if(title.equals(getResources().getString(R.string.related_shows))){
             	setTitle(mDrawerTitles[1]);
+            	mDrawerList.setItemChecked(1, true);
+            }
+            if(((FragmentCal)fragment) != null){
+            	setTitle(mDrawerTitles[0]);
+            	mDrawerList.setItemChecked(0, true);
             }
             else{
-            	setTitle(mDrawerTitles[0]);
+            	setTitle(mDrawerTitles[1]);
+            	mDrawerList.setItemChecked(1, true);
             }
         }
     }
