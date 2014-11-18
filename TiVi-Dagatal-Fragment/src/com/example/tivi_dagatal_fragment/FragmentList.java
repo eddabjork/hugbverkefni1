@@ -144,7 +144,7 @@ public class FragmentList extends Fragment {
 		calendarButton.setPadding(pd,pd,pd,pd);
 		
 		ImageButton deleteButton = new ImageButton(getActivity());
-		deleteButton.setId(2);
+		deleteButton.setId(R.id.deleteButton);
 		deleteButton.setImageResource(R.drawable.delete);
 		deleteButton.setBackgroundColor(Color.TRANSPARENT);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +155,7 @@ public class FragmentList extends Fragment {
 		deleteButton.setPadding(pd,pd,pd,pd);
 		
 		final ImageButton infoButton = new ImageButton(getActivity());
-		infoButton.setId(3);
+		infoButton.setId(R.id.infoButton);
 		infoButton.setImageResource(R.drawable.down_arrow);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
 		infoButton.setPadding(pd,pd,pd,pd);
@@ -180,12 +180,6 @@ public class FragmentList extends Fragment {
 				_show.setInfoMain(infoMain);
 				_show.setScrollView(scrollView);
 				new ShowInfoTask().execute(_show);
-				if(open.contains(""+show.getInfoMain().getId())) {
-					infoButton.setImageResource(R.drawable.down_arrow);
-				}
-				else {
-					infoButton.setImageResource(R.drawable.up_arrow);
-				}
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);
@@ -197,9 +191,9 @@ public class FragmentList extends Fragment {
 		
 		titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
-		calParams.addRule(RelativeLayout.LEFT_OF, 2);
+		calParams.addRule(RelativeLayout.LEFT_OF, R.id.deleteButton);
 		calParams.addRule(RelativeLayout.CENTER_VERTICAL);
-		delParams.addRule(RelativeLayout.LEFT_OF, 3);
+		delParams.addRule(RelativeLayout.LEFT_OF, R.id.infoButton);
 		delParams.addRule(RelativeLayout.CENTER_VERTICAL);
 		infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -389,6 +383,7 @@ public class FragmentList extends Fragment {
 			LinearLayout infoLayout = show.getInfoLayout();
 			LinearLayout infoMain = show.getInfoMain();
 			ScrollView scrollView = show.getScrollView();
+			ImageButton mainInfoButton = (ImageButton) getView().findViewById(R.id.infoButton);
 			
 			if(!open.contains(""+show.getInfoMain().getId())){
 				infoLayout.removeAllViews();
@@ -546,7 +541,7 @@ public class FragmentList extends Fragment {
 					LayoutUtils.showNoResult(infoLayout, getActivity(), false);
 				}
 				scrollView.addView(infoLayout);
-				infoMain.addView(makeLine()); //Kommenta ut ef tid viljid ekki aukalinu
+				infoMain.addView(makeLine());
 				infoMain.addView(scrollView);
 			}
 			
@@ -555,9 +550,11 @@ public class FragmentList extends Fragment {
             if(open.contains(""+infoMain.getId())) {
                 animation = new Animator(infoMain, 500, 1);
                 open.remove(""+infoMain.getId());
+                mainInfoButton.setImageResource(R.drawable.down_arrow);
             } else {
                 animation = new Animator(infoMain, 500, 0);
                 open.add(""+infoMain.getId());
+                mainInfoButton.setImageResource(R.drawable.up_arrow);
             }
             progressDialog.dismiss();
             infoMain.startAnimation(animation);
