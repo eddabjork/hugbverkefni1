@@ -119,7 +119,7 @@ public class FragmentCal extends Fragment {
     	
     	// go to current week
     	ImageButton midBtn = new ImageButton(getActivity());
-    	midBtn.setImageResource(R.drawable.ic_launcher);
+    	midBtn.setImageResource(R.drawable.today);
     	midBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.setCurrentWeek();
