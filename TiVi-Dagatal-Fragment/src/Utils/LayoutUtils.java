@@ -281,6 +281,8 @@ public class LayoutUtils {
 		 return v;
 	}
 	
+	//Notkun: progressDialog = showProgressDialog(title, msg, context)
+	//Eftir:  progressDialog hefur verid birt með titlinum title og skilabodinu msg
 	public static ProgressDialog showProgressDialog(Integer title, Integer msg, Activity context){
 		ProgressDialog progressDialog = new ProgressDialog(context, R.style.ProgressDialog);
         progressDialog.setTitle(context.getResources().getString(title));  

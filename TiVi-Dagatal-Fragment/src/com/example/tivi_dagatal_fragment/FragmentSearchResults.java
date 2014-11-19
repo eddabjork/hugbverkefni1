@@ -91,16 +91,8 @@ public class FragmentSearchResults extends Fragment{
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur veri� stillt sem � a� s�na � me�an notandi er a� b��a
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
-            progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
-            progressDialog.setMessage(getResources().getString(R.string.search_process_msg)); 
-            progressDialog.setCancelable(false);  
-            progressDialog.setIndeterminate(false);  
-            progressDialog.show();  
-            // change color of divider
-            int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
-    		View divider = progressDialog.findViewById(dividerId);
-    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
+    		progressDialog = LayoutUtils.showProgressDialog(R.string.list_process_title, 
+    				R.string.search_process_msg, getActivity());
         } 
 		
 		//Eftir: Ekki � notkun	
