@@ -46,7 +46,8 @@
 		          android:drawablePadding="15dp"
 		          android:textSize="20sp" 
    				  android:onClick="startSearch"                
-                  android:clickable="true"/>
+                  android:clickable="true"
+                  android:layout_marginLeft="-10dp"/>
     
 
 		<TextView 
