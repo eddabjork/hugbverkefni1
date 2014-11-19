@@ -261,7 +261,8 @@ int drawable on_list 0x7f02006a
 int drawable popular 0x7f02006b
 int drawable previous_week 0x7f02006c
 int drawable search 0x7f02006d
-int drawable up_arrow 0x7f02006e
+int drawable today 0x7f02006e
+int drawable up_arrow 0x7f02006f
 int id action_bar 0x7f05001e
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001d

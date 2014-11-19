@@ -1,5 +1,5 @@
 /**
- * Nafn: 		Edda Bj�rk Konr��sd�ttir og J�hanna Agnes Magn�sd�ttir
+ * Nafn: 		Edda Bj�rk Konr��sd�ttir og J�hanna Agnes Magn�sd�ttir
  * Dagsetning: 	9. oktÃƒÂ³ber 2014
  * MarkmiÃƒÂ°: 	Fragment sem sÃƒÂ½nir ÃƒÅ¾ÃƒÂ¦ttirnir-mÃƒÂ­nir lista sem inniheldur 
  * 				alla ÃƒÂ¾ÃƒÂ¡ ÃƒÂ¾ÃƒÂ¦tti sem notandi hefur sett ÃƒÂ­ tilsvarandi lista
@@ -23,6 +23,7 @@ import Dtos.Season;
 import Dtos.Show;
 import Utils.LayoutUtils;
 import Utils.VariousUtils;
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -66,6 +67,7 @@ public class FragmentList extends Fragment {
 	private Fragment frag = new FragmentEpisode();
 	private FragmentRelated fragmentRelated;
 	private String noBannerUrl = "http://slurm.trakt.us/images/banner.jpg";
+	private static Activity myActivity;
 	
 	
 	/** Sets the view */
@@ -77,6 +79,11 @@ public class FragmentList extends Fragment {
 		new GetAllShowsTask().execute();
 		view = mainScrollView;
         return view;
+	}
+	
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		myActivity = activity;
 	}
 	
 	/**
@@ -309,7 +316,7 @@ public class FragmentList extends Fragment {
      * Dagsetning: 9. oktÃƒÆ’Ã‚Â³ber 2014
      * MarkmiÃƒÆ’Ã‚Â°: NÃƒÆ’Ã‚Â¦r ÃƒÆ’Ã‚Â­ myndir meÃƒÆ’Ã‚Â° samhliÃƒÆ’Ã‚Â°a ÃƒÆ’Ã‚Â¾rÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°avinnslu
      * */
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+	public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 		public DownloadImageTask(ImageView bmImage) {
 			this.bmImage = bmImage;
@@ -343,7 +350,7 @@ public class FragmentList extends Fragment {
      * MarkmiÃƒÂ°:   NÃƒÂ¡ ÃƒÂ­ upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttarÃƒÂ¶ÃƒÂ° og sÃƒÂ½na ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista
      * 			   meÃƒÂ° upplÃƒÂ½singum
      * */
-	private class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
+	public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
@@ -372,222 +379,40 @@ public class FragmentList extends Fragment {
 			show.setInfoMain(shows[0].getInfoMain());
 			show.setScrollView(shows[0].getScrollView());
 			return show;
+			
 		}
 		
 		/**************ÃƒÅ¾ARF AÃƒï¿½ SPLITTA ÃƒÅ¾ESSU NIÃƒï¿½UR**************************/
 		//Notkun:		 onPostExecute(show)
 		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
 		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
-		protected void onPostExecute(final Show show) {
-			final Show _show = show;
-			
-			LinearLayout infoLayout = show.getInfoLayout();
-			LinearLayout infoMain = show.getInfoMain();
-			ScrollView scrollView = show.getScrollView();
-			ImageButton mainInfoButton = (ImageButton) getView().findViewById(R.id.infoButton);
-			
-			if(!open.contains(""+show.getInfoMain().getId())){
-				infoLayout.removeAllViews();
-				infoMain.removeAllViews();
-				scrollView.removeAllViews();
-				// if show.getDataTitle == null then there is no internet connection
-				if(show.getDataTitle() != null) {
-					//banner
-					if(!show.getBanner().equals(noBannerUrl)) {
-						ImageView banner = new ImageView(getActivity());
-						DisplayMetrics metrics = getResources().getDisplayMetrics();
-						int densityDpi = metrics.densityDpi;
-						if(densityDpi < 480) {
-							banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-						} else {
-							banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
-						}
-						LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-						banner.setLayoutParams(bannerParams);
-						String url = show.getBanner();
-						new DownloadImageTask(banner).execute(url);
-						banner.buildDrawingCache();
-						infoLayout.addView(banner);
-					}
-					
-					LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-					gradeLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-					
-					//genres
-					if(show.getGenres().size() != 0) {
-						TextView genres = new TextView(getActivity());
-						genres.setLayoutParams(gradeLayout);
-						String genre = TextUtils.join(", ",show.getGenres().toArray());
-						genres.setText(getResources().getString(R.string.genres)+" "+genre);
-						infoLayout.addView(genres);
-					}
-					
-					//einkunn a imdb
-					TextView grade = new TextView(getActivity());
-					Map<Show, TextView> map = new HashMap<Show, TextView>();
-					map.put(show, grade);
-					new IMDbRatingTask().execute(map);
-					grade.setLayoutParams(gradeLayout);
-					grade.setText(getResources().getString(R.string.imdb_grade));
-					
-					infoLayout.addView(grade);
-					
-					//sjonvarpsstodvar
-					if(show.getNetwork() != null && !show.getNetwork().equals("")) {
-						TextView network = new TextView(getActivity());
-						network.setLayoutParams(gradeLayout);
-						network.setText(getResources().getString(R.string.network)+ " " + show.getNetwork());
-						infoLayout.addView(network);
-					}					
-					
-					//a hvada degi thatturinn er syndur
-					if(show.getAirDay() != null && !show.getAirDay().equals("")) {
-						String airDay = VariousUtils.translateWeekday(show.getAirDay(), getActivity());
-						TextView airday = new TextView(getActivity());
-						airday.setLayoutParams(gradeLayout);
-						airday.setText((getResources().getString(R.string.airday))+" "+airDay);
-						infoLayout.addView(airday);
-					
-						//klukkan hvad syndur
-						String airTime = VariousUtils.parseAirTime(show.getAirTime());
-						TextView airtime = new TextView(getActivity());
-						airtime.setLayoutParams(gradeLayout);
-						airtime.setText((getResources().getString(R.string.airtime))+" "+ airTime);
-						
-						infoLayout.addView(airtime);
-					}
-					
-					//soguthradur
-					if(show.getOverview() != null && !show.getOverview().equals("")) {
-						TextView overview = new TextView(getActivity());
-						LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-						overviewLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-						overview.setLayoutParams(overviewLayout);
-						overview.setText(getResources().getString(R.string.overview)+"\n"+show.getOverview());					
-						infoLayout.addView(overview);
-					}
-					
-					//svipadir thaettir takki
-					TextView relatedShows = new TextView(getActivity());
-					relatedShows.setOnClickListener(new View.OnClickListener() {
-						public void onClick(View view) {
-							fragmentRelated = new FragmentRelated();
-							fragmentRelated.setShow(_show);
-							getActivity().setTitle(getResources().getString(R.string.related_shows));
-					        FragmentManager fragmentManager = getFragmentManager();
-					        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
-						}
-					});
-					String udata = getResources().getString(R.string.related_shows);
-					SpannableString content = new SpannableString(udata);
-					content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
-					relatedShows.setText(content);
-					relatedShows.setTextColor(getResources().getColor(R.color.app_red));
-					relatedShows.setTypeface(null, Typeface.BOLD);
-					relatedShows.setLayoutParams(gradeLayout);
-					
-					infoLayout.addView(relatedShows);
-					
-					//seriur
-					List<Season> seasons = show.getSeasons();
-					Collections.reverse(seasons);
-					for(final Season season : seasons) {
-						
-						TextView seasonbutton = new TextView(getActivity());
-						seasonbutton.setText(getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
-						seasonbutton.setGravity(Gravity.CENTER);
-						seasonbutton.setTextSize(20);
-						
-						final ImageButton infoButton = new ImageButton(getActivity());
-						infoButton.setId(3);
-						infoButton.setImageResource(R.drawable.down_arrow);
-						infoButton.setBackgroundColor(Color.TRANSPARENT);
-						infoButton.setPadding(10,10,10,10);
-						
-						RelativeLayout seasonLayout = new RelativeLayout(getActivity());
-						RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-						RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-						titleParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-						titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
-						infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-						infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
-						
-						seasonLayout.addView(seasonbutton, titleParams);
-						seasonLayout.addView(infoButton, infoParams);
-						infoLayout.addView(seasonLayout);
-						
-						final LinearLayout episodes = new LinearLayout(getActivity());
-						episodes.setOrientation(LinearLayout.VERTICAL);
-						episodes.setVisibility(View.GONE);
-						LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-						episodes.setLayoutParams(layoutParams);
-						episodes.setGravity(Gravity.CENTER);
-						episodes.setId(getNextId());
-						infoLayout.addView(episodes);
-						season.setEpisodesView(episodes);				
-						
-						View.OnClickListener serieButtonListener = new View.OnClickListener() {
-							public void onClick(View view) {
-								//mainScrollView.setScrollingEnabled(false);
-								Map<Show, Season> map = new HashMap<Show, Season>();
-								map.put(_show, season);
-								new SeasonEpisodesTask().execute(map);
-								if(open.contains(""+episodes.getId())) {
-									infoButton.setImageResource(R.drawable.down_arrow);
-								}
-								else {
-									infoButton.setImageResource(R.drawable.up_arrow);
-								}
-							}
-						};
-						infoButton.setOnClickListener(serieButtonListener);
-						seasonbutton.setOnClickListener(serieButtonListener);
-					}
-				} else {
-					LayoutUtils.showNotConnectedMsg(getActivity());
-					LayoutUtils.showNoResult(infoLayout, getActivity(), false);
-				}
-				scrollView.addView(infoLayout);
-				infoMain.addView(makeLine());
-				infoMain.addView(scrollView);
-			}
-			
-			Animator.setHeightForWrapContent(getActivity(), infoLayout);
-			Animator animation = null;
-            if(open.contains(""+infoMain.getId())) {
-                animation = new Animator(infoMain, 500, 1);
-                open.remove(""+infoMain.getId());
-                mainInfoButton.setImageResource(R.drawable.down_arrow);
-            } else {
-                animation = new Animator(infoMain, 500, 0);
-                open.add(""+infoMain.getId());
-                mainInfoButton.setImageResource(R.drawable.up_arrow);
-            }
+		protected void onPostExecute(Show show) {
+			LayoutUtils utils = new LayoutUtils();
+			utils.setUpInfoLayout(show,fragmentRelated,open,getActivity(),id,noBannerUrl);
             progressDialog.dismiss();
-            infoMain.startAnimation(animation);
 		}
 	}
 	
-	private class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
+	public class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
-            progressDialog.setTitle(getResources().getString(R.string.ep_process_title));  
-            progressDialog.setMessage(getResources().getString(R.string.ep_process_msg));  
+            progressDialog = new ProgressDialog(FragmentList.myActivity, R.style.ProgressDialog);
+            progressDialog.setTitle(FragmentList.myActivity.getString(R.string.ep_process_title));  
+            progressDialog.setMessage(FragmentList.myActivity.getString(R.string.ep_process_msg));  
             progressDialog.setCancelable(false);  
             progressDialog.setIndeterminate(false);  
             progressDialog.show();  
             // change color of divider
             int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
     		View divider = progressDialog.findViewById(dividerId);
-    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
+    		divider.setBackgroundColor(FragmentList.myActivity.getResources().getColor(R.color.app_red));
         }  
 		
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {
 			TraktClient client = new TraktClient();
 			Season season = new Season();
-			LinearLayout episodes = new LinearLayout(getActivity());
+			LinearLayout episodes = new LinearLayout(FragmentList.myActivity);
 			for(Show key : map[0].keySet()) {
 				Log.v("season",""+map[0].get(key).getSeasonNumber());
 				episodes = map[0].get(key).getEpisodesView();
@@ -615,7 +440,7 @@ public class FragmentList extends Fragment {
 			if(!open.contains(""+episodes.getId())) {
 				episodes.removeAllViews();
 				for(final Episode episode : episodeList) {
-					TextView textView = new TextView(getActivity());
+					TextView textView = new TextView(FragmentList.myActivity);
 				    textView.setText(episode.getNumber()+". "+episode.getTitle());
 				    textView.setPadding(pd,0,0,0);
 				    textView.setGravity(Gravity.LEFT);
@@ -625,14 +450,14 @@ public class FragmentList extends Fragment {
 							((FragmentEpisode) frag).setEpisode(episode);
 							FragmentManager fragmentManager = getFragmentManager();
 							VariousUtils.addFragmentToStack(fragmentManager, frag);
-					        getActivity().getActionBar().setTitle(episode.getShowTitle());
+							FragmentList.myActivity.getActionBar().setTitle(episode.getShowTitle());
 					        
 						}
 					});
 					episodes.addView(textView);
 				}
 			}
-			Animator.setHeightForWrapContent(getActivity(), episodes);
+			Animator.setHeightForWrapContent(FragmentList.myActivity, episodes);
 			Animator animation = null;
             if(open.contains(""+episodes.getId())) {
                 animation = new Animator(episodes, 500, 1);
@@ -741,13 +566,13 @@ public class FragmentList extends Fragment {
 	    newFragment.show(getFragmentManager(), "dialog");
 	}
 	/**
-	 * Nafn: 		Krist�n Fj�la T�masd�ttir
-	 * Dagsetning: 	11. n�vember 2014
-	 * Markmi�: 	IMDbRatingTask framkv�mir �r��avinnu sem n�r � IMDb einkunn fyrir ��ttar��
+	 * Nafn: 		Krist�n Fj�la T�masd�ttir
+	 * Dagsetning: 	11. n�vember 2014
+	 * Markmi�: 	IMDbRatingTask framkv�mir �r��avinnu sem n�r � IMDb einkunn fyrir ��ttar��
 	 */
-	private class IMDbRatingTask extends AsyncTask<Map<Show, TextView>, Integer, Map<Show, TextView>> {
+	public class IMDbRatingTask extends AsyncTask<Map<Show, TextView>, Integer, Map<Show, TextView>> {
 		// Notkun: map = doInBackground(maps)
-		// Eftir:  map inniheldur ��tt me� einkunn og textasv��i sem � a� birta einkunn �
+		// Eftir:  map inniheldur ��tt me� einkunn og textasv��i sem � a� birta einkunn �
 		protected Map<Show, TextView> doInBackground(Map<Show, TextView>... maps) {
 			Map<Show, TextView> map = new HashMap<Show, TextView>();
 			for(Show show : maps[0].keySet()){
@@ -758,13 +583,13 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: onPostExecute(map)
-		// Eftir:  einkunn � ��tti hefur veri� birt
+		// Eftir:  einkunn � ��tti hefur veri� birt
 		protected void onPostExecute(Map<Show, TextView> map) {
 			for(Show show : map.keySet()){
 				if(show.getImdbRating() != null) {
-					map.get(show).setText(getResources().getString(R.string.imdb_grade) + " " + show.getImdbRating());
+					map.get(show).setText(FragmentList.myActivity.getString(R.string.imdb_grade) + " " + show.getImdbRating());
 				} else {
-					map.get(show).setText(getResources().getString(R.string.imdb_grade_not_found));
+					map.get(show).setText(FragmentList.myActivity.getString(R.string.imdb_grade_not_found));
 				}
 			}
 		}
