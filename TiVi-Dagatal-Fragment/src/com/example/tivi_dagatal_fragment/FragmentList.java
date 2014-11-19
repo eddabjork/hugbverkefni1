@@ -429,7 +429,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		protected void onPostExecute(List<Episode> episodeList) {
-			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			WindowManager wm = (WindowManager) FragmentList.myActivity.getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
