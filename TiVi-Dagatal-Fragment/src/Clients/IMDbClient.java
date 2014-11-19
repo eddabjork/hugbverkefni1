@@ -17,33 +17,31 @@ import Dtos.Show;
 import android.util.JsonReader;
 import android.util.Log;
 
-
 public class IMDbClient {
 	
 	//Notkun: 			getIMDbRating(show)
 	//Eftirskilyrði: 	IMDb einkunn er stillt á show
 	public static void getIMDbRating(final Show show){
-		
-	        URL url = null;
-	        try {
-				url = new URL("http://www.omdbapi.com/?i=" + show.getImdbId());
-			} catch (MalformedURLException e) {
-				Log.v("URL error", "Could not make url for: " + show.getTitle());
-				e.printStackTrace();
+		URL url = null;
+        try {
+			url = new URL("http://www.omdbapi.com/?i=" + show.getImdbId());
+		} catch (MalformedURLException e) {
+			Log.v("URL error", "Could not make url for: " + show.getTitle());
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				readShow(reader, show);
+			} finally {
+				reader.close();
 			}
-	        
-	        try {
-				final InputStream is = url.openStream();
-				JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-				try {
-					readShow(reader, show);
-				} finally {
-					reader.close();
-				}
-			} catch (IOException e) {
-				Log.v("API error", "Could not find IMDb rating for show: " + show.getTitle());
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			Log.v("API error", "Could not find IMDb rating for show: " + show.getTitle());
+			e.printStackTrace();
+		}
 	}
 	
 	//Notkun: 			readShow(reader, show)

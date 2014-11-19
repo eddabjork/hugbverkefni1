@@ -15,6 +15,7 @@ import java.util.Date;
 import Clients.IMDbClient;
 import Dtos.Episode;
 import Dtos.Show;
+import Utils.LayoutUtils;
 import android.app.ActionBar.LayoutParams;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -79,16 +80,8 @@ public class FragmentEpisode extends Fragment{
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
 		protected void onPreExecute() {  
-            progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
-            progressDialog.setTitle(getResources().getString(R.string.popular_process_title));  
-            progressDialog.setMessage(getResources().getString(R.string.popular_process_msg)); 
-            progressDialog.setCancelable(false);  
-            progressDialog.setIndeterminate(false);  
-            progressDialog.show();  
-            // change color of divider
-            int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
-    		View divider = progressDialog.findViewById(dividerId);
-    		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
+			progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
+    				R.string.popular_process_msg, getActivity());	
         }  
 		
 		//Engin virkni

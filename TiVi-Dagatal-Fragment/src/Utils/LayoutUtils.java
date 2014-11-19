@@ -7,7 +7,9 @@
 package Utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -43,5 +45,19 @@ public class LayoutUtils {
 		int duration = Toast.LENGTH_LONG;
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
+	}
+	
+	public static ProgressDialog showProgressDialog(Integer title, Integer msg, Activity context){
+		ProgressDialog progressDialog = new ProgressDialog(context, R.style.ProgressDialog);
+        progressDialog.setTitle(context.getResources().getString(title));  
+        progressDialog.setMessage(context.getResources().getString(msg)); 
+        progressDialog.setCancelable(false);  
+        progressDialog.setIndeterminate(false);  
+        progressDialog.show();  
+        // change color of divider
+        int dividerId = progressDialog.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
+		View divider = progressDialog.findViewById(dividerId);
+		divider.setBackgroundColor(context.getResources().getColor(R.color.app_red));
+		return progressDialog;
 	}
 }

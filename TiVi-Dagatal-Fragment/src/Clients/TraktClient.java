@@ -25,7 +25,6 @@ import Dtos.Show;
 import android.util.JsonReader;
 import android.util.Log;
 
-
 public class TraktClient {
 	
 	private String APIkey = "1b7308cb59d642b6548e8c8da531695b";
@@ -44,26 +43,26 @@ public class TraktClient {
 	//Eftirskilyr�i: shows er listi af ��ttum sem eru ni�urst��ur �egar 
 	//				 leita� er eftir strengnum title
 	public List<Show> searchShow(final String title) {			
-	        URL url = null;
-	        try {
-				url = new URL("http://api.trakt.tv/search/shows.json/" + APIkey + "?query=" + title.replaceAll("\\s+","+"));
-			} catch (MalformedURLException e) {
-				Log.e("URL error", "Could not make url for: " + title);
-				e.printStackTrace();
+        URL url = null;
+        try {
+			url = new URL("http://api.trakt.tv/search/shows.json/" + APIkey + "?query=" + title.replaceAll("\\s+","+"));
+		} catch (MalformedURLException e) {
+			Log.e("URL error", "Could not make url for: " + title);
+			e.printStackTrace();
+		}
+        
+        try {
+			final InputStream is = url.openStream();
+			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			try {
+				searchShows = readShowsArrayForSearch(reader);
+			} finally {
+				reader.close();
 			}
-	        
-	        try {
-				final InputStream is = url.openStream();
-				JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-				try {
-					searchShows = readShowsArrayForSearch(reader);
-				} finally {
-					reader.close();
-				}
-			} catch (IOException e) {
-				Log.e("API error", "Could not find show: " + title);
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			Log.e("API error", "Could not find show: " + title);
+			e.printStackTrace();
+		}
 		
 		return searchShows;	
 	}
