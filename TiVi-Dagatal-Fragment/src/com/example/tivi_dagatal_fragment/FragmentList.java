@@ -188,6 +188,12 @@ public class FragmentList extends Fragment {
 				_show.setInfoMain(infoMain);
 				_show.setScrollView(scrollView);
 				new ShowInfoTask().execute(_show);
+				if(open.contains(""+infoMain.getId())) {
+					infoButton.setImageResource(R.drawable.down_arrow);
+				}
+				else {
+					infoButton.setImageResource(R.drawable.up_arrow);
+				}
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);
