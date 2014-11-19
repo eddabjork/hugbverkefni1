@@ -99,11 +99,7 @@ public class FragmentRelated extends Fragment{
 		protected void onPostExecute(List<Show> relatedShows) {
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
-			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			int width = size.x;
+			int width = VariousUtils.getScreenWidth(getActivity());
 			int pd = (int) width/32;
 			for (final Show show : relatedShows){
 				TextView title = new TextView(getActivity());

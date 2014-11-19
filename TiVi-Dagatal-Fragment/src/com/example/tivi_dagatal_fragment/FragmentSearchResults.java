@@ -95,21 +95,12 @@ public class FragmentSearchResults extends Fragment{
     				R.string.search_process_msg, getActivity());
         } 
 		
-		//Eftir: Ekki � notkun	
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
-		
 		//Notkun:	onPostExecute(searchShows)
 		//Eftir: 	B�i� er a� taka searchShows listann og birta hann.
 		//          � listanum eru l�ka takkar sem h�gt er a� �ta � og 
 		// 	        �� b�tist ��ttur � gagnagrunn. 
 		protected void onPostExecute(List<Show> searchShows) {
-			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			int width = size.x;
+			int width = VariousUtils.getScreenWidth(getActivity());
 			int pd = (int) width/32;
 			
 			LinearLayout llv = new LinearLayout(getActivity());
@@ -122,7 +113,6 @@ public class FragmentSearchResults extends Fragment{
 					TextView title = new TextView(getActivity());
 					title.setText(show.getTitle());
 					title.setPadding(pd,0,0,0);
-					Log.v("Thattur heitir ", show.getTitle());
 					
 					ImageButton addButton = getAddButton(show);
 					addButton.setPadding(pd,pd,pd,pd);

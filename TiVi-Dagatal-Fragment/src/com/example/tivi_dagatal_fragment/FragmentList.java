@@ -118,11 +118,7 @@ public class FragmentList extends Fragment {
 	}
 	
 	public void addShow(final Show show) {
-		WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int width = size.x;
+		int width = VariousUtils.getScreenWidth(getActivity());
 		int pd = (int) width/32;
 		
 		RelativeLayout episodeLayout = new RelativeLayout(getActivity());
@@ -281,7 +277,6 @@ public class FragmentList extends Fragment {
   	//EftirskilyrÃƒÆ’Ã‚Â°i: line er nÃƒÆ’Ã‚Âºna view hlutur sem er einfÃƒÆ’Ã‚Â¶ld, ÃƒÆ’Ã‚Â¾unn, grÃƒÆ’Ã‚Â¡ lÃƒÆ’Ã‚Â­na.
 	public View makeLine(){
 		 View v = new View(getActivity());
-		 
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
@@ -362,7 +357,6 @@ public class FragmentList extends Fragment {
 			
 		}
 		
-		/**************ÃƒÅ¾ARF AÃƒï¿½ SPLITTA ÃƒÅ¾ESSU NIÃƒï¿½UR**************************/
 		//Notkun:		 onPostExecute(show)
 		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
 		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
@@ -401,11 +395,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		protected void onPostExecute(List<Episode> episodeList) {
-			WindowManager wm = (WindowManager) FragmentList.myActivity.getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			int width = size.x;
+			int width = VariousUtils.getScreenWidth(FragmentList.myActivity);
 			int pd = (int) width/32;
 			LinearLayout episodes = episodeList.get(0).getEpisodesView();
 			

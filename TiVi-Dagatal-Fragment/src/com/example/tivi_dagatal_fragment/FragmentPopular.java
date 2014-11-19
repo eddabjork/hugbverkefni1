@@ -112,11 +112,7 @@ public class FragmentPopular extends Fragment {
 		//        birta �� �samt takka til �ess a� b�ta vi� 
 		//        ��ttar�� � dagatal. Listinn er svo birtur.
 		protected void onPostExecute(List<Show> searchShows) {
-			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			int width = size.x;
+			int width = VariousUtils.getScreenWidth(getActivity());
 			int pd = (int) width/32;
 			
 			LinearLayout llv = new LinearLayout(getActivity());

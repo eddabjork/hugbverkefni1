@@ -9,6 +9,7 @@ package Utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.example.tivi_dagatal_fragment.FragmentList;
 import com.example.tivi_dagatal_fragment.MainActivity;
 import com.example.tivi_dagatal_fragment.R;
 import com.example.tivi_dagatal_fragment.R.string;
@@ -18,9 +19,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class VariousUtils {
@@ -96,5 +100,16 @@ public class VariousUtils {
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 		boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();	
 		return isConnected;	
+	}
+	
+	//Notkun: width = getScreenWidth(context)
+	//Eftir:  width er breiddin a taekinu sem er ad nota appid
+	public static int getScreenWidth(Activity context){
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		return width;
 	}
 }
