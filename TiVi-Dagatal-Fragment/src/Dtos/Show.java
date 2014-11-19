@@ -7,6 +7,7 @@ package Dtos;
 
 import java.util.List;
 
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class Show {
 	private LinearLayout infoLayout;
 	private LinearLayout infoMain;
 	private ScrollView scrollView;
+	private ImageButton infoButton;
 	
 	public Show(){}
 	
@@ -286,6 +288,10 @@ public class Show {
 		this.scrollView = scrollview;
 	}
 	
+	public void setInfoButton(ImageButton infobutton) {
+		this.infoButton = infobutton;
+	}
+	
 	public LinearLayout getInfoLayout() {
 		return this.infoLayout;
 	}
@@ -296,5 +302,9 @@ public class Show {
 	
 	public ScrollView getScrollView() {
 		return this.scrollView;
+	}
+	
+	public ImageButton getInfoButton() {
+		return this.infoButton;
 	}
 }

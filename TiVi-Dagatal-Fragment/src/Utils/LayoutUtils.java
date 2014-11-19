@@ -54,6 +54,7 @@ public class LayoutUtils {
 		LinearLayout infoLayout = show.getInfoLayout();
 		LinearLayout infoMain = show.getInfoMain();
 		ScrollView scrollView = show.getScrollView();
+		ImageButton _infoButton = show.getInfoButton();
 		
 		final FragmentList fraglist = new FragmentList();
 		
@@ -227,9 +228,11 @@ public class LayoutUtils {
         if(open.contains(""+infoMain.getId())) {
             animation = new Animator(infoMain, 500, 1);
             open.remove(""+infoMain.getId());
+            _infoButton.setImageResource(R.drawable.down_arrow);
         } else {
             animation = new Animator(infoMain, 500, 0);
             open.add(""+infoMain.getId());
+            _infoButton.setImageResource(R.drawable.up_arrow);
         }
         infoMain.startAnimation(animation);
 	}

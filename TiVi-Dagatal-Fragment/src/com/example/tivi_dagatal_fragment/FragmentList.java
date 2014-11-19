@@ -10,7 +10,6 @@ package com.example.tivi_dagatal_fragment;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +32,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.UnderlineSpan;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -187,13 +181,8 @@ public class FragmentList extends Fragment {
 				_show.setInfoLayout(infoLayout);
 				_show.setInfoMain(infoMain);
 				_show.setScrollView(scrollView);
+				_show.setInfoButton(infoButton);
 				new ShowInfoTask().execute(_show);
-				if(open.contains(""+infoMain.getId())) {
-					infoButton.setImageResource(R.drawable.down_arrow);
-				}
-				else {
-					infoButton.setImageResource(R.drawable.up_arrow);
-				}
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);
@@ -384,6 +373,7 @@ public class FragmentList extends Fragment {
 			show.setInfoLayout(shows[0].getInfoLayout());
 			show.setInfoMain(shows[0].getInfoMain());
 			show.setScrollView(shows[0].getScrollView());
+			show.setInfoButton(shows[0].getInfoButton());
 			return show;
 			
 		}
