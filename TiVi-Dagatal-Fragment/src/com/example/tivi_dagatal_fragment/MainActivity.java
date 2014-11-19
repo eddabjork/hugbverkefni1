@@ -191,15 +191,35 @@ public class MainActivity extends Activity {
     //Eftir: Búið að birta viðeigandi skjámynd eða fara útúr appi, 
     //       eftir því í hvaða skjámynd notandi var
     public void onBackPressed() {
-    	
     	if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){ 
             mDrawerLayout.closeDrawer(mDrawerList);
             return;}
-    	String name = getResources().getString(R.string.app_name);
+        try{
+        	FragmentCal frag = (FragmentCal)fragment;
+        	doBack(0);
+        }
+        catch(Exception e){}
+        try{
+        	FragmentSearch frag = (FragmentSearch)fragment;
+        	doBack(2);
+        }
+        catch(Exception e){}
+        try{
+        	FragmentList frag = (FragmentList)fragment;
+        	doBack(1);
+        }
+        catch(Exception e){}
+    }
+    
+    //Notkun: doBack(num)
+    //Eftir:  búið er að framkvæma back aðgerð og setja titil og 
+    //        og valda skúffu rétta.
+    public void doBack(int num){
+        String name = getResources().getString(R.string.app_name);
     	boolean onStartPage = getActionBar().getTitle().toString().equals(name);
         boolean tomurStack = getFragmentManager().getBackStackEntryCount() == 0;
         String title = getActionBar().getTitle().toString();
-    	
+        
         if (!onStartPage && tomurStack){
         	FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -213,18 +233,8 @@ public class MainActivity extends Activity {
         } 
     	else {
             getFragmentManager().popBackStack();
-            if(title.equals(getResources().getString(R.string.related_shows))){
-            	setTitle(mDrawerTitles[1]);
-            	mDrawerList.setItemChecked(1, true);
-            }
-            else if(title.equals(getResources().getString(R.string.leit))){
-            	setTitle(mDrawerTitles[2]);
-            	mDrawerList.setItemChecked(2, true);
-            }
-            else{
-            	setTitle(name+"!");
-            	mDrawerList.setItemChecked(5, true);
-            }
+            mDrawerList.setItemChecked(num, true);
+            setTitle(mDrawerTitles[num]);
         }
     }
 
