@@ -1106,7 +1106,8 @@ containing a value of this type.
         public static final int popular=0x7f02006b;
         public static final int previous_week=0x7f02006c;
         public static final int search=0x7f02006d;
-        public static final int up_arrow=0x7f02006e;
+        public static final int today=0x7f02006e;
+        public static final int up_arrow=0x7f02006f;
     }
     public static final class id {
         public static final int action_bar=0x7f05001e;
