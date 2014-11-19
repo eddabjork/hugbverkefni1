@@ -101,19 +101,10 @@ public class FragmentEpisode extends Fragment{
 		//		  �samt �v� a� stoppa progressDialog
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
-			
-			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			int width = size.x;
 								
 			ImageView image = (ImageView) getView().findViewById(R.id.image);
 			String imgUrl = episode.getScreen();
 			new DownloadImageTask(image).execute(imgUrl);
-			image.buildDrawingCache();
-			image.setAdjustViewBounds(true);
-			image.getLayoutParams().width = width;
 			
 			boolean bool = false;
 			boolean bool2 = false;
@@ -208,6 +199,16 @@ public class FragmentEpisode extends Fragment{
 	  	//EftirskilyrÃ°i: bÃºiÃ° er aÃ° setja myndina result Ã­ rÃ©tt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
+			
+			// set width of picture
+			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			int width = size.x;
+			bmImage.buildDrawingCache();
+			bmImage.setAdjustViewBounds(true);
+			bmImage.getLayoutParams().width = width;
 		}
 	}
 	

@@ -38,6 +38,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -394,7 +395,13 @@ public class FragmentList extends Fragment {
 					//banner
 					if(!show.getBanner().equals(noBannerUrl)) {
 						ImageView banner = new ImageView(getActivity());
-						banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+						DisplayMetrics metrics = getResources().getDisplayMetrics();
+						int densityDpi = metrics.densityDpi;
+						if(densityDpi < 480) {
+							banner.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+						} else {
+							banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+						}
 						LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 						banner.setLayoutParams(bannerParams);
 						String url = show.getBanner();
