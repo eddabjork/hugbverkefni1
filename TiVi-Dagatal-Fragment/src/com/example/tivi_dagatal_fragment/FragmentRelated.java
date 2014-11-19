@@ -45,7 +45,7 @@ public class FragmentRelated extends Fragment{
 	private Show show;
 
 	@Override
-	//Eftir: birtir fragmentið með svipuðum þáttaröðum
+	//Eftir: birtir fragmentiï¿½ meï¿½ svipuï¿½um ï¿½ï¿½ttarï¿½ï¿½um
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_related, container, false);
 		
@@ -66,21 +66,21 @@ public class FragmentRelated extends Fragment{
 	}	
 	
 	//Notkun: onAttach(activity)
-	//Eftir:  búið er að tengja gagnagrunninn við fragmentið
+	//Eftir:  bï¿½iï¿½ er aï¿½ tengja gagnagrunninn viï¿½ fragmentiï¿½
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
         dbHelper = new DbUtils(activity);
     }
 		
 	/**
-     * Nafn: 		Kristín Fjóla Tómasdóttir
-     * Dagsetning: 	13.nóvember 2014
-     * Markmið: 	Framkvæmir þráðavinnu til að birta svipaða þætti 
-     * 				frá vefþjónustu í fragmenti með loadi.
+     * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+     * Dagsetning: 	13.nï¿½vember 2014
+     * Markmiï¿½: 	Framkvï¿½mir ï¿½rï¿½ï¿½avinnu til aï¿½ birta svipaï¿½a ï¿½ï¿½tti 
+     * 				frï¿½ vefï¿½jï¿½nustu ï¿½ fragmenti meï¿½ loadi.
      */   
 	private class RelatedShowsTask extends AsyncTask<Show, Integer, List<Show>> {
 		//Notkun: doInBackground(queries)
-		//Eftir:  Búið er að ná í lista af þáttum sem eru svipaðir fyrsta þættinum í shows
+		//Eftir:  Bï¿½iï¿½ er aï¿½ nï¿½ ï¿½ lista af ï¿½ï¿½ttum sem eru svipaï¿½ir fyrsta ï¿½ï¿½ttinum ï¿½ shows
 		protected List<Show> doInBackground(Show... shows) {         
 			TraktClient client = new TraktClient();	    	 
 			List<Show> relatedShows = client.relatedShows(shows[0]);
@@ -88,14 +88,14 @@ public class FragmentRelated extends Fragment{
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
     				R.string.popular_process_msg, getActivity());		
         }  
 		
 		//Notkun: onPostExecute(relatedShows)
-		//Eftir:  Búið er að taka relatedShows listann og birta þáttaraðirnar í listanum
+		//Eftir:  Bï¿½iï¿½ er aï¿½ taka relatedShows listann og birta ï¿½ï¿½ttaraï¿½irnar ï¿½ listanum
 		protected void onPostExecute(List<Show> relatedShows) {
 			LinearLayout llv = new LinearLayout(getActivity());
 			llv.setOrientation(LinearLayout.VERTICAL);
@@ -197,7 +197,7 @@ public class FragmentRelated extends Fragment{
 	}
 	
 	// Notkun: showDialog(show)
-	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
+	// Eftir:  pop-up hefur veriï¿½ birt sem bï¿½ï¿½ur uppï¿½ aï¿½ vista show ï¿½ dagatali 
 	void showDialog(Show show) {
 		DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");

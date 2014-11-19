@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Steinunn Friðgeirsdóttir
- * Dagsetning: 	30. október 2014
- * Markmið: 	FragmentSearchResults er fragment sem birtir lista
- * 				af þáttum sem notandi leitar eftir.
+ * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
+ * Dagsetning: 	30. oktï¿½ber 2014
+ * Markmiï¿½: 	FragmentSearchResults er fragment sem birtir lista
+ * 				af ï¿½ï¿½ttum sem notandi leitar eftir.
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -44,7 +44,7 @@ public class FragmentSearchResults extends Fragment{
 	private ProgressDialog progressDialog;
 	
 	@Override
-	//Eftir: birtir fragmentið með leitarniðurstöðunum
+	//Eftir: birtir fragmentiï¿½ meï¿½ leitarniï¿½urstï¿½ï¿½unum
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
 		
@@ -66,22 +66,22 @@ public class FragmentSearchResults extends Fragment{
     }
 	
 	//Notkun: onAttach(activity)
-	//Eftir:  búið er að tengja gagnagrunninn við fragmentið
+	//Eftir:  bï¿½iï¿½ er aï¿½ tengja gagnagrunninn viï¿½ fragmentiï¿½
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
         dbHelper = new DbUtils(activity);
     }
 
 	/**
-     * Nafn: 		Steinunn Friðgeirsdóttir
-     * Dagsetning: 	30. október 2014
-     * Markmið: 	Framkvæmir þráðavinnu til að birta leitarniðurstöður
-     * 				frá vefþjónustu í fargmenti. 
+     * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
+     * Dagsetning: 	30. oktï¿½ber 2014
+     * Markmiï¿½: 	Framkvï¿½mir ï¿½rï¿½ï¿½avinnu til aï¿½ birta leitarniï¿½urstï¿½ï¿½ur
+     * 				frï¿½ vefï¿½jï¿½nustu ï¿½ fargmenti. 
      */   	
 	private class SearchShowsTask extends AsyncTask<String, Integer, List<Show>> {
 		//Notkun: 	doInBackground(queries)
-		//Eftir:	Búið er að búa til vefþjónustu og sækja þá þætti sem 
-		//			notandi leitaði eftir í bakgrunnsþærði og skila þeim.
+		//Eftir:	Bï¿½iï¿½ er aï¿½ bï¿½a til vefï¿½jï¿½nustu og sï¿½kja ï¿½ï¿½ ï¿½ï¿½tti sem 
+		//			notandi leitaï¿½i eftir ï¿½ bakgrunnsï¿½ï¿½rï¿½i og skila ï¿½eim.
 		protected List<Show> doInBackground(String... queries) {         
 			TraktClient search = new TraktClient();	    	 
 			List<Show> searchShows = search.searchShow(queries[0]);  
@@ -89,7 +89,7 @@ public class FragmentSearchResults extends Fragment{
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
 		protected void onPreExecute() {  
             progressDialog = new ProgressDialog(getActivity(), R.style.ProgressDialog);
             progressDialog.setTitle(getResources().getString(R.string.list_process_title));  
@@ -103,15 +103,15 @@ public class FragmentSearchResults extends Fragment{
     		divider.setBackgroundColor(getResources().getColor(R.color.app_red));
         } 
 		
-		//Eftir: Ekki í notkun	
+		//Eftir: Ekki ï¿½ notkun	
 		protected void onProgressUpdate(Integer... progress) {
 			//setProgressPercent(progress[0]);
 		}
 		
 		//Notkun:	onPostExecute(searchShows)
-		//Eftir: 	Búið er að taka searchShows listann og birta hann.
-		//          Í listanum eru líka takkar sem hægt er að ýta á og 
-		// 	        þá bætist þáttur í gagnagrunn. 
+		//Eftir: 	Bï¿½iï¿½ er aï¿½ taka searchShows listann og birta hann.
+		//          ï¿½ listanum eru lï¿½ka takkar sem hï¿½gt er aï¿½ ï¿½ta ï¿½ og 
+		// 	        ï¿½ï¿½ bï¿½tist ï¿½ï¿½ttur ï¿½ gagnagrunn. 
 		protected void onPostExecute(List<Show> searchShows) {
 			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
@@ -220,7 +220,7 @@ public class FragmentSearchResults extends Fragment{
 	}
 	
 	// Notkun: showDialog(show)
-	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
+	// Eftir:  pop-up hefur veriï¿½ birt sem bï¿½ï¿½ur uppï¿½ aï¿½ vista show ï¿½ dagatali 
 	void showDialog(Show show) {
 	    DialogFragment newFragment = PopUpPutOnCal.newInstance( show);
 	    newFragment.show(getFragmentManager(), "dialog");

@@ -52,6 +52,9 @@ public class DbUtils {
             String title = cursor.getString(cursor.getColumnIndex(ShowsEntry.COLUMN_NAME_TITLE));
             results.put(dataTitle, title);
         }
+        
+        db.close();
+        
     	return results;
     }
     
@@ -82,6 +85,8 @@ public class DbUtils {
             results.add(show);
         }
         
+        db.close();
+        
     	return results;
     }
     
@@ -97,6 +102,9 @@ public class DbUtils {
     	values.put(ShowsEntry.COLUMN_NAME_ONCAL, false);
     	values.put(ShowsEntry.COLUMN_NAME_POSTER, show.getPoster());
     	db.insert(ShowsEntry.TABLE_NAME, ShowsEntry.COLUMN_NAME_NULLABLE, values);
+    	
+    	db.close();
+    	
     	return;
     }
     
@@ -113,6 +121,8 @@ public class DbUtils {
     	db.update(ShowsEntry.TABLE_NAME, values, 
     			ShowsEntry.COLUMN_NAME_DATATITLE+"=?", 
     			new String[] {show.getDataTitle()});
+    	
+    	db.close();
     	
     	return;
         
@@ -132,6 +142,8 @@ public class DbUtils {
     			ShowsEntry.COLUMN_NAME_DATATITLE+"=?", 
     			new String[] {show.getDataTitle()});
     	
+    	db.close();
+    	
     	return;
         
     }
@@ -144,6 +156,8 @@ public class DbUtils {
     	
     	db.delete(ShowsEntry.TABLE_NAME, ShowsEntry.COLUMN_NAME_DATATITLE+"=?",
     			new String[] {show.getDataTitle()});
+    	
+    	db.close();
     	
     	return;
     }
