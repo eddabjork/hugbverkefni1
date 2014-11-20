@@ -98,7 +98,10 @@ public class FragmentList extends Fragment {
 		}
 	}
 	
-	//TODO: vantar klasal�singu
+	//Nafn: Edda Björk Konráðsdóttir
+	//Dagsetning: 13. nóvember 2014
+	//Markmið: Ná í þætti fyrir seríu og sýna á viðeigandi stað í upplýsingum
+	//		   um þáttaröð
 	public class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur veriÃ° stillt sem birtist Ã¡ meÃ°an notandi bÃ­Ã°ur
@@ -184,7 +187,9 @@ public class FragmentList extends Fragment {
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
 		
-		//TODO: vantar l�singu
+		//Notkun: mainScrollView = new MainScrollView(context)
+		//Eftirskilyrði: mainScrollView er nýtt MainScrollView (erfir frá
+		//				 ScrollView)
 		public MainScrollView(Context context) {
 			super(context);
 		}
