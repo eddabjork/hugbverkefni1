@@ -235,7 +235,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(view, context)
-	// Eftir:  bÃºiÃ° er aÃ° birta texta Ã­ view sem segir notanda aÃ° engar niÃ°urstÃ¶Ã°ur fundust
+	// Eftir:  bÃƒÂºiÃƒÂ° er aÃƒÂ° birta texta ÃƒÂ­ view sem segir notanda aÃƒÂ° engar niÃƒÂ°urstÃƒÂ¶ÃƒÂ°ur fundust
 	public static void showNoResult(ScrollView view, Activity context){
 		TextView nothing = new TextView(context);
 		nothing.setTextSize(20);
@@ -244,7 +244,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(layout, context)
-	// Eftir:  bÃºiÃ° er aÃ° birta texta Ã­ layout sem segir notanda aÃ° engar niÃ°urstÃ¶Ã°ur fundust  
+	// Eftir:  bÃƒÂºiÃƒÂ° er aÃƒÂ° birta texta ÃƒÂ­ layout sem segir notanda aÃƒÂ° engar niÃƒÂ°urstÃƒÂ¶ÃƒÂ°ur fundust  
 	public static void showNoResult(LinearLayout layout, Activity context, boolean big){
 		TextView nothing = new TextView(context);
 		if(big) nothing.setTextSize(20);
@@ -254,7 +254,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°i: line er nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºna view hlutur sem er einfÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶ld, ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾unn, grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ lÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­na.
+  	//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°i: line er nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºna view hlutur sem er einfÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶ld, ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¾unn, grÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ lÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­na.
 	public static View makeLine(Context context){
 		 View v = new View(context);
 		 
@@ -264,7 +264,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: progressDialog = showProgressDialog(title, msg, context)
-	//Eftir:  progressDialog hefur verid birt meï¿½ titlinum title og skilabodinu msg
+	//Eftir:  progressDialog hefur verid birt meÃ¯Â¿Â½ titlinum title og skilabodinu msg
 	public static ProgressDialog showProgressDialog(Integer title, Integer msg, Activity context){
 		ProgressDialog progressDialog = new ProgressDialog(context, R.style.ProgressDialog);
         progressDialog.setTitle(context.getResources().getString(title));  
@@ -279,16 +279,67 @@ public class LayoutUtils {
 		return progressDialog;
 	}
 	
-/******************Jóhanna start****************************/
+	public static TextView getTextView(String type, Activity context, Show show) {
+		int width = VariousUtils.getScreenWidth(context);
+		int pd = width/72;
+		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		layout.setMargins(pd, pd, pd, 0); //left, top, right, bottom
+		TextView txtView = new TextView(context);
+		txtView.setLayoutParams(layout);
+		
+		if(type == "genres") {
+			String genre = TextUtils.join(", ",show.getGenres().toArray());
+			txtView.setText(context.getResources().getString(R.string.genres)+" "+genre);
+		} else if(type == "imdb_grade") {
+			Map<Show, TextView> map = new HashMap<Show, TextView>();
+			map.put(show, txtView);
+			FragmentList fraglist = new FragmentList();
+			fraglist.new IMDbRatingTask().execute(map);
+			txtView.setText(context.getResources().getString(R.string.imdb_grade));
+		} else if(type == "network") {
+			txtView.setText(context.getResources().getString(R.string.network)+ " " + show.getNetwork());
+		} else if(type == "air_day") {
+			String airDay = VariousUtils.translateWeekday(show.getAirDay(), context);
+			txtView.setText((context.getResources().getString(R.string.airday))+" "+airDay);
+		} else if(type == "air_time") {
+			String airTime = VariousUtils.parseAirTime(show.getAirTime());
+			txtView.setText((context.getResources().getString(R.string.airtime))+" "+ airTime);
+		} else if(type == "overview") {
+			LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			overviewLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
+			txtView.setLayoutParams(overviewLayout);
+			txtView.setText(context.getResources().getString(R.string.overview)+"\n"+show.getOverview());
+		}
+		
+		return txtView;
+	}
+	
+	public static void startAnimator(Activity context, LinearLayout infoLayout, LinearLayout infoMain, 
+									List<String> open, ImageButton infoButton) {
+		Animator.setHeightForWrapContent(context, infoLayout);
+		Animator animation = null;
+        if(open.contains(""+infoMain.getId())) {
+            animation = new Animator(infoMain, 500, 1);
+            open.remove(""+infoMain.getId());
+            infoButton.setImageResource(R.drawable.down_arrow);
+        } else {
+            animation = new Animator(infoMain, 500, 0);
+            open.add(""+infoMain.getId());
+            infoButton.setImageResource(R.drawable.up_arrow);
+        }
+        infoMain.startAnimation(animation);
+	}
+	
+/******************TODO: Jóhanna start****************************/
 	
 	public static LinearLayout getRegListLayout (List<Show> searchShows, Activity context, DbUtils dbHelper) {
 		int width = VariousUtils.getScreenWidth(context);
 		int pd = (int) width/32;
 		
-		LinearLayout llv = new LinearLayout(context);
-		llv.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout mainLayout = new LinearLayout(context);
+		mainLayout.setOrientation(LinearLayout.VERTICAL);
 		if(searchShows.isEmpty()){
-			LayoutUtils.showNoResult(llv, context, true);
+			LayoutUtils.showNoResult(mainLayout, context, true);
 		}
 		else{
 			for (final Show show : searchShows){
@@ -303,11 +354,11 @@ public class LayoutUtils {
 				
 				RelativeLayout episodeLayout = getRegEpisodeLayout(title, addButton, infoButton, context);
 				
-				llv.addView(episodeLayout);
-				llv.addView(makeLine(context));
+				mainLayout.addView(episodeLayout);
+				mainLayout.addView(makeLine(context));
 			}
 		}
-		return llv;
+		return mainLayout;
 	}
 	
 	public static TextView getTitle(Show show, Activity context){
@@ -380,14 +431,14 @@ public class LayoutUtils {
 		return episodeLayout;
 	}
 	
-	public static LinearLayout getMyEpsListLayout(List<Show> searchShows, Activity context, DbUtils dbHelper) {
+	public static LinearLayout getMyEpsListLayout(List<Show> showList, Activity context, DbUtils dbHelper) {
 		int width = VariousUtils.getScreenWidth(context);
 		int pd = (int) width/32;
 		
-		LinearLayout llv = new LinearLayout(context);
-		llv.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout mainLayout = new LinearLayout(context);
+		mainLayout.setOrientation(LinearLayout.VERTICAL);
 
-		for (final Show show : searchShows){
+		for (final Show show : showList){
 			TextView title = getTitle(show, context);
 			title.setPadding(pd,0,0,0);
 				
@@ -399,14 +450,16 @@ public class LayoutUtils {
 			
 			ImageButton infoButton = getInfoButton(show, context);
 			infoButton.setPadding(pd,pd,pd,pd);
-				
-			RelativeLayout episodeLayout = getMyEpsEpisodeLayout(title, calendarButton, deleteButton, infoButton, context);
 			
-			llv.addView(episodeLayout);
-			llv.addView(makeLine(context));
+			RelativeLayout episodeLayout = getMyEpsEpisodeLayout(title, calendarButton, deleteButton, infoButton, context);
+			LinearLayout infoMain = getInfoMainLayout(show, context, infoButton);
+			
+			mainLayout.addView(episodeLayout);
+			mainLayout.addView(infoMain);
+			mainLayout.addView(makeLine(context));
 		}
-		//TODO: vantar helling
-		return llv;
+		//TODO: lala hér er kallað á getInfoMainLayout
+		return mainLayout;
 	}
 	
 	public static RelativeLayout getMyEpsEpisodeLayout(TextView title, ImageButton calendarButton, ImageButton deleteButton, ImageButton infoButton, Activity context){
@@ -511,64 +564,44 @@ public class LayoutUtils {
 	}
 	
 	public static ImageButton getInfoButton(final Show show, Activity context){
-		ImageButton infoButton = new ImageButton(context);
+		final ImageButton infoButton = new ImageButton(context);
 		infoButton.setImageResource(R.drawable.down_arrow);
 		infoButton.setBackgroundColor(Color.TRANSPARENT);
 		infoButton.setId(R.id.infoButton);
 		return infoButton;
-		//TODO: vantar helling
 	}
+	
+	public static LinearLayout getInfoMainLayout(final Show show, Activity context, final ImageButton infoButton){
+		//TODO: þarf að fylgjast með hvar þú ert
+		final FragmentList fraglist = new FragmentList();
+		
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
+		final ScrollView scrollView = new ScrollView(context);
+
+		final LinearLayout infoLayout = new LinearLayout(context);
+		infoLayout.setOrientation(LinearLayout.VERTICAL);
+		infoLayout.setLayoutParams(layoutParams);
+		infoLayout.setGravity(Gravity.CENTER);
+
+		final LinearLayout infoMain = new LinearLayout(context);
+		infoMain.setOrientation(LinearLayout.VERTICAL);
+		infoMain.setLayoutParams(layoutParams);
+		infoMain.setVisibility(View.GONE);
+		infoMain.setId(getNextId());
+		
+		View.OnClickListener infoButtonListener = new View.OnClickListener() {
+			@Override 
+			public void onClick(View view) {
+				show.setInfoLayout(infoLayout);
+				show.setInfoMain(infoMain);
+				show.setScrollView(scrollView);
+				show.setInfoButton(infoButton);
+				fraglist.new ShowInfoTask().execute(show);
+			}
+		};
+		infoButton.setOnClickListener(infoButtonListener);
+		return infoMain;
+	}
 	/******************Jóhanna end****************************/
-	
-	public static TextView getTextView(String type, Activity context, Show show) {
-		int width = VariousUtils.getScreenWidth(context);
-		int pd = width/72;
-		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		layout.setMargins(pd, pd, pd, 0); //left, top, right, bottom
-		TextView txtView = new TextView(context);
-		txtView.setLayoutParams(layout);
-		
-		if(type == "genres") {
-			String genre = TextUtils.join(", ",show.getGenres().toArray());
-			txtView.setText(context.getResources().getString(R.string.genres)+" "+genre);
-		} else if(type == "imdb_grade") {
-			Map<Show, TextView> map = new HashMap<Show, TextView>();
-			map.put(show, txtView);
-			FragmentList fraglist = new FragmentList();
-			fraglist.new IMDbRatingTask().execute(map);
-			txtView.setText(context.getResources().getString(R.string.imdb_grade));
-		} else if(type == "network") {
-			txtView.setText(context.getResources().getString(R.string.network)+ " " + show.getNetwork());
-		} else if(type == "air_day") {
-			String airDay = VariousUtils.translateWeekday(show.getAirDay(), context);
-			txtView.setText((context.getResources().getString(R.string.airday))+" "+airDay);
-		} else if(type == "air_time") {
-			String airTime = VariousUtils.parseAirTime(show.getAirTime());
-			txtView.setText((context.getResources().getString(R.string.airtime))+" "+ airTime);
-		} else if(type == "overview") {
-			LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			overviewLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-			txtView.setLayoutParams(overviewLayout);
-			txtView.setText(context.getResources().getString(R.string.overview)+"\n"+show.getOverview());
-		}
-		
-		return txtView;
-	}
-	
-	public static void startAnimator(Activity context, LinearLayout infoLayout, LinearLayout infoMain, 
-									List<String> open, ImageButton infoButton) {
-		Animator.setHeightForWrapContent(context, infoLayout);
-		Animator animation = null;
-        if(open.contains(""+infoMain.getId())) {
-            animation = new Animator(infoMain, 500, 1);
-            open.remove(""+infoMain.getId());
-            infoButton.setImageResource(R.drawable.down_arrow);
-        } else {
-            animation = new Animator(infoMain, 500, 0);
-            open.add(""+infoMain.getId());
-            infoButton.setImageResource(R.drawable.up_arrow);
-        }
-        infoMain.startAnimation(animation);
-	}
 }

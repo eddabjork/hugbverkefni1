@@ -106,14 +106,17 @@ public class FragmentList extends Fragment {
 			mainLayout = new LinearLayout(getActivity());
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
-	    	for(Show show : showList){
+	    	/*for(Show show : showList){
 	    		addShow(show);
-	    	}
+	    	}*/
+	    	
+	    	mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()));
 	    	
 	    	mainScrollView.addView(mainLayout);
 		}
 	}
 	
+	/**TODO: ey�a**/
 	public void addShow(final Show show) {
 		int width = VariousUtils.getScreenWidth(getActivity());
 		int pd = (int) width/32;
@@ -193,6 +196,7 @@ public class FragmentList extends Fragment {
 		mainLayout.addView(makeLine());
 	}
 	
+	/**TODO: ey�a**/
 	//Notkun:		 calButton = getCalButton(show)
   	//EftirskilyrÃƒÆ’Ã‚Â°i: calButton er takki sem sÃƒÆ’Ã‚Â©r um ÃƒÆ’Ã‚Â° bÃƒÆ’Ã‚Â¦ta/taka ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡ttinn show
 	//				 af dagatali
@@ -241,6 +245,7 @@ public class FragmentList extends Fragment {
 		return calendarButton;
 	}
 	
+	/**TODO: ey�a**/
 	//Notkun:		 addToCal(show);
   	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=true fyrir show.
 	public void addToCal(Show show){
@@ -248,6 +253,8 @@ public class FragmentList extends Fragment {
 		dbHelper.putShowOnCal(show);
 		VariousUtils.flushCache("calendarEpisodes");
 	}
+	
+	/**TODO: ey�a**/
 	//Notkun:		 removeFromCal(show);
   	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
@@ -256,18 +263,7 @@ public class FragmentList extends Fragment {
 		VariousUtils.flushCache("calendarEpisodes");
 	}
 	
-	//Notkun:		 removeFromMyEpisodes(show);
-  	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er eyÃƒÆ’Ã‚Â°a ÃƒÆ’Ã‚Âºt show ÃƒÆ’Ã‚Âºr gagnagrunni.
-	public void removeFromMyEpisodes(Show show){
-		DbUtils dbHelper = new DbUtils(getActivity());
-		dbHelper.deleteShow(show);
-		VariousUtils.flushCache("calendarEpisodes");
-		FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                       .replace(R.id.content_frame, new FragmentList())
-                       .commit();
-	}
-	
+	/**TODO: ey�a**/
 	//Notkun:		 line = makeLine();
   	//EftirskilyrÃƒÆ’Ã‚Â°i: line er nÃƒÆ’Ã‚Âºna view hlutur sem er einfÃƒÆ’Ã‚Â¶ld, ÃƒÆ’Ã‚Â¾unn, grÃƒÆ’Ã‚Â¡ lÃƒÆ’Ã‚Â­na.
 	public View makeLine(){
@@ -275,14 +271,6 @@ public class FragmentList extends Fragment {
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
 		 v.setBackgroundColor(Color.rgb(203,203,203));
 		 return v;
-	}
-	
-	//Notkun:		 image = getImage(show);
-  	//EftirskilyrÃƒÆ’Ã‚Â°i: image er poster mynd fyrir show og er ÃƒÆ’Ã‚Â­ rÃƒÆ’Ã‚Â©ttri stÃƒÆ’Ã‚Â¦rÃƒÆ’Ã‚Â°
-	public ImageView getImage(Show show){
-		ImageView image = new ImageView(getActivity());
-		image.setImageResource(R.drawable.app_icon);
-		return image;
 	}
 	
 	/**
@@ -464,6 +452,7 @@ public class FragmentList extends Fragment {
 			else return super.onInterceptTouchEvent(event);
 		}
 	}
+	
 	//Notkun:		 id = getNextId()
 	//EftirskilyrÃƒÆ’Ã‚Â°i: id er nÃƒÆ’Ã‚Â¦sta lausa auÃƒÆ’Ã‚Â°kenni
 	private int getNextId() {
@@ -471,39 +460,7 @@ public class FragmentList extends Fragment {
 		return id;
 	}
 	
-	//Notkun:		 bm = fixBitmapSize(orgBm);
-  	//EftirskilyrÃƒÆ’Ã‚Â°i: bm er nÃƒÆ’Ã‚Â¦stum sama bitmap og orgBm nema ÃƒÆ’Ã‚Â­ rÃƒÆ’Ã‚Â©ttri stÃƒÆ’Ã‚Â¦rÃƒÆ’Ã‚Â°
-	public Bitmap fixBitmapSize(Bitmap originalBmp){
-		int x = originalBmp.getWidth();
-		int y = originalBmp.getHeight();
-		int startX;
-		int startY;
-		Bitmap scaledBmp;
-		double scale;
-		
-		int width = 100;
-		int height = 100;
-		
-		if(x >= y){
-			scale = y/height;
-			scaledBmp = Bitmap.createScaledBitmap(originalBmp, (int)(x/scale), 100, false);
-			x = scaledBmp.getWidth();
-			y = scaledBmp.getHeight();
-			startY = 0;
-			startX = (x-y)/2;
-		}
-		else{
-			scale = x/width;
-			scaledBmp = Bitmap.createScaledBitmap(originalBmp, 100, (int)(y/scale), false);
-			x = scaledBmp.getWidth();
-			y = scaledBmp.getHeight();
-			startX = 0;
-			startY = (y-x)/2;
-		}
-		
-		return Bitmap.createBitmap(scaledBmp, startX,startY,width,height);
-	}	
-	
+	/**TODO: ey�a**/
 	// Notkun: showDialog(show)
 	// Eftir:  pop-up hefur verid birt sem spyr hvort notandi vilji eyda thaetti
 	void showDialog(Show show) {
