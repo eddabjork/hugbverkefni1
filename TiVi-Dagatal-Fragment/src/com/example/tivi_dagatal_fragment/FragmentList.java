@@ -372,7 +372,7 @@ public class FragmentList extends Fragment {
 		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.ep_process_title, 
-    				R.string.ep_process_msg, getActivity());	
+    				R.string.ep_process_msg, FragmentList.myActivity);
         }  
 		
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {

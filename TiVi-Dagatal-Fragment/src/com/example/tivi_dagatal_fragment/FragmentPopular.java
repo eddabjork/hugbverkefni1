@@ -41,12 +41,13 @@ public class FragmentPopular extends Fragment {
 	private DbUtils dbHelper;
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
+	private String cacheKey = "popularShows";
 	
 	@Override
 	//Eftir: Birtir fragmenti� sem s�nir vins�la ��tti
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
-		VariousUtils.flushCacheAfter12Hours("popularShows");
+		VariousUtils.flushCacheAfter12Hours(cacheKey);
 		scrollView = new ScrollView(getActivity());
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new PopularShowsTask().execute();
@@ -79,18 +80,16 @@ public class FragmentPopular extends Fragment {
 		//Eftir:  ���avinnslu � bakgrunni er loki�
 		//        � �r��avinnslu h�r er kalla� � vef�j�nustuna
 		//		  og cache b�i� til e�a s�tt.
-		protected List<Show> doInBackground(String... queries) {         
-			TraktClient trackt = new TraktClient();	    	 
-			List<Show> popularShows = (List<Show>) MainActivity.getCache().get("popularShows");
+		protected List<Show> doInBackground(String... queries) {      
+			List<Show> popularShows = (List<Show>) MainActivity.getCache().get(cacheKey);
 	        
 	        if(popularShows == null || popularShows.size() == 0) {
 		    	Log.v("cache", "Popular shows not cached, retrieving new list");
 		    	TraktClient trakt = new TraktClient();
 		    	popularShows = trakt.popularShows();
-		    	MainActivity.getCache().put("popularShows", popularShows);
+		    	MainActivity.getCache().put(cacheKey, popularShows);
 		    } else {
-		    	Log.v("cahce", "Cached shows found");
-		    	Log.v("cache", "Cache shows size: " + popularShows.size());
+		    	Log.v("cache", "Cached shows found, size: " + popularShows.size());
 		    }
 			return popularShows;
 		}
@@ -101,11 +100,6 @@ public class FragmentPopular extends Fragment {
 			progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
     				R.string.popular_process_msg, getActivity());	
         }  
-		
-		//Engin virkni
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
 		
 		//Notkun: onPostExecute(searchShows)
 		//Eftir:  B�i� er a� taka serchShows listann og
@@ -122,7 +116,6 @@ public class FragmentPopular extends Fragment {
 				TextView title = new TextView(getActivity());
 				title.setText(show.getTitle());
 				title.setPadding(pd,0,0,0);
-				Log.v("Thattur heitir ", show.getTitle());
 				
 				ImageButton addButton = getAddButton(show);	
 				addButton.setPadding(pd,pd,pd,pd);

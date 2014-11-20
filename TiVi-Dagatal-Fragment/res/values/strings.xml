@@ -145,6 +145,11 @@
     <string name="air_time_title">"Sýndur kl.: "</string>
     <string name="first_aired_title">"Fyrst sýndur: "</string>
     <string name="plot_title">Söguþráður:</string>
+    <string name="title_missing">Vantar titil</string>
+    <string name="number_missing">Vantar númer þáttar</string>
+    <string name="showtime_missing">Vantar sýningartíma</string>
+    <string name="date_missing">Vantar dagsetningu</string>
+    <string name="desc_missing">Vantar lýsingu</string>
     	
     
 </resources>

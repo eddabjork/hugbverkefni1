@@ -16,6 +16,7 @@ import Clients.IMDbClient;
 import Dtos.Episode;
 import Dtos.Show;
 import Utils.LayoutUtils;
+import Utils.VariousUtils;
 import android.app.ActionBar.LayoutParams;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -45,12 +46,9 @@ public class FragmentEpisode extends Fragment{
 	@Override
 	//Eftir: Búið að birta upplýsingar um einstaka þátt
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
 		View view = inflater.inflate(R.layout.fragment_episode, container, false);
 		scrollView = new ScrollView(getActivity());
 		new ShowEpisodeTask().execute(episode);
-		//view = scrollView;
-		Log.v("er að búa til ", "episode");
         return view;
 	}
 	
@@ -58,7 +56,6 @@ public class FragmentEpisode extends Fragment{
 	//Eftir: búið er að setja episode sem gildi tilviksbreytinnar episode
 	public void setEpisode(Episode episode){
 		this.episode = episode;
-		Log.v("Var að sækja episode", episode.getTitle());
 	}	
 	
 	/**
@@ -84,11 +81,6 @@ public class FragmentEpisode extends Fragment{
     				R.string.popular_process_msg, getActivity());	
         }  
 		
-		//Engin virkni
-		protected void onProgressUpdate(Integer... progress) {
-			//setProgressPercent(progress[0]);
-		}
-		
 		//Notkun: onPostExecute(searchShows)
 		//Eftir:  búið að er hlaða inn öllum upplýsingum um episode og birta 
 		//		  ásamt því að stoppa progressDialog
@@ -106,7 +98,7 @@ public class FragmentEpisode extends Fragment{
 			TextView title = (TextView) getView().findViewById(R.id.title);
 			bool = checkText(episode.getTitle());
 			if(bool) text = episode.getTitle();
-			else text = "Vantar titil.";
+			else text = getResources().getString(R.string.title_missing);
 			title.setText(text);
 
 			DecimalFormat formatter = new DecimalFormat("00");
@@ -116,7 +108,7 @@ public class FragmentEpisode extends Fragment{
 			bool = checkText(season);
 			bool2 = checkText(number);
 			if (bool && bool2) text = "s"+season+"e"+number;
-			else text = "Vantar númer þáttar.";
+			else text = getResources().getString(R.string.number_missing);
 			episodeNumber.setText(text);
 			
 			Date date = null;
@@ -126,11 +118,11 @@ public class FragmentEpisode extends Fragment{
 				String newDate = new SimpleDateFormat("HH:mm").format(date);
 				bool = checkText(newDate);
 				if(bool) text = newDate;
-				else text = "Vantar sýningartíma.";
+				else text = getResources().getString(R.string.showtime_missing);
 				airTime.setText(text);
 			} catch (ParseException e) {
 				e.printStackTrace();
-				airTime.setText("Sýndur kl.: Vantar sýningartíma");
+				airTime.setText(getResources().getString(R.string.air_time_title) + " " + getResources().getString(R.string.showtime_missing));
 			}
 			
 			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
@@ -141,17 +133,17 @@ public class FragmentEpisode extends Fragment{
 				Log.v("time", time);
 				bool = checkText(newDate);
 				if(bool) text = newDate;
-				else text = "Vantar dagsetningu.";
+				else text = getResources().getString(R.string.date_missing);
 				firstAired.setText(text);
 			} catch (ParseException e) {
 				e.printStackTrace();
-				firstAired.setText("Fyrst sýndur: Vantar dagsetningu");
+				firstAired.setText(getResources().getString(R.string.first_aired_title)  + " " + getResources().getString(R.string.date_missing));
 			}
 			
 			TextView plot = (TextView) getView().findViewById(R.id.plot);
 			bool = checkText(episode.getOverview());
 			if(bool) text = episode.getOverview();
-			else text = "Söguþráður:\n Vantar lýsingu.";
+			else text = getResources().getString(R.string.plot_title)  + "\n" + getResources().getString(R.string.desc_missing);
 			plot.setText(text);  
 		}
 		
@@ -192,13 +184,8 @@ public class FragmentEpisode extends Fragment{
 	  	//EftirskilyrÃƒÂ°i: bÃƒÂºiÃƒÂ° er aÃƒÂ° setja myndina result ÃƒÂ­ rÃƒÂ©tt ImageView.
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
-			
 			// set width of picture
-			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			int width = size.x;
+			int width = VariousUtils.getScreenWidth(getActivity());
 			bmImage.buildDrawingCache();
 			bmImage.setAdjustViewBounds(true);
 			bmImage.getLayoutParams().width = width;

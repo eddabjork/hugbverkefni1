@@ -26,8 +26,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,7 +42,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class FragmentCal extends Fragment {
 	private ScrollView scrollView;
@@ -53,6 +50,7 @@ public class FragmentCal extends Fragment {
 	private Date lastSunday = getLastFirstDayForNumber(MainActivity.getWeek());
 	private Date nextSunday = getNextFirstDayForNumber(MainActivity.getWeek());
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+	private String cacheKey = "calendarEpisodes";
 	
 	/** Sets the view */
 	@Override
@@ -61,7 +59,7 @@ public class FragmentCal extends Fragment {
 		
 		scrollView = new ScrollView(getActivity());
 		setLayout();
-		VariousUtils.flushCacheAfter12Hours("calendarEpisodes");
+		VariousUtils.flushCacheAfter12Hours(cacheKey);
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new CalendarShowsTask().execute();
 		} else {
@@ -105,7 +103,7 @@ public class FragmentCal extends Fragment {
 		leftBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.subtractWeek();
-            	VariousUtils.flushCache("calendarEpisodes");
+            	VariousUtils.flushCache(cacheKey);
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                                .replace(R.id.content_frame, new FragmentCal())
@@ -123,7 +121,7 @@ public class FragmentCal extends Fragment {
     	midBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.setCurrentWeek();
-            	VariousUtils.flushCache("calendarEpisodes");
+            	VariousUtils.flushCache(cacheKey);
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                                .replace(R.id.content_frame, new FragmentCal())
@@ -141,7 +139,7 @@ public class FragmentCal extends Fragment {
     	rightBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	MainActivity.addWeek();
-            	VariousUtils.flushCache("calendarEpisodes");
+            	VariousUtils.flushCache(cacheKey);
             	FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                                .replace(R.id.content_frame, new FragmentCal())
@@ -329,16 +327,13 @@ public class FragmentCal extends Fragment {
 		// Notkun: episodes = doInBackground(dataTitles)
 		// Eftir:  episodes er listi af þáttum sem á að birta á dagatali
 		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
-			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.getCache().get("calendarEpisodes");
+			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.getCache().get(cacheKey);
 	        
 	        if(calendarEpisodes == null || calendarEpisodes.size() == 0) {
 		    	Log.v("cache", "Calendar episodes not cached, retrieving new list");
 		    	TraktClient trakt = new TraktClient();
 		        calendarEpisodes = trakt.getCalendarEpisodes(dataTitles[0], lastSunday, nextSunday);
-		        for(Episode episode : calendarEpisodes){
-		        	Log.v("episode", episode.getDataTitle());
-		        }
-		    	MainActivity.getCache().put("calendarEpisodes", calendarEpisodes);
+		    	MainActivity.getCache().put(cacheKey, calendarEpisodes);
 		    } else {
 		    	Log.v("cahce", "Cached episodes found");
 		    	Log.v("cache", "Cache response size: " + calendarEpisodes.size());
