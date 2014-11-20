@@ -46,7 +46,6 @@ public class FragmentList extends Fragment {
 	private FragmentRelated fragmentRelated;
 	private static Activity myActivity;
 	
-	
 	/** Sets the view */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -99,6 +98,7 @@ public class FragmentList extends Fragment {
 		}
 	}
 	
+	//TODO: vantar klasal�singu
 	public class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur veriÃ° stillt sem birtist Ã¡ meÃ°an notandi bÃ­Ã°ur
@@ -108,8 +108,8 @@ public class FragmentList extends Fragment {
         }  
 		
 		//Notkun: episodeList = doInBackground(map<show,season>)
-		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja Ã¾Ã¦tti og setja Ã­ listann episodeList
-		//				 sem eru Ã­ Ã¾Ã¦ttinu show Ã­ serÃ­unni season
+		//Eftir: BÃºiÃ° er aÃ° sÃ¦kja Ã¾Ã¦tti og setja Ã­ listann episodeList
+		//		 sem eru Ã­ Ã¾Ã¦ttinu show Ã­ serÃ­unni season
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {
 			TraktClient client = new TraktClient();
 			Season season = new Season();
@@ -132,8 +132,8 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun: onPostExecute(episodeList)
-		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ½na episodeList Ã­ viÃ°mÃ³tinu Ã¡ viÃ°eigandi
-		//				 staÃ°.
+		//Eftir: BÃºiÃ° er aÃ° sÃ½na episodeList Ã­ viÃ°mÃ³tinu Ã¡ viÃ°eigandi
+		//		 staÃ°.
 		protected void onPostExecute(List<Episode> episodeList) {
 			int width = VariousUtils.getScreenWidth(FragmentList.myActivity);
 			int pd = (int) width/6;
@@ -154,7 +154,6 @@ public class FragmentList extends Fragment {
 							FragmentManager fragmentManager = FragmentList.myActivity.getFragmentManager();
 							VariousUtils.addFragmentToStack(fragmentManager, frag);
 							FragmentList.myActivity.getActionBar().setTitle(episode.getShowTitle());
-					        
 						}
 					});
 					episodes.addView(textView);
@@ -185,13 +184,14 @@ public class FragmentList extends Fragment {
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
 		
+		//TODO: vantar l�singu
 		public MainScrollView(Context context) {
 			super(context);
 		}
 		
 		//Notkun: touch = scrollview.onTouchEvent(event)
-		//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°i:  touch er true ef scrollview er virkt og event
-		//				  er ACTION_DOWN, false annars
+		//Eftir:  touch er true ef scrollview er virkt og event
+		//		  er ACTION_DOWN, false annars
 		public boolean onTouchEvent(MotionEvent event) {
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -202,9 +202,9 @@ public class FragmentList extends Fragment {
 			}
 		}
 		
-		// Notkun: 		 interupt = scrollview.onInterceptTouchEvent(event)
-		//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°i: interupt er false ef scrollview er ekki virkt, skilar
-		//				 annars sama og samnefnt fall ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ ScrollView
+		// Notkun: interupt = scrollview.onInterceptTouchEvent(event)
+		//Eftir: interupt er false ef scrollview er ekki virkt, skilar
+		//		 annars sama og samnefnt fall ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ ScrollView
 		public boolean onInterceptTouchEvent(MotionEvent event) {
 			if(!scrollable) return false;
 			else return super.onInterceptTouchEvent(event);

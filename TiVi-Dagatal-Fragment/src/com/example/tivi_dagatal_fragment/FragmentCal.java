@@ -66,14 +66,13 @@ public class FragmentCal extends Fragment {
 			LayoutUtils.showNotConnectedMsg(getActivity());
 		}
 		
-
 		view = scrollView;
         return view;
 	}
 	
-	//Notkun:		 setLayout();
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ setja upp grunnlag ï¿½tlits, sem er LinearLayout,
-	//				 inn ï¿½ scrollView
+	//Notkun: setLayout();
+  	//Eftir: Bï¿½iï¿½ er aï¿½ setja upp grunnlag ï¿½tlits, sem er LinearLayout,
+	//		 inn ï¿½ scrollView
 	public void setLayout(){
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
@@ -152,10 +151,10 @@ public class FragmentCal extends Fragment {
     	btnLayout.addView(rightBtn, rightParams);
 	}
 	
-	//Notkun:		 fillInDates(mainLayout);
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir sï¿½rhvern dag vikunnar (alls 7) ï¿½ar
-    //				 sem fram kemur dagsetning og Layout-plï¿½ss fyrir dagatals-ï¿½ï¿½tti
-    //				 ï¿½au eru svo sett inn ï¿½ mainLayout sem er ï¿½ scrollView.
+	//Notkun: fillInDates(mainLayout);
+  	//Eftir: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir sï¿½rhvern dag vikunnar (alls 7) ï¿½ar
+    //		 sem fram kemur dagsetning og Layout-plï¿½ss fyrir dagatals-ï¿½ï¿½tti
+    //		 ï¿½au eru svo sett inn ï¿½ mainLayout sem er ï¿½ scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 
@@ -194,25 +193,25 @@ public class FragmentCal extends Fragment {
 			cal.add(Calendar.DATE, 1);
 		}
 	}
+	
 	//Notkun: addNameOfMont(cal, mainLayout)
 	//Eftir:  Nafni viðeigandi mánaðar hefur verið bætt við mainLayout
 	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
-		
 		TextView month = new TextView(getActivity());
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		month.setPadding(10,10,10,10);
 		month.setTextSize(20);
 		mainLayout.addView(month);
-		mainLayout.addView(makeLine());
+		mainLayout.addView(LayoutUtils.makeLine(getActivity()));
 	}
 	
-	//Notkun:		 setDateLayout(dayName, calendar, mainLayout);
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir einn dag ï¿½ar sem fram kemur
-    //				 dagur vikunnar, dagur mï¿½naï¿½ars og mï¿½nuï¿½urinn sjï¿½lfur.
-    //				 Einnig er bï¿½iï¿½ aï¿½ bï¿½a til LinearLayout inni ï¿½ ï¿½essu view sem er 
-    //				 meï¿½ id (dagsetningin ï¿½ forminu yyMMdd) svo hï¿½gt sï¿½ aï¿½ bï¿½ta 
-    //				 viï¿½ ï¿½ï¿½ttum ï¿½ rï¿½ttum staï¿½. ï¿½essu view er svo bï¿½tt viï¿½ neï¿½st ï¿½ 
-	//				 mainLayout.
+	//Notkun: setDateLayout(dayName, calendar, mainLayout);
+  	//Eftir: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir einn dag ï¿½ar sem fram kemur
+    //		 dagur vikunnar, dagur mï¿½naï¿½ars og mï¿½nuï¿½urinn sjï¿½lfur.
+    //		 Einnig er bï¿½iï¿½ aï¿½ bï¿½a til LinearLayout inni ï¿½ ï¿½essu view sem er 
+    //		 meï¿½ id (dagsetningin ï¿½ forminu yyMMdd) svo hï¿½gt sï¿½ aï¿½ bï¿½ta 
+    //		 viï¿½ ï¿½ï¿½ttum ï¿½ rï¿½ttum staï¿½. ï¿½essu view er svo bï¿½tt viï¿½ neï¿½st ï¿½ 
+	//		 mainLayout.
 	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {		
 		LinearLayout dayLayout = new LinearLayout(getActivity());
 		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -249,12 +248,12 @@ public class FragmentCal extends Fragment {
 		dayLayout.addView(episodesLayout);
 		
 		mainLayout.addView(dayLayout);
-		mainLayout.addView(makeLine());
+		mainLayout.addView(LayoutUtils.makeLine(getActivity()));
 	}
 	
-	//Notkun:		 month = getMonthFromInt(number);
-  	//Eftirskilyrï¿½i: month er nafn mï¿½nuï¿½s miï¿½aï¿½ viï¿½ number ï¿½ar sem 
-	//				 0=janï¿½ar,..,11=desember.
+	//Notkun: month = getMonthFromInt(number);
+  	//Eftir: month er nafn mï¿½nuï¿½s miï¿½aï¿½ viï¿½ number ï¿½ar sem 
+	//		 0=janï¿½ar,..,11=desember.
 	public String getMonthForInt(int num) {
         String month = "wrong";
         String[] months = {
@@ -276,15 +275,6 @@ public class FragmentCal extends Fragment {
         }
         return month;
     }
-	
-	//Notkun:		 line = makeLine();
-  	//Eftirskilyrï¿½i: line er nï¿½na view hlutur sem er einfï¿½ld, ï¿½unn, grï¿½ lï¿½na.
-	public View makeLine(){
-		 View v = new View(getActivity());
-		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
-		 v.setBackgroundColor(Color.rgb(203,203,203));
-		 return v;
-	 }
 	
 	/**
 	 * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
@@ -353,10 +343,10 @@ public class FragmentCal extends Fragment {
 		}
 	}
 	
-	//Notkun:		 fillInEpisode(episode);
-  	//Eftirskilyrï¿½i: Bï¿½iï¿½ aï¿½ setja inn alla ï¿½ï¿½tti sem eru stilltir ï¿½ "ï¿½ dagatali"
-	//				 ï¿½ rï¿½ttan staï¿½ (ï¿½.e. bï¿½ta viï¿½ ï¿½ view-iï¿½ sem hefur id-iï¿½
-	//				 dagsetninguna ï¿½egar ï¿½ï¿½tturinn var frumsï¿½ndur)
+	//Notkun: fillInEpisode(episode);
+  	//Eftir: Bï¿½iï¿½ aï¿½ setja inn alla ï¿½ï¿½tti sem eru stilltir ï¿½ "ï¿½ dagatali"
+	//		 ï¿½ rï¿½ttan staï¿½ (ï¿½.e. bï¿½ta viï¿½ ï¿½ view-iï¿½ sem hefur id-iï¿½
+	//		 dagsetninguna ï¿½egar ï¿½ï¿½tturinn var frumsï¿½ndur)
 	public void fillInEpisode(final Episode episode) {
 		frag = new FragmentEpisode();
 		
@@ -392,9 +382,9 @@ public class FragmentCal extends Fragment {
 	    }
 	}
 	
-	//Notkun:		 number = firstAiredRightForm(strDate);
-  	//Eftirskilyrï¿½i: strDate er dagsetningu ï¿½ forminu: yyyy-MM-dd'T'HH:mm:ss 
-	//				 number er talan yyMMdd.
+	//Notkun: number = firstAiredRightForm(strDate);
+  	//Eftir: strDate er dagsetningu ï¿½ forminu: yyyy-MM-dd'T'HH:mm:ss 
+	//		 number er talan yyMMdd.
 	public int getFirstAiredInRightForm(String strDate){
     	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyMMdd");
@@ -408,8 +398,8 @@ public class FragmentCal extends Fragment {
 		return Integer.parseInt(newStrDate);
     }
 	
-	//Notkun: 		 calendar = nullifyTime(c)
-	//Eftirskilyrï¿½i: Tï¿½minn ï¿½ deginum calendar hefur veriï¿½ settur ï¿½ 00:00:00
+	//Notkun: calendar = nullifyTime(c)
+	//Eftir: Tï¿½minn ï¿½ deginum calendar hefur veriï¿½ settur ï¿½ 00:00:00
 	public static Calendar nullifyTime(Calendar c){
 		c.set(Calendar.HOUR_OF_DAY,0);
 		c.set(Calendar.MINUTE, 0);
@@ -417,8 +407,8 @@ public class FragmentCal extends Fragment {
 		return c;
 	}
 	
-	//Notkun: 		 date = getLastSundayForNumber(num)
-	//Eftirskilyrï¿½i: date er sunnudagur eftir num-1 vikur
+	//Notkun: date = getLastSundayForNumber(num)
+	//Eftir: date er sunnudagur eftir num-1 vikur
 	public static Date getLastFirstDayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -433,8 +423,8 @@ public class FragmentCal extends Fragment {
 		return lastSunday;
 	}
 	
-	//Notkun: 		 date = getNextSundayForNumber(num)
-	//Eftirskilyrï¿½i: date er sunnudagur eftir num vikur
+	//Notkun: date = getNextSundayForNumber(num)
+	//Eftir: date er sunnudagur eftir num vikur
 	public static Date getNextFirstDayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());

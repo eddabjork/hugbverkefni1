@@ -148,5 +148,4 @@ public class FragmentEpisode extends Fragment{
 	    DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");
 	}
-}	
-
+}

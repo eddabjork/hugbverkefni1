@@ -23,8 +23,6 @@ import com.example.tivi_dagatal_fragment.FragmentEpisode;
 import com.example.tivi_dagatal_fragment.FragmentList;
 import com.example.tivi_dagatal_fragment.R;
 
-
-
 public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	private List<String> open = new ArrayList<String>();
 	private Integer id;
@@ -32,6 +30,7 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	private static Activity myActivity;
 	private ProgressDialog progressDialog;
 	
+	//TODO: vantar lýsingu
 	public ShowInfoTask(Integer id, Fragment frag, Activity activity, List<String> open){
 		this.id = id;
 		this.frag = frag;

@@ -51,6 +51,7 @@ public class FragmentRelated extends Fragment{
         return rootView;
     }
 	
+	//TODO: vantar lýsingu
 	public void setShow(Show show){
 		this.show = show;
 	}	

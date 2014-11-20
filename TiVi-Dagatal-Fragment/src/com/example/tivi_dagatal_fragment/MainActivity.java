@@ -239,7 +239,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    
     @Override
     //Notkun: onOptionsItemSelected(item)
     //Eftir: item hefur veri� vali� og samsvarandi skj�r 
