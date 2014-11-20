@@ -5,6 +5,7 @@
  **/
 package Dtos;
 
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 public class Episode {
@@ -21,6 +22,7 @@ public class Episode {
 	private String ratingPercentage;
 	private String showTitle;
 	private LinearLayout episodesView;
+	private ImageButton infoButton;
 	
 	public Episode(){}
 	
@@ -182,7 +184,15 @@ public class Episode {
 		this.episodesView = episodesview;
 	}
 	
+	public void setInfoButton(ImageButton infobutton) {
+		this.infoButton = infobutton;
+	}
+	
 	public LinearLayout getEpisodesView() {
 		return this.episodesView;
+	}
+	
+	public ImageButton getInfoButton() {
+		return this.infoButton;
 	}
 }

@@ -378,9 +378,11 @@ public class FragmentList extends Fragment {
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {
 			TraktClient client = new TraktClient();
 			Season season = new Season();
+			ImageButton infoButton = new ImageButton(FragmentList.myActivity);
 			LinearLayout episodes = new LinearLayout(FragmentList.myActivity);
 			for(Show key : map[0].keySet()) {
 				episodes = map[0].get(key).getEpisodesView();
+				infoButton = key.getInfoButton();
 				if(!open.contains(""+episodes.getId())) season = client.getEpisodesForSeasonForShowInfo(key, map[0].get(key));
 			}
 			List<Episode> episodeList = new ArrayList<Episode>();
@@ -390,6 +392,7 @@ public class FragmentList extends Fragment {
 				episodeList = season.getEpisodes();
 			}
 			episodeList.get(0).setEpisodesView(episodes);
+			episodeList.get(0).setInfoButton(infoButton);
 			return episodeList;
 		}
 		
@@ -397,6 +400,7 @@ public class FragmentList extends Fragment {
 			int width = VariousUtils.getScreenWidth(FragmentList.myActivity);
 			int pd = (int) width/32;
 			LinearLayout episodes = episodeList.get(0).getEpisodesView();
+			ImageButton infoButton = episodeList.get(0).getInfoButton();
 			
 			if(!open.contains(""+episodes.getId())) {
 				episodes.removeAllViews();
@@ -423,9 +427,11 @@ public class FragmentList extends Fragment {
             if(open.contains(""+episodes.getId())) {
                 animation = new Animator(episodes, 500, 1);
                 open.remove(""+episodes.getId());
+                infoButton.setImageResource(R.drawable.down_arrow);
             } else {
                 animation = new Animator(episodes, 500, 0);
                 open.add(""+episodes.getId());
+                infoButton.setImageResource(R.drawable.up_arrow);
             }
             progressDialog.dismiss();
             episodes.startAnimation(animation);

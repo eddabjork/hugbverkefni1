@@ -189,16 +189,10 @@ public class LayoutUtils {
 					
 					View.OnClickListener serieButtonListener = new View.OnClickListener() {
 						public void onClick(View view) {
-							//mainScrollView.setScrollingEnabled(false);
 							Map<Show, Season> map = new HashMap<Show, Season>();
+							_show.setInfoButton(infoButton);
 							map.put(_show, season);
 							fraglist.new SeasonEpisodesTask().execute(map);
-							if(open.contains(""+episodes.getId())) {
-								infoButton.setImageResource(R.drawable.down_arrow);
-							}
-							else {
-								infoButton.setImageResource(R.drawable.up_arrow);
-							}
 						}
 					};
 					infoButton.setOnClickListener(serieButtonListener);

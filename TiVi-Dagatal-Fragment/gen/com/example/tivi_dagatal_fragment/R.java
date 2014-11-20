@@ -1091,21 +1091,21 @@ containing a value of this type.
         public static final int ic_cal_icon_start=0x7f02005c;
         public static final int ic_drawer=0x7f02005d;
         public static final int ic_info_logo_start=0x7f02005e;
-        public static final int ic_launcher=0x7f02005f;
-        public static final int ic_list_start=0x7f020060;
-        public static final int ic_popular_start=0x7f020061;
-        public static final int ic_search_start=0x7f020062;
-        public static final int list_item_bg_normal=0x7f020063;
-        public static final int list_item_bg_pressed=0x7f020064;
-        public static final int list_selector=0x7f020065;
-        public static final int next_week=0x7f020066;
-        public static final int off_cal=0x7f020067;
-        public static final int off_list=0x7f020068;
-        public static final int on_cal=0x7f020069;
-        public static final int on_list=0x7f02006a;
-        public static final int popular=0x7f02006b;
-        public static final int previous_week=0x7f02006c;
-        public static final int search=0x7f02006d;
+        public static final int ic_list_start=0x7f02005f;
+        public static final int ic_popular_start=0x7f020060;
+        public static final int ic_search_start=0x7f020061;
+        public static final int list_item_bg_normal=0x7f020062;
+        public static final int list_item_bg_pressed=0x7f020063;
+        public static final int list_selector=0x7f020064;
+        public static final int next_week=0x7f020065;
+        public static final int off_cal=0x7f020066;
+        public static final int off_list=0x7f020067;
+        public static final int on_cal=0x7f020068;
+        public static final int on_list=0x7f020069;
+        public static final int popular=0x7f02006a;
+        public static final int previous_week=0x7f02006b;
+        public static final int search=0x7f02006c;
+        public static final int today=0x7f02006d;
         public static final int up_arrow=0x7f02006e;
     }
     public static final class id {
@@ -1317,8 +1317,10 @@ containing a value of this type.
         /**  Navigation strengir 
          */
         public static final int dagatal=0x7f0a000f;
+        public static final int date_missing=0x7f0a006b;
         public static final int dec_label=0x7f0a0029;
         public static final int desc_list_item_icon=0x7f0a0016;
+        public static final int desc_missing=0x7f0a006c;
         public static final int drawer_close=0x7f0a0015;
         public static final int drawer_open=0x7f0a0014;
         public static final int ep_process_msg=0x7f0a0045;
@@ -1362,6 +1364,7 @@ containing a value of this type.
          */
         public static final int nothing_found=0x7f0a004e;
         public static final int nov_label=0x7f0a0028;
+        public static final int number_missing=0x7f0a0069;
         public static final int oct_label=0x7f0a0027;
         public static final int overview=0x7f0a0049;
         public static final int plot_title=0x7f0a0067;
@@ -1391,6 +1394,7 @@ containing a value of this type.
         public static final int serie=0x7f0a003f;
         public static final int show_process_msg=0x7f0a0043;
         public static final int show_process_title=0x7f0a0042;
+        public static final int showtime_missing=0x7f0a006a;
         public static final int sun_en=0x7f0a0031;
         /**   Vikudagar 
          */
@@ -1402,6 +1406,7 @@ containing a value of this type.
         public static final int thu_en=0x7f0a0035;
         public static final int thu_is=0x7f0a002e;
         public static final int thu_label=0x7f0a001b;
+        public static final int title_missing=0x7f0a0068;
         public static final int trash_icon=0x7f0a005c;
         public static final int tue_en=0x7f0a0033;
         public static final int tue_is=0x7f0a002c;
