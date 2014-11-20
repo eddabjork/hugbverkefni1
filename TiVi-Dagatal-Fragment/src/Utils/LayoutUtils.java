@@ -14,6 +14,8 @@ import java.util.Map;
 import Data.DbUtils;
 import Dtos.Season;
 import Dtos.Show;
+import Threads.DownloadImageTask;
+import Threads.IMDbRatingTask;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -66,8 +68,12 @@ public class LayoutUtils {
 			infoLayout.removeAllViews();
 			infoMain.removeAllViews();
 			scrollView.removeAllViews();
-			// if show.getDataTitle == null then there is no internet connection
-			if(show.getDataTitle() != null) {
+			if(show.getDataTitle() == null) {		// no internet connection
+				showNotConnectedMsg(context);
+				showNoResult(infoLayout, context, false);
+			} else if (show.getDataTitle().equals("not_found")) {	// no results from web client
+				showNoResult(infoLayout, context, false);
+			} else {
 				//banner
 				if(!show.getBanner().equals(noBannerUrl)) {
 					ImageView banner = new ImageView(context);
@@ -81,7 +87,7 @@ public class LayoutUtils {
 					LinearLayout.LayoutParams bannerParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 					banner.setLayoutParams(bannerParams);
 					String url = show.getBanner();
-					fraglist.new DownloadImageTask(banner).execute(url);
+					new DownloadImageTask(banner, context).execute(url);
 					banner.buildDrawingCache();
 					infoLayout.addView(banner);
 				}
@@ -128,10 +134,6 @@ public class LayoutUtils {
 					
 					addSeasons(show, context, infoLayout);
 				}
-				
-			} else {
-				showNotConnectedMsg(context);
-				showNoResult(infoLayout, context, false);
 			}
 			scrollView.addView(infoLayout);
 			infoMain.addView(makeLine(context));
@@ -291,11 +293,8 @@ public class LayoutUtils {
 			String genre = TextUtils.join(", ",show.getGenres().toArray());
 			txtView.setText(context.getResources().getString(R.string.genres)+" "+genre);
 		} else if(type == "imdb_grade") {
-			Map<Show, TextView> map = new HashMap<Show, TextView>();
-			map.put(show, txtView);
-			FragmentList fraglist = new FragmentList();
-			fraglist.new IMDbRatingTask().execute(map);
 			txtView.setText(context.getResources().getString(R.string.imdb_grade));
+			new IMDbRatingTask(txtView, context).execute(show);
 		} else if(type == "network") {
 			txtView.setText(context.getResources().getString(R.string.network)+ " " + show.getNetwork());
 		} else if(type == "air_day") {

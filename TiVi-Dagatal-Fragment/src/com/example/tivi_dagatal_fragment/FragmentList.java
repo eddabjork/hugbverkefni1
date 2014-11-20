@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import Clients.IMDbClient;
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Episode;
@@ -106,11 +104,11 @@ public class FragmentList extends Fragment {
 			mainLayout = new LinearLayout(getActivity());
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
-	    	/*for(Show show : showList){
+	    	for(Show show : showList){
 	    		addShow(show);
-	    	}*/
+	    	}
 	    	
-	    	mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()));
+	    	//mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()));
 	    	
 	    	mainScrollView.addView(mainLayout);
 		}
@@ -274,39 +272,6 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-     * Nafn: KristÃƒÆ’Ã‚Â­n FjÃƒÆ’Ã‚Â³la TÃƒÆ’Ã‚Â³masdÃƒÆ’Ã‚Â³ttir
-     * Dagsetning: 9. oktÃƒÆ’Ã‚Â³ber 2014
-     * MarkmiÃƒÆ’Ã‚Â°: NÃƒÆ’Ã‚Â¦r ÃƒÆ’Ã‚Â­ myndir meÃƒÆ’Ã‚Â° samhliÃƒÆ’Ã‚Â°a ÃƒÆ’Ã‚Â¾rÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°avinnslu
-     * */
-	public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		ImageView bmImage;
-		public DownloadImageTask(ImageView bmImage) {
-			this.bmImage = bmImage;
-		}
-		
-		//Notkun:		 bm = doInBackground(urls);
-	  	//EftirskilyrÃƒÆ’Ã‚Â°i: bm er myndin sem er sÃƒÆ’Ã‚Â³tt frÃƒÆ’Ã‚Â¡ urls.
-		protected Bitmap doInBackground(String... urls) {
-			String urldisplay = urls[0];
-			Bitmap mIcon11 = null;
-			try {
-				InputStream in = new java.net.URL(urldisplay).openStream();
-				mIcon11 = BitmapFactory.decodeStream(in);
-			} catch (Exception e) {
-				Log.e("Error", e.getMessage());
-				e.printStackTrace();
-			}
-			return mIcon11;
-		}
-		
-		//Notkun:		 onPostExecute(result);
-	  	//EftirskilyrÃƒÆ’Ã‚Â°i: bÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° setja myndina result ÃƒÆ’Ã‚Â­ rÃƒÆ’Ã‚Â©tt ImageView.
-		protected void onPostExecute(Bitmap result) {
-			bmImage.setImageBitmap(result);
-		}
-	}
-	
-	/**
      * Nafn: 	   Edda BjÃƒÂ¶rk KonrÃƒÂ¡ÃƒÂ°sdÃƒÂ³ttir
      * Dagsetning: 30. oktÃƒÂ³ber 2014
      * MarkmiÃƒÂ°:   NÃƒÂ¡ ÃƒÂ­ upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttarÃƒÂ¶ÃƒÂ° og sÃƒÂ½na ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista
@@ -466,34 +431,5 @@ public class FragmentList extends Fragment {
 	void showDialog(Show show) {
 	    DialogFragment newFragment = PopUpDelete.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");
-	}
-	/**
-	 * Nafn: 		Krist�n Fj�la T�masd�ttir
-	 * Dagsetning: 	11. n�vember 2014
-	 * Markmi�: 	IMDbRatingTask framkv�mir �r��avinnu sem n�r � IMDb einkunn fyrir ��ttar��
-	 */
-	public class IMDbRatingTask extends AsyncTask<Map<Show, TextView>, Integer, Map<Show, TextView>> {
-		// Notkun: map = doInBackground(maps)
-		// Eftir:  map inniheldur ��tt me� einkunn og textasv��i sem � a� birta einkunn �
-		protected Map<Show, TextView> doInBackground(Map<Show, TextView>... maps) {
-			Map<Show, TextView> map = new HashMap<Show, TextView>();
-			for(Show show : maps[0].keySet()){
-				IMDbClient.getIMDbRating(show);
-				map.put(show, maps[0].get(show));
-			}
-			return map;
-		}
-		
-		// Notkun: onPostExecute(map)
-		// Eftir:  einkunn � ��tti hefur veri� birt
-		protected void onPostExecute(Map<Show, TextView> map) {
-			for(Show show : map.keySet()){
-				if(show.getImdbRating() != null) {
-					map.get(show).setText(FragmentList.myActivity.getString(R.string.imdb_grade) + " " + show.getImdbRating());
-				} else {
-					map.get(show).setText(FragmentList.myActivity.getString(R.string.imdb_grade_not_found));
-				}
-			}
-		}
 	}
 }

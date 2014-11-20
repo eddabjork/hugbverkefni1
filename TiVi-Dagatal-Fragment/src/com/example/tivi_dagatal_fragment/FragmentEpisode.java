@@ -15,6 +15,7 @@ import java.util.Date;
 import Clients.IMDbClient;
 import Dtos.Episode;
 import Dtos.Show;
+import Threads.DownloadImageTask;
 import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.DialogFragment;
@@ -83,7 +84,7 @@ public class FragmentEpisode extends Fragment{
 								
 			ImageView image = (ImageView) getView().findViewById(R.id.image);
 			String imgUrl = episode.getScreen();
-			new DownloadImageTask(image).execute(imgUrl);
+			new DownloadImageTask(image, getActivity()).execute(imgUrl);
 			
 			boolean bool = false;
 			boolean bool2 = false;
@@ -144,44 +145,6 @@ public class FragmentEpisode extends Fragment{
 			if(string == null || string.toString().isEmpty() || string.equals("TBA"))
 				return false;
 			return true;
-		}
-	}
-	
-	/**
-     * Nafn: Krist�n Fj�la T�masd�ttir
-     * Dagsetning: 9. oktÃ³ber 2014
-     * MarkmiÃ°: NÃ¦r Ã­ myndir meÃ° samhliÃ°a Ã¾rÃ¡Ã°avinnslu
-     * */
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		ImageView bmImage;
-		public DownloadImageTask(ImageView bmImage) {
-			this.bmImage = bmImage;
-		}
-		
-		//Notkun:		 bm = doInBackground(urls);
-	  	//EftirskilyrÃ°i: bm er myndin sem er sÃ³tt frÃ¡ urls.
-		protected Bitmap doInBackground(String... urls) {
-			String urldisplay = urls[0];
-			Bitmap mIcon11 = null;
-			try {
-				InputStream in = new java.net.URL(urldisplay).openStream();
-				mIcon11 = BitmapFactory.decodeStream(in);
-			} catch (Exception e) {
-				Log.e("Error", e.getMessage());
-				e.printStackTrace();
-			}
-			return mIcon11;
-		}
-		
-		//Notkun:		 onPostExecute(result);
-	  	//EftirskilyrÃ°i: bÃºiÃ° er aÃ° setja myndina result Ã­ rÃ©tt ImageView.
-		protected void onPostExecute(Bitmap result) {
-			bmImage.setImageBitmap(result);
-			// set width of picture
-			int width = VariousUtils.getScreenWidth(getActivity());
-			bmImage.buildDrawingCache();
-			bmImage.setAdjustViewBounds(true);
-			bmImage.getLayoutParams().width = width;
 		}
 	}
 	

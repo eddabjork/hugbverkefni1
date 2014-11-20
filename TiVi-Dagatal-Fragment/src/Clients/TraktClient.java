@@ -489,6 +489,7 @@ public class TraktClient {
 				reader.close();
 			}
 		} catch (IOException e) {
+			showInfo.setDataTitle("not_found");
 			Log.e("API error", "Could not find show: " + show.getTitle());
 			e.printStackTrace();
 		}
