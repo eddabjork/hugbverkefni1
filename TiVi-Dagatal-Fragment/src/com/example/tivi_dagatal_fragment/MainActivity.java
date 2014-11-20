@@ -217,8 +217,7 @@ public class MainActivity extends Activity {
         String name = getResources().getString(R.string.app_name);
     	boolean onStartPage = getActionBar().getTitle().toString().equals(name);
         boolean tomurStack = getFragmentManager().getBackStackEntryCount() == 0;
-        String title = getActionBar().getTitle().toString();
-        
+       
         if (!onStartPage && tomurStack){
         	FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()

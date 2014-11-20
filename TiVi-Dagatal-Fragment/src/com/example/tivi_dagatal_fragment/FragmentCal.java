@@ -194,7 +194,8 @@ public class FragmentCal extends Fragment {
 			cal.add(Calendar.DATE, 1);
 		}
 	}
-	
+	//Notkun: addNameOfMont(cal, mainLayout)
+	//Eftir:  Nafni viðeigandi mánaðar hefur verið bætt við mainLayout
 	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
 		
 		TextView month = new TextView(getActivity());
