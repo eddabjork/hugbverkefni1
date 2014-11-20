@@ -1091,21 +1091,21 @@ containing a value of this type.
         public static final int ic_cal_icon_start=0x7f02005c;
         public static final int ic_drawer=0x7f02005d;
         public static final int ic_info_logo_start=0x7f02005e;
-        public static final int ic_launcher=0x7f02005f;
-        public static final int ic_list_start=0x7f020060;
-        public static final int ic_popular_start=0x7f020061;
-        public static final int ic_search_start=0x7f020062;
-        public static final int list_item_bg_normal=0x7f020063;
-        public static final int list_item_bg_pressed=0x7f020064;
-        public static final int list_selector=0x7f020065;
-        public static final int next_week=0x7f020066;
-        public static final int off_cal=0x7f020067;
-        public static final int off_list=0x7f020068;
-        public static final int on_cal=0x7f020069;
-        public static final int on_list=0x7f02006a;
-        public static final int popular=0x7f02006b;
-        public static final int previous_week=0x7f02006c;
-        public static final int search=0x7f02006d;
+        public static final int ic_list_start=0x7f02005f;
+        public static final int ic_popular_start=0x7f020060;
+        public static final int ic_search_start=0x7f020061;
+        public static final int list_item_bg_normal=0x7f020062;
+        public static final int list_item_bg_pressed=0x7f020063;
+        public static final int list_selector=0x7f020064;
+        public static final int next_week=0x7f020065;
+        public static final int off_cal=0x7f020066;
+        public static final int off_list=0x7f020067;
+        public static final int on_cal=0x7f020068;
+        public static final int on_list=0x7f020069;
+        public static final int popular=0x7f02006a;
+        public static final int previous_week=0x7f02006b;
+        public static final int search=0x7f02006c;
+        public static final int today=0x7f02006d;
         public static final int up_arrow=0x7f02006e;
     }
     public static final class id {

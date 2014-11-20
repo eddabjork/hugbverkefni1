@@ -122,7 +122,6 @@ public class FragmentPopular extends Fragment {
 				TextView title = new TextView(getActivity());
 				title.setText(show.getTitle());
 				title.setPadding(pd,0,0,0);
-				Log.v("Thattur heitir ", show.getTitle());
 				
 				ImageButton addButton = getAddButton(show);	
 				addButton.setPadding(pd,pd,pd,pd);

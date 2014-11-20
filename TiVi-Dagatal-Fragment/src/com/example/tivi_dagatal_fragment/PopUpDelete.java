@@ -1,7 +1,7 @@
 /**
- * Nafn: 		Kristín Fjóla Tómasdóttir
- * Dagsetning: 	13. nóvember 2014
- * Markmið: 	Pop-up sem spyr notanda hvort hann vilji eyda thaetti. 
+ * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+ * Dagsetning: 	13. nï¿½vember 2014
+ * Markmiï¿½: 	Pop-up sem spyr notanda hvort hann vilji eyda thaetti. 
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -14,7 +14,6 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,7 +24,7 @@ public class PopUpDelete extends DialogFragment{
 
 	// Notkun: popUpDelete = newInstance(showToDelete)
 	// Eftir:  popUpDelete er pop-up sem spyr notanda hvort
-	//		   hann vilji eyða þættinum showToDelete úr gagnagrunni		
+	//		   hann vilji eyï¿½a ï¿½ï¿½ttinum showToDelete ï¿½r gagnagrunni		
 	public static PopUpDelete newInstance(Show showToDelete) {
 		PopUpDelete frag = new PopUpDelete();
 		show = showToDelete;
@@ -33,7 +32,7 @@ public class PopUpDelete extends DialogFragment{
     }
 
 	// Notkun: dialog = onCreateDialog(savedInstanceState)
-	// Eftir:  dialog er pop-up sem spyr notanda hvort hann vilji eyða þætti
+	// Eftir:  dialog er pop-up sem spyr notanda hvort hann vilji eyï¿½a ï¿½ï¿½tti
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -53,7 +52,7 @@ public class PopUpDelete extends DialogFragment{
 	        .setNegativeButton(R.string.pos_answer,
 	            new DialogInterface.OnClickListener() {
 	        	//Notkun: onClick(dialog, whichButton)
-        		//Eftir: þaetti hefur verid eytt ur 'Thaettirnir minir' lista
+        		//Eftir: ï¿½aetti hefur verid eytt ur 'Thaettirnir minir' lista
 	        	public void onClick(DialogInterface dialog, int whichButton) {
 	        			removeFromMyShows(show);
 	                }
@@ -72,7 +71,7 @@ public class PopUpDelete extends DialogFragment{
     }
     
 	//Notkun:	removeFromMyEpisodes(show);
-  	//Eftir:	Búið er að eyða show úr gagnagrunni
+  	//Eftir:	Bï¿½iï¿½ er aï¿½ eyï¿½a show ï¿½r gagnagrunni
 	public void removeFromMyShows(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);
