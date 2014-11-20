@@ -47,6 +47,7 @@ import com.example.tivi_dagatal_fragment.FragmentList.SeasonEpisodesTask;
 public class LayoutUtils {
 	private static Integer id;
 	private static Integer start_id_from;
+	
 	public static void setUpInfoLayout(Show show, final FragmentRelated fragmentRelated, final List<String> open, final Activity context, Integer startIdFrom, String noBannerUrl) {
 		final Show _show = show;
 		start_id_from = startIdFrom;
@@ -139,25 +140,14 @@ public class LayoutUtils {
 					infoLayout.addView(overview);
 				}
 				
-				//svipadir thaettir takki
-				TextView relatedShows = new TextView(context);
-				relatedShows.setOnClickListener(new View.OnClickListener() {
-					public void onClick(View view) {
-						fragmentRelated.setShow(_show);
-						context.setTitle(context.getResources().getString(R.string.related_shows));
-				        FragmentManager fragmentManager = context.getFragmentManager();
-				        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
-					}
-				});
-				String udata = context.getResources().getString(R.string.related_shows);
-				SpannableString content = new SpannableString(udata);
-				content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
-				relatedShows.setText(content);
-				relatedShows.setTextColor(context.getResources().getColor(R.color.app_red));
-				relatedShows.setTypeface(null, Typeface.BOLD);
-				relatedShows.setLayoutParams(gradeLayout);
+				boolean gildi = true;
 				
-				infoLayout.addView(relatedShows);
+				if(gildi){
+					TextView relatedButton = addRelatedButton(show, context, fragmentRelated, gradeLayout);
+					infoLayout.addView(relatedButton);
+					
+					//addSeasons();
+				}
 				
 				//seriur
 				List<Season> seasons = show.getSeasons();
@@ -236,6 +226,30 @@ public class LayoutUtils {
         }
         infoMain.startAnimation(animation);
 	}
+	
+	public static TextView addRelatedButton(Show show, final Activity context, final FragmentRelated fragmentRelated, LayoutParams gradeLayout){
+		final Show _show = show;
+		
+		TextView relatedShows = new TextView(context);
+		relatedShows.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				fragmentRelated.setShow(_show);
+				context.setTitle(context.getResources().getString(R.string.related_shows));
+		        FragmentManager fragmentManager = context.getFragmentManager();
+		        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);
+			}
+		});
+		String udata = context.getResources().getString(R.string.related_shows);
+		SpannableString content = new SpannableString(udata);
+		content.setSpan(new UnderlineSpan(), 0, udata.length(), 0);
+		relatedShows.setText(content);
+		relatedShows.setTextColor(context.getResources().getColor(R.color.app_red));
+		relatedShows.setTypeface(null, Typeface.BOLD);
+		relatedShows.setLayoutParams(gradeLayout);
+		
+		return relatedShows;
+	}
+	
 	
 	private static int getNextId() {
 		id = (id == null) ? 0 : id+1;
