@@ -6,6 +6,9 @@
  */
 package Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.*;
 
 import android.test.ActivityInstrumentationTestCase2;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import com.example.tivi_dagatal_fragment.MainActivity;
 import com.example.tivi_dagatal_fragment.R;
 
+import Dtos.Show;
 import Utils.VariousUtils;
 
 public class TestMain extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -88,7 +92,10 @@ public class TestMain extends ActivityInstrumentationTestCase2<MainActivity> {
 	//Notkun: testParseAirTime()
 	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu
 	public void testFlushCache(){
+		List<Show> popularShows = new ArrayList<Show>();
+		popularShows.add(new Show("The Walking Dead"));
+		mTestMain.getCache().put("popularShows", popularShows);
 		VariousUtils.flushCache("popularShows");
-		assertNull("popularShows cache is not empty", MainActivity.getCache().get("popularShows"));
+		assertNull("popularShows cache is not empty", mTestMain.getCache().get("popularShows"));
 	}
 }
