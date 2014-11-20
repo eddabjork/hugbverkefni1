@@ -20,26 +20,20 @@ import Dtos.Show;
 import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 public class FragmentList extends Fragment {
@@ -256,12 +250,5 @@ public class FragmentList extends Fragment {
 			if(!scrollable) return false;
 			else return super.onInterceptTouchEvent(event);
 		}
-	}
-	
-	//Notkun:		 id = getNextId()
-	//EftirskilyrÃƒÆ’Ã‚Â°i: id er nÃƒÆ’Ã‚Â¦sta lausa auÃƒÆ’Ã‚Â°kenni
-	private int getNextId() {
-		id = (id == null) ? 0 : id+1;
-		return id;
 	}
 }
