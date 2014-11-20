@@ -65,6 +65,7 @@ public class FragmentList extends Fragment {
         return view;
 	}
 	
+	/** Sets the appropriate activity when fragment attached*/
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		myActivity = activity;
@@ -153,6 +154,9 @@ public class FragmentList extends Fragment {
     				R.string.ep_process_msg, FragmentList.myActivity);
         }  
 		
+		//Notkun: episodeList = doInBackground(map<show,season>)
+		//Eftirskilyrði: Búið er að sækja þætti og setja í listann episodeList
+		//				 sem eru í þættinu show í seríunni season
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {
 			TraktClient client = new TraktClient();
 			Season season = new Season();
@@ -174,6 +178,9 @@ public class FragmentList extends Fragment {
 			return episodeList;
 		}
 		
+		//Notkun: onPostExecute(episodeList)
+		//Eftirskilyrði: Búið er að sýna episodeList í viðmótinu á viðeigandi
+		//				 stað.
 		protected void onPostExecute(List<Episode> episodeList) {
 			int width = VariousUtils.getScreenWidth(FragmentList.myActivity);
 			int pd = (int) width/6;

@@ -56,6 +56,8 @@ public class Season {
 		return episodes;
 	}
 	
+	//Notkun: episodesView = season.getEpisodesView()
+	//Eftirskilyrði: episodesView er EpisodesView fyrir seríuna season
 	public LinearLayout getEpisodesView() {
 		return this.episodesView;
 	}
@@ -92,6 +94,8 @@ public class Season {
 		this.episodes = episodes;
 	}
 	
+	//Notkun: season.setEpisodesView(episodesview)
+	//Eftirskilyrði: Búið er að setja episodesview sem EpisodeView fyrir seríuna season
 	public void setEpisodesView(LinearLayout episodesview) {
 		this.episodesView = episodesview;
 	}

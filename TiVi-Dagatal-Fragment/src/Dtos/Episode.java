@@ -104,10 +104,14 @@ public class Episode {
 		return showTitle;
 	}
 	
+	//Notkun episodesView = episode.getEpisodesView()
+	//Eftirskilyrði: episodesView er EpisodeView fyrir þáttinn episode
 	public LinearLayout getEpisodesView() {
 		return this.episodesView;
 	}
 	
+	//Notkun: infoButton = episode.getInfoButton()
+	//Eftirskilyrði: infoButton er takki fyrir upplýsingar fyrir þáttinn episode
 	public ImageButton getInfoButton() {
 		return this.infoButton;
 	}
@@ -188,10 +192,15 @@ public class Episode {
 		this.showTitle = showTitle;
 	}
 	
+	//Notkun: episode.setEpisodesView(episodesView)
+	//Eftirskilyrði: Bútið er að setja episodesView sem EpisodeView fyrir þáttinn episode
 	public void setEpisodesView(LinearLayout episodesview) {
 		this.episodesView = episodesview;
 	}
 	
+	//Notkun: episode.setInfoButton(infobutton)
+	//Eftirskilyrði: Bútið er að setja infobutton sem takka fyrir upplýsingar 
+	//				 fyrir þáttinn episode
 	public void setInfoButton(ImageButton infobutton) {
 		this.infoButton = infobutton;
 	}

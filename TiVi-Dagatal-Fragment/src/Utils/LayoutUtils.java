@@ -52,6 +52,9 @@ public class LayoutUtils {
 	private static Integer id;
 	private static Integer start_id_from;
 	
+	//Notkun: setUpInfoLayout(show,open,context,startIdFrom,noBannerUrl,showSeasons)
+	//Eftirskilyrði: Búið er að setja upp útlit fyrir upplýsingar um þáttaraðir fyrir
+	// 				 þáttinn show.
 	public static void setUpInfoLayout(Show show, final List<String> open, final Activity context,
 									Integer startIdFrom, String noBannerUrl, boolean showSeasons) {
 		start_id_from = startIdFrom;
@@ -224,7 +227,8 @@ public class LayoutUtils {
 		return relatedShows;
 	}
 	
-	
+	//Notkun: id = getNextId()
+	//Eftirskilyrði: id er næsta lausa auðkenni
 	private static int getNextId() {
 		id = (id == null) ? 0 : id+1;
 		start_id_from = (start_id_from == null) ? 0 : start_id_from;
@@ -285,6 +289,9 @@ public class LayoutUtils {
 		return progressDialog;
 	}
 	
+	//Notkun: textView = getTextView(type,context,show)
+	//Eftirskilyrði: textView er TextView fyrir ,,hlutinn'' type fyrir þáttinn
+	//				 show
 	public static TextView getTextView(String type, Activity context, Show show) {
 		int width = VariousUtils.getScreenWidth(context);
 		int pd = width/72;
@@ -317,6 +324,8 @@ public class LayoutUtils {
 		return txtView;
 	}
 	
+	//Notkun: startAnimator(context,infoLayout,infoMain,open,infoButton)
+	//Eftirskilyrði: Búið er að ,,animate''-a infoMain
 	public static void startAnimator(Activity context, LinearLayout infoLayout, LinearLayout infoMain, 
 									List<String> open, ImageButton infoButton) {
 		Animator.setHeightForWrapContent(context, infoLayout);

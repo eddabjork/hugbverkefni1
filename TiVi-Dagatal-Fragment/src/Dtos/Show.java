@@ -159,18 +159,29 @@ public class Show {
 		return seasons;
 	}
 	
+	//Notkun: infoLayout = show.getInfoLayout()
+	//Eftirskilyrði: infoLayout er layout-ið fyrir upplýsingar um þáttaraðir
+	//				 fyrir þáttaröðina show
 	public LinearLayout getInfoLayout() {
 		return this.infoLayout;
 	}
 	
+	//Notkun: infoMain = show.getInfoMain()
+	//Eftirskilyrði: infoMain er aðal-layout-ið fyrir upplýsingar um þáttaraðir
+	//				 fyrir þáttaröðina show
 	public LinearLayout getInfoMain() {
 		return this.infoMain;
 	}
 	
+	//Notkun: scrollView = show.getScrollView()
+	//Eftirskilyrði: scrollView er ScrollView-ið fyrir þáttaröðina show
 	public ScrollView getScrollView() {
 		return this.scrollView;
 	}
 	
+	//Notkun: infoButton = show.getInfoButton()
+	//Eftirskilyrði: infoButton er takkinn fyrir upplýsingar um þáttaraðir
+	//				 fyrir þáttaröðina show
 	public ImageButton getInfoButton() {
 		return this.infoButton;
 	}
@@ -291,18 +302,30 @@ public class Show {
 		this.seasons = seasons;
 	}
 	
+	//Notkun: show.setInfoLayout(infolayout)
+	//Eftirskilyrði: Búið er að setja infolayout sem layout upplýsingar um
+	//				 þáttaraðir fyrir þáttaröðina show
 	public void setInfoLayout(LinearLayout infolayout) {
 		this.infoLayout = infolayout;
 	}
 	
+	//Notkun: show.setInfoMain(infomain)
+	//Eftirskilyrði: Búið er að setja infomain sem aðal-layout fyrir upplýsingar
+	//				 um þáttaraðir fyrir þáttinn show
 	public void setInfoMain(LinearLayout infomain) {
 		this.infoMain = infomain;
 	}
 	
+	//Notkun: show.setScrollView(scrollview)
+	//Eftirskilyrði: Búið er að setja scrollview sem ScrollView fyrir þáttaröðina
+	//				 show
 	public void setScrollView(ScrollView scrollview) {
 		this.scrollView = scrollview;
 	}
 	
+	//Notkun: show.setInfoButton(infobutton)
+	//Eftirskilyrði: Búið er að setja infobutton sem takka fyrir upplýsingar
+	//				 fyrir þáttaröðina show
 	public void setInfoButton(ImageButton infobutton) {
 		this.infoButton = infobutton;
 	}
