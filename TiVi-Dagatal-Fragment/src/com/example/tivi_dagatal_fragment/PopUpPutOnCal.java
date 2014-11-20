@@ -1,7 +1,7 @@
 /**
- * Nafn: 		Kristín Fjóla Tómasdóttir
- * Dagsetning: 	30. október 2014
- * Markmið: 	Pop-up sem býður notanda uppá að vista ákveðna þáttaröð á dagatalinu sínu. 
+ * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+ * Dagsetning: 	30. oktï¿½ber 2014
+ * Markmiï¿½: 	Pop-up sem bï¿½ï¿½ur notanda uppï¿½ aï¿½ vista ï¿½kveï¿½na ï¿½ï¿½ttarï¿½ï¿½ ï¿½ dagatalinu sï¿½nu. 
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -13,7 +13,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -23,8 +22,8 @@ public class PopUpPutOnCal extends DialogFragment{
 	private static Show show;
 
 	// Notkun: putOnCalPopUp = newInstance(showToSave)
-	// Eftir:  putOnCalPopUp er pop-up sem býður uppá 
-	// 		   að vista þáttinn showToSave á dagatali
+	// Eftir:  putOnCalPopUp er pop-up sem bï¿½ï¿½ur uppï¿½ 
+	// 		   aï¿½ vista ï¿½ï¿½ttinn showToSave ï¿½ dagatali
 	public static PopUpPutOnCal newInstance(Show showToSave) {
 		PopUpPutOnCal frag = new PopUpPutOnCal();
 		show = showToSave;
@@ -32,7 +31,7 @@ public class PopUpPutOnCal extends DialogFragment{
     }
 
 	// Notkun: dialog = onCreateDialog(savedInstanceState)
-	// Eftir:  dialog er pop-up sem býður uppá að vista þátt á dagatali
+	// Eftir:  dialog er pop-up sem bï¿½ï¿½ur uppï¿½ aï¿½ vista ï¿½ï¿½tt ï¿½ dagatali
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -52,7 +51,7 @@ public class PopUpPutOnCal extends DialogFragment{
 	        .setNegativeButton(R.string.pos_answer,
 	            new DialogInterface.OnClickListener() {
 	        	//Notkun: onClick(dialog, whichButton)
-        		//Eftir: þaetti er baett a dagatalslista
+        		//Eftir: ï¿½aetti er baett a dagatalslista
 	        	public void onClick(DialogInterface dialog, int whichButton) {
 	                	addToCal(show);
 	                }
@@ -71,7 +70,7 @@ public class PopUpPutOnCal extends DialogFragment{
     }
     
 	// Notkun: addToCal(show)
-	// Eftir:  show hefur verið bætt á dagatalið
+	// Eftir:  show hefur veriï¿½ bï¿½tt ï¿½ dagataliï¿½
     public void addToCal(Show show){
     	DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);

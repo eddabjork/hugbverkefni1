@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Steinunn Friðgeirsdóttir
- * Dagsetning: 	30. október 2014
- * Markmið: 	FragmentEpisopde er fragment sem birtir upplýsingar
- * 				um einstaka þætti.
+ * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
+ * Dagsetning: 	30. oktï¿½ber 2014
+ * Markmiï¿½: 	FragmentEpisopde er fragment sem birtir upplï¿½singar
+ * 				um einstaka ï¿½ï¿½tti.
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -44,7 +44,7 @@ public class FragmentEpisode extends Fragment{
 	private ProgressDialog progressDialog;
 	
 	@Override
-	//Eftir: Búið að birta upplýsingar um einstaka þátt
+	//Eftir: Bï¿½iï¿½ aï¿½ birta upplï¿½singar um einstaka ï¿½ï¿½tt
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_episode, container, false);
 		scrollView = new ScrollView(getActivity());
@@ -53,21 +53,21 @@ public class FragmentEpisode extends Fragment{
 	}
 	
 	//Notkun: setEpisode(episode)  
-	//Eftir: búið er að setja episode sem gildi tilviksbreytinnar episode
+	//Eftir: bï¿½iï¿½ er aï¿½ setja episode sem gildi tilviksbreytinnar episode
 	public void setEpisode(Episode episode){
 		this.episode = episode;
 	}	
 	
 	/**
-     * Nafn: 		Steinunn Friðgeirsdóttir
+     * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
      * Dagsetning: 	6. november 2014
-     * Markmið: 	ShowEpisodeTask er klasi sem sér um þráðavinnslu fyrir FragmentEpisode.
-     * 				Upplýsingum um þátt er hlaðið inn asyncronus með loading skjá.
+     * Markmiï¿½: 	ShowEpisodeTask er klasi sem sï¿½r um ï¿½rï¿½ï¿½avinnslu fyrir FragmentEpisode.
+     * 				Upplï¿½singum um ï¿½ï¿½tt er hlaï¿½iï¿½ inn asyncronus meï¿½ loading skjï¿½.
      */   
 	private class ShowEpisodeTask extends AsyncTask<Object, Integer, Episode> {
 		//Notkun: doInBackground(queries)
-		//Eftir:  þáðavinnslu í bakgrunni er lokið
-		//        og slilað hefur verið réttum episode.
+		//Eftir:  ï¿½ï¿½ï¿½avinnslu ï¿½ bakgrunni er lokiï¿½
+		//        og slilaï¿½ hefur veriï¿½ rï¿½ttum episode.
 		protected Episode doInBackground(Object... objects) {         
 			IMDbClient imdb = new IMDbClient();
 			Episode episode = (Episode)objects[0];
@@ -75,15 +75,15 @@ public class FragmentEpisode extends Fragment{
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
 		protected void onPreExecute() {  
 			progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
     				R.string.popular_process_msg, getActivity());	
         }  
 		
 		//Notkun: onPostExecute(searchShows)
-		//Eftir:  búið að er hlaða inn öllum upplýsingum um episode og birta 
-		//		  ásamt því að stoppa progressDialog
+		//Eftir:  bï¿½iï¿½ aï¿½ er hlaï¿½a inn ï¿½llum upplï¿½singum um episode og birta 
+		//		  ï¿½samt ï¿½vï¿½ aï¿½ stoppa progressDialog
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
 								
@@ -130,7 +130,6 @@ public class FragmentEpisode extends Fragment{
 				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
 				String newDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
 				String time = new SimpleDateFormat("HH:mm").format(date);
-				Log.v("time", time);
 				bool = checkText(newDate);
 				if(bool) text = newDate;
 				else text = getResources().getString(R.string.date_missing);
@@ -155,7 +154,7 @@ public class FragmentEpisode extends Fragment{
 	}
 	
 	/**
-     * Nafn: Kristín Fjóla Tómasdóttir
+     * Nafn: Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
      * Dagsetning: 9. oktÃƒÂ³ber 2014
      * MarkmiÃƒÂ°: NÃƒÂ¦r ÃƒÂ­ myndir meÃƒÂ° samhliÃƒÂ°a ÃƒÂ¾rÃƒÂ¡ÃƒÂ°avinnslu
      * */
@@ -193,7 +192,7 @@ public class FragmentEpisode extends Fragment{
 	}
 	
 	// Notkun: showDialog(show)
-	// Eftir:  pop-up hefur verið birt sem býður uppá að vista show á dagatali 
+	// Eftir:  pop-up hefur veriï¿½ birt sem bï¿½ï¿½ur uppï¿½ aï¿½ vista show ï¿½ dagatali 
 	void showDialog(Show show) {
 	    DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");

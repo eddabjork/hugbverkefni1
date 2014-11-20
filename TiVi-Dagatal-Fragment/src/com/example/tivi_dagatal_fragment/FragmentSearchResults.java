@@ -53,7 +53,6 @@ public class FragmentSearchResults extends Fragment{
 		Bundle bundle = this.getArguments();
 		char[] aWord = bundle.getCharArray("search");
 		String word =  new String(aWord);
-		Log.v("Strengurinn er", word);
 		if(VariousUtils.isConnectedToInternet(getActivity())){
 			new SearchShowsTask().execute(word);
 		} else {

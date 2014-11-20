@@ -23,7 +23,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -282,7 +281,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: progressDialog = showProgressDialog(title, msg, context)
-	//Eftir:  progressDialog hefur verid birt með titlinum title og skilabodinu msg
+	//Eftir:  progressDialog hefur verid birt meï¿½ titlinum title og skilabodinu msg
 	public static ProgressDialog showProgressDialog(Integer title, Integer msg, Activity context){
 		ProgressDialog progressDialog = new ProgressDialog(context, R.style.ProgressDialog);
         progressDialog.setTitle(context.getResources().getString(title));  

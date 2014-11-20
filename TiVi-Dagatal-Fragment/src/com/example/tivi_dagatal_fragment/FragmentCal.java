@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Jóhanna Agnes Magnúsdóttir
- * Dagsetning: 	2. október 2014
- * Markmið: 	Fragment sem sýnir viku-dagatal sem inniheldur alla 
- * 				þá þætti sem eru að birtast á dagatalinu.
+ * Nafn: 		Jï¿½hanna Agnes Magnï¿½sdï¿½ttir
+ * Dagsetning: 	2. oktï¿½ber 2014
+ * Markmiï¿½: 	Fragment sem sï¿½nir viku-dagatal sem inniheldur alla 
+ * 				ï¿½ï¿½ ï¿½ï¿½tti sem eru aï¿½ birtast ï¿½ dagatalinu.
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -72,8 +72,8 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun:		 setLayout();
-  	//Eftirskilyrði: Búið er að setja upp grunnlag útlits, sem er LinearLayout,
-	//				 inn í scrollView
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ setja upp grunnlag ï¿½tlits, sem er LinearLayout,
+	//				 inn ï¿½ scrollView
 	public void setLayout(){
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
@@ -95,7 +95,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	// Notkun: addWeekNavButtons(btnLayout)
-	// Eftir:  takkar til að flakka á milli vikna hafa verið settir í btnLayout
+	// Eftir:  takkar til aï¿½ flakka ï¿½ milli vikna hafa veriï¿½ settir ï¿½ btnLayout
 	public void addWeekNavButtons(RelativeLayout btnLayout){		
 		// go one week back
 		ImageButton leftBtn = new ImageButton(getActivity());
@@ -153,9 +153,9 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun:		 fillInDates(mainLayout);
-  	//Eftirskilyrði: Búið er að búa til view fyrir sérhvern dag vikunnar (alls 7) þar
-    //				 sem fram kemur dagsetning og Layout-pláss fyrir dagatals-þætti
-    //				 Þau eru svo sett inn í mainLayout sem er í scrollView.
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir sï¿½rhvern dag vikunnar (alls 7) ï¿½ar
+    //				 sem fram kemur dagsetning og Layout-plï¿½ss fyrir dagatals-ï¿½ï¿½tti
+    //				 ï¿½au eru svo sett inn ï¿½ mainLayout sem er ï¿½ scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 
@@ -206,11 +206,11 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun:		 setDateLayout(dayName, calendar, mainLayout);
-  	//Eftirskilyrði: Búið er að búa til view fyrir einn dag þar sem fram kemur
-    //				 dagur vikunnar, dagur mánaðars og mánuðurinn sjálfur.
-    //				 Einnig er búið að búa til LinearLayout inni í þessu view sem er 
-    //				 með id (dagsetningin á forminu yyMMdd) svo hægt sé að bæta 
-    //				 við þættum á réttum stað. Þessu view er svo bætt við neðst í 
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir einn dag ï¿½ar sem fram kemur
+    //				 dagur vikunnar, dagur mï¿½naï¿½ars og mï¿½nuï¿½urinn sjï¿½lfur.
+    //				 Einnig er bï¿½iï¿½ aï¿½ bï¿½a til LinearLayout inni ï¿½ ï¿½essu view sem er 
+    //				 meï¿½ id (dagsetningin ï¿½ forminu yyMMdd) svo hï¿½gt sï¿½ aï¿½ bï¿½ta 
+    //				 viï¿½ ï¿½ï¿½ttum ï¿½ rï¿½ttum staï¿½. ï¿½essu view er svo bï¿½tt viï¿½ neï¿½st ï¿½ 
 	//				 mainLayout.
 	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {		
 		LinearLayout dayLayout = new LinearLayout(getActivity());
@@ -252,8 +252,8 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun:		 month = getMonthFromInt(number);
-  	//Eftirskilyrði: month er nafn mánuðs miðað við number þar sem 
-	//				 0=janúar,..,11=desember.
+  	//Eftirskilyrï¿½i: month er nafn mï¿½nuï¿½s miï¿½aï¿½ viï¿½ number ï¿½ar sem 
+	//				 0=janï¿½ar,..,11=desember.
 	public String getMonthForInt(int num) {
         String month = "wrong";
         String[] months = {
@@ -277,7 +277,7 @@ public class FragmentCal extends Fragment {
     }
 	
 	//Notkun:		 line = makeLine();
-  	//Eftirskilyrði: line er núna view hlutur sem er einföld, þunn, grá lína.
+  	//Eftirskilyrï¿½i: line er nï¿½na view hlutur sem er einfï¿½ld, ï¿½unn, grï¿½ lï¿½na.
 	public View makeLine(){
 		 View v = new View(getActivity());
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -286,15 +286,15 @@ public class FragmentCal extends Fragment {
 	 }
 	
 	/**
-	 * Nafn: 		Kristín Fjóla Tómasdóttir
-	 * Dagsetning: 	23. október 2014
-	 * Markmið: 	CalendarShowsTask framkvæmir þráðavinnu sem nær í alla þætti 
-	 * 				frá gagnagrunni sem eiga að vera birtir á dagatali
+	 * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+	 * Dagsetning: 	23. oktï¿½ber 2014
+	 * Markmiï¿½: 	CalendarShowsTask framkvï¿½mir ï¿½rï¿½ï¿½avinnu sem nï¿½r ï¿½ alla ï¿½ï¿½tti 
+	 * 				frï¿½ gagnagrunni sem eiga aï¿½ vera birtir ï¿½ dagatali
 	 */
 	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
 		// Notkun: map = doInBackground(voids)
-		// Eftir:  map inniheldur gagna-titlana á þeim þáttum sem eiga að vera
-		//		   að vera birtir á dagatali
+		// Eftir:  map inniheldur gagna-titlana ï¿½ ï¿½eim ï¿½ï¿½ttum sem eiga aï¿½ vera
+		//		   aï¿½ vera birtir ï¿½ dagatali
 		protected Map<String, String> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 	        Map<String, String> dataTitles = dbHelper.getOnCalShows();
@@ -302,30 +302,30 @@ public class FragmentCal extends Fragment {
 		}
 		
 		// Notkun: onPostExecute(dataTitles)
-		// Eftir:  nýr þráður byrjar sem nær í upplýsingar um þætti sem eiga 
-		//		   að vera birtir á dagatali
+		// Eftir:  nï¿½r ï¿½rï¿½ï¿½ur byrjar sem nï¿½r ï¿½ upplï¿½singar um ï¿½ï¿½tti sem eiga 
+		//		   aï¿½ vera birtir ï¿½ dagatali
 		protected void onPostExecute(Map<String, String> dataTitles) {
 			new CalendarEpisodesTask().execute(dataTitles);
 		}
 	}
 	
 	/**
-	 * Nafn: 		Kristín Fjóla Tómasdóttir
-	 * Dagsetning: 	23. október 2014
-	 * Markmið: 	CalendarEpisodesTask framkvæmir þráðavinnu sem nær í alla þætti 
-	 * 				frá vefþjónustunni trakt.tv sem eiga að vera birtir á dagatali
+	 * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+	 * Dagsetning: 	23. oktï¿½ber 2014
+	 * Markmiï¿½: 	CalendarEpisodesTask framkvï¿½mir ï¿½rï¿½ï¿½avinnu sem nï¿½r ï¿½ alla ï¿½ï¿½tti 
+	 * 				frï¿½ vefï¿½jï¿½nustunni trakt.tv sem eiga aï¿½ vera birtir ï¿½ dagatali
 	 */
 	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem á að sýna á meðan notandi er að bíða
+		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.list_process_title, 
     				R.string.list_process_msg, getActivity());	
         }  
 		
 		// Notkun: episodes = doInBackground(dataTitles)
-		// Eftir:  episodes er listi af þáttum sem á að birta á dagatali
+		// Eftir:  episodes er listi af ï¿½ï¿½ttum sem ï¿½ aï¿½ birta ï¿½ dagatali
 		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
 			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.getCache().get(cacheKey);
 	        
@@ -343,7 +343,7 @@ public class FragmentCal extends Fragment {
 		}
 		
 		// Notkun: onPostExecute(episodes)
-		// Eftir:  episodes hafa verið birtir á dagatali
+		// Eftir:  episodes hafa veriï¿½ birtir ï¿½ dagatali
 		protected void onPostExecute(List<Episode> calendarEpisodes) {
 			progressDialog.dismiss();
 			for (Episode episode : calendarEpisodes){
@@ -353,9 +353,9 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun:		 fillInEpisode(episode);
-  	//Eftirskilyrði: Búið að setja inn alla þætti sem eru stilltir á "á dagatali"
-	//				 á réttan stað (þ.e. bæta við í view-ið sem hefur id-ið
-	//				 dagsetninguna þegar þátturinn var frumsýndur)
+  	//Eftirskilyrï¿½i: Bï¿½iï¿½ aï¿½ setja inn alla ï¿½ï¿½tti sem eru stilltir ï¿½ "ï¿½ dagatali"
+	//				 ï¿½ rï¿½ttan staï¿½ (ï¿½.e. bï¿½ta viï¿½ ï¿½ view-iï¿½ sem hefur id-iï¿½
+	//				 dagsetninguna ï¿½egar ï¿½ï¿½tturinn var frumsï¿½ndur)
 	public void fillInEpisode(final Episode episode) {
 		frag = new FragmentEpisode();
 		
@@ -387,12 +387,12 @@ public class FragmentCal extends Fragment {
 	    try {
 	    	linearLayout.addView(textView);
 	    } catch(Exception e) {
-	    	Log.v("Náði ekki að setja í linear", "layout");
+	    	Log.e("NÃ¡Ã°i ekki aÃ° setja Ã­ linear", "layout");
 	    }
 	}
 	
 	//Notkun:		 number = firstAiredRightForm(strDate);
-  	//Eftirskilyrði: strDate er dagsetningu á forminu: yyyy-MM-dd'T'HH:mm:ss 
+  	//Eftirskilyrï¿½i: strDate er dagsetningu ï¿½ forminu: yyyy-MM-dd'T'HH:mm:ss 
 	//				 number er talan yyMMdd.
 	public int getFirstAiredInRightForm(String strDate){
     	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -408,7 +408,7 @@ public class FragmentCal extends Fragment {
     }
 	
 	//Notkun: 		 calendar = nullifyTime(c)
-	//Eftirskilyrði: Tíminn á deginum calendar hefur verið settur á 00:00:00
+	//Eftirskilyrï¿½i: Tï¿½minn ï¿½ deginum calendar hefur veriï¿½ settur ï¿½ 00:00:00
 	public static Calendar nullifyTime(Calendar c){
 		c.set(Calendar.HOUR_OF_DAY,0);
 		c.set(Calendar.MINUTE, 0);
@@ -417,7 +417,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: 		 date = getLastSundayForNumber(num)
-	//Eftirskilyrði: date er sunnudagur eftir num-1 vikur
+	//Eftirskilyrï¿½i: date er sunnudagur eftir num-1 vikur
 	public static Date getLastFirstDayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -433,7 +433,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: 		 date = getNextSundayForNumber(num)
-	//Eftirskilyrði: date er sunnudagur eftir num vikur
+	//Eftirskilyrï¿½i: date er sunnudagur eftir num vikur
 	public static Date getNextFirstDayForNumber(int num){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());

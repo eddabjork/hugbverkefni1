@@ -380,7 +380,6 @@ public class FragmentList extends Fragment {
 			Season season = new Season();
 			LinearLayout episodes = new LinearLayout(FragmentList.myActivity);
 			for(Show key : map[0].keySet()) {
-				Log.v("season",""+map[0].get(key).getSeasonNumber());
 				episodes = map[0].get(key).getEpisodesView();
 				if(!open.contains(""+episodes.getId())) season = client.getEpisodesForSeasonForShowInfo(key, map[0].get(key));
 			}
@@ -410,7 +409,7 @@ public class FragmentList extends Fragment {
 				    textView.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View view) {
 							((FragmentEpisode) frag).setEpisode(episode);
-							FragmentManager fragmentManager = getFragmentManager();
+							FragmentManager fragmentManager = FragmentList.myActivity.getFragmentManager();
 							VariousUtils.addFragmentToStack(fragmentManager, frag);
 							FragmentList.myActivity.getActionBar().setTitle(episode.getShowTitle());
 					        

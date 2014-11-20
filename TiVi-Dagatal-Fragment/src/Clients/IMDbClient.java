@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Kristín Fjóla Tómasdóttir
- * Dagsetning: 	5. október 2014
- * Markmið: 	Biðill sem nær í upplýsingar um þáttaraðir og þætti frá 
- * 				vefþjónustu https://imdb.com/. 
+ * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
+ * Dagsetning: 	5. oktï¿½ber 2014
+ * Markmiï¿½: 	Biï¿½ill sem nï¿½r ï¿½ upplï¿½singar um ï¿½ï¿½ttaraï¿½ir og ï¿½ï¿½tti frï¿½ 
+ * 				vefï¿½jï¿½nustu https://imdb.com/. 
  */
 
 package Clients;
@@ -20,13 +20,13 @@ import android.util.Log;
 public class IMDbClient {
 	
 	//Notkun: 			getIMDbRating(show)
-	//Eftirskilyrði: 	IMDb einkunn er stillt á show
+	//Eftirskilyrï¿½i: 	IMDb einkunn er stillt ï¿½ show
 	public static void getIMDbRating(final Show show){
 		URL url = null;
         try {
 			url = new URL("http://www.omdbapi.com/?i=" + show.getImdbId());
 		} catch (MalformedURLException e) {
-			Log.v("URL error", "Could not make url for: " + show.getTitle());
+			Log.e("URL error", "Could not make url for: " + show.getTitle());
 			e.printStackTrace();
 		}
         
@@ -39,13 +39,13 @@ public class IMDbClient {
 				reader.close();
 			}
 		} catch (IOException e) {
-			Log.v("API error", "Could not find IMDb rating for show: " + show.getTitle());
+			Log.e("API error", "Could not find IMDb rating for show: " + show.getTitle());
 			e.printStackTrace();
 		}
 	}
 	
 	//Notkun: 			readShow(reader, show)
-	//Eftirskilyrði: 	IMDb einkunn er stillt á show
+	//Eftirskilyrï¿½i: 	IMDb einkunn er stillt ï¿½ show
 	public static void readShow(JsonReader reader, Show show) throws IOException {
 		reader.beginObject();
 		
