@@ -27,7 +27,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -143,6 +142,8 @@ public class LayoutUtils {
 		startAnimator(context, infoLayout, infoMain, open, _infoButton);
 	}
 	
+	//Notkun: addSeason(show, context, infoLayout)
+	//Eftir:  búið er að bæta season tökkum við info layout.
 	public static void addSeasons(final Show show, Activity context, LinearLayout infoLayout){
 		//seriur
 		final FragmentList fraglist = new FragmentList();
@@ -198,7 +199,8 @@ public class LayoutUtils {
 		
 	}
 	
-	
+	//Notkun: text = addRelatedButton(show, context, gradeLayout)
+	//Eftir:  Text er núna clickable takki sem opnar Sviparðir þættir myndina. 
 	public static TextView addRelatedButton(final Show show, final Activity context, LayoutParams gradeLayout){
 		
 		TextView relatedShows = new TextView(context);
