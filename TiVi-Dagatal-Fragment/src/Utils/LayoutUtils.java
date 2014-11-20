@@ -53,8 +53,8 @@ public class LayoutUtils {
 	private static Integer id;
 	private static Integer start_id_from;
 	
-	public static void setUpInfoLayout(Show show, FragmentRelated fragmentRelated, final List<String> open, 
-										final Activity context, Integer startIdFrom, String noBannerUrl, boolean showSeasons) {
+	public static void setUpInfoLayout(Show show, final List<String> open, final Activity context,
+									Integer startIdFrom, String noBannerUrl, boolean showSeasons) {
 		start_id_from = startIdFrom;
 		
 		LinearLayout infoLayout = show.getInfoLayout();
@@ -129,7 +129,7 @@ public class LayoutUtils {
 					int pd = width/72;
 					LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 					layout.setMargins(pd, pd, pd, 0); //left, top, right, bottom
-					TextView relatedButton = addRelatedButton(show, context, fragmentRelated, layout);
+					TextView relatedButton = addRelatedButton(show, context, layout);
 					infoLayout.addView(relatedButton);
 					
 					addSeasons(show, context, infoLayout);
@@ -199,11 +199,12 @@ public class LayoutUtils {
 	}
 	
 	
-	public static TextView addRelatedButton(final Show show, final Activity context, final FragmentRelated fragmentRelated, LayoutParams gradeLayout){
+	public static TextView addRelatedButton(final Show show, final Activity context, LayoutParams gradeLayout){
 		
 		TextView relatedShows = new TextView(context);
 		relatedShows.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
+				FragmentRelated fragmentRelated = new FragmentRelated();
 				fragmentRelated.setShow(show);
 				context.setTitle(context.getResources().getString(R.string.related_shows));
 		        FragmentManager fragmentManager = context.getFragmentManager();

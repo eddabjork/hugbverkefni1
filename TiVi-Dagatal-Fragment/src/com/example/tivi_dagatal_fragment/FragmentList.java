@@ -140,8 +140,7 @@ public class FragmentList extends Fragment {
 		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
 		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
 		protected void onPostExecute(Show show) {
-			fragmentRelated = new FragmentRelated();
-			LayoutUtils.setUpInfoLayout(show, fragmentRelated, open, FragmentList.myActivity, id, noBannerUrl, true);
+			LayoutUtils.setUpInfoLayout(show, open, FragmentList.myActivity, id, noBannerUrl, true);
             progressDialog.dismiss();
 		}
 	}
