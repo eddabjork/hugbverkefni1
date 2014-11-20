@@ -206,10 +206,12 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: text = addRelatedButton(show, context, gradeLayout)
-	//Eftir:  Text er núna clickable takki sem opnar Sviparðir þættir myndina. 
+	//Eftir:  Text er núna clickable takki sem opnar Sviparðir þættir myndina.
 	public static TextView addRelatedButton(final Show show, final Activity context, LayoutParams gradeLayout){
-		
+		int width = VariousUtils.getScreenWidth(context);
+		int pd = width/25;
 		TextView relatedShows = new TextView(context);
+		relatedShows.setPadding(pd, 0, 0, 0);
 		relatedShows.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				FragmentRelated fragmentRelated = new FragmentRelated();
@@ -297,11 +299,11 @@ public class LayoutUtils {
 	//				 show
 	public static TextView getTextView(String type, Activity context, Show show) {
 		int width = VariousUtils.getScreenWidth(context);
-		int pd = width/72;
+		int pd = width/50;
 		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		layout.setMargins(pd, pd, pd, 0); //left, top, right, bottom
 		TextView txtView = new TextView(context);
 		txtView.setLayoutParams(layout);
+		txtView.setPadding(2*pd, pd, pd, 0);
 		
 		if(type == "genres") {
 			String genre = TextUtils.join(", ",show.getGenres().toArray());
@@ -344,8 +346,6 @@ public class LayoutUtils {
         }
         infoMain.startAnimation(animation);
 	}
-	
-/******************TODO: JÃ³hanna start****************************/
 	
 	public static LinearLayout getRegListLayout (List<Show> searchShows, Activity context, DbUtils dbHelper, List<String> open) {
 		int width = VariousUtils.getScreenWidth(context);
@@ -589,8 +589,6 @@ public class LayoutUtils {
 	}
 	
 	public static LinearLayout getInfoMainLayout(final Show show, final Activity context, final ImageButton infoButton, final Fragment fragment, final List<String> open){
-		//int position = 0;
-		
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 		final ScrollView scrollView = new ScrollView(context);
