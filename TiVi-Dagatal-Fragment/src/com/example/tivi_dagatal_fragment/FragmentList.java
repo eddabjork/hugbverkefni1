@@ -362,7 +362,8 @@ public class FragmentList extends Fragment {
 		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
 		protected void onPostExecute(Show show) {
 			LayoutUtils utils = new LayoutUtils();
-			utils.setUpInfoLayout(show,fragmentRelated,open,getActivity(),id,noBannerUrl);
+			fragmentRelated = new FragmentRelated();
+			utils.setUpInfoLayout(show, fragmentRelated, open,getActivity(),id,noBannerUrl);
             progressDialog.dismiss();
 		}
 	}

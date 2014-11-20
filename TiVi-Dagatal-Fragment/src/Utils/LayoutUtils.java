@@ -48,7 +48,7 @@ public class LayoutUtils {
 	private static Integer id;
 	private static Integer start_id_from;
 	
-	public static void setUpInfoLayout(Show show, final FragmentRelated fragmentRelated, final List<String> open, final Activity context, Integer startIdFrom, String noBannerUrl) {
+	public static void setUpInfoLayout(Show show, FragmentRelated fragmentRelated, final List<String> open, final Activity context, Integer startIdFrom, String noBannerUrl) {
 		final Show _show = show;
 		start_id_from = startIdFrom;
 		
