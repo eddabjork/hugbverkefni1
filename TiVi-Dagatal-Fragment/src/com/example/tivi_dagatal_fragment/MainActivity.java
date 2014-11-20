@@ -196,18 +196,22 @@ public class MainActivity extends Activity {
         try{
         	FragmentCal frag = (FragmentCal)fragment;
         	doBack(0);
+        	return;
         }
         catch(Exception e){}
         try{
         	FragmentSearch frag = (FragmentSearch)fragment;
         	doBack(2);
+        	return;
         }
         catch(Exception e){}
         try{
         	FragmentList frag = (FragmentList)fragment;
         	doBack(1);
+        	return;
         }
         catch(Exception e){}
+        doBack(5);
     }
     
     //Notkun: doBack(num)
@@ -217,7 +221,6 @@ public class MainActivity extends Activity {
         String name = getResources().getString(R.string.app_name);
     	boolean onStartPage = getActionBar().getTitle().toString().equals(name);
         boolean tomurStack = getFragmentManager().getBackStackEntryCount() == 0;
-       
         if (!onStartPage && tomurStack){
         	FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
