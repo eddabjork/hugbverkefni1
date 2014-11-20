@@ -99,17 +99,17 @@ public class FragmentList extends Fragment {
 			mainLayout = new LinearLayout(getActivity());
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
-	    	for(Show show : showList){
+	    	/*for(Show show : showList){
 	    		addShow(show);
-	    	}
+	    	}*/
 	    	
-	    	//mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()));
+	    	mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()));
 	    	
 	    	mainScrollView.addView(mainLayout);
 		}
 	}
 	
-	/**TODO: ey�a**/
+	/**TODO: ey�a**/
 	public void addShow(final Show show) {
 		int width = VariousUtils.getScreenWidth(getActivity());
 		int pd = (int) width/32;
@@ -189,7 +189,7 @@ public class FragmentList extends Fragment {
 		mainLayout.addView(makeLine());
 	}
 	
-	/**TODO: ey�a**/
+	/**TODO: ey�a**/
 	//Notkun:		 calButton = getCalButton(show)
   	//EftirskilyrÃƒÆ’Ã‚Â°i: calButton er takki sem sÃƒÆ’Ã‚Â©r um ÃƒÆ’Ã‚Â° bÃƒÆ’Ã‚Â¦ta/taka ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡ttinn show
 	//				 af dagatali
@@ -238,7 +238,7 @@ public class FragmentList extends Fragment {
 		return calendarButton;
 	}
 	
-	/**TODO: ey�a**/
+	/**TODO: ey�a**/
 	//Notkun:		 addToCal(show);
   	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=true fyrir show.
 	public void addToCal(Show show){
@@ -247,7 +247,7 @@ public class FragmentList extends Fragment {
 		VariousUtils.flushCache("calendarEpisodes");
 	}
 	
-	/**TODO: ey�a**/
+	/**TODO: ey�a**/
 	//Notkun:		 removeFromCal(show);
   	//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° uppfÃƒÆ’Ã‚Â¦ra gagnagrunn ÃƒÆ’Ã‚Â¾.a. gildiÃƒÆ’Ã‚Â° on_calendar=false fyrir show.
 	public void removeFromCal(Show show){
@@ -256,7 +256,7 @@ public class FragmentList extends Fragment {
 		VariousUtils.flushCache("calendarEpisodes");
 	}
 	
-	/**TODO: ey�a**/
+	/**TODO: ey�a**/
 	//Notkun:		 line = makeLine();
   	//EftirskilyrÃƒÆ’Ã‚Â°i: line er nÃƒÆ’Ã‚Âºna view hlutur sem er einfÃƒÆ’Ã‚Â¶ld, ÃƒÆ’Ã‚Â¾unn, grÃƒÆ’Ã‚Â¡ lÃƒÆ’Ã‚Â­na.
 	public View makeLine(){
@@ -277,7 +277,7 @@ public class FragmentList extends Fragment {
 		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.show_process_title, 
-    				R.string.show_process_msg, getActivity());	
+    				R.string.show_process_msg, FragmentList.myActivity);	
         }  
 		
 		//Notkun:		 show = doInBackground(shows)
@@ -285,7 +285,7 @@ public class FragmentList extends Fragment {
 		//				 sem nÃƒÂ¡ÃƒÂ° er ÃƒÂ­ ÃƒÂºtfrÃƒÂ¡ shows
 		protected Show doInBackground(Show... shows) {
 			Show show = new Show();
-			if(VariousUtils.isConnectedToInternet(getActivity())){
+			if(VariousUtils.isConnectedToInternet(FragmentList.myActivity)){
 				TraktClient client = new TraktClient();
 				if(!open.contains(""+shows[0].getInfoMain().getId())) show = client.getShowInfo(shows[0]);
 			}
@@ -302,7 +302,7 @@ public class FragmentList extends Fragment {
 		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
 		protected void onPostExecute(Show show) {
 			fragmentRelated = new FragmentRelated();
-			LayoutUtils.setUpInfoLayout(show, fragmentRelated, open, getActivity(), id, noBannerUrl, true);
+			LayoutUtils.setUpInfoLayout(show, fragmentRelated, open, FragmentList.myActivity, id, noBannerUrl, true);
             progressDialog.dismiss();
 		}
 	}
@@ -420,7 +420,7 @@ public class FragmentList extends Fragment {
 		return id;
 	}
 	
-	/**TODO: ey�a**/
+	/**TODO: ey�a**/
 	// Notkun: showDialog(show)
 	// Eftir:  pop-up hefur verid birt sem spyr hvort notandi vilji eyda thaetti
 	void showDialog(Show show) {

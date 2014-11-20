@@ -224,6 +224,7 @@ public class LayoutUtils {
 	
 	private static int getNextId() {
 		id = (id == null) ? 0 : id+1;
+		start_id_from = (start_id_from == null) ? 0 : start_id_from;
 		return start_id_from+id;
 	}
 
