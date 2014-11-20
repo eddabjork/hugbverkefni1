@@ -11,12 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Data.DbUtils;
 import Dtos.Season;
 import Dtos.Show;
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.app.FragmentManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableString;
@@ -24,25 +26,25 @@ import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.OnTouchListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
 
 import com.example.tivi_dagatal_fragment.Animator;
 import com.example.tivi_dagatal_fragment.FragmentList;
 import com.example.tivi_dagatal_fragment.FragmentRelated;
+import com.example.tivi_dagatal_fragment.PopUpDelete;
+import com.example.tivi_dagatal_fragment.PopUpPutOnCal;
 import com.example.tivi_dagatal_fragment.R;
-import com.example.tivi_dagatal_fragment.FragmentList.DownloadImageTask;
-import com.example.tivi_dagatal_fragment.FragmentList.IMDbRatingTask;
-import com.example.tivi_dagatal_fragment.FragmentList.SeasonEpisodesTask;
 
 public class LayoutUtils {
 	private static Integer id;
@@ -266,7 +268,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(view, context)
-	// Eftir:  búið er að birta texta í view sem segir notanda að engar niðurstöður fundust
+	// Eftir:  bÃºiÃ° er aÃ° birta texta Ã­ view sem segir notanda aÃ° engar niÃ°urstÃ¶Ã°ur fundust
 	public static void showNoResult(ScrollView view, Activity context){
 		TextView nothing = new TextView(context);
 		nothing.setTextSize(20);
@@ -275,7 +277,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(layout, context)
-	// Eftir:  búið er að birta texta í layout sem segir notanda að engar niðurstöður fundust  
+	// Eftir:  bÃºiÃ° er aÃ° birta texta Ã­ layout sem segir notanda aÃ° engar niÃ°urstÃ¶Ã°ur fundust  
 	public static void showNoResult(LinearLayout layout, Activity context, boolean big){
 		TextView nothing = new TextView(context);
 		if(big) nothing.setTextSize(20);
@@ -285,7 +287,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//EftirskilyrÃƒÆ’Ã‚Â°i: line er nÃƒÆ’Ã‚Âºna view hlutur sem er einfÃƒÆ’Ã‚Â¶ld, ÃƒÆ’Ã‚Â¾unn, grÃƒÆ’Ã‚Â¡ lÃƒÆ’Ã‚Â­na.
+  	//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°i: line er nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºna view hlutur sem er einfÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶ld, ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾unn, grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ lÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­na.
 	public static View makeLine(Context context){
 		 View v = new View(context);
 		 
@@ -295,7 +297,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: progressDialog = showProgressDialog(title, msg, context)
-	//Eftir:  progressDialog hefur verid birt me� titlinum title og skilabodinu msg
+	//Eftir:  progressDialog hefur verid birt meï¿½ titlinum title og skilabodinu msg
 	public static ProgressDialog showProgressDialog(Integer title, Integer msg, Activity context){
 		ProgressDialog progressDialog = new ProgressDialog(context, R.style.ProgressDialog);
         progressDialog.setTitle(context.getResources().getString(title));  
@@ -309,4 +311,247 @@ public class LayoutUtils {
 		divider.setBackgroundColor(context.getResources().getColor(R.color.app_red));
 		return progressDialog;
 	}
+	
+	
+/******************Jóhanna start****************************/
+	
+	public static LinearLayout getRegListLayout (List<Show> searchShows, Activity context, DbUtils dbHelper) {
+		int width = VariousUtils.getScreenWidth(context);
+		int pd = (int) width/32;
+		
+		LinearLayout llv = new LinearLayout(context);
+		llv.setOrientation(LinearLayout.VERTICAL);
+		if(searchShows.isEmpty()){
+			LayoutUtils.showNoResult(llv, context, true);
+		}
+		else{
+			for (final Show show : searchShows){
+				TextView title = getTitle(show, context);
+				title.setPadding(pd,0,0,0);
+				
+				ImageButton addButton = getAddButton(show, context, dbHelper);
+				addButton.setPadding(pd,pd,pd,pd);
+				
+				ImageButton infoButton = getInfoButton(show, context);
+				infoButton.setPadding(pd,pd,pd,pd);
+				
+				RelativeLayout episodeLayout = getRegEpisodeLayout(title, addButton, infoButton, context);
+				
+				llv.addView(episodeLayout);
+				llv.addView(makeLine(context));
+			}
+		}
+		return llv;
+	}
+	
+	public static TextView getTitle(Show show, Activity context){
+		TextView title = new TextView(context);
+		title.setText(show.getTitle());
+		title.setId(R.id.title);
+		return title;
+	}
+	
+	public static ImageButton getAddButton(final Show show, final Activity context, final DbUtils dbHelper){
+		final ImageButton addButton = new ImageButton(context);
+		// 0 -> onList=false; 1 -> onList=true
+		addButton.setTag(0);
+		addButton.setImageResource(R.drawable.off_list);
+		
+		addButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent me) {
+				if (me.getAction() == MotionEvent.ACTION_DOWN) {
+					addButton.setColorFilter(Color.argb(150, 155, 155, 155));
+					return true;
+				} else if (me.getAction() == MotionEvent.ACTION_UP) {
+					addButton.setColorFilter(Color.argb(0, 155, 155, 155));
+					int status =(Integer) view.getTag();
+	            	if(status == 0) {
+	            		dbHelper.saveShow(show);
+	            		view.setTag(1);
+						addButton.setImageResource(R.drawable.on_list);
+	            		showDialogCal(show, context);
+	            	} else {
+	            		dbHelper.deleteShow(show);
+	            		view.setTag(0);
+						addButton.setImageResource(R.drawable.off_list);
+	            	}
+					return true;
+				}
+				return false;
+			}
+		});
+		addButton.setBackgroundColor(Color.TRANSPARENT);
+		addButton.setId(R.id.addButton);
+		return addButton;
+	}
+	
+	// Notkun: showDialogCal(show)
+	// Eftir:  pop-up hefur veri� birt sem b��ur upp� a� vista show � dagatali 
+	public static void showDialogCal(Show show, Activity context) {
+		DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
+	    newFragment.show(context.getFragmentManager(), "dialog");
+	}
+	
+	public static RelativeLayout getRegEpisodeLayout(TextView title, ImageButton addButton, ImageButton infoButton, Activity context){
+		RelativeLayout episodeLayout = new RelativeLayout(context);
+		
+		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams addParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+		titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		addParams.addRule(RelativeLayout.LEFT_OF, R.id.infoButton);
+		addParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		
+		episodeLayout.addView(title, titleParams);
+		episodeLayout.addView(addButton, addParams);
+		episodeLayout.addView(infoButton, infoParams);
+		
+		return episodeLayout;
+	}
+	
+	public static LinearLayout getMyEpsListLayout(List<Show> searchShows, Activity context, DbUtils dbHelper) {
+		int width = VariousUtils.getScreenWidth(context);
+		int pd = (int) width/32;
+		
+		LinearLayout llv = new LinearLayout(context);
+		llv.setOrientation(LinearLayout.VERTICAL);
+
+		for (final Show show : searchShows){
+			TextView title = getTitle(show, context);
+			title.setPadding(pd,0,0,0);
+				
+			ImageButton calendarButton = getCalButton(show, context);
+			calendarButton.setPadding(pd,pd,pd,pd);
+			
+			ImageButton deleteButton = getDeleteButton(show, context);
+			deleteButton.setPadding(pd,pd,pd,pd);
+			
+			ImageButton infoButton = getInfoButton(show, context);
+			infoButton.setPadding(pd,pd,pd,pd);
+				
+			RelativeLayout episodeLayout = getMyEpsEpisodeLayout(title, calendarButton, deleteButton, infoButton, context);
+			
+			llv.addView(episodeLayout);
+			llv.addView(makeLine(context));
+		}
+		//TODO: vantar helling
+		return llv;
+	}
+	
+	public static RelativeLayout getMyEpsEpisodeLayout(TextView title, ImageButton calendarButton, ImageButton deleteButton, ImageButton infoButton, Activity context){
+		RelativeLayout episodeLayout = new RelativeLayout(context);
+		
+		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams calParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams delParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		
+		titleParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		calParams.addRule(RelativeLayout.LEFT_OF, R.id.deleteButton);
+		calParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		delParams.addRule(RelativeLayout.LEFT_OF, R.id.infoButton);
+		delParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		
+		episodeLayout.addView(title, titleParams);
+		episodeLayout.addView(calendarButton, calParams);
+		episodeLayout.addView(deleteButton, delParams);
+		episodeLayout.addView(infoButton, infoParams);
+		
+		return episodeLayout;
+	}
+	
+	public static ImageButton getCalButton(final Show show, final Activity context){
+		final ImageButton calendarButton = new ImageButton(context);
+		DbUtils dbHelper = new DbUtils(context);
+		// 0 -> onCal=false; 1 -> onCal=true
+		boolean onCal = dbHelper.isOnCal(show);
+		if(onCal) {
+			calendarButton.setImageResource(R.drawable.on_cal);
+			calendarButton.setTag(1);
+		}
+		else {
+			calendarButton.setImageResource(R.drawable.off_cal);
+			calendarButton.setTag(0);
+		}
+		calendarButton.setBackgroundColor(Color.TRANSPARENT);
+		calendarButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent me) {
+				if (me.getAction() == MotionEvent.ACTION_DOWN) {
+					calendarButton.setColorFilter(Color.argb(150, 155, 155, 155));
+					return true;
+				} else if (me.getAction() == MotionEvent.ACTION_UP) {
+					calendarButton.setColorFilter(Color.argb(0, 155, 155, 155));
+					final int status =(Integer) view.getTag();
+					if(status == 1) {
+						removeFromCal(show, context);
+						view.setTag(0);
+						calendarButton.setImageResource(R.drawable.off_cal);
+					}
+					else {
+						addToCal(show, context);
+						view.setTag(1);
+						calendarButton.setImageResource(R.drawable.on_cal);
+					}
+					return true;
+				}
+				return false;
+			}
+		});
+		calendarButton.setId(R.id.calButton);
+		return calendarButton;
+	}
+	
+	//Notkun:		 addToCal(show);
+	public static void addToCal(Show show, Activity context){
+		DbUtils dbHelper = new DbUtils(context);
+		dbHelper.putShowOnCal(show);
+		VariousUtils.flushCache("calendarEpisodes");
+	}
+	
+	//Notkun:		 removeFromCal(show);
+	public static void removeFromCal(Show show, Activity context){
+		DbUtils dbHelper = new DbUtils(context);
+		dbHelper.takeShowOffCal(show);
+		VariousUtils.flushCache("calendarEpisodes");
+	}
+	
+	public static ImageButton getDeleteButton(final Show show, final Activity context){
+		ImageButton deleteButton = new ImageButton(context);
+		deleteButton.setImageResource(R.drawable.delete);
+		deleteButton.setBackgroundColor(Color.TRANSPARENT);
+		deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	showDialogDel(show, context);
+            }
+        });
+		deleteButton.setId(R.id.deleteButton);
+		return deleteButton;
+	}
+	
+	// Notkun: showDialogDel(show)
+	// Eftir:  pop-up hefur verid birt sem spyr hvort notandi vilji eyda thaetti
+	public static void showDialogDel(Show show, Activity context) {
+	    DialogFragment newFragment = PopUpDelete.newInstance(show);
+	    newFragment.show(context.getFragmentManager(), "dialog");
+	}
+	
+	public static ImageButton getInfoButton(final Show show, Activity context){
+		ImageButton infoButton = new ImageButton(context);
+		infoButton.setImageResource(R.drawable.down_arrow);
+		infoButton.setBackgroundColor(Color.TRANSPARENT);
+		infoButton.setId(R.id.infoButton);
+		return infoButton;
+		//TODO: vantar helling
+	}
+
+	/******************Jóhanna end****************************/
 }

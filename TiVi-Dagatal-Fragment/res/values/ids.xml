@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item type="id" name="title" />
+    <item type="id" name="addButton" />
     <item type="id" name="infoButton" />
+    <item type="id" name="calButton" />
     <item type="id" name="deleteButton" />
-    
 </resources>
