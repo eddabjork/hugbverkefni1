@@ -48,7 +48,8 @@ public class LayoutUtils {
 	private static Integer id;
 	private static Integer start_id_from;
 	
-	public static void setUpInfoLayout(Show show, FragmentRelated fragmentRelated, final List<String> open, final Activity context, Integer startIdFrom, String noBannerUrl) {
+	public static void setUpInfoLayout(Show show, FragmentRelated fragmentRelated, final List<String> open, 
+										final Activity context, Integer startIdFrom, String noBannerUrl, boolean showSeasons) {
 		final Show _show = show;
 		start_id_from = startIdFrom;
 		
@@ -140,64 +141,13 @@ public class LayoutUtils {
 					infoLayout.addView(overview);
 				}
 				
-				boolean gildi = true;
-				
-				if(gildi){
+				if(showSeasons){
 					TextView relatedButton = addRelatedButton(show, context, fragmentRelated, gradeLayout);
 					infoLayout.addView(relatedButton);
 					
-					//addSeasons();
+					addSeasons(show, context, infoLayout);
 				}
 				
-				//seriur
-				List<Season> seasons = show.getSeasons();
-				Collections.reverse(seasons);
-				for(final Season season : seasons) {
-					
-					TextView seasonbutton = new TextView(context);
-					seasonbutton.setText(context.getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
-					seasonbutton.setGravity(Gravity.CENTER);
-					seasonbutton.setTextSize(20);
-					
-					final ImageButton infoButton = new ImageButton(context);
-					infoButton.setId(3);
-					infoButton.setImageResource(R.drawable.down_arrow);
-					infoButton.setBackgroundColor(Color.TRANSPARENT);
-					infoButton.setPadding(10,10,10,10);
-					
-					RelativeLayout seasonLayout = new RelativeLayout(context);
-					RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-					RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-					titleParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-					titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
-					infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-					infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
-					
-					seasonLayout.addView(seasonbutton, titleParams);
-					seasonLayout.addView(infoButton, infoParams);
-					infoLayout.addView(seasonLayout);
-					
-					final LinearLayout episodes = new LinearLayout(context);
-					episodes.setOrientation(LinearLayout.VERTICAL);
-					episodes.setVisibility(View.GONE);
-					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-					episodes.setLayoutParams(layoutParams);
-					episodes.setGravity(Gravity.CENTER);
-					episodes.setId(getNextId());
-					infoLayout.addView(episodes);
-					season.setEpisodesView(episodes);				
-					
-					View.OnClickListener serieButtonListener = new View.OnClickListener() {
-						public void onClick(View view) {
-							Map<Show, Season> map = new HashMap<Show, Season>();
-							_show.setInfoButton(infoButton);
-							map.put(_show, season);
-							fraglist.new SeasonEpisodesTask().execute(map);
-						}
-					};
-					infoButton.setOnClickListener(serieButtonListener);
-					seasonbutton.setOnClickListener(serieButtonListener);
-				}
 			} else {
 				showNotConnectedMsg(context);
 				showNoResult(infoLayout, context, false);
@@ -220,6 +170,61 @@ public class LayoutUtils {
         }
         infoMain.startAnimation(animation);
 	}
+	
+	public static void addSeasons(final Show show, Activity context, LinearLayout infoLayout){
+		//seriur
+		final FragmentList fraglist = new FragmentList();
+		List<Season> seasons = show.getSeasons();
+		Collections.reverse(seasons);
+		for(final Season season : seasons) {
+			
+			TextView seasonbutton = new TextView(context);
+			seasonbutton.setText(context.getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
+			seasonbutton.setGravity(Gravity.CENTER);
+			seasonbutton.setTextSize(20);
+			
+			final ImageButton infoButton = new ImageButton(context);
+			infoButton.setId(3);
+			infoButton.setImageResource(R.drawable.down_arrow);
+			infoButton.setBackgroundColor(Color.TRANSPARENT);
+			infoButton.setPadding(10,10,10,10);
+			
+			RelativeLayout seasonLayout = new RelativeLayout(context);
+			RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			RelativeLayout.LayoutParams infoParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			titleParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+			titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
+			infoParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			infoParams.addRule(RelativeLayout.CENTER_VERTICAL);
+			
+			seasonLayout.addView(seasonbutton, titleParams);
+			seasonLayout.addView(infoButton, infoParams);
+			infoLayout.addView(seasonLayout);
+			
+			final LinearLayout episodes = new LinearLayout(context);
+			episodes.setOrientation(LinearLayout.VERTICAL);
+			episodes.setVisibility(View.GONE);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+			episodes.setLayoutParams(layoutParams);
+			episodes.setGravity(Gravity.CENTER);
+			episodes.setId(getNextId());
+			infoLayout.addView(episodes);
+			season.setEpisodesView(episodes);				
+			
+			View.OnClickListener serieButtonListener = new View.OnClickListener() {
+				public void onClick(View view) {
+					Map<Show, Season> map = new HashMap<Show, Season>();
+					show.setInfoButton(infoButton);
+					map.put(show, season);
+					fraglist.new SeasonEpisodesTask().execute(map);
+				}
+			};
+			infoButton.setOnClickListener(serieButtonListener);
+			seasonbutton.setOnClickListener(serieButtonListener);
+		}
+		
+	}
+	
 	
 	public static TextView addRelatedButton(Show show, final Activity context, final FragmentRelated fragmentRelated, LayoutParams gradeLayout){
 		final Show _show = show;
