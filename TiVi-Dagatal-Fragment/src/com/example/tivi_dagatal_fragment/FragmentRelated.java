@@ -7,6 +7,7 @@
 
 package com.example.tivi_dagatal_fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Clients.TraktClient;
@@ -31,6 +32,7 @@ public class FragmentRelated extends Fragment{
 	private ProgressDialog progressDialog;
 	private DbUtils dbHelper;
 	private Show show;
+	private List<String> open = new ArrayList<String>();
 
 	@Override
 	//Eftir: birtir fragmenti� me� svipu�um ��ttar��um
@@ -85,7 +87,7 @@ public class FragmentRelated extends Fragment{
 		//Notkun: onPostExecute(relatedShows)
 		//Eftir:  B�i� er a� taka relatedShows listann og birta ��ttara�irnar � listanum
 		protected void onPostExecute(List<Show> relatedShows) {
-			LinearLayout listLayout = LayoutUtils.getRegListLayout(relatedShows, getActivity(), dbHelper);
+			LinearLayout listLayout = LayoutUtils.getRegListLayout(relatedShows, getActivity(), dbHelper, open);
 			scrollView.addView(listLayout);
 			progressDialog.dismiss();
 		}

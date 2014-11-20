@@ -6,6 +6,7 @@
  */
 package com.example.tivi_dagatal_fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Clients.TraktClient;
@@ -28,6 +29,7 @@ public class FragmentSearchResults extends Fragment{
 	private DbUtils dbHelper;
 	private ScrollView scrollView;
 	private ProgressDialog progressDialog;
+	private List<String> open = new ArrayList<String>();
 	
 	@Override
 	//Eftir: birtir fragmenti� me� leitarni�urst��unum
@@ -85,7 +87,7 @@ public class FragmentSearchResults extends Fragment{
 		//          � listanum eru l�ka takkar sem h�gt er a� �ta � og 
 		// 	        �� b�tist ��ttur � gagnagrunn. 
 		protected void onPostExecute(List<Show> searchShows) {
-			LinearLayout listLayout = LayoutUtils.getRegListLayout(searchShows, getActivity(), dbHelper);
+			LinearLayout listLayout = LayoutUtils.getRegListLayout(searchShows, getActivity(), dbHelper, open);
 			scrollView.addView(listLayout);
 			progressDialog.dismiss();
 		}

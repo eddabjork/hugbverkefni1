@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Edda Bj�rk Konr��sd�ttir og J�hanna Agnes Magn�sd�ttir
- * Dagsetning: 	9. oktÃƒÂ³ber 2014
- * MarkmiÃƒÂ°: 	Fragment sem sÃƒÂ½nir ÃƒÅ¾ÃƒÂ¦ttirnir-mÃƒÂ­nir lista sem inniheldur 
- * 				alla ÃƒÂ¾ÃƒÂ¡ ÃƒÂ¾ÃƒÂ¦tti sem notandi hefur sett ÃƒÂ­ tilsvarandi lista
- * 				(td. ÃƒÂ­ gegnum search)
+ * Nafn: 		Edda Bjï¿½rk Konrï¿½ï¿½sdï¿½ttir og Jï¿½hanna Agnes Magnï¿½sdï¿½ttir
+ * Dagsetning: 	9. oktÃƒÆ’Ã‚Â³ber 2014
+ * MarkmiÃƒÆ’Ã‚Â°: 	Fragment sem sÃƒÆ’Ã‚Â½nir ÃƒÆ’Ã…Â¾ÃƒÆ’Ã‚Â¦ttirnir-mÃƒÆ’Ã‚Â­nir lista sem inniheldur 
+ * 				alla ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡ ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦tti sem notandi hefur sett ÃƒÆ’Ã‚Â­ tilsvarandi lista
+ * 				(td. ÃƒÆ’Ã‚Â­ gegnum search)
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -44,7 +44,6 @@ public class FragmentList extends Fragment {
 	private ProgressDialog progressDialog;
 	private Fragment frag = new FragmentEpisode();
 	private FragmentRelated fragmentRelated;
-	private String noBannerUrl = "http://slurm.trakt.us/images/banner.jpg";
 	private static Activity myActivity;
 	
 	
@@ -66,14 +65,14 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-	 * Nafn: 		KristÃƒÆ’Ã‚Â­n FjÃƒÆ’Ã‚Â³la TÃƒÆ’Ã‚Â³masdÃƒÆ’Ã‚Â³ttir
-	 * Dagsetning: 	23. oktÃƒÆ’Ã‚Â³ber 2014
-	 * MarkmiÃƒÆ’Ã‚Â°: 	GetAllShowsTask framkvÃƒÆ’Ã‚Â¦mir ÃƒÆ’Ã‚Â¾rÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°avinnu sem nÃƒÆ’Ã‚Â¦r ÃƒÆ’Ã‚Â­ alla ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦tti frÃƒÆ’Ã‚Â¡ gagnagrunni
-	 * 				sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° birta ÃƒÆ’Ã‚Â­ 'MÃƒÆ’Ã‚Â­nir ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦ttir' og birtir ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡
+	 * Nafn: 		KristÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­n FjÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³la TÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³masdÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ttir
+	 * Dagsetning: 	23. oktÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ber 2014
+	 * MarkmiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°: 	GetAllShowsTask framkvÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦mir ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°avinnu sem nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦r ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ alla ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦tti frÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ gagnagrunni
+	 * 				sem ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° birta ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ 'MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­nir ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦ttir' og birtir ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
-		// Eftir:  shows er listi af ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¡ttum sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° birta ÃƒÆ’Ã‚Â­ 'MÃƒÆ’Ã‚Â­nir ÃƒÆ’Ã‚Â¾ÃƒÆ’Ã‚Â¦ttir'
+		// Eftir:  shows er listi af ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ttum sem ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° birta ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ 'MÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­nir ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦ttir'
 		protected List<Show> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 			List<Show> showList = dbHelper.getAllShows();
@@ -81,76 +80,36 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veriÃƒÆ’Ã‚Â° stillt sem ÃƒÆ’Ã‚Â¡ aÃƒÆ’Ã‚Â° sÃƒÆ’Ã‚Â½na ÃƒÆ’Ã‚Â¡ meÃƒÆ’Ã‚Â°an notandi er aÃƒÆ’Ã‚Â° bÃƒÆ’Ã‚Â­ÃƒÆ’Ã‚Â°a
+		// Eftir:  progressDialog hefur veriÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° stillt sem ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â½na ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ meÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°an notandi er aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° bÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°a
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.list_process_title, 
     				R.string.list_process_msg, getActivity());	
         }  
 		
 		// Notkun: onPostExecute(shows)
-		// Eftir:  shows hafa veriÃƒÆ’Ã‚Â° birtir ÃƒÆ’Ã‚Â¡ 'ÃƒÆ’Ã…Â¾ÃƒÆ’Ã‚Â¦ttirnir mÃƒÆ’Ã‚Â­nir'
+		// Eftir:  shows hafa veriÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° birtir ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ 'ÃƒÆ’Ã†â€™Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦ttirnir mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­nir'
 		protected void onPostExecute(List<Show> showList) {
 			progressDialog.dismiss();
 			mainLayout = new LinearLayout(getActivity());
 	    	mainLayout.setOrientation(LinearLayout.VERTICAL);
 	    	
-	    	mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()));
+	    	mainLayout = LayoutUtils.getMyEpsListLayout(showList, getActivity(), new DbUtils(getActivity()), open);
 	    	
 	    	mainScrollView.addView(mainLayout);
 		}
 	}
 	
-	/**
-     * Nafn: 	   Edda BjÃƒÂ¶rk KonrÃƒÂ¡ÃƒÂ°sdÃƒÂ³ttir
-     * Dagsetning: 30. oktÃƒÂ³ber 2014
-     * MarkmiÃƒÂ°:   NÃƒÂ¡ ÃƒÂ­ upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttarÃƒÂ¶ÃƒÂ° og sÃƒÂ½na ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista
-     * 			   meÃƒÂ° upplÃƒÂ½singum
-     * */
-	public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
-		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
-		protected void onPreExecute() {  
-    		progressDialog = LayoutUtils.showProgressDialog(R.string.show_process_title, 
-    				R.string.show_process_msg, FragmentList.myActivity);	
-        }  
-		
-		//Notkun:		 show = doInBackground(shows)
-		//EftirskilyrÃƒÂ°i: show er ÃƒÂ¾ÃƒÂ¡tturinn sem inniheldur upplÃƒÂ½singar
-		//				 sem nÃƒÂ¡ÃƒÂ° er ÃƒÂ­ ÃƒÂºtfrÃƒÂ¡ shows
-		protected Show doInBackground(Show... shows) {
-			Show show = new Show();
-			if(VariousUtils.isConnectedToInternet(FragmentList.myActivity)){
-				TraktClient client = new TraktClient();
-				if(!open.contains(""+shows[0].getInfoMain().getId())) show = client.getShowInfo(shows[0]);
-			}
-			show.setInfoLayout(shows[0].getInfoLayout());
-			show.setInfoMain(shows[0].getInfoMain());
-			show.setScrollView(shows[0].getScrollView());
-			show.setInfoButton(shows[0].getInfoButton());
-			return show;
-			
-		}
-		
-		//Notkun:		 onPostExecute(show)
-		//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
-		//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
-		protected void onPostExecute(Show show) {
-			LayoutUtils.setUpInfoLayout(show, open, FragmentList.myActivity, id, noBannerUrl, true);
-            progressDialog.dismiss();
-		}
-	}
-	
 	public class SeasonEpisodesTask extends AsyncTask<Map<Show, Season>, Integer, List<Episode>> {
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
+		// Eftir:  progressDialog hefur veriÃ° stillt sem birtist Ã¡ meÃ°an notandi bÃ­Ã°ur
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.ep_process_title, 
     				R.string.ep_process_msg, FragmentList.myActivity);
         }  
 		
 		//Notkun: episodeList = doInBackground(map<show,season>)
-		//Eftirskilyrði: Búið er að sækja þætti og setja í listann episodeList
-		//				 sem eru í þættinu show í seríunni season
+		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ¦kja Ã¾Ã¦tti og setja Ã­ listann episodeList
+		//				 sem eru Ã­ Ã¾Ã¦ttinu show Ã­ serÃ­unni season
 		protected List<Episode> doInBackground(Map<Show, Season>... map) {
 			TraktClient client = new TraktClient();
 			Season season = new Season();
@@ -173,8 +132,8 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun: onPostExecute(episodeList)
-		//Eftirskilyrði: Búið er að sýna episodeList í viðmótinu á viðeigandi
-		//				 stað.
+		//EftirskilyrÃ°i: BÃºiÃ° er aÃ° sÃ½na episodeList Ã­ viÃ°mÃ³tinu Ã¡ viÃ°eigandi
+		//				 staÃ°.
 		protected void onPostExecute(List<Episode> episodeList) {
 			int width = VariousUtils.getScreenWidth(FragmentList.myActivity);
 			int pd = (int) width/6;
@@ -218,10 +177,10 @@ public class FragmentList extends Fragment {
 	}
 	
 	/**
-     * Nafn: 	   Edda BjÃƒÆ’Ã‚Â¶rk KonrÃƒÆ’Ã‚Â¡ÃƒÆ’Ã‚Â°sdÃƒÆ’Ã‚Â³ttir
-     * Dagsetning: 30. oktÃƒÆ’Ã‚Â³ber 2014
-     * MarkmiÃƒÂ¯Ã‚Â¿Ã‚Â½:   Manual scroll view sem erfir frÃƒÆ’Ã‚Â¡ ScrollView svo hÃƒÆ’Ã‚Â¦gt sÃƒÆ’Ã‚Â©
-     * 			  aÃƒÆ’Ã‚Â° virkja ÃƒÆ’Ã‚Â¾aÃƒÆ’Ã‚Â° og ,,slÃƒÆ’Ã‚Â¶kkva ÃƒÆ’Ã‚Â¡ ÃƒÆ’Ã‚Â¾vÃƒÆ’Ã‚Â­'' ÃƒÆ’Ã‚Â­ appinu
+     * Nafn: 	   Edda BjÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶rk KonrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°sdÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ttir
+     * Dagsetning: 30. oktÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ber 2014
+     * MarkmiÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½:   Manual scroll view sem erfir frÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ ScrollView svo hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¦gt sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©
+     * 			  aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° virkja ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾aÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â° og ,,slÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶kkva ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¾vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­'' ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ appinu
      * */
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
@@ -231,7 +190,7 @@ public class FragmentList extends Fragment {
 		}
 		
 		//Notkun: touch = scrollview.onTouchEvent(event)
-		//EftirskilyrÃƒÆ’Ã‚Â°i:  touch er true ef scrollview er virkt og event
+		//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°i:  touch er true ef scrollview er virkt og event
 		//				  er ACTION_DOWN, false annars
 		public boolean onTouchEvent(MotionEvent event) {
 			switch(event.getAction()) {
@@ -244,8 +203,8 @@ public class FragmentList extends Fragment {
 		}
 		
 		// Notkun: 		 interupt = scrollview.onInterceptTouchEvent(event)
-		//EftirskilyrÃƒÆ’Ã‚Â°i: interupt er false ef scrollview er ekki virkt, skilar
-		//				 annars sama og samnefnt fall ÃƒÆ’Ã‚Â­ ScrollView
+		//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°i: interupt er false ef scrollview er ekki virkt, skilar
+		//				 annars sama og samnefnt fall ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ ScrollView
 		public boolean onInterceptTouchEvent(MotionEvent event) {
 			if(!scrollable) return false;
 			else return super.onInterceptTouchEvent(event);
