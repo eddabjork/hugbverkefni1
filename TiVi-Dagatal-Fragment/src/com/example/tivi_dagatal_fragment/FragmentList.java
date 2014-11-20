@@ -390,7 +390,7 @@ public class FragmentList extends Fragment {
 		
 		protected void onPostExecute(List<Episode> episodeList) {
 			int width = VariousUtils.getScreenWidth(FragmentList.myActivity);
-			int pd = (int) width/32;
+			int pd = (int) width/6;
 			LinearLayout episodes = episodeList.get(0).getEpisodesView();
 			ImageButton infoButton = episodeList.get(0).getInfoButton();
 			
