@@ -6,7 +6,6 @@
  */
 package com.example.tivi_dagatal_fragment;
 
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,15 +16,11 @@ import Dtos.Episode;
 import Dtos.Show;
 import Threads.DownloadImageTask;
 import Utils.LayoutUtils;
-import Utils.VariousUtils;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +63,6 @@ public class FragmentEpisode extends Fragment{
 			Episode episode = (Episode)objects[0];
 			return episode;
 		}
-		
 		// Notkun: onPreExecute()
 		// Eftir:  progressDialog hefur veri� stillt sem � a� s�na � me�an notandi er a� b��a
 		protected void onPreExecute() {  
