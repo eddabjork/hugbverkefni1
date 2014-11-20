@@ -184,7 +184,7 @@ public class LayoutUtils {
 			final LinearLayout episodes = new LinearLayout(context);
 			episodes.setOrientation(LinearLayout.VERTICAL);
 			episodes.setVisibility(View.GONE);
-			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			episodes.setLayoutParams(layoutParams);
 			episodes.setGravity(Gravity.CENTER);
 			episodes.setId(getNextId());
@@ -368,7 +368,7 @@ public class LayoutUtils {
 				infoButton.setPadding(pd,pd,pd,pd);
 				
 				RelativeLayout episodeLayout = getRegEpisodeLayout(title, addButton, infoButton, context);
-				LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, new FragmentList(), open);
+				LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, title, open);
 
 				
 				mainLayout.addView(episodeLayout);
@@ -470,7 +470,7 @@ public class LayoutUtils {
 			infoButton.setPadding(pd,pd,pd,pd);
 			
 			RelativeLayout episodeLayout = getMyEpsEpisodeLayout(title, calendarButton, deleteButton, infoButton, context);
-			LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, new FragmentList(), open);
+			LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, title, open);
 			
 			mainLayout.addView(episodeLayout);
 			mainLayout.addView(infoMain);
@@ -588,7 +588,7 @@ public class LayoutUtils {
 		return infoButton;
 	}
 	
-	public static LinearLayout getInfoMainLayout(final Show show, final Activity context, final ImageButton infoButton, final Fragment fragment, final List<String> open){
+	public static LinearLayout getInfoMainLayout(final Show show, final Activity context, final ImageButton infoButton, final TextView title, final List<String> open){
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 		final ScrollView scrollView = new ScrollView(context);
@@ -611,28 +611,11 @@ public class LayoutUtils {
 				show.setInfoMain(infoMain);
 				show.setScrollView(scrollView);
 				show.setInfoButton(infoButton);
-				Fragment frag = new Fragment();
-				try{
-		        	frag = (FragmentList)fragment;
-		        }
-		        catch(Exception e){}
-		        try{
-		        	frag = (FragmentSearchResults)fragment;
-		        }
-		        catch(Exception e){}
-		        try{
-		        	frag = (FragmentList)fragment;
-		        }
-		        catch(Exception e){}
-		        try{
-		        	frag = (FragmentRelated)fragment;
-		        }
-		        catch(Exception e){}
-
-		        new Threads.ShowInfoTask(id, frag, context, open).execute(show);
+		        new Threads.ShowInfoTask(id, new Fragment(), context, open).execute(show);
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);
+		title.setOnClickListener(infoButtonListener);
 		
 		return infoMain;
 	}
