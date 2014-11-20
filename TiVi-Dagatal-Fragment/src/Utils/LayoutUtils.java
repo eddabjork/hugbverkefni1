@@ -52,7 +52,6 @@ public class LayoutUtils {
 	
 	public static void setUpInfoLayout(Show show, FragmentRelated fragmentRelated, final List<String> open, 
 										final Activity context, Integer startIdFrom, String noBannerUrl, boolean showSeasons) {
-		final Show _show = show;
 		start_id_from = startIdFrom;
 		
 		LinearLayout infoLayout = show.getInfoLayout();
@@ -86,65 +85,42 @@ public class LayoutUtils {
 					infoLayout.addView(banner);
 				}
 				
-				LinearLayout.LayoutParams gradeLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				gradeLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-				
 				//genres
 				if(show.getGenres().size() != 0) {
-					TextView genres = new TextView(context);
-					genres.setLayoutParams(gradeLayout);
-					String genre = TextUtils.join(", ",show.getGenres().toArray());
-					genres.setText(context.getResources().getString(R.string.genres)+" "+genre);
+					TextView genres = getTextView("genres", context, show);
 					infoLayout.addView(genres);
 				}
 				
 				//einkunn a imdb
-				TextView grade = new TextView(context);
-				Map<Show, TextView> map = new HashMap<Show, TextView>();
-				map.put(show, grade);
-				fraglist.new IMDbRatingTask().execute(map);
-				grade.setLayoutParams(gradeLayout);
-				grade.setText(context.getResources().getString(R.string.imdb_grade));
-				
+				TextView grade = getTextView("imdb_grade", context, show);				
 				infoLayout.addView(grade);
 				
 				//sjonvarpsstodvar
 				if(show.getNetwork() != null && !show.getNetwork().equals("")) {
-					TextView network = new TextView(context);
-					network.setLayoutParams(gradeLayout);
-					network.setText(context.getResources().getString(R.string.network)+ " " + show.getNetwork());
+					TextView network = getTextView("network", context, show);
 					infoLayout.addView(network);
 				}					
 				
 				//a hvada degi thatturinn er syndur
 				if(show.getAirDay() != null && !show.getAirDay().equals("")) {
-					String airDay = VariousUtils.translateWeekday(show.getAirDay(), context);
-					TextView airday = new TextView(context);
-					airday.setLayoutParams(gradeLayout);
-					airday.setText((context.getResources().getString(R.string.airday))+" "+airDay);
+					TextView airday = getTextView("air_day", context, show);
 					infoLayout.addView(airday);
 				
 					//klukkan hvad syndur
-					String airTime = VariousUtils.parseAirTime(show.getAirTime());
-					TextView airtime = new TextView(context);
-					airtime.setLayoutParams(gradeLayout);
-					airtime.setText((context.getResources().getString(R.string.airtime))+" "+ airTime);
-					
+					TextView airtime = getTextView("air_time", context, show);
 					infoLayout.addView(airtime);
 				}
 				
 				//soguthradur
 				if(show.getOverview() != null && !show.getOverview().equals("")) {
-					TextView overview = new TextView(context);
-					LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-					overviewLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-					overview.setLayoutParams(overviewLayout);
-					overview.setText(context.getResources().getString(R.string.overview)+"\n"+show.getOverview());					
+					TextView overview = getTextView("overview", context, show);				
 					infoLayout.addView(overview);
 				}
 				
 				if(showSeasons){
-					TextView relatedButton = addRelatedButton(show, context, fragmentRelated, gradeLayout);
+					LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+					layout.setMargins(15, 15, 15, 0); //left, top, right, bottom
+					TextView relatedButton = addRelatedButton(show, context, fragmentRelated, layout);
 					infoLayout.addView(relatedButton);
 					
 					addSeasons(show, context, infoLayout);
@@ -159,18 +135,7 @@ public class LayoutUtils {
 			infoMain.addView(scrollView);
 		}
 		
-		Animator.setHeightForWrapContent(context, infoLayout);
-		Animator animation = null;
-        if(open.contains(""+infoMain.getId())) {
-            animation = new Animator(infoMain, 500, 1);
-            open.remove(""+infoMain.getId());
-            _infoButton.setImageResource(R.drawable.down_arrow);
-        } else {
-            animation = new Animator(infoMain, 500, 0);
-            open.add(""+infoMain.getId());
-            _infoButton.setImageResource(R.drawable.up_arrow);
-        }
-        infoMain.startAnimation(animation);
+		startAnimator(context, infoLayout, infoMain, open, _infoButton);
 	}
 	
 	public static void addSeasons(final Show show, Activity context, LinearLayout infoLayout){
@@ -311,7 +276,6 @@ public class LayoutUtils {
 		divider.setBackgroundColor(context.getResources().getColor(R.color.app_red));
 		return progressDialog;
 	}
-	
 	
 /******************Jóhanna start****************************/
 	
@@ -554,4 +518,54 @@ public class LayoutUtils {
 	}
 
 	/******************Jóhanna end****************************/
+	
+	public static TextView getTextView(String type, Activity context, Show show) {
+		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		layout.setMargins(15, 15, 15, 0); //left, top, right, bottom
+		
+		TextView txtView = new TextView(context);
+		txtView.setLayoutParams(layout);
+		
+		if(type == "genres") {
+			String genre = TextUtils.join(", ",show.getGenres().toArray());
+			txtView.setText(context.getResources().getString(R.string.genres)+" "+genre);
+		} else if(type == "imdb_grade") {
+			Map<Show, TextView> map = new HashMap<Show, TextView>();
+			map.put(show, txtView);
+			FragmentList fraglist = new FragmentList();
+			fraglist.new IMDbRatingTask().execute(map);
+			txtView.setText(context.getResources().getString(R.string.imdb_grade));
+		} else if(type == "network") {
+			txtView.setText(context.getResources().getString(R.string.network)+ " " + show.getNetwork());
+		} else if(type == "air_day") {
+			String airDay = VariousUtils.translateWeekday(show.getAirDay(), context);
+			txtView.setText((context.getResources().getString(R.string.airday))+" "+airDay);
+		} else if(type == "air_time") {
+			String airTime = VariousUtils.parseAirTime(show.getAirTime());
+			txtView.setText((context.getResources().getString(R.string.airtime))+" "+ airTime);
+		} else if(type == "overview") {
+			LinearLayout.LayoutParams overviewLayout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			overviewLayout.setMargins(15, 15, 15, 0); //left, top, right, bottom
+			txtView.setLayoutParams(overviewLayout);
+			txtView.setText(context.getResources().getString(R.string.overview)+"\n"+show.getOverview());
+		}
+		
+		return txtView;
+	}
+	
+	public static void startAnimator(Activity context, LinearLayout infoLayout, LinearLayout infoMain, 
+									List<String> open, ImageButton infoButton) {
+		Animator.setHeightForWrapContent(context, infoLayout);
+		Animator animation = null;
+        if(open.contains(""+infoMain.getId())) {
+            animation = new Animator(infoMain, 500, 1);
+            open.remove(""+infoMain.getId());
+            infoButton.setImageResource(R.drawable.down_arrow);
+        } else {
+            animation = new Animator(infoMain, 500, 0);
+            open.add(""+infoMain.getId());
+            infoButton.setImageResource(R.drawable.up_arrow);
+        }
+        infoMain.startAnimation(animation);
+	}
 }
