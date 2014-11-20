@@ -25,6 +25,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -118,8 +119,10 @@ public class LayoutUtils {
 				}
 				
 				if(showSeasons){
+					int width = VariousUtils.getScreenWidth(context);
+					int pd = width/72;
 					LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-					layout.setMargins(15, 15, 15, 0); //left, top, right, bottom
+					layout.setMargins(pd, pd, pd, 0); //left, top, right, bottom
 					TextView relatedButton = addRelatedButton(show, context, fragmentRelated, layout);
 					infoLayout.addView(relatedButton);
 					
@@ -519,9 +522,10 @@ public class LayoutUtils {
 	/******************Jóhanna end****************************/
 	
 	public static TextView getTextView(String type, Activity context, Show show) {
+		int width = VariousUtils.getScreenWidth(context);
+		int pd = width/72;
 		LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		layout.setMargins(15, 15, 15, 0); //left, top, right, bottom
-		
+		layout.setMargins(pd, pd, pd, 0); //left, top, right, bottom
 		TextView txtView = new TextView(context);
 		txtView.setLayoutParams(layout);
 		
