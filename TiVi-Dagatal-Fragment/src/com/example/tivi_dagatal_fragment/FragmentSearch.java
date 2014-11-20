@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Steinunn Friðgeirsdóttir
- * Dagsetning: 	30. október 2014
- * Markmið: 	FragmentSearch er fragment sem birtir leitarglugga
- * 				og takka til að leita.
+ * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
+ * Dagsetning: 	30. oktï¿½ber 2014
+ * Markmiï¿½: 	FragmentSearch er fragment sem birtir leitarglugga
+ * 				og takka til aï¿½ leita.
  * 
  */
 package com.example.tivi_dagatal_fragment;
@@ -24,13 +24,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TableLayout;
-import android.widget.Toast;
 
 public class FragmentSearch extends Fragment {
 	Fragment results;
 	
 	@Override
-	//Eftir: Birtir fragment með leitarglugga og takka
+	//Eftir: Birtir fragment meï¿½ leitarglugga og takka
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         
@@ -44,7 +43,7 @@ public class FragmentSearch extends Fragment {
 	}
 	
 	//Notkun: setLayout();
-	//Eftir: Búið er að setja upp leitarútlitið
+	//Eftir: Bï¿½iï¿½ er aï¿½ setja upp leitarï¿½tlitiï¿½
 	public void setLayout(LinearLayout mainLayout){
 		final EditText editText = new EditText(getActivity());
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1f);
@@ -75,9 +74,9 @@ public class FragmentSearch extends Fragment {
 	}
 	
 	//Notkun: searchClick(view)
-	//Eftir: Tekur það sem er í leitarboxinu og leitar eftir því
-	//       í gegnum vefþjónustu og skilar niðurstöðum í nýju
-	//       fragmenti sem er birt þegar niðurstöður eru komnar.
+	//Eftir: Tekur ï¿½aï¿½ sem er ï¿½ leitarboxinu og leitar eftir ï¿½vï¿½
+	//       ï¿½ gegnum vefï¿½jï¿½nustu og skilar niï¿½urstï¿½ï¿½um ï¿½ nï¿½ju
+	//       fragmenti sem er birt ï¿½egar niï¿½urstï¿½ï¿½ur eru komnar.
 	public void searchClick(View view){
 		Fragment results = new FragmentSearchResults();
 		

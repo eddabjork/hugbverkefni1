@@ -10,7 +10,6 @@ import java.util.List;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class Show {
 	private String title;
@@ -160,6 +159,22 @@ public class Show {
 		return seasons;
 	}
 	
+	public LinearLayout getInfoLayout() {
+		return this.infoLayout;
+	}
+	
+	public LinearLayout getInfoMain() {
+		return this.infoMain;
+	}
+	
+	public ScrollView getScrollView() {
+		return this.scrollView;
+	}
+	
+	public ImageButton getInfoButton() {
+		return this.infoButton;
+	}
+	
 	/*Setters*/
 	
 	//Notkun: show.setAirDay(airDay)
@@ -290,21 +305,5 @@ public class Show {
 	
 	public void setInfoButton(ImageButton infobutton) {
 		this.infoButton = infobutton;
-	}
-	
-	public LinearLayout getInfoLayout() {
-		return this.infoLayout;
-	}
-	
-	public LinearLayout getInfoMain() {
-		return this.infoMain;
-	}
-	
-	public ScrollView getScrollView() {
-		return this.scrollView;
-	}
-	
-	public ImageButton getInfoButton() {
-		return this.infoButton;
 	}
 }

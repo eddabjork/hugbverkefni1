@@ -9,11 +9,6 @@ package Utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.example.tivi_dagatal_fragment.FragmentList;
-import com.example.tivi_dagatal_fragment.MainActivity;
-import com.example.tivi_dagatal_fragment.R;
-import com.example.tivi_dagatal_fragment.R.string;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -25,7 +20,9 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import android.widget.Toast;
+
+import com.example.tivi_dagatal_fragment.MainActivity;
+import com.example.tivi_dagatal_fragment.R;
 
 public class VariousUtils {
 
@@ -67,7 +64,7 @@ public class VariousUtils {
 	}
 	
 	//Notkun: addFragmentToStack(manager, fragment)
-	//Fyrir:  búið er að birta fragment ofaná stack með síðasta
+	//Fyrir:  bï¿½iï¿½ er aï¿½ birta fragment ofanï¿½ stack meï¿½ sï¿½ï¿½asta
 	//		  fragment undir.
 	public static void addFragmentToStack(FragmentManager manager, Fragment fragment){
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
@@ -77,14 +74,14 @@ public class VariousUtils {
 	}
 	
 	//Notkun:		 flushCache(key)
-	//Eftirskilyrði: það sem var með key sem lykil hefur verið eytt úr cache-minni
+	//Eftirskilyrï¿½i: ï¿½aï¿½ sem var meï¿½ key sem lykil hefur veriï¿½ eytt ï¿½r cache-minni
 	public static void flushCache(String key){
 		MainActivity.getCache().remove(key);
 		Log.v("cache", key + " removed from cache");
 	}
 	
 	//Notkun:		 flushCacheAfter12Hours(key)
-	//Eftirskilyrði: það sem var með key sem lykil hefur verið eytt úr cache-minni
+	//Eftirskilyrï¿½i: ï¿½aï¿½ sem var meï¿½ key sem lykil hefur veriï¿½ eytt ï¿½r cache-minni
 	public static void flushCacheAfter12Hours(String key){
 		long time = System.currentTimeMillis();
 		long twelveHours = (long) (60000*60*12);

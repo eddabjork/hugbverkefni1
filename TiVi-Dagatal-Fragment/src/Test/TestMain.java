@@ -9,16 +9,12 @@ package Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.*;
-
+import Dtos.Show;
+import Utils.VariousUtils;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.TextView;
 
 import com.example.tivi_dagatal_fragment.MainActivity;
 import com.example.tivi_dagatal_fragment.R;
-
-import Dtos.Show;
-import Utils.VariousUtils;
 
 public class TestMain extends ActivityInstrumentationTestCase2<MainActivity> {
 	

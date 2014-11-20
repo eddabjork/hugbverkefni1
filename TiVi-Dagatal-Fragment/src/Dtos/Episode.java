@@ -104,6 +104,14 @@ public class Episode {
 		return showTitle;
 	}
 	
+	public LinearLayout getEpisodesView() {
+		return this.episodesView;
+	}
+	
+	public ImageButton getInfoButton() {
+		return this.infoButton;
+	}
+	
 	
 	/*Setters*/
 	
@@ -186,13 +194,5 @@ public class Episode {
 	
 	public void setInfoButton(ImageButton infobutton) {
 		this.infoButton = infobutton;
-	}
-	
-	public LinearLayout getEpisodesView() {
-		return this.episodesView;
-	}
-	
-	public ImageButton getInfoButton() {
-		return this.infoButton;
 	}
 }

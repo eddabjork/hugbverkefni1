@@ -194,13 +194,12 @@ public class LayoutUtils {
 	}
 	
 	
-	public static TextView addRelatedButton(Show show, final Activity context, final FragmentRelated fragmentRelated, LayoutParams gradeLayout){
-		final Show _show = show;
+	public static TextView addRelatedButton(final Show show, final Activity context, final FragmentRelated fragmentRelated, LayoutParams gradeLayout){
 		
 		TextView relatedShows = new TextView(context);
 		relatedShows.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				fragmentRelated.setShow(_show);
+				fragmentRelated.setShow(show);
 				context.setTitle(context.getResources().getString(R.string.related_shows));
 		        FragmentManager fragmentManager = context.getFragmentManager();
 		        VariousUtils.addFragmentToStack(fragmentManager, fragmentRelated);

@@ -31,18 +31,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -285,9 +282,6 @@ public class FragmentList extends Fragment {
 	public ImageView getImage(Show show){
 		ImageView image = new ImageView(getActivity());
 		image.setImageResource(R.drawable.app_icon);
-		//String imgUrl = show.getPoster();
-		//new DownloadImageTask(image).execute(imgUrl);
-		//image.buildDrawingCache();
 		return image;
 	}
 	
@@ -447,20 +441,6 @@ public class FragmentList extends Fragment {
 		
 		public MainScrollView(Context context) {
 			super(context);
-		}
-		
-		//Notkun: 		 scrollview.setScrollingEnabled(enabled)
-		//EftirskilyrÃƒÆ’Ã‚Â°i: BÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° virkja scrollview ef enabled er true
-		//				 en ,,slÃƒÆ’Ã‚Â¶kkva ÃƒÆ’Ã‚Â¡ ÃƒÆ’Ã‚Â¾vÃƒÆ’Ã‚Â­'' annars
-		public void setScrollingEnabled(boolean enabled) {
-			scrollable = enabled;
-		}
-		
-		//Notkun:		 isScrollable = scrollview.isScrollable()
-		//EftirskilyrÃƒÆ’Ã‚Â°i: isScrollable er true ef scrollview er virkt,
-		//				 false annars
-		public boolean isScrollable() {
-			return scrollable;
 		}
 		
 		//Notkun: touch = scrollview.onTouchEvent(event)

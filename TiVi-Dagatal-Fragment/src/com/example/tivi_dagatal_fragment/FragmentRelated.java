@@ -1,41 +1,29 @@
 /**
  * Nafn: 		Kristin Fjola Tomasdottir
  * Dagsetning: 	13. november 2014
- * Markmið: 	FragmentRelated er fragment sem birtir lista
+ * Markmiï¿½: 	FragmentRelated er fragment sem birtir lista
  * 				af thattum sem eru svipadir tilviksbreytunni show
  */
 
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
+
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
 import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 public class FragmentRelated extends Fragment{
 	

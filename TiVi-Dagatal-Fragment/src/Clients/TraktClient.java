@@ -14,7 +14,6 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -661,7 +660,7 @@ public class TraktClient {
 			final InputStream is = url.openStream();
 			JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 			try {
-				popularShows = readShowsArrayForSearch(reader);
+				relatedShows = readShowsArrayForSearch(reader);
 			} finally {
 				reader.close();
 			}
@@ -670,7 +669,7 @@ public class TraktClient {
 			e.printStackTrace();
 		}
 		
-		return popularShows;	
+		return relatedShows;	
 	}
 		  
 }

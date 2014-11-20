@@ -1,7 +1,7 @@
 /**
  * Nafn: 		Kristin Fjola Tomasdottir
  * Dagsetning: 	13. november 2014
- * Markmið: 	FragmentInfo er fragment sem birtir upplysingar
+ * Markmiï¿½: 	FragmentInfo er fragment sem birtir upplysingar
  * 				og leidbeiningar um appid
  */
 package com.example.tivi_dagatal_fragment;
@@ -11,12 +11,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 
 public class FragmentInfo extends Fragment{
 	@Override
 	//Notkun: onCreateView(inflater, container, savedInstanceState)
-	//Eftir:  Birtir fragmentið sem sýnir upplýsingar um appið
+	//Eftir:  Birtir fragmentiï¿½ sem sï¿½nir upplï¿½singar um appiï¿½
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_info, container, false);
 		

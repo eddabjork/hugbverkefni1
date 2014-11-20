@@ -9,8 +9,6 @@ package Dtos;
 import java.util.List;
 
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.ImageButton;
 
 public class Season {
 	private String title;
@@ -58,6 +56,10 @@ public class Season {
 		return episodes;
 	}
 	
+	public LinearLayout getEpisodesView() {
+		return this.episodesView;
+	}
+	
 	/*Setters*/
 	
 	//Notkun: season.setSeasonNumber(seasonNumber)
@@ -92,9 +94,5 @@ public class Season {
 	
 	public void setEpisodesView(LinearLayout episodesview) {
 		this.episodesView = episodesview;
-	}
-	
-	public LinearLayout getEpisodesView() {
-		return this.episodesView;
 	}
 }

@@ -7,36 +7,22 @@
 package com.example.tivi_dagatal_fragment;
 
 import java.util.List;
+
 import Clients.TraktClient;
 import Data.DbUtils;
 import Dtos.Show;
 import Utils.LayoutUtils;
 import Utils.VariousUtils;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 public class FragmentSearchResults extends Fragment{
 	private DbUtils dbHelper;
