@@ -177,7 +177,6 @@ public class LayoutUtils {
 		List<Season> seasons = show.getSeasons();
 		Collections.reverse(seasons);
 		for(final Season season : seasons) {
-			
 			TextView seasonbutton = new TextView(context);
 			seasonbutton.setText(context.getResources().getString(R.string.serie) + " " + season.getSeasonNumber());
 			seasonbutton.setGravity(Gravity.CENTER);
@@ -187,7 +186,9 @@ public class LayoutUtils {
 			infoButton.setId(3);
 			infoButton.setImageResource(R.drawable.down_arrow);
 			infoButton.setBackgroundColor(Color.TRANSPARENT);
-			infoButton.setPadding(10,10,10,10);
+			int width = VariousUtils.getScreenWidth(context);
+			int pd = (int) width/70;
+			infoButton.setPadding(pd,pd,pd,pd);
 			
 			RelativeLayout seasonLayout = new RelativeLayout(context);
 			RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);

@@ -127,8 +127,6 @@ public class FragmentList extends Fragment {
 		title.setText(show.getTitle());
 		title.setPadding(pd,0,0,0);
 		
-		final Show _show = show;
-		
 		ImageButton calendarButton = getCalButton(show);
 		calendarButton.setId(1);
 		calendarButton.setPadding(pd,pd,pd,pd);
@@ -139,7 +137,7 @@ public class FragmentList extends Fragment {
 		deleteButton.setBackgroundColor(Color.TRANSPARENT);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	showDialog(_show);
+            	showDialog(show);
             }
         });
 		deleteButton.setPadding(pd,pd,pd,pd);
@@ -166,11 +164,11 @@ public class FragmentList extends Fragment {
 		View.OnClickListener infoButtonListener = new View.OnClickListener() {
 			@Override 
 			public void onClick(View view) {
-				_show.setInfoLayout(infoLayout);
-				_show.setInfoMain(infoMain);
-				_show.setScrollView(scrollView);
-				_show.setInfoButton(infoButton);
-				new ShowInfoTask().execute(_show);
+				show.setInfoLayout(infoLayout);
+				show.setInfoMain(infoMain);
+				show.setScrollView(scrollView);
+				show.setInfoButton(infoButton);
+				new ShowInfoTask().execute(show);
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);
