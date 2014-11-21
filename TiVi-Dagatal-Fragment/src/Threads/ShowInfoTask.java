@@ -1,7 +1,7 @@
 /**
      * Nafn: 	   Edda Bjork Konradsdottir
      * Dagsetning: 30. oktober 2014
-     * MarkmiÃƒÂ°:   Na i­ upplysingar um thattarod og syna thaettirnir minir lista
+     * Markmid:    Na i upplysingar um thattarod og syna thaettirnir minir lista
      * 			   med upplysingum
      * */
 
@@ -40,14 +40,14 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	}
 	
 	// Notkun: onPreExecute()
-	// Eftir:  progressDialog hefur verið stillt sem birtist á meðan notandi bíður
+	// Eftir:  progressDialog hefur verid stillt sem birtist a medan notandi bidur
 	protected void onPreExecute() {  
 		progressDialog = LayoutUtils.showProgressDialog(R.string.show_process_title, 
 				R.string.show_process_msg, myActivity);	
     }  
 	
 	//Notkun:		 show = doInBackground(shows)
-	//Eftirskilyrdi: show er thatturinn sem inniheldur upplysingar
+	//Eftir:		 show er thatturinn sem inniheldur upplysingar
 	//				 sem nad er i utfra shows
 	protected Show doInBackground(Show... shows) {
 		Show show = new Show();
@@ -64,8 +64,8 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	}
 	
 	//Notkun:		 onPostExecute(show)
-	//Eftirskilyrdi: Buid er ad saekja upplysingar um thattinn show
-	//				 og syna i­ thaettirnir minir lista.
+	//Eftir: 		 Buid er ad saekja upplysingar um thattinn show
+	//				 og syna a thaettirnir minir lista.
 	protected void onPostExecute(Show show) {
 		LayoutUtils.setUpInfoLayout(show, open, myActivity, id, true);
         progressDialog.dismiss();
