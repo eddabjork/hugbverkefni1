@@ -368,7 +368,7 @@ public class LayoutUtils {
 				infoButton.setPadding(pd,pd,pd,pd);
 				
 				RelativeLayout episodeLayout = getRegEpisodeLayout(title, addButton, infoButton, context);
-				LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, title, open);
+				LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, title, open, false);
 
 				
 				mainLayout.addView(episodeLayout);
@@ -482,7 +482,7 @@ public class LayoutUtils {
 			infoButton.setPadding(pd,pd,pd,pd);
 			
 			RelativeLayout episodeLayout = getMyEpsEpisodeLayout(title, calendarButton, deleteButton, infoButton, context);
-			LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, title, open);
+			LinearLayout infoMain = getInfoMainLayout(show, context, infoButton, title, open, true);
 			
 			mainLayout.addView(episodeLayout);
 			mainLayout.addView(infoMain);
@@ -618,7 +618,7 @@ public class LayoutUtils {
 	//Eftir: infoMain er layout sem inniheldur upplysingar um thattarodina show.
 	//		 Buid er ad baeta vid virkni i infoButton og title thannig ad infoMain
 	//		 birtist/hverfi thegar ytt er a annadhvort
-	public static LinearLayout getInfoMainLayout(final Show show, final Activity context, final ImageButton infoButton, final TextView title, final List<String> open){
+	public static LinearLayout getInfoMainLayout(final Show show, final Activity context, final ImageButton infoButton, final TextView title, final List<String> open, final boolean isMyEpisodes){
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 		final ScrollView scrollView = new ScrollView(context);
@@ -641,7 +641,7 @@ public class LayoutUtils {
 				show.setInfoMain(infoMain);
 				show.setScrollView(scrollView);
 				show.setInfoButton(infoButton);
-		        new Threads.ShowInfoTask(id, new Fragment(), context, open).execute(show);
+		        new Threads.ShowInfoTask(id, new Fragment(), context, open, isMyEpisodes).execute(show);
 			}
 		};
 		infoButton.setOnClickListener(infoButtonListener);

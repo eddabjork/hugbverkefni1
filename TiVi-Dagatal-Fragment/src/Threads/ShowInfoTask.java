@@ -29,14 +29,16 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	private Fragment frag = new FragmentEpisode();
 	private static Activity myActivity;
 	private ProgressDialog progressDialog;
+	private boolean isMyEpisodes;
 	
 	//Notkun: task = ShowInfoTask(id, frag, activity, open)
 	//Eftir:  task er nytt ShowInfoTask
-	public ShowInfoTask(Integer id, Fragment frag, Activity activity, List<String> open){
+	public ShowInfoTask(Integer id, Fragment frag, Activity activity, List<String> open, boolean isMyEpisodes){
 		this.id = id;
 		this.frag = frag;
 		this.myActivity = activity;
 		this.open = open;
+		this.isMyEpisodes = isMyEpisodes;
 	}
 	
 	// Notkun: onPreExecute()
@@ -67,7 +69,7 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	//Eftir: 		 Buid er ad saekja upplysingar um thattinn show
 	//				 og syna a thaettirnir minir lista.
 	protected void onPostExecute(Show show) {
-		LayoutUtils.setUpInfoLayout(show, open, myActivity, id, true);
+		LayoutUtils.setUpInfoLayout(show, open, myActivity, id, isMyEpisodes);
         progressDialog.dismiss();
 	}
 }
