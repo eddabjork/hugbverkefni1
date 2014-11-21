@@ -54,8 +54,8 @@ public class LayoutUtils {
 	private static String noBannerUrl = "http://slurm.trakt.us/images/banner.jpg";
 	
 	//Notkun: setUpInfoLayout(show,open,context,startIdFrom,noBannerUrl,showSeasons)
-	//Eftir: BÃºiÃ° er aÃ° setja upp Ãºtlit fyrir upplÃ½singar um Ã¾Ã¡ttaraÃ°ir fyrir
-	// 		 Ã¾Ã¡ttinn show.
+	//Eftir: Buid er ad setja upp utlit fyrir upplysingar um thattaradir fyrir
+	// 		 thattinn show.
 	public static void setUpInfoLayout(Show show, final List<String> open, final Activity context,
 									Integer startIdFrom, boolean showSeasons) {
 		start_id_from = startIdFrom;
@@ -230,7 +230,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: id = getNextId()
-	//EftirskilyrÃ°i: id er nÃ¦sta lausa auÃ°kenni
+	//Eftirskilyrdi: id er naesta lausa audkenni
 	private static int getNextId() {
 		id = (id == null) ? 0 : id+1;
 		start_id_from = (start_id_from == null) ? 0 : start_id_from;
@@ -247,7 +247,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(view, context)
-	// Eftir:  bÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° birta texta ÃƒÆ’Ã‚Â­ view sem segir notanda aÃƒÆ’Ã‚Â° engar niÃƒÆ’Ã‚Â°urstÃƒÆ’Ã‚Â¶ÃƒÆ’Ã‚Â°ur fundust
+	// Eftir:  buid er ad birta texta i­ view sem segir notanda ad engar nidurstodur fundust
 	public static void showNoResult(ScrollView view, Activity context){
 		TextView nothing = new TextView(context);
 		nothing.setTextSize(20);
@@ -256,7 +256,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(layout, context)
-	// Eftir:  bÃƒÆ’Ã‚ÂºiÃƒÆ’Ã‚Â° er aÃƒÆ’Ã‚Â° birta texta ÃƒÆ’Ã‚Â­ layout sem segir notanda aÃƒÆ’Ã‚Â° engar niÃƒÆ’Ã‚Â°urstÃƒÆ’Ã‚Â¶ÃƒÆ’Ã‚Â°ur fundust  
+	// Eftir:  buid er ad birta texta i layout sem segir notanda ad engar nidurstodur fundust  
 	public static void showNoResult(LinearLayout layout, Activity context, boolean big){
 		TextView nothing = new TextView(context);
 		if(big) nothing.setTextSize(20);
@@ -266,7 +266,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//EftirskilyrÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°i: line er nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºna view hlutur sem er einfÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶ld, ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¾unn, grÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ lÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­na.
+  	//Eftirskilyrdi: line er nuna view hlutur sem er einfold, þunn, gra lina.
 	public static View makeLine(Context context){
 		 View v = new View(context);
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
@@ -275,7 +275,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: progressDialog = showProgressDialog(title, msg, context)
-	//Eftir:  progressDialog hefur verid birt meÃƒÂ¯Ã‚Â¿Ã‚Â½ titlinum title og skilabodinu msg
+	//Eftir:  progressDialog hefur verid birt med titlinum title og skilabodinu msg
 	public static ProgressDialog showProgressDialog(Integer title, Integer msg, Activity context){
 		ProgressDialog progressDialog = new ProgressDialog(context, R.style.ProgressDialog);
         progressDialog.setTitle(context.getResources().getString(title));  
@@ -291,7 +291,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: textView = getTextView(type,context,show)
-	//EftirskilyrÃ°i: textView er TextView fyrir ,,hlutinn'' type fyrir Ã¾Ã¡ttinn
+	//Eftirskilyrdi: textView er TextView fyrir ,,hlutinn'' type fyrir thattinn
 	//				 show
 	public static TextView getTextView(String type, Activity context, Show show) {
 		int width = VariousUtils.getScreenWidth(context);
@@ -326,7 +326,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: startAnimator(context,infoLayout,infoMain,open,infoButton)
-	//EftirskilyrÃ°i: BÃºiÃ° er aÃ° ,,animate''-a infoMain
+	//Eftirskilyrdi: Buid er ad ,,animate''-a infoMain
 	public static void startAnimator(Activity context, LinearLayout infoLayout, LinearLayout infoMain, 
 									List<String> open, ImageButton infoButton) {
 		Animator.setHeightForWrapContent(context, infoLayout);
@@ -344,9 +344,9 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: mainLayout = getRegListLayout(showList, context, dbHelper, open);
-	//Eftir: mainLayout er layout sem hefur fyrir s�rhverja ��ttar�� � searchShows:
-	//		 titil ��ttara�ar, takka til a� b�ta vi�/taka af ��ttar�� � ��ttirnir 
-	//		 m�nir og takka til �ess a� s�na uppl�singar um ��ttar��
+	//Eftir: mainLayout er layout sem hefur fyrir serhverja thattarod i searchShows:
+	//		 titil thattaradar, takka til ad baeta vid/taka af thattarod i thaettirnir 
+	//		 minir og takka til thess ad syna upplysingar um thattarrod
 	public static LinearLayout getRegListLayout (List<Show> showList, Activity context, DbUtils dbHelper, List<String> open) {
 		int width = VariousUtils.getScreenWidth(context);
 		int pd = (int) width/32;
@@ -380,7 +380,7 @@ public class LayoutUtils {
 	}
 	
 	//Fyrir: title = getTitle(show, context);
-	//Eftir: title er view sem inniheldur titil ��ttara�arinnar show
+	//Eftir: title er view sem inniheldur titil thattaradarinnar show
 	public static TextView getTitle(Show show, Activity context){
 		TextView title = new TextView(context);
 		title.setText(show.getTitle());
@@ -389,8 +389,8 @@ public class LayoutUtils {
 	}
 	
 	//Fyrir: addButton = getAddButton(show, context, dbHelper);
-	//Eftir: addButton er takki sem b�tir vi�/tekur af ��ttar�� � ��ttirnir m�nir
-	//		 �egar �tt er � hann
+	//Eftir: addButton er takki sem baetir vid/tekur af thattarod i thaettirnir minir
+	//		 thegar ytt er a hann
 	public static ImageButton getAddButton(final Show show, final Activity context, final DbUtils dbHelper){
 		final ImageButton addButton = new ImageButton(context);
 		// 0 -> onList=false; 1 -> onList=true
@@ -427,14 +427,14 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showDialogCal(show)
-	// Eftir:  pop-up hefur veri� birt sem b��ur upp� a� vista show � dagatali 
+	// Eftir:  pop-up hefur verid birt sem bydur uppa ad vista show i dagatali 
 	public static void showDialogCal(Show show, Activity context) {
 		DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(context.getFragmentManager(), "dialog");
 	}
 	
 	//Notkun: episodeLayout = getRegEpisodeLayout(title, addButton, infoButton, context);
-	//Eftir: episodeLayout er layout sem hefur title vinstra megin og addButton og infoButton h�gra megin
+	//Eftir: episodeLayout er layout sem hefur title vinstra megin og addButton og infoButton haegra megin
 	public static RelativeLayout getRegEpisodeLayout(TextView title, ImageButton addButton, ImageButton infoButton, Activity context){
 		RelativeLayout episodeLayout = new RelativeLayout(context);
 		
@@ -457,10 +457,10 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: mainLayout = getMyEpsListLayout(showList, context, dbHelper, open);
-	//Eftir: mainLayout er layout sem hefur fyrir s�rhverja ��ttar�� � showList:
-	//		 titil ��ttara�ar, takka til a� b�ta vi�/taka ��ttar�� af dagatali,
-	//		 takka til a� taka ��ttar�� af ��ttirnir m�nir lista og takka til
-	//		 �ess a� s�na uppl�singar um ��ttar��
+	//Eftir: mainLayout er layout sem hefur fyrir serhverja thattarod i showList:
+	//		 titil thattaradar, takka til ad baeta vid/taka thattarod af dagatali,
+	//		 takka til ad taka thattarod af thaettirnir minir lista og takka til
+	//		 thess ad syna upplysingar um thattarod
 	public static LinearLayout getMyEpsListLayout(List<Show> showList, Activity context, DbUtils dbHelper, List<String> open) {
 		int width = VariousUtils.getScreenWidth(context);
 		int pd = (int) width/32;
@@ -492,9 +492,9 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: episodeLayout = getMyEpsEpisodeLayout(title, calendarButton, deleteButton, infoButton, context);
-	//Eftir: episodeLayout er layout sem hefur title vinstra megin og calendarButton, deleteButton og infoButton h�gra megin 
+	//Eftir: episodeLayout er layout sem hefur title vinstra megin og calendarButton, deleteButton og infoButton haegra megin 
 	//Notkun: episodeLayout = getRegEpisodeLayout(title, addButton, infoButton, context);
-	//Eftir: episodeLayout er layout sem hefur title vinstra megin og addButton og infoButton h�gra megin	
+	//Eftir: episodeLayout er layout sem hefur title vinstra megin og addButton og infoButton haegra megin	
 	public static RelativeLayout getMyEpsEpisodeLayout(TextView title, ImageButton calendarButton, ImageButton deleteButton, ImageButton infoButton, Activity context){
 		RelativeLayout episodeLayout = new RelativeLayout(context);
 		
@@ -521,8 +521,8 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: calendarButton = getCalButton(show, context);
-	//Eftir: calendarButton er takki sem b�tir vi�/tekur ��ttar�� af dagatali
-	//		 ef �tt er � hann
+	//Eftir: calendarButton er takki sem baetir vid/tekur thattarod af dagatali
+	//		 ef ytt er a hann
 	public static ImageButton getCalButton(final Show show, final Activity context){
 		final ImageButton calendarButton = new ImageButton(context);
 		DbUtils dbHelper = new DbUtils(context);
@@ -566,7 +566,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: addToCal(show);
-	//Eftir: B�i� er a� b�ta vi� ��ttar��inni show � dagatal
+	//Eftir: Buid er ad baeta vid thattarodinni show i dagatal
 	public static void addToCal(Show show, Activity context){
 		DbUtils dbHelper = new DbUtils(context);
 		dbHelper.putShowOnCal(show);
@@ -574,7 +574,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: removeFromCal(show);
-	//Eftir: B�i� er a� taka ��ttar��ina show af dagatali
+	//Eftir: Buid er ad taka thattarodina show af dagatali
 	public static void removeFromCal(Show show, Activity context){
 		DbUtils dbHelper = new DbUtils(context);
 		dbHelper.takeShowOffCal(show);
@@ -582,8 +582,8 @@ public class LayoutUtils {
 	}
 	
 	//Fyrir: deleteButton = getDeleteButton(show, context);
-	//Eftir: deleteButton er takki sem tekur ��ttar�� af ��ttirnir m�nir lista
-	//		 ef �tt er � hann
+	//Eftir: deleteButton er takki sem tekur thattarod af thaettirnir minir lista
+	//		 ef ytt er a hann
 	public static ImageButton getDeleteButton(final Show show, final Activity context){
 		ImageButton deleteButton = new ImageButton(context);
 		deleteButton.setImageResource(R.drawable.delete);
@@ -605,7 +605,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: infoButton = getInfoButton(show, context);
-	//Eftir: infoButtono er takki me� mynd af �r (virkni b�tt vi� � fallinu getInfoMainLayout)
+	//Eftir: infoButtono er takki med mynd af or (virkni baett vid i fallinu getInfoMainLayout)
 	public static ImageButton getInfoButton(final Show show, Activity context){
 		final ImageButton infoButton = new ImageButton(context);
 		infoButton.setImageResource(R.drawable.down_arrow);
@@ -615,9 +615,9 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: infoMain = getInfoMainLayout(show, context, infoButton, title, open);
-	//Eftir: infoMain er layout sem inniheldur uppl�singar um ��ttar��ina show.
-	//		 B�i� er a� b�ta vi� virkni � infoButton og title �annig a� infoMain
-	//		 birtist/hverfi �egar �tt er � anna�hvort
+	//Eftir: infoMain er layout sem inniheldur upplysingar um thattarodina show.
+	//		 Buid er ad baeta vid virkni i infoButton og title thannig ad infoMain
+	//		 birtist/hverfi thegar ytt er a annadhvort
 	public static LinearLayout getInfoMainLayout(final Show show, final Activity context, final ImageButton infoButton, final TextView title, final List<String> open){
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
