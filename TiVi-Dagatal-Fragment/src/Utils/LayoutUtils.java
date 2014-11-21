@@ -147,7 +147,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: addSeason(show, context, infoLayout)
-	//Eftir:  búið er að bæta season tökkum við info layout.
+	//Eftir:  Buid er ad baeta season tokkum vid info layout.
 	public static void addSeasons(final Show show, Activity context, LinearLayout infoLayout){
 		//seriur
 		final FragmentList fraglist = new FragmentList();
@@ -203,7 +203,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun: text = addRelatedButton(show, context, gradeLayout)
-	//Eftir:  Text er núna clickable takki sem opnar Sviparðir þættir myndina.
+	//Eftir:  Text er nuna clickable takki sem opnar Svipadir thaettir myndina.
 	public static TextView addRelatedButton(final Show show, final Activity context, LayoutParams gradeLayout){
 		int width = VariousUtils.getScreenWidth(context);
 		int pd = width/25;
@@ -247,7 +247,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(view, context)
-	// Eftir:  buid er ad birta texta i­ view sem segir notanda ad engar nidurstodur fundust
+	// Eftir:  Buid er ad birta texta i view sem segir notanda ad engar nidurstodur fundust
 	public static void showNoResult(ScrollView view, Activity context){
 		TextView nothing = new TextView(context);
 		nothing.setTextSize(20);
@@ -256,7 +256,7 @@ public class LayoutUtils {
 	}
 	
 	// Notkun: showNoResult(layout, context)
-	// Eftir:  buid er ad birta texta i layout sem segir notanda ad engar nidurstodur fundust  
+	// Eftir:  Buid er ad birta texta i layout sem segir notanda ad engar nidurstodur fundust  
 	public static void showNoResult(LinearLayout layout, Activity context, boolean big){
 		TextView nothing = new TextView(context);
 		if(big) nothing.setTextSize(20);
@@ -266,7 +266,7 @@ public class LayoutUtils {
 	}
 	
 	//Notkun:		 line = makeLine();
-  	//Eftirskilyrdi: line er nuna view hlutur sem er einfold, þunn, gra lina.
+  	//Eftirskilyrdi: line er nuna view hlutur sem er einfold, thunn, gra lina.
 	public static View makeLine(Context context){
 		 View v = new View(context);
 		 v.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, 1, (float) 0.80));
