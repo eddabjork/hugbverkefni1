@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Edda Björk Konráðsdóttir
- * Dagsetning: 	4. október 2014
- * Markmið:		Skilgreina og geyma breytur fyrir gagnagrunninn sem geymir
- * 				þættina sem eru í Þættirnir Mínir listanum.
+ * Nafn: 		Edda Bjork Konradsdottir
+ * Dagsetning: 	4. oktober 2014
+ * Markmid:		Skilgreina og geyma breytur fyrir gagnagrunninn sem geymir
+ * 				thaettina sem eru i thaettirnir minir listanum.
  */
 package Data;
 

@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Edda Bj�rk Konr��sd�ttir
- * Dagsetning: 	9. okt�ber 2014
- * Markmi�: 	Klasinn leyfir a� b�ta g�gnum � gagnagrunninn, s�kja g�gn
- * 				og ey�a �eim. Hj�lparklasi til a� framkv�ma a�ger�ir � 
+ * Nafn: 		Edda Bjork Konradsdottir
+ * Dagsetning: 	9. oktober 2014
+ * Markmid: 	Klasinn leyfir ad baeta gognum i gagnagrunninn, saekja gogn
+ * 				og eyda theim. Hjalparklasi til ad framkvaema adgerdir a 
  * 				gagnagrunninn.
  */
 package Data;
@@ -27,8 +27,8 @@ public class DbUtils {
 	}
 	
 	//Notkun: db.getOnCalShows()
-	//Eftirskilyr�i: B�i� a� er a� s�kja alla ��tti sem eru � dagatali
-	//				 �r gagnagrunninum db
+	//Eftirskilyrdi: Buid er ad saekja alla thaetti sem eru a dagatali
+	//				 ur gagnagrunninum db
 	public Map<String, String> getOnCalShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -58,7 +58,7 @@ public class DbUtils {
     }
     
     //Noktun: db.getAllShows()
-	//Eftirskilyr�i: B�i� er a� s�kja alla ��tti �r gagnagrunninum db
+	//Eftirskilyrdi: Buid er ad saekja alla thaetti ur gagnagrunninum db
 	public List<Show> getAllShows() {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -90,7 +90,7 @@ public class DbUtils {
     }
     
 	//Noktun: db.saveShow(show)
-	//Eftirskilyr�i: B�i� er a� vista ��ttinn show � gagnagrunninn db
+	//Eftirskilyrdi: Buid er ad vista thattinn show i gagnagrunninn db
     public void saveShow(Show show) {
     	ShowsDb showDb = new ShowsDb(this.context);
     	SQLiteDatabase db = showDb.getWritableDatabase();
@@ -108,8 +108,8 @@ public class DbUtils {
     }
     
     //Notkun: db.putShowOnCal(show)
-    //Eftirskilyr�i: B�i� er a� uppf�ra gagnagrunninn db �annig a� ��tturinn
-    //				 show s� � dagatalinu
+    //Eftirskilyrdi: Buid er ad uppfaera gagnagrunninn db thannig ad thatturinn
+    //				 show se a dagatalinu
     public void putShowOnCal(Show show) {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -128,8 +128,8 @@ public class DbUtils {
     }
     
     //Notkun: db.takeShowOffcal(show)
-    //Eftirskilyr�i: B�i� er a� uppf�ra gagnagrunninn db �annig a�
-    //				 ��tturinn show s� ekki lengur � dagatalinu
+    //Eftirskilyrdi: Buid er ad uppfaera gagnagrunninn db thannig ad
+    //				 thatturinn show se ekki lengur a dagatalinu
     public void takeShowOffCal(Show show) {
     	ShowsDb showsdb = new ShowsDb(this.context);
     	SQLiteDatabase db = showsdb.getWritableDatabase();
@@ -148,7 +148,7 @@ public class DbUtils {
     }
     
     //Notkun: db.deleteShow(show)
-    //Eftirskilyr�i: B�i� er a� ey�a ��ttinum show �r gagnagrunninum db
+    //Eftirskilyrdi: Buid er ad eyda thaettinum show ur gagnagrunninum db
     public void deleteShow(Show show){
     	ShowsDb showDb = new ShowsDb(this.context);
     	SQLiteDatabase db = showDb.getWritableDatabase();
