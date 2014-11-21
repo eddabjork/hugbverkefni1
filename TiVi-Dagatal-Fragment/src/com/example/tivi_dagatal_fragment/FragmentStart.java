@@ -1,7 +1,7 @@
 /**
- * Nafn: 		Steinunn Friðgeirsdóttir
- * Dagsetning: 	13. nóvember 2014
- * Markmið: 	FragmentStart er fragment sem er startskjárinn
+ * Nafn: 		Steinunn Fridgeirsdottir
+ * Dagsetning: 	13. november 2014
+ * Markmid: 	FragmentStart er fragment sem er startskjarinn
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public class FragmentStart extends Fragment{
 	@Override
-	//Eftir: Birtir Velkomin fragmentið sem birtist í byrjun appsins
+	//Eftir: Birtir Velkomin fragmentid sem birtist i byrjun appsins
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_start, container, false);
         return rootView;
