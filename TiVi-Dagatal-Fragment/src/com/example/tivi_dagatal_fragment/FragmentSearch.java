@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Steinunn Fri�geirsd�ttir
- * Dagsetning: 	30. okt�ber 2014
- * Markmi�: 	FragmentSearch er fragment sem birtir leitarglugga
- * 				og takka til a� leita.
+ * Nafn: 		Steinunn Fridgeirsdottir
+ * Dagsetning: 	30. oktober 2014
+ * Markmid: 	FragmentSearch er fragment sem birtir leitarglugga
+ * 				og takka til ad leita.
  * 
  */
 package com.example.tivi_dagatal_fragment;
@@ -29,7 +29,7 @@ public class FragmentSearch extends Fragment {
 	Fragment results;
 	
 	@Override
-	//Eftir: Birtir fragment me� leitarglugga og takka
+	//Eftir: Birtir fragment med leitarglugga og takka
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         
@@ -43,7 +43,7 @@ public class FragmentSearch extends Fragment {
 	}
 	
 	//Notkun: setLayout();
-	//Eftir: B�i� er a� setja upp leitar�tliti�
+	//Eftir: Buid er ad setja upp leitarutlitid
 	public void setLayout(LinearLayout mainLayout){
 		final EditText editText = new EditText(getActivity());
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1f);
@@ -74,9 +74,9 @@ public class FragmentSearch extends Fragment {
 	}
 	
 	//Notkun: searchClick(view)
-	//Eftir: Tekur �a� sem er � leitarboxinu og leitar eftir �v�
-	//       � gegnum vef�j�nustu og skilar ni�urst��um � n�ju
-	//       fragmenti sem er birt �egar ni�urst��ur eru komnar.
+	//Eftir: Tekur thad sem er i leitarboxinu og leitar eftir thvi
+	//       i gegnum vefthjonustu og skilar nidurstodum i nyju
+	//       fragmenti sem er birt thegar nidurstodur eru komnar.
 	public void searchClick(View view){
 		Fragment results = new FragmentSearchResults();
 		
