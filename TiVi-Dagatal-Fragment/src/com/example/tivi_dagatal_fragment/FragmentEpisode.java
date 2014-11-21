@@ -49,10 +49,10 @@ public class FragmentEpisode extends Fragment{
 	}	
 	
 	/**
-     * Nafn: 		Steinunn Fri�geirsd�ttir
+     * Nafn: 		Steinunn Fridgeirsdottir
      * Dagsetning: 	6. november 2014
-     * Markmi�: 	ShowEpisodeTask er klasi sem s�r um �r��avinnslu fyrir FragmentEpisode.
-     * 				upplysingum um ��tt er hla�i� inn asyncronus me� loading skj�.
+     * Markmid: 	ShowEpisodeTask er klasi sem ser um thradavinnslu fyrir FragmentEpisode.
+     * 				upplysingum um thatt er hladid inn asyncronus med loading skja.
      */   
 	private class ShowEpisodeTask extends AsyncTask<Object, Integer, Episode> {
 		//Notkun: doInBackground(queries)
