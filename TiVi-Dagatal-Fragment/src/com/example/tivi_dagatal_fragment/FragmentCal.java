@@ -1,5 +1,5 @@
 /**
- * Nafn: 		Johanna Agnes Magnusdotir
+ * Nafn: 		Johanna Agnes Magnusdottir
  * Dagsetning: 	2. oktober 2014
  * Markmid: 	Fragment sem synir viku-dagatal sem inniheldur alla 
  * 				tha thaetti sem eiga ad birtast a dagatalinu.
