@@ -1,9 +1,9 @@
 /**
- * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
- * Dagsetning: 	20. oktï¿½ber 2014
- * Markmiï¿½: 	Mï¿½ï¿½urclasinn. Geymir navigation drawer og ï¿½ï¿½r
- * 				aï¿½gerï¿½ir sem ï¿½arf til aï¿½ skipta ï¿½ milli fragmenta
- * 				ï¿½ appinu.
+ * Nafn: 		Steinunn Fridgeirsdottir
+ * Dagsetning: 	20. oktober 2014
+ * Markmid: 	Modurclasinn. Geymir navigation drawer og thaer
+ * 				adgerdir sem tharf til ad skipta a milli fragmenta
+ * 				i appinu.
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
     private static int week = 0;
     
     
-    //Birtir tï¿½man skjï¿½ og setur nawigationDrawer upp
+    //Birtir toman skja og setur nawigationDrawer upp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +53,19 @@ public class MainActivity extends Activity {
     }
     
     // Notkun: cache = getCache()
-    // Eftir:  cache er frï¿½tekiï¿½ minnissvï¿½ï¿½i fyrir appiï¿½
+    // Eftir:  cache er fratekid minnissvaedi fyrir appid
     public static LruCache getCache(){
     	return cache;
     }
     
     // Notkun: startTime = getAppStartTime()
-    // Eftir:  startTime er tï¿½minn ï¿½ ms sem appiï¿½ byrjaï¿½i ï¿½
+    // Eftir:  startTime er timinn i ms sem appid byrjadi a
     public static long getAppStartTime() {
     	return startTime;
     }
     
     //Notkun: startWelcomeScreen()
-    //Eftir:  buid er ad birta Start skjï¿½inn
+    //Eftir:  buid er ad birta Start skjainn
     public void startWelcomeScreen(){
     	FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
@@ -73,38 +73,38 @@ public class MainActivity extends Activity {
                        .commit();
     }
     //Notkun: startCal(view)
-    //Eftir:  Bï¿½iï¿½ er aï¿½ starta dagatalinu
+    //Eftir:  Buid er ad starta dagatalinu
     public void startCal(View view){
     	selectItem(0);
     }
     
     //Notkun: startList(view)
-    //Eftir:  Bï¿½iï¿½ er aï¿½ starta ï¿½ï¿½ttirnir mï¿½nir fragmentinu
+    //Eftir:  Buid er ad starta thaettirnir minir fragmentinu
     public void startList(View view){
     	selectItem(1);
     }
     
     //Notkun: startSearch(view)
-    //Eftir:  Bï¿½iï¿½ er aï¿½ starta leitar fragmentinu.
+    //Eftir:  Buid er ad starta leitar fragmentinu.
     public void startSearch(View view){
     	selectItem(2);
     }
     
     //Notkun: startPop(view)
-    //Eftir:  Bï¿½iï¿½ er aï¿½ starta vinsï¿½lir ï¿½ï¿½ttir fragmentninu.
+    //Eftir:  Buid er ad starta Vinsaelir thaettir fragmentninu.
     public void startPop(View view){
     	selectItem(3);
     }
     
     //Notkun: startInfo(view)
-    //Eftir:  Bï¿½iï¿½ er aï¿½ starta upplï¿½singafragmenginu.
+    //Eftir:  Buid er ad starta upplysingafragmenginu.
     public void startInfo(View view){
     	selectItem(4);
     }
     
     //Notkun: makeNavigationDrawer()
-    //Eftir: Bï¿½iï¿½ er aï¿½ gera navigation drawer og undirfï¿½ll sem 
-    // 		 stjï¿½rna opnun og lokun ï¿½ honum.
+    //Eftir: Buid er ad gera navigation drawer skuffur og undirföll sem 
+    // 		 stjorna opnun og lokun a honum.
     public void makeNavigationDrawer(){
         mDrawerTitles = getResources().getStringArray(R.array.drawer_title_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -165,7 +165,7 @@ public class MainActivity extends Activity {
     }
     
     // Notkun: cache = createCache()
-    // Eftir:  cache er plï¿½ss sem hefur veriï¿½ tekiï¿½ frï¿½ ï¿½ cache-minni
+    // Eftir:  cache er plass sem hefur verid tekid fra cache-minni
     public LruCache createCache(){
 		// Get memory class of this device, exceeding this amount will throw an OutOfMemory exception.
 		ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -178,7 +178,7 @@ public class MainActivity extends Activity {
     
     @Override
     //Notkun: onCreateOptionsMenu(menu)
-    //Eftir: Bï¿½iï¿½ aï¿½ aï¿½ setja menuinn upp
+    //Eftir: Buid ad ad setja menuinn upp
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -187,8 +187,8 @@ public class MainActivity extends Activity {
     
     @Override
     //Notkun: onBackPressed()
-    //Eftir: Bï¿½iï¿½ aï¿½ birta viï¿½eigandi skjï¿½mynd eï¿½a fara ï¿½tï¿½r appi, 
-    //       eftir ï¿½vï¿½ ï¿½ hvaï¿½a skjï¿½mynd notandi var
+    //Eftir: Buid ad birta videigandi skjamynd eda fara til baka i appi, 
+    //       eftir thvi i hvada skjamynd notandi var
     public void onBackPressed() {
     	if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){ 
             mDrawerLayout.closeDrawer(mDrawerList);
@@ -215,8 +215,8 @@ public class MainActivity extends Activity {
     }
     
     //Notkun: doBack(num)
-    //Eftir:  bï¿½iï¿½ er aï¿½ framkvï¿½ma back aï¿½gerï¿½ og setja titil og 
-    //        og valda skï¿½ffu rï¿½tta.
+    //Eftir:  Buid er ad framkvaema back adgerdir og setja titil og 
+    //        og valda skuffu retta.
     public void doBack(int num){
         String name = getResources().getString(R.string.app_name);
     	boolean onStartPage = getActionBar().getTitle().toString().equals(name);
@@ -241,8 +241,8 @@ public class MainActivity extends Activity {
 
     @Override
     //Notkun: onOptionsItemSelected(item)
-    //Eftir: item hefur veriï¿½ valiï¿½ og samsvarandi skjï¿½r 
-    //       birtur (enginn eins og er)
+    //Eftir: item hefur verid valid og samsvarandi skjar 
+    //       birtur
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -260,22 +260,22 @@ public class MainActivity extends Activity {
     /**
 	 * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
 	 * Dagsetning: 	20. oktï¿½ber 2014
-	 * Markmiï¿½: 	DrawerItemClickListener erfir frï¿½ OnItemClickListener og
+	 * Markmiï¿½: 	DrawerItemClickListener erfir fra OnItemClickListener og
 	 * 				framkvï¿½mir aï¿½gerï¿½ir ï¿½egar notandi ï¿½tir ï¿½ hlut
 	 * 				ï¿½r navigation drawer
 	 */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
     	@Override
-    	//Fall sem velur fragment ï¿½r navigation drawer
+    	//Fall sem velur fragment ur navigation drawer
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             selectItem(position);
         }
     }
 
     //Notkun: selectItem(int)
-    //Eftir: Bï¿½iï¿½ er aï¿½ velja fragment (lita ï¿½aï¿½) sem
-    //       er ï¿½ staï¿½setningu int ï¿½ listanum ï¿½ navigation
-    //       drawer og birta ï¿½aï¿½.
+    //Eftir: Buid er ad velja fragment (lita tha) sem
+    //       er i stadsetningu int i listanum i navigation
+    //       drawer og birta thad.
     private void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
         switch (position) {
@@ -311,16 +311,16 @@ public class MainActivity extends Activity {
     }
     
     //Notkun: searchClick(view)
-    //Eftir:  Hjï¿½lparfall fyrir leitina
-    //		  Birtir leitarniï¿½urstï¿½ï¿½ur fyrir ï¿½ï¿½ leit
-    //        sem er ï¿½ leitarboxinu.
+    //Eftir:  Hjalparfall fyrir leitina
+    //		  Birtir leitarnidurstodur fyrir tha leit
+    //        sem er i leitarboxinu.
     public void searchClick(View view){
     	((FragmentSearch) fragment).searchClick(view);
     }
 
     @Override
     //Notkun: setTitle(title)
-    //Eftir: Bï¿½iï¿½ er aï¿½ setja titilinn ï¿½ actionBar
+    //Eftir: Buid er ad setja titilinn i actionBar
     //		sem titil fragmentsins
     public void setTitle(CharSequence title) {
         mTitle = title;
@@ -330,8 +330,8 @@ public class MainActivity extends Activity {
     
     @Override
     //Notkun: onPrepareOptionsMenu(menu)
-    //Eftir: Kallaï¿½ ï¿½ ï¿½egar viï¿½ kï¿½llum ï¿½ invalidateOptionsMenu()
-    //		 Felur ï¿½au fï¿½ll sem tengjast nï¿½verandi content view (ekki notaï¿½ ï¿½ bili)
+    //Eftir: Kallad a thegar vid kollum a invalidateOptionsMenu()
+    //		 Felur thau foll sem tengjast nuverandi content view
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
@@ -344,7 +344,7 @@ public class MainActivity extends Activity {
 	
 	@Override
 	//Notkun: onPostCreate(savedInstanceState)
-    //Eftir:  Bï¿½iï¿½ aï¿½ bï¿½a til skï¿½ffuna, syncar stï¿½ï¿½ur ï¿½ togglinu
+    //Eftir:  Buid ad bua til skuffuna, syncar staedur i togglinu
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
@@ -353,32 +353,32 @@ public class MainActivity extends Activity {
 
     @Override
     //Notkun: onConfigurationChanged(newConfig)
-    //Eftir:  Bï¿½iï¿½ aï¿½ breyta configinu ï¿½ togglinu
+    //Eftir:  Buid ad breyta configinu i togglinu
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     } 
     
     // Notkun: week = getWeek()
-    // Eftir:  week er vikan sem er veriï¿½ aï¿½ skoï¿½a ï¿½ dagatali
+    // Eftir:  week er vikan sem er verid ad skoda i dagatali
     public static int getWeek(){
     	return week;
     }
     
     // Notkun: addWeek()
-    // Eftir:  einni viku hefur veriï¿½ bï¿½tt viï¿½ week
+    // Eftir:  einni viku hefur verid baett vid week
     public static void addWeek(){
     	week += 1;
     }
     	
     // Notkun: subtractWeek()
-    // Eftir:  ein vika hefur veriï¿½ dregin frï¿½ week
+    // Eftir:  ein vika hefur verid dregin fra week
     public static void subtractWeek(){
     	week -= 1;
     }
     
     // Notkun: setCurrentWeek()
-    // Eftir:  week hefur veriï¿½ stillt ï¿½ nï¿½verandi viku
+    // Eftir:  week hefur verid stillt i nuverandi viku
     public static void setCurrentWeek(){
     	week = 0;
     }
