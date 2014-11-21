@@ -66,8 +66,8 @@ public class FragmentList extends Fragment {
 	/**
 	 * Nafn: 		Kristin Fjola Tomasdottir
 	 * Dagsetning: 	23. oktober 2014
-	 * Markmid: 	GetAllShowsTask framkvaemir thradavinnu sem naer i allar thattaradir fra gagnagrunni
-	 * 				sem a ad birta i 'thaettirnir minir' og birtir a skja
+	 * Markmid: 	GetAllShowsTask framkvaemirï¿½thradavinnu sem naer i allar thattaradir fra gagnagrunni
+	 * 				sem a ad birta i 'thaettirnir minir' og birtir aï¿½skja
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
@@ -86,7 +86,7 @@ public class FragmentList extends Fragment {
         }  
 		
 		// Notkun: onPostExecute(shows)
-		// Eftir:  shows hafa verid birtir a skjanum 'thaettirnir minir'
+		// Eftir:  shows hafa verid birtir aï¿½skjanum 'thaettirnir minir'
 		protected void onPostExecute(List<Show> showList) {
 			progressDialog.dismiss();
 			mainLayout = new LinearLayout(getActivity());
@@ -182,7 +182,7 @@ public class FragmentList extends Fragment {
      * Nafn: 	   Edda Bjork Konradsdottir
      * Dagsetning: 30. oktober 2014
      * Markmid:   Manual scroll view sem erfir fra ScrollView svo haegt se
-     * 			  ad virkja a thad og slökkva a tvi i appinu
+     * 			  ad virkja thad og slokkva a thvi i appinu
      * */
 	private class MainScrollView extends ScrollView {
 		private boolean scrollable = true;
