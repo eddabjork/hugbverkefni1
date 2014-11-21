@@ -1,7 +1,7 @@
 /**
  * Nafn: 		Kristin Fjola Tomasdottir
  * Dagsetning: 	13. november 2014
- * Markmi�: 	FragmentRelated er fragment sem birtir lista
+ * Markmid: 	FragmentRelated er fragment sem birtir lista
  * 				af thattum sem eru svipadir tilviksbreytunni show
  */
 
@@ -35,7 +35,7 @@ public class FragmentRelated extends Fragment{
 	private List<String> open = new ArrayList<String>();
 
 	@Override
-	//Eftir: birtir fragmenti� me� svipu�um ��ttar��um
+	//Eftir: birtir fragmentid med svipudum thattarodum
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_related, container, false);
 		
@@ -58,21 +58,21 @@ public class FragmentRelated extends Fragment{
 	}	
 	
 	//Notkun: onAttach(activity)
-	//Eftir:  b�i� er a� tengja gagnagrunninn vi� fragmenti�
+	//Eftir:  Buid er ad tengja gagnagrunninn vid fragmentid
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
         dbHelper = new DbUtils(activity);
     }
 		
 	/**
-     * Nafn: 		Krist�n Fj�la T�masd�ttir
-     * Dagsetning: 	13.n�vember 2014
-     * Markmi�: 	Framkv�mir �r��avinnu til a� birta svipa�a ��tti 
-     * 				fr� vef�j�nustu � fragmenti me� loadi.
+     * Nafn: 		Kristin Fjola Tomasdottir
+     * Dagsetning: 	13.november 2014
+     * Markmid: 	Framkvaemir thradaavinnu til ad birta svipada thaetti 
+     * 				fra vefthjonustu a fragmenti med loadi.
      */   
 	private class RelatedShowsTask extends AsyncTask<Show, Integer, List<Show>> {
 		//Notkun: doInBackground(queries)
-		//Eftir:  B�i� er a� n� � lista af ��ttum sem eru svipa�ir fyrsta ��ttinum � shows
+		//Eftir:  Buid er ad na i lista af thattum sem eru svipadir fyrsta thaettinum i shows
 		protected List<Show> doInBackground(Show... shows) {         
 			TraktClient client = new TraktClient();	    	 
 			List<Show> relatedShows = client.relatedShows(shows[0]);
@@ -80,14 +80,14 @@ public class FragmentRelated extends Fragment{
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veri� stillt sem � a� s�na � me�an notandi er a� b��a
+		// Eftir:  progressDialog hefur verid stillt sem a ad syna a medan notandi er ad bida
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
     				R.string.popular_process_msg, getActivity());		
         }  
 		
 		//Notkun: onPostExecute(relatedShows)
-		//Eftir:  B�i� er a� taka relatedShows listann og birta ��ttara�irnar � listanum
+		//Eftir:  Buid er ad taka relatedShows listann og birta thattaradirnar i listanum
 		protected void onPostExecute(List<Show> relatedShows) {
 			LinearLayout listLayout = LayoutUtils.getRegListLayout(relatedShows, getActivity(), dbHelper, open);
 			scrollView.addView(listLayout);
