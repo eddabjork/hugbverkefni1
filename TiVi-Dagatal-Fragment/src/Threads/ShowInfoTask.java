@@ -1,8 +1,8 @@
 /**
-     * Nafn: 	   Edda BjÃƒÂ¶rk KonrÃƒÂ¡ÃƒÂ°sdÃƒÂ³ttir
-     * Dagsetning: 30. oktÃƒÂ³ber 2014
-     * MarkmiÃƒÂ°:   NÃƒÂ¡ ÃƒÂ­ upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttarÃƒÂ¶ÃƒÂ° og sÃƒÂ½na ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista
-     * 			   meÃƒÂ° upplÃƒÂ½singum
+     * Nafn: 	   Edda Bjork Konradsdottir
+     * Dagsetning: 30. oktober 2014
+     * MarkmiÃƒÂ°:   Na i­ upplysingar um thattarod og syna thaettirnir minir lista
+     * 			   med upplysingum
      * */
 
 package Threads;
@@ -47,8 +47,8 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
     }  
 	
 	//Notkun:		 show = doInBackground(shows)
-	//EftirskilyrÃƒÂ°i: show er ÃƒÂ¾ÃƒÂ¡tturinn sem inniheldur upplÃƒÂ½singar
-	//				 sem nÃƒÂ¡ÃƒÂ° er ÃƒÂ­ ÃƒÂºtfrÃƒÂ¡ shows
+	//Eftirskilyrdi: show er thatturinn sem inniheldur upplysingar
+	//				 sem nad er i utfra shows
 	protected Show doInBackground(Show... shows) {
 		Show show = new Show();
 		if(VariousUtils.isConnectedToInternet(myActivity)){
@@ -64,8 +64,8 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	}
 	
 	//Notkun:		 onPostExecute(show)
-	//EftirskilyrÃƒÂ°i: BÃƒÂºiÃƒÂ° er aÃƒÂ° sÃƒÂ¦kja upplÃƒÂ½singar um ÃƒÂ¾ÃƒÂ¡ttinn show
-	//				 og sÃƒÂ½na ÃƒÂ­ ÃƒÅ¾ÃƒÂ¦ttirnir mÃƒÂ­nir lista.
+	//Eftirskilyrdi: Buid er ad saekja upplysingar um thattinn show
+	//				 og syna i­ thaettirnir minir lista.
 	protected void onPostExecute(Show show) {
 		LayoutUtils.setUpInfoLayout(show, open, myActivity, id, true);
         progressDialog.dismiss();
