@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
- * Dagsetning: 	30. oktï¿½ber 2014
- * Markmiï¿½: 	FragmentPopular er fragment sem birtir lista
- * 				af visï¿½lum ï¿½ï¿½ttum
+ * Nafn: 		Steinunn Fridgeirsdottir
+ * Dagsetning: 	30. oktober 2014
+ * Markmi�: 	FragmentPopular er fragment sem birtir lista
+ * 				af vinsaelum thattum
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -34,7 +34,7 @@ public class FragmentPopular extends Fragment {
 	private List<String> open = new ArrayList<String>();
 	
 	@Override
-	//Eftir: Birtir fragmentiï¿½ sem sï¿½nir vinsï¿½la ï¿½ï¿½tti
+	//Eftir: Birtir fragmentid sem synir vinsaela thaetti
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_popular, container, false);
 		VariousUtils.flushCacheAfter12Hours(cacheKey);
@@ -51,25 +51,24 @@ public class FragmentPopular extends Fragment {
     }
 	
 	//Notkun: onAttach(activity)
-	//Eftir: Bï¿½iï¿½ aï¿½ tengja gagnagrunn viï¿½ fragmentiï¿½
+	//Eftir: Buid er ad tengja gagnagrunn vid fragmentid
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
         dbHelper = new DbUtils(activity);
     }
 
 	/**
-     * Nafn: 		Steinunn Friï¿½geirsdï¿½ttir
-     * Dagsetning: 	30. oktï¿½ber 2014
-     * Markmiï¿½: 	Framkvï¿½mir ï¿½rï¿½ï¿½avinnu til aï¿½ birta vinsï¿½la ï¿½ï¿½tti 
-     * 				frï¿½ vefï¿½jï¿½nustu ï¿½ fragmenti meï¿½ loadi.
-     * 				Clasinn geymir einnig cache fyrir ï¿½ï¿½ttina svo
-     * 				ï¿½aï¿½ ï¿½urfi ekki aï¿½ sï¿½kja alla ï¿½ï¿½ttina oft.
+     * Nafn: 		Steinunn Fridgeirsdottir
+     * Dagsetning: 	30. oktober 2014
+     * Markmid: 	Framkvaemir thradaavinnu til ad birta vinsaela thaetti 
+     * 				fra veftjonustu a fragmenti med loadi.
+     * 				Klasinn geymir einnig cache fyrir thaettina svo
+     * 				thad thurfi ekki ad saekja alla thaettina oft.
      */   
 	private class PopularShowsTask extends AsyncTask<String, Integer, List<Show>> {
 		//Notkun: doInBackground(queries)
-		//Eftir:  ï¿½ï¿½ï¿½avinnslu ï¿½ bakgrunni er lokiï¿½
-		//        ï¿½ ï¿½rï¿½ï¿½avinnslu hï¿½r er kallaï¿½ ï¿½ vefï¿½jï¿½nustuna
-		//		  og cache bï¿½iï¿½ til eï¿½a sï¿½tt.
+		//Eftir:  Thradavinnslu i bakgrunni er lokid,
+		//        kallad er a veftjhonustuna og cache buid til eda sott.
 		protected List<Show> doInBackground(String... queries) {      
 			List<Show> popularShows = (List<Show>) MainActivity.getCache().get(cacheKey);
 	        
@@ -85,16 +84,16 @@ public class FragmentPopular extends Fragment {
 		}
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
+		// Eftir:  progressDialog hefur verid stillt sem a ad syna a medan notandi er ad bida
 		protected void onPreExecute() {  
 			progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
     				R.string.popular_process_msg, getActivity());	
         }  
 		
 		//Notkun: onPostExecute(searchShows)
-		//Eftir:  Bï¿½iï¿½ er aï¿½ taka serchShows listann og
-		//        birta ï¿½ï¿½ ï¿½samt takka til ï¿½ess aï¿½ bï¿½ta viï¿½ 
-		//        ï¿½ï¿½ttarï¿½ï¿½ ï¿½ dagatal. Listinn er svo birtur.
+		//Eftir:  Buid er ad taka serchShows listann og
+		//        birta thvi asamt takka til thess ad baeta vid 
+		//        thattarod a dagatal. Listinn er svo birtur.
 		protected void onPostExecute(List<Show> searchShows) {
 			LinearLayout listLayout = LayoutUtils.getRegListLayout(searchShows, getActivity(), dbHelper, open);
 			scrollView.addView(listLayout);

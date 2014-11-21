@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 public class FragmentInfo extends Fragment{
 	@Override
 	//Notkun: onCreateView(inflater, container, savedInstanceState)
-	//Eftir:  Birtir fragmenti� sem s�nir uppl�singar um appi�
+	//Eftir:  Birtir fragmentid sem synir upplysingar um appid
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_info, container, false);
 		
