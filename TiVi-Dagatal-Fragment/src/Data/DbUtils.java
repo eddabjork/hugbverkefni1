@@ -162,7 +162,7 @@ public class DbUtils {
     }
     
     //Noktun: db.isOnCal(show)
-    //Eftirskilyrði: true ef show er á dagatali í db, annars false
+    //Eftir: true ef show er a dagatali i db, annars false
     public boolean isOnCal(Show show) {
     	Map<String, String> onCalList = getOnCalShows();
     	return onCalList.keySet().contains(show.getDataTitle());

@@ -66,8 +66,8 @@ public class FragmentList extends Fragment {
 	/**
 	 * Nafn: 		Kristin Fjola Tomasdottir
 	 * Dagsetning: 	23. oktober 2014
-	 * Markmid: 	GetAllShowsTask framkvaemir�thradavinnu sem naer i allar thattaradir fra gagnagrunni
-	 * 				sem a ad birta i 'thaettirnir minir' og birtir a�skja
+	 * Markmid: 	GetAllShowsTask framkvaemir thradavinnu sem naer i allar thattaradir fra gagnagrunni
+	 * 				sem a ad birta i 'thaettirnir minir' og birtir a skja
 	 */
 	private class GetAllShowsTask extends AsyncTask<Void, Integer, List<Show>> {
 		// Notkun: shows = doInBackground(voids)
