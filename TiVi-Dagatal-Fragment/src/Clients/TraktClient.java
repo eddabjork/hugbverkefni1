@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
- * Dagsetning: 	2. oktï¿½ber 2014
- * Markmiï¿½: 	Biï¿½ill sem nï¿½r ï¿½ upplï¿½singar um ï¿½ï¿½ttaraï¿½ir og ï¿½ï¿½tti frï¿½ 
- * 				vefï¿½jï¿½nustu https://trakt.tv/. 
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	2. oktober 2014
+ * Markmid: 	Bidill sem naer i upplysingar um thattaradir og thaetti fra
+ * 				vefthjonustu https://trakt.tv/. 
  */
 package Clients;
 
@@ -39,8 +39,8 @@ public class TraktClient {
 	public TraktClient(){}
 	
 	//Notkun: 		 shows = searchShow(title)
-	//Eftirskilyrï¿½i: shows er listi af ï¿½ï¿½ttum sem eru niï¿½urstï¿½ï¿½ur ï¿½egar 
-	//				 leitaï¿½ er eftir strengnum title
+	//Eftirskilyrdi: shows er listi af thattum sem eru nidurstödur thegar 
+	//				 leitad er eftir strengnum title
 	public List<Show> searchShow(final String title) {			
         URL url = null;
         try {
@@ -67,8 +67,8 @@ public class TraktClient {
 	}
 	
 	//Notkun: 		 shows = readShowsArrayForSearch(reader)
-	//Eftirskilyrï¿½i: shows er listi af ï¿½ï¿½ttum sem eru niï¿½urstï¿½ï¿½ur ï¿½egar 
-	//				 leitaï¿½ er eftir strengnum title
+	//Eftirskilyrdi: shows er listi af thattum sem eru nidurstödur thegar 
+	//				 leitad er eftir strengnum title
 	public List<Show> readShowsArrayForSearch(JsonReader reader) throws IOException {
 		List<Show> shows = new ArrayList<Show>();
 		
@@ -87,8 +87,7 @@ public class TraktClient {
 	}
  
 	 //Notkun: 		  show = readShowForSearch(reader)
-	 //Eftirskilyrï¿½i: show er ï¿½ï¿½ttur sem er lesinn er ï¿½r staki
-	 //				  ï¿½r json upplï¿½singum sem reader geymir	
+	 //Eftirskilyrdi: show er thattur sem er lesinn er ur staki
 	 public Show readShowForSearch(JsonReader reader) throws IOException {
 		Show show = new Show();
 		reader.beginObject();
@@ -170,8 +169,9 @@ public class TraktClient {
 		return show;
 	  }
 
+	 //TODO: skil ekki
 	 //Notkun: 		  readImages(reader, show)
-	 //Eftirskilyrï¿½i: slï¿½ï¿½ir ï¿½ myndir fyrir show hafa veriï¿½ stilltar ï¿½ show
+	 //Eftirskilyrdi: slï¿½ï¿½ir ï¿½ myndir fyrir show hafa verid stilltar i show
 	 public void readImages(JsonReader reader, Show show) throws IOException{
 		 reader.beginObject();
 		 while(reader.hasNext()){
@@ -202,8 +202,8 @@ public class TraktClient {
 	 }
 
 	 //Notkun: 		  episodes = getCalendarEpisodes(dataTitles)
-	 //Eftirskilyrï¿½i: episodes er listi af ï¿½ï¿½ttum sem eiga aï¿½ vera
-	 //				  birtir ï¿½ dagatali
+	 //Eftirskilyrdi: episodes er listi af thattum sem eiga ad vera
+	 //				  birtir i dagatali
 	 public List<Episode> getCalendarEpisodes(Map<String, String> dataTitles, Date fromDate, Date toDate){
 		 for(final String dataTitle : dataTitles.keySet()){
 			 
@@ -239,9 +239,10 @@ public class TraktClient {
 		 return calendarEpisodes;
 	 }
 	 
+	 //TODO: skil ekki
 	//Notkun: 		 getSeasonsForShow(dataTitle, forInfo)
-	//Eftirskilyrï¿½i: ef forInfo er false ï¿½ï¿½ er nï¿½ï¿½ ï¿½ nï¿½justu 2 serï¿½urnar fyrir ï¿½ï¿½ttarï¿½ï¿½ina
-	//				 dataTitle, annars er nï¿½ï¿½ ï¿½ allar serï¿½urnar fyrir ï¿½ï¿½ttarï¿½ï¿½ina dataTitle
+	//Eftirskilyrdi: ef forInfo er false ï¿½ï¿½ er nï¿½ï¿½ ï¿½ naeustu 2 seriurnar fyrir thattarödina
+	//				 dataTitle, annars er nï¿½ï¿½ ï¿½ allar seriurnar fyrir thattarödina dataTitle
 	public void getSeasonsForShow(String dataTitle, boolean forInfo){
 		// get the newest 2 seasons for the show
 		URL url = null;
@@ -271,7 +272,7 @@ public class TraktClient {
 	}
 
 	 //Notkun: 		  seasons = readSeasonsArrayForCalendar(reader)
-	 //Eftirskilyrï¿½i: seasons er listi af nï¿½merum ï¿½ ï¿½eim serï¿½um sem ï¿½ aï¿½ leita eftir
+	 //Eftirskilyrdi: seasons er listi af numerum a theim serium sem a ad leita eftir
 	 public List<String> readSeasonsArrayForCalendar(JsonReader reader) throws IOException {
 	    List<String> seasons = new ArrayList<String>();
 	    int count = 0;
@@ -289,7 +290,7 @@ public class TraktClient {
 	 }
 	 
 	 //Notkun: 		  seasons = readSeasonsArrayForShowInfo(reader)
-	 //Eftirskilyrï¿½i: seasons er listi af serï¿½um sem ï¿½ aï¿½ birta fyrir ï¿½ï¿½ttarï¿½ï¿½ ï¿½ upplï¿½singum
+	 //Eftirskilyrdi: seasons er listi af serium sem a ad birta fyrir thattaröd med upplysingum
 	 public List<Season> readSeasonsArrayForShowInfo(JsonReader reader) throws IOException {
 	    List<Season> seasons = new ArrayList<Season>();
 	    reader.beginArray();
@@ -301,7 +302,7 @@ public class TraktClient {
 	 }
 	 
 	 //Notkun: 		  season = readSeasonForCalendar(reader)
-	 //Eftirskilyrï¿½i: season er nï¿½mer ï¿½ serï¿½u sem ï¿½ aï¿½ leita eftir
+	 //Eftirskilyrdi: season er numer a seriu sem a ad leita eftir
 	 public String readSeasonForCalendar(JsonReader reader) throws IOException {
 		reader.beginObject();
 		String season = "";
@@ -323,7 +324,7 @@ public class TraktClient {
 	  }
 	 
 	 //Notkun: 		  season = readSeasonForShowInfo(reader)
-	 //Eftirskilyrï¿½i: season er serï¿½a sem ï¿½ aï¿½ birta fyrir ï¿½ï¿½ttarï¿½ï¿½ ï¿½ upplï¿½singum
+	 //Eftirskilyrdi: season er seria sem a ad birta fyrir thattaröd med upplysingum
 	 public Season readSeasonForShowInfo(JsonReader reader) throws IOException {
 		reader.beginObject();
 		Season season = new Season();
@@ -357,8 +358,8 @@ public class TraktClient {
 	  }
 	 
 	 //Notkun: 		  episodes = readEpisodesArrayForCalendar(reader, showDataTitle)
-	 //Eftirskilyrï¿½i: episodes er listi af ï¿½ï¿½ttum sem eiga aï¿½ vera
-	 //				  birtir ï¿½ dagatali
+	 //Eftirskilyrdi: episodes er listi af thattum sem eiga ad vera
+	 //				  birtir a dagatali
 	 public List<Episode> readEpisodesArrayForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo, Date fromDate, Date toDate) throws IOException {
 		List<Episode> episodes = new ArrayList<Episode>();
 		
@@ -374,7 +375,7 @@ public class TraktClient {
 	}
 	
 	//Notkun: 		 episode = readEpisodeForCalendar(reader, showDataTitle)
-	//Eftirskilyrï¿½i: episode er ï¿½ï¿½ttur sem ï¿½ aï¿½ vera birtur ï¿½ dagatali
+	//Eftirskilyrdi: episode er thattur sem a ad vera birtur a dagatali
 	public Episode readEpisodeForCalendar(JsonReader reader, String showDataTitle, String showTitle, boolean forInfo, Date fromDate, Date toDate) throws IOException {
 		Episode episode = new Episode();
 		reader.beginObject();
@@ -447,9 +448,9 @@ public class TraktClient {
 		}
 		return null;
 	}
-	
+	//TODO: Skil ekki
 	//Notkun: 		 readImages(reader, episode)
-	//Eftirskilyrï¿½i: slï¿½ï¿½ir ï¿½ myndir fyrir episode hafa veriï¿½ stilltar ï¿½ episode
+	//Eftirskilyrdi: slï¿½ï¿½ir ï¿½ myndir fyrir episode hafa verid stilltar a episode
 	public void readImages(JsonReader reader, Episode episode) throws IOException{
 		 reader.beginObject();
 		 while(reader.hasNext()){
@@ -468,7 +469,7 @@ public class TraktClient {
 	 }
 	
 	//Notkun: 		 showInfo = getShowInfo(show)
-	//Eftirskilyrï¿½i: showInfo inniheldur nï¿½nari upplï¿½singar um show
+	//Eftirskilyrdi: showInfo inniheldur nanari upplysingar um show
 	public Show getShowInfo(Show show){
 		URL url = null;
         try {
@@ -497,7 +498,7 @@ public class TraktClient {
 	}
 	
 	//Notkun: 		 showInfo = readShowInfo(reader)
-	//Eftirskilyrï¿½i: showInfo inniheldur nï¿½nari upplï¿½singar um show
+	//Eftirskilyrdi: showInfo inniheldur nanari upplysingar um show
 	public Show readShowInfo(JsonReader reader) throws IOException {
 		Show show = new Show();
 		reader.beginObject();
@@ -580,7 +581,7 @@ public class TraktClient {
 	  }
 	
 	 //Notkun: 		  readGenres(reader, show)
-	 //Eftirskilyrï¿½i: listi af 'genres' hefur veriï¿½ stilltur ï¿½ show
+	 //Eftirskilyrdi: listi af 'genres' hefur verid stilltur a show
 	 public void readGenres(JsonReader reader, Show show) throws IOException{			
 		reader.beginArray();
 		List<String> genres = new ArrayList<String>();
@@ -592,7 +593,7 @@ public class TraktClient {
 	 }
 	 
 	 //Notkun: 		  season = getEpisodesForSeasonForShowInfo(show, season)
-	 //Eftirskilyrï¿½i: season inniheldur upplï¿½singar um alla ï¿½ï¿½ttina ï¿½ ï¿½eirri serï¿½u
+	 //Eftirskilyrdi: season inniheldur upplysingar um alla thaettina i theirri seriu
 	 public Season getEpisodesForSeasonForShowInfo(Show show, Season season){
 		List<Episode> episodes = new ArrayList<Episode>();
         URL url = null;
@@ -620,7 +621,7 @@ public class TraktClient {
 	 }
 	 
 	//Notkun: 		 shows = popularShows()
-	//Eftirskilyrï¿½i: shows er listi af vinsï¿½lum ï¿½ï¿½ttarï¿½ï¿½um ï¿½essa stundina skv. trakt.tv
+	//Eftirskilyrdi: shows er listi af vinsaelum thattarödum thessa stundina skv. trakt.tv
 	public List<Show> popularShows() {			
         URL url = null;
         try {
@@ -647,7 +648,7 @@ public class TraktClient {
 	}
 	
 	//Notkun: 		 shows = relatedShows(show)
-	//Eftirskilyrï¿½i: shows er listi af ï¿½ï¿½ttum sem eru svipaï¿½ir show
+	//Eftirskilyrdi: shows er listi af thattum sem eru svipadir show
 	public List<Show> relatedShows(Show show) {			
         URL url = null;
         try {

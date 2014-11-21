@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Krist�n Fj�la T�masd�ttir
- * Dagsetning: 	5. okt�ber 2014
- * Markmi�: 	Bi�ill sem n�r � uppl�singar um ��ttara�ir og ��tti fr� 
- * 				vef�j�nustu https://imdb.com/. 
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	5. oktober 2014
+ * Markmii: 	Bidill sem naer i upplysingar um thattaradir og thaetti fra 
+ * 				vefthjonustu https://imdb.com/. 
  */
 
 package Clients;
@@ -20,7 +20,7 @@ import android.util.Log;
 public class IMDbClient {
 	
 	//Notkun: 			getIMDbRating(show)
-	//Eftirskilyr�i: 	IMDb einkunn er stillt � show
+	//Eftirskilyrdi: 	IMDb einkunn er stillt a show
 	public static void getIMDbRating(final Show show){
 		URL url = null;
         try {
@@ -45,7 +45,7 @@ public class IMDbClient {
 	}
 	
 	//Notkun: 			readShow(reader, show)
-	//Eftirskilyr�i: 	IMDb einkunn er stillt � show
+	//Eftirskilyrdi: 	IMDb einkunn er stillt a show
 	public static void readShow(JsonReader reader, Show show) throws IOException {
 		reader.beginObject();
 		
