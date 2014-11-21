@@ -1,7 +1,7 @@
 /**
  * Nafn: 		Steinunn Fridgeirsdottir
  * Dagsetning: 	30. oktober 2014
- * Markmið: 	FragmentPopular er fragment sem birtir lista
+ * Markmid: 	FragmentPopular er fragment sem birtir lista
  * 				af vinsaelum thattum
  */
 package com.example.tivi_dagatal_fragment;
