@@ -64,7 +64,7 @@ public class VariousUtils {
 	}
 	
 	//Notkun: addFragmentToStack(manager, fragment)
-	//Fyrir:  b�i� er a� birta fragment ofan� stack me� s��asta
+	//Fyrir:  búið er að birta fragment ofaná stack með síðasta
 	//		  fragment undir.
 	public static void addFragmentToStack(FragmentManager manager, Fragment fragment){
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
@@ -74,14 +74,14 @@ public class VariousUtils {
 	}
 	
 	//Notkun:		 flushCache(key)
-	//Eftirskilyr�i: �a� sem var me� key sem lykil hefur veri� eytt �r cache-minni
+	//Eftirskilyrði: Það sem var með key sem lykil hefur verið eytt úr cache-minni
 	public static void flushCache(String key){
 		MainActivity.getCache().remove(key);
 		Log.v("cache", key + " removed from cache");
 	}
 	
 	//Notkun:		 flushCacheAfter12Hours(key)
-	//Eftirskilyr�i: �a� sem var me� key sem lykil hefur veri� eytt �r cache-minni
+	//Eftirskilyrði: Það sem var með key sem lykil hefur verið eytt úr cache-minni
 	public static void flushCacheAfter12Hours(String key){
 		long time = System.currentTimeMillis();
 		long twelveHours = (long) (60000*60*12);
