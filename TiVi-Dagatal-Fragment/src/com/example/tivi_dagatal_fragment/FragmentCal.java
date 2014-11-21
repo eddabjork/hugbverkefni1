@@ -94,7 +94,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	// Notkun: addWeekNavButtons(btnLayout)
-	// Eftir:  Takkar til ad flakka a milli vikna hafa verid settir abtnLayout
+	// Eftir:  Takkar til ad flakka a milli vikna hafa verid settir a btnLayout
 	public void addWeekNavButtons(RelativeLayout btnLayout){		
 		// go one week back
 		ImageButton leftBtn = new ImageButton(getActivity());
@@ -274,7 +274,7 @@ public class FragmentCal extends Fragment {
 	/**
 	 * Nafn: 		Kristin Fjola Tomasdottir
 	 * Dagsetning: 	23. oktober 2014
-	 * Markmi�: 	CalendarShowsTask framkvaemir thradaavinnu sem naer i alla thaetti 
+	 * Markmid: 	CalendarShowsTask framkvaemir thradaavinnu sem naer i alla thaetti 
 	 * 				fra gagnagrunni sem eiga ad vera birtir a dagatali
 	 */
 	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
@@ -298,7 +298,7 @@ public class FragmentCal extends Fragment {
 	/**
 	 * Nafn: 		Kristin Fjola Tomasdottir
 	 * Dagsetning: 	23. oktober 2014
-	 * Markmi�: 	CalendarEpisodesTask framkvaemir thradaavinnu sem naer i alla thaetti 
+	 * Markmid: 	CalendarEpisodesTask framkvaemir thradaavinnu sem naer i alla thaetti 
 	 * 				fra vefthjonustunni trakt.tv sem eiga ad vera birtir a dagatali
 	 */
 	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
