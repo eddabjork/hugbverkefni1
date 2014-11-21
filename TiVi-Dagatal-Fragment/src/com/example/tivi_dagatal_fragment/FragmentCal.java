@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Jï¿½hanna Agnes Magnï¿½sdï¿½ttir
- * Dagsetning: 	2. oktï¿½ber 2014
- * Markmiï¿½: 	Fragment sem sï¿½nir viku-dagatal sem inniheldur alla 
- * 				ï¿½ï¿½ ï¿½ï¿½tti sem eru aï¿½ birtast ï¿½ dagatalinu.
+ * Nafn: 		Johanna Agnes Magnusdotir
+ * Dagsetning: 	2. oktober 2014
+ * Markmid: 	Fragment sem synir viku-dagatal sem inniheldur alla 
+ * 				tha thaetti sem eiga ad birtast a dagatalinu.
  */
 
 package com.example.tivi_dagatal_fragment;
@@ -71,8 +71,8 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: setLayout();
-  	//Eftir: Bï¿½iï¿½ er aï¿½ setja upp grunnlag ï¿½tlits, sem er LinearLayout,
-	//		 inn ï¿½ scrollView
+  	//Eftir: Buid er ad setja upp grunnlag utlits, sem er LinearLayout,
+	//		 inn i scrollView
 	public void setLayout(){
 		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
     	
@@ -94,7 +94,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	// Notkun: addWeekNavButtons(btnLayout)
-	// Eftir:  takkar til aï¿½ flakka ï¿½ milli vikna hafa veriï¿½ settir ï¿½ btnLayout
+	// Eftir:  Takkar til ad flakka a milli vikna hafa verid settir abtnLayout
 	public void addWeekNavButtons(RelativeLayout btnLayout){		
 		// go one week back
 		ImageButton leftBtn = new ImageButton(getActivity());
@@ -152,9 +152,9 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: fillInDates(mainLayout);
-  	//Eftir: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir sï¿½rhvern dag vikunnar (alls 7) ï¿½ar
-    //		 sem fram kemur dagsetning og Layout-plï¿½ss fyrir dagatals-ï¿½ï¿½tti
-    //		 ï¿½au eru svo sett inn ï¿½ mainLayout sem er ï¿½ scrollView.
+  	//Eftir: Buid er ad bua til view fyrir serhvern dag vikunnar (alls 7) thar
+    //		 sem fram kemur dagsetning og Layout-plass fyrir dagatals-thaetti
+    //		 thau eru svo sett inn i mainLayout sem er i scrollView.
 	public void fillInDates(LinearLayout mainLayout){
 		Calendar cal = Calendar.getInstance();
 
@@ -195,36 +195,31 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: addNameOfMont(cal, mainLayout)
-	//Eftir:  Nafni viðeigandi mánaðar hefur verið bætt við mainLayout
+	//Eftir:  Nafni videigandi manadar hefur verid baett vid mainLayout
 	public void addNameOfMonth(Calendar cal, LinearLayout mainLayout){
+		int pd = VariousUtils.getScreenWidth(getActivity());
 		TextView month = new TextView(getActivity());
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
-		month.setPadding(10,10,10,10);
-		month.setTextSize(20);
+		month.setPadding(pd/32,pd/32,pd/32,pd/32);
+		month.setTextSize(pd/16);
 		mainLayout.addView(month);
 		mainLayout.addView(LayoutUtils.makeLine(getActivity()));
 	}
 	
 	//Notkun: setDateLayout(dayName, calendar, mainLayout);
-  	//Eftir: Bï¿½iï¿½ er aï¿½ bï¿½a til view fyrir einn dag ï¿½ar sem fram kemur
-    //		 dagur vikunnar, dagur mï¿½naï¿½ars og mï¿½nuï¿½urinn sjï¿½lfur.
-    //		 Einnig er bï¿½iï¿½ aï¿½ bï¿½a til LinearLayout inni ï¿½ ï¿½essu view sem er 
-    //		 meï¿½ id (dagsetningin ï¿½ forminu yyMMdd) svo hï¿½gt sï¿½ aï¿½ bï¿½ta 
-    //		 viï¿½ ï¿½ï¿½ttum ï¿½ rï¿½ttum staï¿½. ï¿½essu view er svo bï¿½tt viï¿½ neï¿½st ï¿½ 
-	//		 mainLayout.
-	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {		
+  	//Eftir: Buid er ad bu til view fyrir einn dag thar sem fram kemur
+    //		 dagur vikunnar, dagur manadars og manudurinn sjalfur.
+    //		 Einnig er buid ad bua til LinearLayout inni i thessu view sem er 
+    //		 med id (dagsetningin a forminu yyMMdd) svo haegt se ad birta 
+    //		 tilsvarandi thattum a rettan stad a dagatali. thessu view er svo 
+	//		 baett vid nedst i mainLayout.
+	public void setDateLayout(String dayName, Calendar cal, LinearLayout mainLayout) {
+		int pd = VariousUtils.getScreenWidth(getActivity());
 		LinearLayout dayLayout = new LinearLayout(getActivity());
 		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
-		dayLayout.setPadding(16,8,16,8);
+		dayLayout.setPadding(pd/20,pd/40,pd/20,pd/40);
 		
-		Context myContext = getActivity();
-		WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		int width = size.x;
-		int wd = (int) width/9;
-		LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(wd, LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(pd/9, LinearLayout.LayoutParams.WRAP_CONTENT);
 		
 		LinearLayout dateLayout = new LinearLayout(getActivity());
 		dateLayout.setLayoutParams(layoutParams);
@@ -235,7 +230,7 @@ public class FragmentCal extends Fragment {
 		TextView dateDay = new TextView(getActivity());
 		dateDay.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 		dateDay.setGravity(Gravity.CENTER);
-		dateDay.setTextSize(20);
+		dateDay.setTextSize(pd/16);
 		dateLayout.addView(dateName);
 		dateLayout.addView(dateDay);
 		
@@ -252,8 +247,8 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: month = getMonthFromInt(number);
-  	//Eftir: month er nafn mï¿½nuï¿½s miï¿½aï¿½ viï¿½ number ï¿½ar sem 
-	//		 0=janï¿½ar,..,11=desember.
+  	//Eftir: month er nafn manadars midad vid number thar sem 
+	//		 0=januar,..,11=desember.
 	public String getMonthForInt(int num) {
         String month = "wrong";
         String[] months = {
@@ -277,15 +272,15 @@ public class FragmentCal extends Fragment {
     }
 	
 	/**
-	 * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
-	 * Dagsetning: 	23. oktï¿½ber 2014
-	 * Markmiï¿½: 	CalendarShowsTask framkvï¿½mir ï¿½rï¿½ï¿½avinnu sem nï¿½r ï¿½ alla ï¿½ï¿½tti 
-	 * 				frï¿½ gagnagrunni sem eiga aï¿½ vera birtir ï¿½ dagatali
+	 * Nafn: 		Kristin Fjola Tomasdottir
+	 * Dagsetning: 	23. oktober 2014
+	 * Markmiï¿½: 	CalendarShowsTask framkvaemir thradaavinnu sem naer i alla thaetti 
+	 * 				fra gagnagrunni sem eiga ad vera birtir a dagatali
 	 */
 	private class CalendarShowsTask extends AsyncTask<Void, Integer, Map<String, String>> {
 		// Notkun: map = doInBackground(voids)
-		// Eftir:  map inniheldur gagna-titlana ï¿½ ï¿½eim ï¿½ï¿½ttum sem eiga aï¿½ vera
-		//		   aï¿½ vera birtir ï¿½ dagatali
+		// Eftir:  map inniheldur gagna-titlana a theim thattum sem eiga ad vera
+		//		   birtir a dagatali
 		protected Map<String, String> doInBackground(Void... voids) {
 			DbUtils dbHelper = new DbUtils(getActivity());
 	        Map<String, String> dataTitles = dbHelper.getOnCalShows();
@@ -293,30 +288,30 @@ public class FragmentCal extends Fragment {
 		}
 		
 		// Notkun: onPostExecute(dataTitles)
-		// Eftir:  nï¿½r ï¿½rï¿½ï¿½ur byrjar sem nï¿½r ï¿½ upplï¿½singar um ï¿½ï¿½tti sem eiga 
-		//		   aï¿½ vera birtir ï¿½ dagatali
+		// Eftir:  Nyr thradur byrjar sem naer i upplysingar um thaetti sem eiga 
+		//		   ad vera birtir a dagatali
 		protected void onPostExecute(Map<String, String> dataTitles) {
 			new CalendarEpisodesTask().execute(dataTitles);
 		}
 	}
 	
 	/**
-	 * Nafn: 		Kristï¿½n Fjï¿½la Tï¿½masdï¿½ttir
-	 * Dagsetning: 	23. oktï¿½ber 2014
-	 * Markmiï¿½: 	CalendarEpisodesTask framkvï¿½mir ï¿½rï¿½ï¿½avinnu sem nï¿½r ï¿½ alla ï¿½ï¿½tti 
-	 * 				frï¿½ vefï¿½jï¿½nustunni trakt.tv sem eiga aï¿½ vera birtir ï¿½ dagatali
+	 * Nafn: 		Kristin Fjola Tomasdottir
+	 * Dagsetning: 	23. oktober 2014
+	 * Markmiï¿½: 	CalendarEpisodesTask framkvaemir thradaavinnu sem naer i alla thaetti 
+	 * 				fra vefthjonustunni trakt.tv sem eiga ad vera birtir a dagatali
 	 */
 	private class CalendarEpisodesTask extends AsyncTask<Map<String, String>, Integer, List<Episode>> {
 		
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veriï¿½ stillt sem ï¿½ aï¿½ sï¿½na ï¿½ meï¿½an notandi er aï¿½ bï¿½ï¿½a
+		// Eftir:  progressDialog hefur verid stillt sem a ad syna a medan notandi er ad bida
 		protected void onPreExecute() {  
     		progressDialog = LayoutUtils.showProgressDialog(R.string.list_process_title, 
     				R.string.list_process_msg, getActivity());	
         }  
 		
 		// Notkun: episodes = doInBackground(dataTitles)
-		// Eftir:  episodes er listi af ï¿½ï¿½ttum sem ï¿½ aï¿½ birta ï¿½ dagatali
+		// Eftir:  episodes er listi af thattum sem a ad birta a dagatali
 		protected List<Episode> doInBackground(Map<String, String>... dataTitles) {
 			List<Episode> calendarEpisodes = (List<Episode>) MainActivity.getCache().get(cacheKey);
 	        
@@ -334,7 +329,7 @@ public class FragmentCal extends Fragment {
 		}
 		
 		// Notkun: onPostExecute(episodes)
-		// Eftir:  episodes hafa veriï¿½ birtir ï¿½ dagatali
+		// Eftir:  episodes hafa verid birtir a dagatali
 		protected void onPostExecute(List<Episode> calendarEpisodes) {
 			progressDialog.dismiss();
 			for (Episode episode : calendarEpisodes){
@@ -344,10 +339,12 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: fillInEpisode(episode);
-  	//Eftir: Bï¿½iï¿½ aï¿½ setja inn alla ï¿½ï¿½tti sem eru stilltir ï¿½ "ï¿½ dagatali"
-	//		 ï¿½ rï¿½ttan staï¿½ (ï¿½.e. bï¿½ta viï¿½ ï¿½ view-iï¿½ sem hefur id-iï¿½
-	//		 dagsetninguna ï¿½egar ï¿½ï¿½tturinn var frumsï¿½ndur)
+  	//Eftir: Buid er ad setja inn alla thaetti sem eru stilltir a "a dagatali"
+	//		 a rettan stad (th.e. baeta vid i view-id sem hefur id-id
+	//		 dagsetninguna thegar thatturinn var frumsyndur)
 	public void fillInEpisode(final Episode episode) {
+		int pd = VariousUtils.getScreenWidth(getActivity());
+		
 		frag = new FragmentEpisode();
 		
 		DecimalFormat formatter = new DecimalFormat("00");
@@ -365,7 +362,7 @@ public class FragmentCal extends Fragment {
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);
 		TextView textView = new TextView(getActivity());
 	    textView.setText(title);
-	    textView.setPadding(20,0,0,0);
+	    textView.setPadding(pd/16,0,0,0);
 	    textView.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				((FragmentEpisode) frag).setEpisode(episode);
@@ -383,7 +380,7 @@ public class FragmentCal extends Fragment {
 	}
 	
 	//Notkun: number = firstAiredRightForm(strDate);
-  	//Eftir: strDate er dagsetningu ï¿½ forminu: yyyy-MM-dd'T'HH:mm:ss 
+  	//Eftir: strDate er dagsetningu a forminu: yyyy-MM-dd'T'HH:mm:ss 
 	//		 number er talan yyMMdd.
 	public int getFirstAiredInRightForm(String strDate){
     	SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -399,7 +396,7 @@ public class FragmentCal extends Fragment {
     }
 	
 	//Notkun: calendar = nullifyTime(c)
-	//Eftir: Tï¿½minn ï¿½ deginum calendar hefur veriï¿½ settur ï¿½ 00:00:00
+	//Eftir: Timinn a deginum calendar hefur verid settur a 00:00:00
 	public static Calendar nullifyTime(Calendar c){
 		c.set(Calendar.HOUR_OF_DAY,0);
 		c.set(Calendar.MINUTE, 0);
