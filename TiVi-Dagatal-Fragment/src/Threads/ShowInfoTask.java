@@ -30,7 +30,8 @@ public class ShowInfoTask extends AsyncTask<Show, Integer, Show> {
 	private static Activity myActivity;
 	private ProgressDialog progressDialog;
 	
-	//TODO: vantar lýsingu
+	//Notkun: task = ShowInfoTask(id, frag, activity, open)
+	//Eftir:  task er nytt ShowInfoTask
 	public ShowInfoTask(Integer id, Fragment frag, Activity activity, List<String> open){
 		this.id = id;
 		this.frag = frag;

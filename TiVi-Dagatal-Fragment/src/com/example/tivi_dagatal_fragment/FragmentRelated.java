@@ -51,7 +51,8 @@ public class FragmentRelated extends Fragment{
         return rootView;
     }
 	
-	//TODO: vantar lýsingu
+	//Notkun: setShow(show)
+	//Eftir:  show hefur verid stilltur a tilviksbreyturna show
 	public void setShow(Show show){
 		this.show = show;
 	}	
