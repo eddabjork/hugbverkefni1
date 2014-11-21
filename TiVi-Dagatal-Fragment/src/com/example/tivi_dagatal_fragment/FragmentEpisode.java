@@ -1,8 +1,8 @@
 /**
- * Nafn: 		Steinunn Fri�geirsd�ttir
- * Dagsetning: 	30. okt�ber 2014
- * Markmi�: 	FragmentEpisopde er fragment sem birtir uppl�singar
- * 				um einstaka ��tti.
+ * Nafn: 		Steinunn Fridgeirsdottir
+ * Dagsetning: 	30. oktober 2014
+ * Markmid: 	FragmentEpisopde er fragment sem birtir upplysingar
+ * 				um einstaka thaetti.
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -34,7 +34,7 @@ public class FragmentEpisode extends Fragment{
 	private ProgressDialog progressDialog;
 	
 	@Override
-	//Eftir: B�i� a� birta uppl�singar um einstaka ��tt
+	//Eftir: Buid er ad birta upplysingar um einstaka thatt
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_episode, container, false);
 		scrollView = new ScrollView(getActivity());
@@ -43,7 +43,7 @@ public class FragmentEpisode extends Fragment{
 	}
 	
 	//Notkun: setEpisode(episode)  
-	//Eftir: b�i� er a� setja episode sem gildi tilviksbreytinnar episode
+	//Eftir: Buid er ad setja episode sem gildi tilviksbreytinnar episode
 	public void setEpisode(Episode episode){
 		this.episode = episode;
 	}	
@@ -52,27 +52,27 @@ public class FragmentEpisode extends Fragment{
      * Nafn: 		Steinunn Fri�geirsd�ttir
      * Dagsetning: 	6. november 2014
      * Markmi�: 	ShowEpisodeTask er klasi sem s�r um �r��avinnslu fyrir FragmentEpisode.
-     * 				Uppl�singum um ��tt er hla�i� inn asyncronus me� loading skj�.
+     * 				upplysingum um ��tt er hla�i� inn asyncronus me� loading skj�.
      */   
 	private class ShowEpisodeTask extends AsyncTask<Object, Integer, Episode> {
 		//Notkun: doInBackground(queries)
-		//Eftir:  ���avinnslu � bakgrunni er loki�
-		//        og slila� hefur veri� r�ttum episode.
+		//Eftir:  thradavinnslu i bakgrunni er lokid
+		//        og skilad hefur rettum episode.
 		protected Episode doInBackground(Object... objects) {         
 			IMDbClient imdb = new IMDbClient();
 			Episode episode = (Episode)objects[0];
 			return episode;
 		}
 		// Notkun: onPreExecute()
-		// Eftir:  progressDialog hefur veri� stillt sem � a� s�na � me�an notandi er a� b��a
+		// Eftir:  progressDialog hefur verid stillt sem a ad syna a medan notandi er ad bida
 		protected void onPreExecute() {  
 			progressDialog = LayoutUtils.showProgressDialog(R.string.popular_process_title, 
     				R.string.popular_process_msg, getActivity());	
         }  
 		
 		//Notkun: onPostExecute(searchShows)
-		//Eftir:  b�i� a� er hla�a inn �llum uppl�singum um episode og birta 
-		//		  �samt �v� a� stoppa progressDialog
+		//Eftir:  Buid er ad hlada inn ollum upplysingum um episode og birta 
+		//		  asamt thvi ad stoppa progressDialog
 		protected void onPostExecute(Episode episode) {
 			progressDialog.dismiss();
 								
@@ -143,7 +143,7 @@ public class FragmentEpisode extends Fragment{
 	}
 	
 	// Notkun: showDialog(show)
-	// Eftir:  pop-up hefur veri� birt sem b��ur upp� a� vista show � dagatali 
+	// Eftir:  Pop-up hefur verid birt sem bidur uppa ad vista show a dagatali 
 	void showDialog(Show show) {
 	    DialogFragment newFragment = PopUpPutOnCal.newInstance(show);
 	    newFragment.show(getFragmentManager(), "dialog");
