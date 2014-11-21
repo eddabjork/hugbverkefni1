@@ -169,9 +169,8 @@ public class TraktClient {
 		return show;
 	  }
 
-	 //TODO: skil ekki
 	 //Notkun: 		  readImages(reader, show)
-	 //Eftirskilyrdi: slï¿½ï¿½ir ï¿½ myndir fyrir show hafa verid stilltar i show
+	 //Eftirskilyrdi: slodir a myndir fyrir show hafa verid stilltar i show
 	 public void readImages(JsonReader reader, Show show) throws IOException{
 		 reader.beginObject();
 		 while(reader.hasNext()){
@@ -239,10 +238,9 @@ public class TraktClient {
 		 return calendarEpisodes;
 	 }
 	 
-	 //TODO: skil ekki
 	//Notkun: 		 getSeasonsForShow(dataTitle, forInfo)
-	//Eftirskilyrdi: ef forInfo er false ï¿½ï¿½ er nï¿½ï¿½ ï¿½ naeustu 2 seriurnar fyrir thattarödina
-	//				 dataTitle, annars er nï¿½ï¿½ ï¿½ allar seriurnar fyrir thattarödina dataTitle
+	//Eftirskilyrdi: ef forInfo er false tha er nad i naeustu 2 seriurnar fyrir thattarödina
+	//				 dataTitle, annars er nad i allar seriurnar fyrir thattarödina dataTitle
 	public void getSeasonsForShow(String dataTitle, boolean forInfo){
 		// get the newest 2 seasons for the show
 		URL url = null;
@@ -448,9 +446,9 @@ public class TraktClient {
 		}
 		return null;
 	}
-	//TODO: Skil ekki
+	
 	//Notkun: 		 readImages(reader, episode)
-	//Eftirskilyrdi: slï¿½ï¿½ir ï¿½ myndir fyrir episode hafa verid stilltar a episode
+	//Eftirskilyrdi: slodir a myndir fyrir episode hafa verid stilltar a episode
 	public void readImages(JsonReader reader, Episode episode) throws IOException{
 		 reader.beginObject();
 		 while(reader.hasNext()){

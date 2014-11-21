@@ -1,7 +1,7 @@
 /**
- * Nafn: 		Krist�n Fj�la T�masd�ttir
- * Dagsetning: 	13. n�vember 2014
- * Markmi�: 	Pop-up sem spyr notanda hvort hann vilji eyda thaetti. 
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	13. november 2014
+ * Markmid: 	Pop-up sem spyr notanda hvort hann vilji eyda thaetti. 
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -24,7 +24,7 @@ public class PopUpDelete extends DialogFragment{
 
 	// Notkun: popUpDelete = newInstance(showToDelete)
 	// Eftir:  popUpDelete er pop-up sem spyr notanda hvort
-	//		   hann vilji ey�a ��ttinum showToDelete �r gagnagrunni		
+	//		   hann vilji eyda thaettinum showToDelete ur gagnagrunni		
 	public static PopUpDelete newInstance(Show showToDelete) {
 		PopUpDelete frag = new PopUpDelete();
 		show = showToDelete;
@@ -32,7 +32,7 @@ public class PopUpDelete extends DialogFragment{
     }
 
 	// Notkun: dialog = onCreateDialog(savedInstanceState)
-	// Eftir:  dialog er pop-up sem spyr notanda hvort hann vilji ey�a ��tti
+	// Eftir:  dialog er pop-up sem spyr notanda hvort hann vilji eyda thaetti
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -52,7 +52,7 @@ public class PopUpDelete extends DialogFragment{
 	        .setNegativeButton(R.string.pos_answer,
 	            new DialogInterface.OnClickListener() {
 	        	//Notkun: onClick(dialog, whichButton)
-        		//Eftir: �aetti hefur verid eytt ur 'Thaettirnir minir' lista
+        		//Eftir:  thaetti hefur verid eytt ur 'Thaettirnir minir' lista
 	        	public void onClick(DialogInterface dialog, int whichButton) {
 	        			removeFromMyShows(show);
 	                }
@@ -71,7 +71,7 @@ public class PopUpDelete extends DialogFragment{
     }
     
 	//Notkun:	removeFromMyEpisodes(show);
-  	//Eftir:	B�i� er a� ey�a show �r gagnagrunni
+  	//Eftir:	buid er ad eyda show ur gagnagrunni
 	public void removeFromMyShows(Show show){
 		DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.deleteShow(show);

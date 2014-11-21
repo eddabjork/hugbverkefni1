@@ -1,7 +1,7 @@
 /**
- * Nafn: 		Krist�n Fj�la T�masd�ttir
- * Dagsetning: 	30. okt�ber 2014
- * Markmi�: 	Pop-up sem b��ur notanda upp� a� vista �kve�na ��ttar�� � dagatalinu s�nu. 
+ * Nafn: 		Kristin Fjola Tomasdottir
+ * Dagsetning: 	30. oktober 2014
+ * Markmid: 	Pop-up sem bidur notanda uppa ad vista akvedna thattarod dagatalinu sinu. 
  */
 package com.example.tivi_dagatal_fragment;
 
@@ -21,8 +21,8 @@ public class PopUpPutOnCal extends DialogFragment{
 	private static Show show;
 
 	// Notkun: putOnCalPopUp = newInstance(showToSave)
-	// Eftir:  putOnCalPopUp er pop-up sem b��ur upp� 
-	// 		   a� vista ��ttinn showToSave � dagatali
+	// Eftir:  putOnCalPopUp er pop-up sem bidur notenda uppa
+	// 		   ad vista thattinn showToSave i dagatali
 	public static PopUpPutOnCal newInstance(Show showToSave) {
 		PopUpPutOnCal frag = new PopUpPutOnCal();
 		show = showToSave;
@@ -30,7 +30,8 @@ public class PopUpPutOnCal extends DialogFragment{
     }
 
 	// Notkun: dialog = onCreateDialog(savedInstanceState)
-	// Eftir:  dialog er pop-up sem b��ur upp� a� vista ��tt � dagatali
+	// Eftir:  dialog er pop-up sem bidur notenda uppa ad
+	//		   vista thatt i dagatali
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -50,7 +51,7 @@ public class PopUpPutOnCal extends DialogFragment{
 	        .setNegativeButton(R.string.pos_answer,
 	            new DialogInterface.OnClickListener() {
 	        	//Notkun: onClick(dialog, whichButton)
-        		//Eftir: �aetti er baett a dagatalslista
+        		//Eftir: thaetti er baett a dagatalslista
 	        	public void onClick(DialogInterface dialog, int whichButton) {
 	                	addToCal(show);
 	                }
@@ -69,7 +70,7 @@ public class PopUpPutOnCal extends DialogFragment{
     }
     
 	// Notkun: addToCal(show)
-	// Eftir:  show hefur veri� b�tt � dagatali�
+	// Eftir:  show hefur verid baett i dagatalid
     public void addToCal(Show show){
     	DbUtils dbHelper = new DbUtils(getActivity());
 		dbHelper.putShowOnCal(show);

@@ -1,7 +1,7 @@
 /**
- * Nafn:		J�hanna Agnes Magn�sd�ttir
- * Dagsetning:	23. okt�ber 2014
- * Markmi�:		Klasinn er hlutur sem geymir uppl�singar um ��ttaser�u.
+ * Nafn:		Johanna Agnes Magnusdottir
+ * Dagsetning:	23. oktober 2014
+ * Markmid:		Klasinn er hlutur sem geymir upplysingar um thattaseriu.
  **/
 
 package Dtos;
@@ -27,37 +27,37 @@ public class Season {
 	/*Getters*/
 	
 	//Notkun: seasonNumber = season.getSeasonNumber()
-	//Eftirskilyr�i: seasonNumber er n�mer ser�u season.
+	//Eftir: seasonNumber er numer seriu season.
 	public int getSeasonNumber() {
 		return seasonNumber;
 	}
 	
 	//Notkun: episodes = season.getTotalEpisodes()
-	//Eftirskilyr�i: episodes er fj�ldi ��tta � season.
+	//Eftir: episodes er fjoldi thatta i season.
 	public int getTotalEpisodes() {
 		return totalEpisodes;
 	}
 		
 	//Notkun: url = show.getUrl()
-	//Eftirskilyr�i: url er sl�� � ��ttaser�u � trakt s��unni.
+	//Eftir: url er slod a thattaseriu a trakt sidunni.
 	public String getUrl() {
 		return url;
 	}
 	
 	//Notkun: poster = season.getPoster()
-	//Eftirskilyr�i: poster er sl�� � fors��umynd ��ttaser�u.
+	//Eftir: poster er slod a forsidumynd thattaseriu.
 	public String getPoster() {
 		return poster;
 	}
 	
 	//Notkun: episodes = season.getEpisodes()
-	//Eftirskilyr�i: episodes eru allir ��ttirnir � season.
+	//Eftir: episodes eru allir thaettirnir i season.
 	public List<Episode> getEpisodes() {
 		return episodes;
 	}
 	
 	//Notkun: episodesView = season.getEpisodesView()
-	//Eftirskilyrði: episodesView er EpisodesView fyrir seríuna season
+	//Eftir: episodesView er EpisodesView fyrir seriuna season
 	public LinearLayout getEpisodesView() {
 		return this.episodesView;
 	}
@@ -65,37 +65,37 @@ public class Season {
 	/*Setters*/
 	
 	//Notkun: season.setSeasonNumber(seasonNumber)
-	//Eftirskilyr�i: season er ser�a n�mer seasonNumber.
+	//Eftir: season er seriu numer seasonNumber.
 	public void setSeasonNumber(int seasonNumber) {
 		this.seasonNumber = seasonNumber;
 	}
 	
 	//Notkun: season.setTotalEpisodes(totalEpisodes)
-	//Eftirskilyr�i: season hefur totalEpisodes marga ��tti.
+	//Eftir: season hefur totalEpisodes marga thaetti.
 	public void setTotalEpisodes(int totalEpisodes) {
 		this.totalEpisodes = totalEpisodes;
 	}
 	
 	//Notkun: season.setUrl(url)
-	//Eftirskilyr�i: url er sl�� � season � trakt client.
+	//Eftir: url er slod a season hja trakt client.
 	public void setUrl(String url) {
 		this.url = url;
 	}
 	
 	//Notkun: season.setPoster(poster)
-	//Eftirskilyr�i: poster er url � a�almynd season.
+	//Eftir: poster er url a adalmynd season.
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
 	
 	//Notkun: season.setEpisodes(episodes)
-	//Eftirskilyr�i: episodes eru allir ��ttirnir � season.
+	//Eftir: episodes eru allir thaettirnir i season.
 	public void setEpisodes(List<Episode> episodes) {
 		this.episodes = episodes;
 	}
 	
 	//Notkun: season.setEpisodesView(episodesview)
-	//Eftirskilyrði: Búið er að setja episodesview sem EpisodeView fyrir seríuna season
+	//Eftir: Buid er ad setja episodesview sem EpisodeView fyrir seriuna season
 	public void setEpisodesView(LinearLayout episodesview) {
 		this.episodesView = episodesview;
 	}

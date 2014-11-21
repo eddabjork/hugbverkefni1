@@ -1,7 +1,7 @@
 /**
- * Nafn:		Steinunn Fri�geirsd�ttir
- * Dagsetning:	2. okt�ber 2014
- * Markmi�:		Klasinn er hlutur sem geymir uppl�singar um ��ttar��.
+ * Nafn:		Steinunn Fridgeirsdottir
+ * Dagsetning:	2. oktober 2014
+ * Markmid:		Klasinn er hlutur sem geymir upplysingar um thattarod.
  **/
 package Dtos;
 
@@ -46,142 +46,142 @@ public class Show {
 	//Getters
 	
 	//Notkun: airDay = show.getAirDay()
-	//Eftirskilyr�i: airDay frums�ningardegi ��ttara�ar (vikudegi).
+	//Eftir: airDay frumsyningardegi thattaradarinnar (vikudegi).
 	public String getAirDay() {
 		return airDay;
 	}
 	
 	//Notkun: airTime = show.getAirTime()
-	//Eftirskilyr�i: airTime er frums�ningart�mi ��ttara�ar � USA.
+	//Eftir: airTime er frumsyningartimi thattaradarinnar i USA.
 	public String getAirTime() {
 		return airTime;
 	}
 	
 	//Notkun: url = show.getBanner()
-	//Eftirskilyr�i: url er sl�� � banner mynd ��ttara�ar.
+	//Eftir: url er slod a banner mynd thattaradarinnar.
 	public String getBanner() {
 		return banner;
 	}
 	
 	//Notkun: country = show.getCountry()
-	//Eftirskilyr�i: country er upprunalandi ��ttara�ar.
+	//Eftir: country er upprunalandi thattaradarinnar.
 	public String getCountry() {
 		return country;
 	}
 	
 	//Notkun: ended = show.isEnded()
-	//Eftirskilyr�i: ended er true e�a false eftir �v� 
-	//				 hvort ��ttar�� s� h�tt � s�ningu e�a ekki.
+	//Eftir: ended er true eda false eftir thvi 
+	//				 hvort thattarodin se haett i syningu eda ekki.
 	public boolean isEnded() {
 		return ended;
 	}
 	
 	//Notkun: fanart = show.getFanart()
-	//Eftirskilyr�i: fanart er sl�� � ��d�endalist ��ttara�ar.
+	//Eftir: fanart er slod a addaendalist thattaradarinnar.
 	public String getFanart() {
 		return fanart;
 	}
 	
 	//Notkun: firstAired = show.getFirstAired()
-	//Eftirskilyr�i: Skilar dagsetningunni sem ��tturinn er s�ndur fyrst.
+	//Eftir: Skilar dagsetningunni sem thatturinn er syndur fyrst.
 	public String getFirstAired() {
 		return firstAired;
 	}
 	
 	//Notkun: genres = show.getGenres()
-	//Eftirskilyr�i: genres er tegund ��ttara�ar.
+	//Eftir: genres eru tegundir thattaradarinnar.
 	public List<String> getGenres() {
 		return genres;
 	}
 	
 	//Notkun: imdbId = show.getImdbId()
-	//Eftirskilyr�i: imdbId er IMDb au�kenni ��ttara�ar.
+	//Eftir: imdbId er IMDb audkenni thattaradarinnar.
 	public String getImdbId() {
 		return imdbId;
 	}
 	
 	//Notkun: network = show.getNetwork()
-	//Eftirskilyr�i: network er st�� sem ��ttar�� er s�nd � � USA.
+	//Eftir: network er sjonvarpsstodin sem thattarodin er synd a i USA.
 	public String getNetwork() {
 		return network;
 	}
 	
 	//Notkun: overview = show.getOverview()
-	//Eftirskilyr�i: overview er l�sing � ��ttar��.
+	//Eftir: overview er lysing a thattarodinni.
 	public String getOverview() {
 		return overview;
 	}
 	
 	//Notkun: poster = show.getPoster()
-	//Eftirskilyr�i: poster er sl�� � fors��umynd ��ttara�ar.
+	//Eftir: poster er slod a forsidumynd thattaradarinnar.
 	public String getPoster() {
 		return poster;
 	}
 	
 	//Notkun: title = show.getTitle()
-	//Eftirskilyr�i: title er titill ��ttara�ar.
+	//Eftir: title er titill thattaradarinnar.
 	public String getTitle() {
 		return title;
 	}
 	
 	//Notkun: tvdbId = show.getTvdbId()
-	//Eftirskilyr�i: tvdbId er Tvdb au�kenni.
+	//Eftir: tvdbId er Tvdb audkenni.
 	public String getTvdbId() {
 		return tvdbId;
 	}
 	
 	//Notkun: url = show.getUrl()
-	//Eftirskilyr�i: url er sl�� � ��ttar�� � trakt s��unni.
+	//Eftir: url er slodin a thattarodina hja trakt sidunni.
 	public String getUrl() {
 		return url;
 	}
 	
 	//Notkun: year = show.getYear()
-	//Eftirskilyr�i: year er �r sem ��ttar�� kom �t.
+	//Eftir: year er arid sem thattarodin kom ut.
 	public String getYear() {
 		return year;
 	}
 	//Notkun: dataTitle = show.getDataTitle()
-	//Eftirskilyr�i: dataTitle er au�kenni ��ttara�ar fyrir vef�j�nustu.
+	//Eftir: dataTitle er audkenni thattaradarinnar fyrir vefthjonustu.
 	public String getDataTitle(){
 		return dataTitle;
 	}
 	
 	//Notkun: rating = show.getImdbRating()
-	//Eftirskilyr�i: rating er IMDb einkunn ��ttara�ar.
+	//Eftir: rating er IMDb einkunn thattaradarinnar.
 	public String getImdbRating(){
 		return imdbRating;
 	}
 	
 	//Notkun: show.getSeasons(seasons)
-	//Eftirskilyr�i: seasons eru ser�ur show.
+	//Eftir: seasons eru seriur show.
 	public List<Season> getSeasons() {
 		return seasons;
 	}
 	
 	//Notkun: infoLayout = show.getInfoLayout()
-	//Eftirskilyrði: infoLayout er layout-ið fyrir upplýsingar um þáttaraðir
-	//				 fyrir þáttaröðina show
+	//Eftir: infoLayout er layout-id fyrir upplysingar um thattaradir
+	//				 fyrir thattarodina show
 	public LinearLayout getInfoLayout() {
 		return this.infoLayout;
 	}
 	
 	//Notkun: infoMain = show.getInfoMain()
-	//Eftirskilyrði: infoMain er aðal-layout-ið fyrir upplýsingar um þáttaraðir
-	//				 fyrir þáttaröðina show
+	//Eftir: infoMain er adal-layout-id fyrir upplysingar um thattaradir
+	//				 fyrir thattarodina show
 	public LinearLayout getInfoMain() {
 		return this.infoMain;
 	}
 	
 	//Notkun: scrollView = show.getScrollView()
-	//Eftirskilyrði: scrollView er ScrollView-ið fyrir þáttaröðina show
+	//Eftir: scrollView er ScrollView-id fyrir thattarodina show
 	public ScrollView getScrollView() {
 		return this.scrollView;
 	}
 	
 	//Notkun: infoButton = show.getInfoButton()
-	//Eftirskilyrði: infoButton er takkinn fyrir upplýsingar um þáttaraðir
-	//				 fyrir þáttaröðina show
+	//Eftir: infoButton er takkinn fyrir upplysingar um thattaradir
+	//				 fyrir thattarodina show
 	public ImageButton getInfoButton() {
 		return this.infoButton;
 	}
@@ -189,143 +189,143 @@ public class Show {
 	/*Setters*/
 	
 	//Notkun: show.setAirDay(airDay)
-	//Eftirskilyr�i: airDay er furms�ningaradagur show.
+	//Eftir: airDay er furmsyningaradagur show.
 	public void setAirDay(String airDay) {
 		this.airDay = airDay;
 	}
 	
 	//Notkun: show.setAirTime(airTime)
-	//Eftirskilyr�i: airTime er frums�ningart�mi show.
+	//Eftir: airTime er frumsyningartimi show.
 	public void setAirTime(String airTime) {
 		this.airTime = airTime;
 	}
 	
 	//Notkun: show.setBanner(banner)
-	//Eftirskilyr�i: banner er url � banner mynd show.
+	//Eftir: banner er url a banner mynd show.
 	public void setBanner(String banner) {
 		this.banner = banner;
 	}
 
 	//Notkun: show.setCountry(country)
-	//Eftirskilyr�i: country er s�ningarland show.
+	//Eftir: country er syningarland show.
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
 	//Notkun: show.setEnded(ended)
-	//Eftirskilyr�i: ended er true e�a false eftir �v� hvort show er � s�ningu e�a ekki.
+	//Eftir: ended er true eda false eftir thvi hvort show er i syningu eda ekki.
 	public void setEnded(boolean ended) {
 		this.ended = ended;
 	}
 
 	//Notkun: show.setFanart(fanart)
-	//Eftirskilyr�i: fanart er url � a�d�endalist show.
+	//Eftir: fanart er url a addaendalist show.
 	public void setFanart(String fanart) {
 		this.fanart = fanart;
 	}
 
 	//Notkun: show.setFirstAired(firstAired)
-	//Eftirskilyr�i: firstAired frums�ningardagsetning show.
+	//Eftir: firstAired frumsyningardagsetning show.
 	public void setFirstAired(String firstAired) {
 		this.firstAired = firstAired;
 	}
 
 	//Notkun: show.setGenres(genres)
-	//Eftirskilyr�i: genres er tegund show.
+	//Eftir: genres er tegund show.
 	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
 
 	//Notkun: show.setImdbId(imdbId)
-	//Eftirskilyr�i: imdbId er IMDb aukenni show.
+	//Eftir: imdbId er IMDb aukenni show.
 	public void setImdbId(String imdbId) {
 		this.imdbId = imdbId;
 	}
 
 	//Notkun: show.setNetwork(network)
-	//Eftirskilyr�i: network er s� st�� sem show er s�nd �.
+	//Eftir: network er su sjonvarpsstod sem show er synd a.
 	public void setNetwork(String network) {
 		this.network = network;
 	}
 
 	//Notkun: show.setOverview(overview)
-	//Eftirskilyr�i: overview er l�sing � show.
+	//Eftir: overview er lysing a show.
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
 
 	//Notkun: show.setPoster(poster)
-	//Eftirskilyr�i: poster er url � a�almynd show.
+	//Eftir: poster er url a adalmynd show.
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
 	
 	//Notkun: show.setTitle(title)
-	//Eftirskilyr�i: title er titill show.
+	//Eftir: title er titill show.
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	//Notkun: show.setTvdbId(id)
-	//Eftirskilyr�i: id er Tvdb au�kenni show.
+	//Eftir: id er Tvdb audkenni show.
 	public void setTvdbId(String tvdbId) {
 		this.tvdbId = tvdbId;
 	}
 
 	//Notkun: show.setUrl(url)
-	//Eftirskilyr�i: url er sl�� show � trakt.
+	//Eftir: url er slod a show hja trakt.
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
 	//Notkun: show.setYear(Year)
-	//Eftirskilyr�i: year er �ri� sem show var gefinn �t fyrst.
+	//Eftir: year er arid sem show var gefinn ut fyrst.
 	public void setYear(String year) {
 		this.year = year;
 	}
 
 	//Notkun: show.setDataTitle(title)
-	//Eftirskilyr�i: title er aukenni show � trakt.
+	//Eftir: title er aukenni show hja trakt.
 	public void setDataTitle(String dataTitle){
 		this.dataTitle = dataTitle;
 	}
 
 	//Notkun: show.setImdbRating(rating)
-	//Eftirskilyr�i: rating er IMDb einkunn show.
+	//Eftir: rating er IMDb einkunn show.
 	public void setImdbRating(String rating){
 		this.imdbRating = rating;
 	}
 	
 	//Notkun: show.setSeasons(seasons)
-	//Eftirskilyr�i: seasons eru ser�ur show.
+	//Eftir: seasons eru seriur show.
 	public void setSeasons(List<Season> seasons) {
 		this.seasons = seasons;
 	}
 	
 	//Notkun: show.setInfoLayout(infolayout)
-	//Eftirskilyrði: Búið er að setja infolayout sem layout upplýsingar um
-	//				 þáttaraðir fyrir þáttaröðina show
+	//Eftir: Buid er ad setja infolayout sem layout upplysingar um
+	//				 thattaradir fyrir thattarodina show
 	public void setInfoLayout(LinearLayout infolayout) {
 		this.infoLayout = infolayout;
 	}
 	
 	//Notkun: show.setInfoMain(infomain)
-	//Eftirskilyrði: Búið er að setja infomain sem aðal-layout fyrir upplýsingar
-	//				 um þáttaraðir fyrir þáttinn show
+	//Eftir: Buid er ad setja infomain sem adal-layout fyrir upplysingar
+	//				 um thattaradir fyrir thattinn show
 	public void setInfoMain(LinearLayout infomain) {
 		this.infoMain = infomain;
 	}
 	
 	//Notkun: show.setScrollView(scrollview)
-	//Eftirskilyrði: Búið er að setja scrollview sem ScrollView fyrir þáttaröðina
+	//Eftir: Buid er ad setja scrollview sem ScrollView fyrir thattarodina
 	//				 show
 	public void setScrollView(ScrollView scrollview) {
 		this.scrollView = scrollview;
 	}
 	
 	//Notkun: show.setInfoButton(infobutton)
-	//Eftirskilyrði: Búið er að setja infobutton sem takka fyrir upplýsingar
-	//				 fyrir þáttaröðina show
+	//Eftir: Buid er ad setja infobutton sem takka fyrir upplysingar
+	//				 fyrir thattarodina show
 	public void setInfoButton(ImageButton infobutton) {
 		this.infoButton = infobutton;
 	}
