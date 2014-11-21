@@ -1,7 +1,7 @@
 /**
  * Nafn: 		Kristin Fjola Tomasdottir
  * Dagsetning: 	13. november 2014
- * Markmi�: 	FragmentInfo er fragment sem birtir upplysingar
+ * Markmid: 	FragmentInfo er fragment sem birtir upplysingar
  * 				og leidbeiningar um appid
  */
 package com.example.tivi_dagatal_fragment;
