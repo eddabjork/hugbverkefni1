@@ -23,24 +23,20 @@ import Utils.VariousUtils;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 public class FragmentCal extends Fragment {
@@ -201,7 +197,7 @@ public class FragmentCal extends Fragment {
 		TextView month = new TextView(getActivity());
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
 		month.setPadding(pd/32,pd/32,pd/32,pd/32);
-		month.setTextSize(pd/16);
+		month.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		mainLayout.addView(month);
 		mainLayout.addView(LayoutUtils.makeLine(getActivity()));
 	}
@@ -230,7 +226,7 @@ public class FragmentCal extends Fragment {
 		TextView dateDay = new TextView(getActivity());
 		dateDay.setText(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 		dateDay.setGravity(Gravity.CENTER);
-		dateDay.setTextSize(pd/16);
+		dateDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		dateLayout.addView(dateName);
 		dateLayout.addView(dateDay);
 		
