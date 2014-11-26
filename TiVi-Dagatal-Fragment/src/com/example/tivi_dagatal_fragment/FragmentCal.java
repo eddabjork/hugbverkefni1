@@ -196,7 +196,7 @@ public class FragmentCal extends Fragment {
 		int pd = VariousUtils.getScreenWidth(getActivity());
 		TextView month = new TextView(getActivity());
 		month.setText(getMonthForInt(cal.get(Calendar.MONTH)));
-		month.setPadding(pd/32,pd/32,pd/32,pd/32);
+		month.setPadding(pd/60,pd/32,pd/32,pd/32);
 		month.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		mainLayout.addView(month);
 		mainLayout.addView(LayoutUtils.makeLine(getActivity()));
@@ -213,7 +213,7 @@ public class FragmentCal extends Fragment {
 		int pd = VariousUtils.getScreenWidth(getActivity());
 		LinearLayout dayLayout = new LinearLayout(getActivity());
 		dayLayout.setOrientation(LinearLayout.HORIZONTAL);
-		dayLayout.setPadding(pd/20,pd/40,pd/20,pd/40);
+		dayLayout.setPadding(pd/90,pd/60,pd/90,pd/60);
 		
 		LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(pd/9, LinearLayout.LayoutParams.WRAP_CONTENT);
 		
@@ -358,7 +358,7 @@ public class FragmentCal extends Fragment {
 		LinearLayout linearLayout = (LinearLayout)getView().findViewById(episodeId);
 		TextView textView = new TextView(getActivity());
 	    textView.setText(title);
-	    textView.setPadding(pd/16,0,0,0);
+	    textView.setPadding(pd/40,0,0,0);
 	    textView.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				((FragmentEpisode) frag).setEpisode(episode);
