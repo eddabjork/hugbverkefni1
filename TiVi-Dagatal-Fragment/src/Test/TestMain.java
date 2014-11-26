@@ -40,33 +40,40 @@ public class TestMain extends ActivityInstrumentationTestCase2<MainActivity> {
 	}
 	
 	//Notkun: testTranslateWeekday()
-	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu
+	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu VariousUtils.translateWeekday
 	public void testTranslateWeekday(){
+		// test monday
 		String test = mTestMain.getResources().getString(R.string.mon_en);
 		String expected = mTestMain.getResources().getString(R.string.mon_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
+		// test tuesday
 		test = mTestMain.getResources().getString(R.string.tue_en);
 		expected = mTestMain.getResources().getString(R.string.tue_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
+		// test wednesday
 		test = mTestMain.getResources().getString(R.string.wed_en);
 		expected = mTestMain.getResources().getString(R.string.wed_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
+		// test thursday
 		test = mTestMain.getResources().getString(R.string.thu_en);
 		expected = mTestMain.getResources().getString(R.string.thu_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
+		// test friday
 		test = mTestMain.getResources().getString(R.string.fri_en);
 		expected = mTestMain.getResources().getString(R.string.fri_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
+		// test saturday
 		test = mTestMain.getResources().getString(R.string.sat_en);
 		expected = mTestMain.getResources().getString(R.string.sat_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
+		// test sunday
 		test = mTestMain.getResources().getString(R.string.sun_en);
 		expected = mTestMain.getResources().getString(R.string.sun_is);
 		assertEquals(expected, VariousUtils.translateWeekday(test, mTestMain));
 	}
 	
 	//Notkun: testParseAirTime()
-	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu
+	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu VariousUtils.parseAirTime
 	public void testParseAirTime(){
 		String test = "8:00pm";
 		String expected = "20:00";
@@ -86,7 +93,7 @@ public class TestMain extends ActivityInstrumentationTestCase2<MainActivity> {
 	}
 	
 	//Notkun: testParseAirTime()
-	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu
+	//Eftir:  Thad hafa verid framkvaemdar profanir a fallinu VariousUtils.flushCache
 	public void testFlushCache(){
 		List<Show> popularShows = new ArrayList<Show>();
 		popularShows.add(new Show("The Walking Dead"));
