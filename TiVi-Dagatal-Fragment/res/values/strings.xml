@@ -115,7 +115,7 @@
     
     <string name="list_title">Þættirnir mínir:</string>
     <string name="list_text1">
-        \tÁ listanum \'Þættirnir mínir\' má sjá þá þætti sem þú ert með á lista..\n
+        \tÁ listanum \'Þættirnir mínir\' má sjá þá þætti sem þú hefur valið á listann.\n
         \tHægt að velja um að fylgjast með þætti með því að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.
     </string>
     <string name="list_text2">\tHægt er að eyða þætti af listanum \'Þættirnir mínir\' með því að ýta á eftirfarandi takka sem er við hliðina á hverjum þætti.</string>
@@ -136,12 +136,12 @@
     <string name="app_info_text">
         \tAppið er verkefni í áfanganum Hugbúnaðarverkefni 1 í Háskóla 
         Íslands. Kennari áfangans er Ebba Þóra Hvannberg.\n
-        \tHöfundar appsins eru nemendur í hugbúnaðarverfræði og heita Edda Björk Konráðsdóttir, 
+        \tHöfundar appsins eru nemendur í hugbúnaðarverkfræði og heita Edda Björk Konráðsdóttir, 
         Jóhanna Agnes Magnúsdóttir, Kristín Fjóla Tómasdóttir og Steinunn Friðgeirsdóttir.
     </string>
     
     <!-- Stakur þáttur -->
-    <string name="episode_number_title">"Númer þáttar:  </string>
+    <string name="episode_number_title">"Númer þáttar: "</string>
     <string name="air_time_title">"Sýndur kl.: "</string>
     <string name="first_aired_title">"Fyrst sýndur: "</string>
     <string name="plot_title">Söguþráður:</string>

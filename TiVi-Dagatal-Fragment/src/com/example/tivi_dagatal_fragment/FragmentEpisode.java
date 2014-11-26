@@ -103,35 +103,43 @@ public class FragmentEpisode extends Fragment{
 			Date date = null;
 			TextView airTime = (TextView) getView().findViewById(R.id.airTime);
 			try {
-				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
-				String newDate = new SimpleDateFormat("HH:mm").format(date);
-				bool = checkText(newDate);
-				if(bool) text = newDate;
-				else text = getResources().getString(R.string.showtime_missing);
-				airTime.setText(text);
+				if(episode.getFirstAired() != null) {
+					date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
+					String newDate = new SimpleDateFormat("HH:mm").format(date);
+					bool = checkText(newDate);
+					if(bool) text = newDate;
+					else text = getResources().getString(R.string.showtime_missing);
+					airTime.setText(text);
+				} else {
+					airTime.setText(getResources().getString(R.string.showtime_missing));
+				}
 			} catch (ParseException e) {
 				e.printStackTrace();
-				airTime.setText(getResources().getString(R.string.air_time_title) + " " + getResources().getString(R.string.showtime_missing));
+				airTime.setText(getResources().getString(R.string.showtime_missing));
 			}
 			
 			TextView firstAired = (TextView) getView().findViewById(R.id.firstAired);
 			try {
-				date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
-				String newDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
-				String time = new SimpleDateFormat("HH:mm").format(date);
-				bool = checkText(newDate);
-				if(bool) text = newDate;
-				else text = getResources().getString(R.string.date_missing);
-				firstAired.setText(text);
+				if(episode.getFirstAired() != null) {
+					date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(episode.getFirstAired());
+					String newDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
+					String time = new SimpleDateFormat("HH:mm").format(date);
+					bool = checkText(newDate);
+					if(bool) text = newDate;
+					else text = getResources().getString(R.string.date_missing);
+					firstAired.setText(text);
+				} else {
+					firstAired.setText(getResources().getString(R.string.date_missing));
+				}
 			} catch (ParseException e) {
 				e.printStackTrace();
-				firstAired.setText(getResources().getString(R.string.first_aired_title)  + " " + getResources().getString(R.string.date_missing));
+				firstAired.setText(getResources().getString(R.string.date_missing));
 			}
 			
 			TextView plot = (TextView) getView().findViewById(R.id.plot);
 			bool = checkText(episode.getOverview());
 			if(bool) text = episode.getOverview();
-			else text = getResources().getString(R.string.plot_title)  + "\n" + getResources().getString(R.string.desc_missing);
+			else text = getResources().getString(R.string.desc_missing);
 			plot.setText(text);  
 		}
 		
